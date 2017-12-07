@@ -6,7 +6,7 @@ import router from '../router'
 let base = window.location.indexOf('localhost') > -1 ? '//localhost:3000/' : '/'
 
 let api = axios.create({
-  baseURL: base + '/api/',
+  baseURL: base + 'api/',
   timeout: 2000,
   withCredentials: true
 })
