@@ -1,7 +1,7 @@
 {
-  "name": "vue-kanban-server",
+  "name": "organizzle",
   "version": "1.0.0",
-  "description": "The server for vue-kanban",
+  "description": "The web interface for Organizzle",
   "main": "index.js",
   "scripts": {
     "debug": "node index.js",
