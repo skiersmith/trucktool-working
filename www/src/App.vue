@@ -11,6 +11,9 @@ export default {
   name: 'app',
   components:{
     Error
+  },
+  mounted(){
+    this.$store.dispatch('authenticate')
   }
 }
 </script>
@@ -23,5 +26,9 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  background: rgb(238, 235, 190)
+}
+html{
+  background:rgb(238, 235, 190)
 }
 </style>
