@@ -1,6 +1,3 @@
-//NEED TO MAKE CUSTOM ROUTES FOR LISTS/TASKS/COMMENTS
-
-
 let Boards = require('../models/board')
 
 module.exports = {

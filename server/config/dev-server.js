@@ -18,7 +18,7 @@ function Validate(req, res, next) {
     // ONLY ALLOW GET METHOD IF NOT LOGGED IN 
     console.log(req.session)
     if (req.method !== 'GET' && !req.session.uid) {
-        return res.status(401).send({ error: 'Please Login or Register to continue' })
+        return res.send({ error: 'Please Login or Register to continue' })
     }
     return next()
 }
@@ -32,7 +32,6 @@ function logger(req, res, next) {
 app.use(session)
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use(express.static(__dirname, '../../server/public'))
 app.use('*', logger)
 app.use('*', cors(corsOptions))
 app.use('/', Auth)
@@ -46,5 +45,16 @@ let io = require('socket.io')(server, {
     origins: '*:*'
 })
 
+io.on('connection', function (socket) {
+    socket.emit('CONNECTED', {
+        socket: socket.id,
+        message: 'Welcome to the Jungle'
+    })
+
+    socket.on('update', (d) => {
+        console.log(d)
+    })
+
+})
 
 module.exports = server
