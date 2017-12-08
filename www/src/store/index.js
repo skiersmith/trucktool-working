@@ -18,7 +18,7 @@ vue.use(vuex)
 
 var store = new vuex.Store({
   state: {
-    boards: [],
+    dashboard: [],
     activeBoard: {},
     activeLists: [],
     activeProducts: {},
@@ -33,7 +33,7 @@ var store = new vuex.Store({
       console.log("User: ", state.user)
     },
     setBoards(state, data) {
-      state.boards = data
+      state.dashboard = data
     },
     handleError(state, err) {
       state.error = err
@@ -64,7 +64,7 @@ var store = new vuex.Store({
         })
     },
     getBoard({ commit, dispatch }, payload) {
-      api('boards/' + payload.boardId)
+      api('dashboard/' + payload.boardId)
         .then(res => {
           commit('setActiveBoard', res.data.data)
           dispatch('getLists', res.data.data._id)
@@ -73,8 +73,8 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-    createBoard({ commit, dispatch }, board) {
-      api.post('boards/', board)
+    createBoard({ commit, dispatch }, category) {
+      api.post('dashboard/', category)
         .then(res => {
           dispatch('getBoards')
         })
@@ -82,8 +82,8 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-    removeBoard({ commit, dispatch }, board) {
-      api.delete('boards/' + board._id)
+    removeBoard({ commit, dispatch }, category) {
+      api.delete('dashboard/' + category._id)
         .then(res => {
           dispatch('getBoards')
         })
@@ -98,7 +98,7 @@ var store = new vuex.Store({
 
     //-------------LISTS-------------------//
     getLists({ commit, dispatch }, id) {
-      api('boards/' + id + '/lists')
+      api('dashboard/' + id + '/lists')
         .then(res => {
           commit('setActiveLists', res.data.data)
         })
@@ -130,7 +130,7 @@ var store = new vuex.Store({
 
     //-------------TASKS-----------------//
     getProducts({ commit, dispatch }, payload) {
-      api('boards/' + payload.boardId + '/lists/' + payload.listId + '/products')
+      api('dashboard/' + payload.boardId + '/lists/' + payload.listId + '/products')
         .then(res => {
           commit('setActiveProducts', { product: res.data.data, listId: payload.listId })
         })
@@ -177,7 +177,7 @@ var store = new vuex.Store({
 
     //------------COMMENTS--------------//
     getNotes({ commit, dispatch }, payload) {
-      api('boards/' + payload.boardId + '/lists/' + payload.listId + '/products/' + payload.productId + '/notes')
+      api('dashboard/' + payload.boardId + '/lists/' + payload.listId + '/products/' + payload.productId + '/notes')
         .then(res => {
 
           commit('setActiveNotes', { note: res.data.data, productId: payload.productId })
@@ -214,7 +214,7 @@ var store = new vuex.Store({
       auth.post('login', login)
         .then(res => {
           commit('setUser', res.data.data)
-          router.push({ name: 'Boards' })
+          router.push({ name: 'Dashboard' })
         })
         .catch(() => {
           router.push({ name: "Login" })
@@ -224,7 +224,7 @@ var store = new vuex.Store({
       auth.post('register', register)
         .then(res => {
           commit('setUser', res.data.data)
-          router.push({ name: 'Boards' })
+          router.push({ name: 'Dashboard' })
         })
         .catch(err => {
           commit('handleError', err)
@@ -235,7 +235,7 @@ var store = new vuex.Store({
       auth('authenticate')
         .then(res => {
           commit('setUser', res.data.data)
-          router.push({ name: 'Boards' })
+          router.push({ name: 'Dashboard' })
         })
         .catch(() => {
           router.push({ name: "Login" })

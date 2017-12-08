@@ -1,31 +1,31 @@
 <template>
   <div>
-    <div class="boardsHeader container">
-      <h1>{{user.name}}'s Boards</h1>
+    <div class="categorysHeader container">
+      <h1>{{user.name}}'s Categorys</h1>
       <div class="header container-fluid">
-        <button @click="toggleBoradForm" class="btn-success">New Board</button>
+        <button @click="toggleBoradForm" class="btn-success">New Category</button>
         <button class="btn-danger" @click="userLogout">Logout</button>
       </div>
     </div>
-    <div class="boardList row">
+    <div class="categoryList row">
 
-      <div class="col-sm-3" v-for="board in boards">
-        <div class="board flex">
-          <router-link class="router-link-text" :to="'/boards/'+board._id">
-            <p class="boardName">
-              {{board.name}}
+      <div class="col-sm-3" v-for="category in categorys">
+        <div class="category flex">
+          <router-link class="router-link-text" :to="'/categorys/'+category._id">
+            <p class="categoryName">
+              {{category.name}}
             </p>
           </router-link>
-          <span class="remove" @click="removeBoard(board)">x</span>
+          <span class="remove" @click="removeCategory(category)">x</span>
         </div>
       </div>
 
-      <div v-if="showBoardForm" class="boardForm container">
-        <form @submit.prevent="createBoard">
-          <input class="form-control" placeholder="name" type="text" name="name" v-model="board.name" required>
-          <input class="form-control" placeholder="description" type="text" name="description" v-model="board.description">
+      <div v-if="showCategoryForm" class="categoryForm container">
+        <form @submit.prevent="createCategory">
+          <input class="form-control" placeholder="name" type="text" name="name" v-model="category.name" required>
+          <input class="form-control" placeholder="description" type="text" name="description" v-model="category.description">
           <div class="blacktext">
-            <button class="btn-success margins" type="submit">Add Board</button>
+            <button class="btn-success margins" type="submit">Add Category</button>
           </div>
         </form>
       </div>
@@ -42,36 +42,36 @@
       return {
         register: {},
         login: {},
-        board: {},
-        showBoardForm: false
+        category: {},
+        showCategoryForm: false
       }
     },
-    name: 'boards',
+    name: 'categorys',
     mounted() {
-      this.$store.dispatch('getBoards')
+      this.$store.dispatch('getCategorys')
     },
     computed: {
-      boards() {
-        return this.$store.state.boards
+      categorys() {
+        return this.$store.state.categorys
       },
       user() {
         return this.$store.state.user
       }
     },
     methods: {
-      createBoard() {
-        this.$store.dispatch('createBoard', this.board)
-        this.board = {}
+      createCategory() {
+        this.$store.dispatch('createCategory', this.category)
+        this.category = {}
         this.toggleBoradForm()
       },
       userLogout() {
         this.$store.dispatch('logout', this.$store.state.user._id)
       },
-      removeBoard(board) {
-        this.$store.dispatch('removeBoard', board)
+      removeCategory(category) {
+        this.$store.dispatch('removeCategory', category)
       },
       toggleBoradForm() {
-        this.showBoardForm = !this.showBoardForm
+        this.showCategoryForm = !this.showCategoryForm
       }
     }
   }
@@ -93,11 +93,11 @@
     font-weight: bold;
   }
 
-  .boardName:hover {
+  .categoryName:hover {
     color: rgb(232, 240, 158);
   }
 
-  .boardForm {
+  .categoryForm {
     display: flex;
     max-width: 60rem;
     justify-content: center;
@@ -108,22 +108,22 @@
 
   }
 
-  .boardHeader {
+  .categoryHeader {
     display: flex;
     justify-content: flex-start;
 
   }
 
-  .boardList {
+  .categoryList {
     margin: 5rem;
     /* background-color: rgba(8, 8, 8, 0.452); */
   }
 
-  .board-boarder {
+  .category-categoryer {
     margin: 2rem;
   }
 
-  .boardsHeader {
+  .categorysHeader {
     background-color: rgb(104, 142, 255);
     width: 30rem;
     border-radius: 25px;
@@ -157,7 +157,7 @@
     margin: .5rem;
   }
 
-  .board {
+  .category {
     color: white;
     font-weight: bold;
     font-size: 2rem;

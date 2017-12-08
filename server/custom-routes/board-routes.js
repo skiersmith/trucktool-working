@@ -1,5 +1,5 @@
 var Users = require('../models/user')
-var Boards = require( '../models/board')
+var Dashboard = require( '../models/category')
 var Products = require('../models/product')
 var Lists = require('../models/list')
 var Notes = require('../models/note')
@@ -14,7 +14,7 @@ module.exports = {
 
 
     // getBoardByBoardId: {
-    //     path: '/boards/:boardId',
+    //     path: '/dashboard/:boardId',
     //     reqType: 'get',
     //     method(req, res, next){
     //       let action = 'Find Lists By BoardId'
@@ -27,7 +27,7 @@ module.exports = {
     //     }
     //   },
     getListsByBoardId: {
-        path: '/boards/:boardId/lists',
+        path: '/dashboard/:boardId/lists',
         reqType: 'get',
         method(req, res, next) {
             let action = 'Find Lists By BoardId'
@@ -41,7 +41,7 @@ module.exports = {
         }
     },
     getProductsByListId: {
-        path: '/boards/:boardId/lists/:listId/products',
+        path: '/dashboard/:boardId/lists/:listId/products',
         reqType: 'get',
         method(req, res, next) {
             let action = 'Find Products By ListId'
@@ -54,7 +54,7 @@ module.exports = {
         }
     },
     getNotesByProductId: {
-        path: '/boards/:boardId/lists/:listId/products/:productId/notes',
+        path: '/dashboard/:boardId/lists/:listId/products/:productId/notes',
         reqType: 'get',
         method(req, res, next) {
             let action = 'Find Notes By ProductId'
