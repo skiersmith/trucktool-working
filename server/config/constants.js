@@ -23,14 +23,14 @@ const models = {
     preventDefaultApi: true,
     useCustomRoutes: true
   },
-  task: {
-    name: 'Task',
-    endpoint: 'tasks'
+  product: {
+    name: 'Product',
+    endpoint: 'products'
     // useCustomRoutes: true
   },
-  comment: {
-    name: 'Comment',
-    endpoint: 'comments'
+  note: {
+    name: 'Note',
+    endpoint: 'notes'
     // useCustomRoutes: true
   }
 }

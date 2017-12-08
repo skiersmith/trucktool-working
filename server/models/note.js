@@ -6,7 +6,7 @@ var schema = new mongoose.Schema({
     description: { type: String, required: true },
     created: { type: Number, default: Date.now() },
     // Relations
-    taskId: { type: ObjectId, ref: models.task, required: true }
+    productId: { type: ObjectId, ref: models.product, required: true }
 });
 
-module.exports = mongoose.model(models.comment.name, schema);
+module.exports = mongoose.model(models.note.name, schema);
