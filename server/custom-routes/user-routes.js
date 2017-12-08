@@ -4,7 +4,7 @@
 let Dashboard = require('../models/category')
 
 module.exports = {
-  userBoards: {
+  userCategory: {
     path: '/userboards',
     reqType: 'get',
     method(req, res, next){
