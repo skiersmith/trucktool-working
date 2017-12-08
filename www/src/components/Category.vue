@@ -1,10 +1,10 @@
 <template>
-  <div class="board container-fluid">
-    <div class="boardHeaderC container">
+  <div class="category container-fluid">
+    <div class="categoryHeaderC container">
 
-      <div class="boardheader">
-        <h2>{{board.name}}</h2>
-        <h4 v-if="board.description" class="board-description">Description: {{board.description}}</h4>
+      <div class="categoryheader">
+        <h2>{{category.name}}</h2>
+        <h4 v-if="category.description" class="category-description">Description: {{category.description}}</h4>
         <button class="btn-success" @click="toggleListForm">New List</button>
       </div>
     </div>
@@ -18,7 +18,7 @@
 
     <div class="row dalists">
       <div class="drawList col-sm-3" v-for="list in lists">
-        <list class="list" :name="list.name" :description="list.description" :listId="list._id" :boardId="board._id"></list>
+        <list class="list" :name="list.name" :description="list.description" :listId="list._id" :categoryId="category._id"></list>
       </div>
     </div>
 
@@ -31,31 +31,31 @@
     data() {
       return {
         list: {
-          boardId: this.$route.params.id
+          categoryId: this.$route.params.id
         },
         showAddListForm: false
       }
     },
-    name: 'board',
+    name: 'category',
     mounted() {
-      this.$store.dispatch('getBoard', { boardId: this.$route.params.id })
+      this.$store.dispatch('getCategory', { categoryId: this.$route.params.id })
     },
     methods: {
       createList() {
         this.$store.dispatch('createList', { list: this.list })
         this.list = {
-          boardId: this.$route.params.id
+          categoryId: this.$route.params.id
         }
         this.toggleListForm()
       },
       toggleListForm() {
-        debugger
+        
         this.showAddListForm = !this.showAddListForm
       }
     },
     computed: {
-      board() {
-        return this.$store.state.activeBoard
+      category() {
+        return this.$store.state.activeCategory
       },
       lists() {
         return this.$store.state.activeLists
@@ -72,11 +72,11 @@
     margin: 1rem;
   }
 
-  .board-description {
+  .category-description {
     color: rgb(233, 233, 233);
   }
 
-  .boardheader {
+  .categoryheader {
     background-color: rgb(104, 142, 255);
     border-radius: 15px;
     color: rgb(250, 248, 248);
@@ -84,7 +84,7 @@
     padding: 1rem;
   }
 
-  .boardHeaderC {
+  .categoryHeaderC {
     display: flex;
     justify-content: center
   }

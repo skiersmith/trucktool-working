@@ -63,7 +63,7 @@
                 this.$store.dispatch('getNotes', { productId: this.productId, listId: this.listId, boardId: this.boardId })
             },
             moveProductToDifferentList(newListId) {
-                debugger
+                
                 this.$store.dispatch('moveProductToDifferentList', { productId: this.productId, boardId: this.boardId, oldListId: this.listId, listId: this.formOption })
             },
             newNote() {
