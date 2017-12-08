@@ -12,7 +12,7 @@ module.exports = {
 
 
     getListsByCategoryId: {
-        path: '/dashboard/:categoryId/lists',
+        path: '/categorys/:categoryId/lists',
         reqType: 'get',
         method(req, res, next) {
             let action = 'Find Lists By BoardId'

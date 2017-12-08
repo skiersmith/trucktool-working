@@ -13,7 +13,7 @@ export default new Router({
       name: 'Dashboard',
       component: Dashboard
     }, {
-      path: '/dashboard/:id',
+      path: '/categorys/:id',
       name: 'Category',
       component: Category
     }, {

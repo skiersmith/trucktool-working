@@ -20,7 +20,7 @@ var store = new vuex.Store({
   state: {
     dashboard: [],
     activeCategorys: {},
-    activeLists: [],
+    activeLists: {},
     activeProducts: {},
     activeNotes: {},
     error: {},
@@ -46,6 +46,7 @@ var store = new vuex.Store({
     },
     setActiveLists(state, lists) {
       state.activeLists = lists
+      console.log(lists)
     },
     setActiveProducts(state, payload) {
       vue.set(state.activeProducts, payload.listId, payload.product)
@@ -70,7 +71,7 @@ var store = new vuex.Store({
       api('dashboard/' + payload.categoryId)
         .then(res => {
           commit('setActiveCategory', res.data.data)
-          dispatch('getLists', res.data.data._id)
+          dispatch('getCategorys', res.data.data._id)
         })
         .catch(err => {
           commit('handleError', err)
@@ -79,7 +80,7 @@ var store = new vuex.Store({
     createCategory({ commit, dispatch }, category) {
       api.post('categorys/', category)
         .then(res => {
-          dispatch('getCategorys')
+          dispatch('getCategorys', category)
         })
         .catch(err => {
           commit('handleError', err)
@@ -88,7 +89,7 @@ var store = new vuex.Store({
     removeCategory({ commit, dispatch }, category) {
       api.delete('categorys/' + category._id)
         .then(res => {
-          dispatch('getCategorys')
+          dispatch('getCategorys', category)
         })
         .catch(err => {
           commit('handleError', err)
@@ -100,8 +101,9 @@ var store = new vuex.Store({
 
 
     //-------------LISTS-------------------//
-    getLists({ commit, dispatch }, id) {
-      api('dashboard/' + id + '/lists')
+    getLists({ commit, dispatch }, payload) {
+      
+      api('categorys/' + payload.categoryId + '/lists')
         .then(res => {
           commit('setActiveLists', res.data.data)
         })
@@ -110,9 +112,10 @@ var store = new vuex.Store({
         })
     },
     createList({ commit, dispatch }, payload) {
+      
       api.post('lists/', payload.list)
         .then(res => {
-          dispatch('getLists', payload.list.categoryId)
+          dispatch('getLists', payload.categoryId)
         })
         .catch(err => {
           commit('handleError', err)
@@ -121,7 +124,18 @@ var store = new vuex.Store({
     removeList({ commit, dispatch }, payload) {
       api.delete('lists/' + payload.listId)
         .then(res => {
+          // commit('getLists', payload)
           dispatch('getLists', payload.categoryId)
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
+    },
+    setLists({ commit, dispatch }, payload) {
+      api('categorys/' + payload.categoryId)
+        .then(res => {
+          commit('setActiveLists', res.data.data)
+          dispatch('getLists', res.data.data._id)
         })
         .catch(err => {
           commit('handleError', err)

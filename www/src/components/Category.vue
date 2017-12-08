@@ -12,7 +12,7 @@
       <form @submit.prevent="createList">
         <input type="text" name="name" placeholder="name" v-model="list.name" required>
         <input type="text" name="description" placeholder="description" v-model="list.description">
-        <button type="submit" class="btn btn-success btn-sm">add</button>
+        <button type="submit" class="btn btn-success btn-sm">Add</button>
       </form>
     </div>
 
@@ -31,21 +31,22 @@
     data() {
       return {
         list: {
-          categoryId: this.$route.params.id
+          // categoryId: this.$route.params.id
         },
         showAddListForm: false
       }
     },
     name: 'category',
     mounted() {
-      this.$store.dispatch('getList', { categoryId: this.$route.params.id })
+      console.log(this)
+      console.log(this.category[0]._id)
+      this.$store.dispatch('getLists', { categoryId: this.category[0]._id })
     },
     methods: {
       createList() {
+        this.list.categoryId = this.$route.params.id
+        
         this.$store.dispatch('createList', { list: this.list })
-        this.list = {
-          categoryId: this.$route.params.id
-        }
         this.toggleListForm()
       },
       toggleListForm() {
@@ -55,7 +56,7 @@
     },
     computed: {
       category() {
-        return this.$store.state.activeCategory
+        return this.$store.state.activeCategorys
       },
       lists() {
         return this.$store.state.activeLists
