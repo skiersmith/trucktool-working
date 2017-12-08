@@ -25,7 +25,7 @@
             </div>
             <div class="list-footer">
                 <div class="the-product" v-for="product in products">
-                    <product :name="product.name" :description="product.description" :productId="product._id" :listId="listId" :boardId="boardId"
+                    <product :name="product.name" :description="product.description" :productId="product._id" :listId="listId" :categoryId="categoryId"
                         :newListId="newListId"></product>
                 </div>
             </div>
@@ -43,7 +43,7 @@
                 list: {},
                 product: {
                     listId: this.listId,
-                    boardId: this.boardId
+                    categoryId: this.categoryId
 
                 },
                 showAddProductForm: false,
@@ -51,20 +51,20 @@
             }
         },
         name: 'list',
-        props: ['name', 'description', 'listId', 'boardId', 'productId', 'id'],
+        props: ['name', 'description', 'listId', 'categoryId', 'productId', 'id'],
         mounted() {
-            this.$store.dispatch('getProducts', { listId: this.listId, boardId: this.boardId })
+            this.$store.dispatch('getProducts', { listId: this.listId, categoryId: this.categoryId })
         },
         methods: {
             removeList(listId) {
-                this.$store.dispatch('removeList', { listId: listId, boardId: this.boardId })
+                this.$store.dispatch('removeList', { listId: listId, categoryId: this.categoryId })
             },
             createProduct() {
                 this.product.order = this.$store.state.activeProducts[this.listId].length
                 this.$store.dispatch('createProduct', { product: this.product })
                 this.product = {
                     listId: this.listId,
-                    boardId: this.boardId
+                    categoryId: this.categoryId
 
                 }
                 this.toggleProductForm()

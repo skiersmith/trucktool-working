@@ -14,11 +14,11 @@ module.exports = {
 
 
     // getBoardByBoardId: {
-    //     path: '/dashboard/:boardId',
+    //     path: '/dashboard/:categoryId',
     //     reqType: 'get',
     //     method(req, res, next){
     //       let action = 'Find Lists By BoardId'
-    //       Lists.find({boardId: req.params.boardId})
+    //       Lists.find({categoryId: req.params.categoryId})
     //         .then(lists => {
     //           res.send(handleResponse(action, lists))
     //         }).catch(error => {
@@ -27,11 +27,11 @@ module.exports = {
     //     }
     //   },
     getListsByBoardId: {
-        path: '/dashboard/:boardId/lists',
+        path: '/dashboard/:categoryId/lists',
         reqType: 'get',
         method(req, res, next) {
             let action = 'Find Lists By BoardId'
-            Lists.find({ boardId: req.params.boardId })
+            Lists.find({ categoryId: req.params.categoryId })
                 .then(lists => {
                     res.send(handleResponse(action, lists))
                 }).catch(error => {
@@ -41,7 +41,7 @@ module.exports = {
         }
     },
     getProductsByListId: {
-        path: '/dashboard/:boardId/lists/:listId/products',
+        path: '/dashboard/:categoryId/lists/:listId/products',
         reqType: 'get',
         method(req, res, next) {
             let action = 'Find Products By ListId'
@@ -54,7 +54,7 @@ module.exports = {
         }
     },
     getNotesByProductId: {
-        path: '/dashboard/:boardId/lists/:listId/products/:productId/notes',
+        path: '/dashboard/:categoryId/lists/:listId/products/:productId/notes',
         reqType: 'get',
         method(req, res, next) {
             let action = 'Find Notes By ProductId'

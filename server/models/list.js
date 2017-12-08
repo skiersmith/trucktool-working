@@ -7,7 +7,7 @@ var schema = new mongoose.Schema({
 	description: { type: String },
 	created: { type: Number, default: Date.now() },
 	// Relations
-	boardId: { type: ObjectId, ref: models.category, required: true }
+	categoryId: { type: ObjectId, ref: models.category, required: true }
 });
 
 module.exports = mongoose.model(models.list.name, schema);
