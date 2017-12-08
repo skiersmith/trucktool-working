@@ -9,7 +9,7 @@ const actions = {
 const models = {
   category: {
     name: 'Category',
-    endpoint: 'dashboard',
+    endpoint: 'categorys',
     useCustomRoutes: true
   },
   list: {

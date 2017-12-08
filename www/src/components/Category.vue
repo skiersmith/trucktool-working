@@ -38,7 +38,7 @@
     },
     name: 'category',
     mounted() {
-      this.$store.dispatch('getCategory', { categoryId: this.$route.params.id })
+      this.$store.dispatch('getList', { categoryId: this.$route.params.id })
     },
     methods: {
       createList() {

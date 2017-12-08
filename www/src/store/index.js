@@ -19,7 +19,7 @@ vue.use(vuex)
 var store = new vuex.Store({
   state: {
     dashboard: [],
-    activeCategory: {},
+    activeCategorys: {},
     activeLists: [],
     activeProducts: {},
     activeNotes: {},
@@ -33,13 +33,16 @@ var store = new vuex.Store({
       console.log("User: ", state.user)
     },
     setCategorys(state, data) {
-      state.dashboard = data
+      state.activeCategorys = data
+      console.log('activeCategorys:', data)
     },
     handleError(state, err) {
       state.error = err
     },
     setActiveCategory(state, payload) {
-      state.activeCategory = payload
+      state.activeCategorys = payload
+      console.log(payload)
+      console.log(payload)
     },
     setActiveLists(state, lists) {
       state.activeLists = lists
@@ -63,7 +66,7 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-    getCategory({ commit, dispatch }, payload) {
+    setCategorys({ commit, dispatch }, payload) {
       api('dashboard/' + payload.categoryId)
         .then(res => {
           commit('setActiveCategory', res.data.data)
@@ -74,7 +77,7 @@ var store = new vuex.Store({
         })
     },
     createCategory({ commit, dispatch }, category) {
-      api.post('dashboard/', category)
+      api.post('categorys/', category)
         .then(res => {
           dispatch('getCategorys')
         })
@@ -83,7 +86,7 @@ var store = new vuex.Store({
         })
     },
     removeCategory({ commit, dispatch }, category) {
-      api.delete('dashboard/' + category._id)
+      api.delete('categorys/' + category._id)
         .then(res => {
           dispatch('getCategorys')
         })

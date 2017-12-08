@@ -3,7 +3,8 @@
     <div class="categorysHeader container">
       <h1>{{user.name}}'s Categorys</h1>
       <div class="header container-fluid">
-        <button @click="toggleCategorydForm" class="btn-success">New Category</button>
+        
+        <button @click="toggleCategoryForm" class="btn-success">New Category</button>
         <button class="btn-danger" @click="userLogout">Logout</button>
       </div>
     </div>
@@ -46,13 +47,16 @@
         showCategoryForm: false
       }
     },
+    
     name: 'categorys',
     mounted() {
       this.$store.dispatch('getCategorys')
+      
     },
     computed: {
       categorys() {
-        return this.$store.state.categorys
+        return this.$store.state.activeCategorys
+        
       },
       user() {
         return this.$store.state.user
