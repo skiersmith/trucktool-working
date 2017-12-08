@@ -15,6 +15,8 @@
                     <form @submit.prevent="createProduct">
                         <div class="form-group">
                             <input class="inline" size="15" type="text" name="name" placeholder="name" v-model="product.name" required>
+                            <input class="inline" size="15" type="text" name="quantity" placeholder="quantity" v-model="product.quantity" required>
+                            <input class="inline" size="15" type="text" name="unitPrice" placeholder="unitPrice" v-model="product.unitPrice" required>
                             <button type="submit" class="btn-xs btn-success">Add</button>
                         </div>
                     </form>
