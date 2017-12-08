@@ -10,26 +10,20 @@
                 <div v-if="description">
                     <p class="list-text-color">Description: {{description}}</p>
                 </div>
-                <button class="btn-success btn-xs margin" @click="toggleTaskForm">New Task</button>
-                <div class="create-task" v-if="showAddTaskForm">
-                    <form @submit.prevent="createTask">
+                <button class="btn-success btn-xs margin" @click="toggleProductForm">New Product</button>
+                <div class="create-product" v-if="showAddProductForm">
+                    <form @submit.prevent="createProduct">
                         <div class="form-group">
-                            <input class="inline" size="15" type="text" name="name" placeholder="name" v-model="task.name" required>
+                            <input class="inline" size="15" type="text" name="name" placeholder="name" v-model="product.name" required>
                             <button type="submit" class="btn-xs btn-success">Add</button>
                         </div>
-                        <!-- <div class="form-group">
-                            <label for="description">description</label>
-                            <input class="inline" size="15" type="text" name="description" placeholder="description" v-model="task.description">
-                        </div> -->
-                        <!-- e -->
                     </form>
                 </div>
 
             </div>
             <div class="list-footer">
-                <div class="the-task" v-for="task in tasks">
-                    <!-- <router-link :to="'/tasks/'+task._id">{{task.name}}</router-link> -->
-                    <task :name="task.name" :description="task.description" :taskId="task._id" :listId="listId" :boardId="boardId" :newListId="newListId"></task>
+                <div class="the-product" v-for="product in products">
+                    <product :name="product.name" :description="product.description" :productId="product._id" :listId="listId" :boardId="boardId" :newListId="newListId"></product>
                 </div>
             </div>
 
@@ -38,57 +32,56 @@
 </template>
 
 <script>
-    import task from './task'
+    import product from './product'
     import draggable from 'vuedraggable'
     export default {
         data() {
             return {
                 list: {},
-                task: {
+                product: {
                     listId: this.listId,
                     boardId: this.boardId
 
                 },
-                showAddTaskForm: false,
+                showAddProductForm: false,
                 newListId: document.getElementById('listId')
             }
         },
         name: 'list',
-        props: ['name', 'description', 'listId', 'boardId', 'taskId', 'id'],
+        props: ['name', 'description', 'listId', 'boardId', 'productId', 'id'],
         mounted() {
-            // this.$store.dispatch('getLists', this.$route.params.id)
-            this.$store.dispatch('getTasks', { listId: this.listId, boardId: this.boardId })
+            this.$store.dispatch('getProducts', { listId: this.listId, boardId: this.boardId })
         },
         methods: {
             removeList(listId) {
                 this.$store.dispatch('removeList', { listId: listId, boardId: this.boardId })
             },
-            createTask() {
+            createProduct() {
                 debugger
-                this.task.order = this.$store.state.activeTasks[this.listId].length
-                this.$store.dispatch('createTask', { task: this.task })
-                this.task = {
+                this.product.order = this.$store.state.activeProducts[this.listId].length
+                this.$store.dispatch('createProduct', { product: this.product })
+                this.product = {
                     listId: this.listId,
                     boardId: this.boardId
 
                 }
-                this.toggleTaskForm()
+                this.toggleProductForm()
             },
 
-            toggleTaskForm() {
-                this.showAddTaskForm = !this.showAddTaskForm
+            toggleProductForm() {
+                this.showAddProductForm = !this.showAddProductForm
             }
         },
         computed: {
-            tasks() {
-                return this.$store.state.activeTasks[this.listId]
+            products() {
+                return this.$store.state.activeProducts[this.listId]
             },
             lists() {
                 return this.$store.state.activeLists
             }
         },
         components: {
-            task,
+            product,
             draggable
 
         }
@@ -122,25 +115,20 @@
         float: right;
         color: rgb(235, 15, 15);
     }
-    .fa-trash:hover{
-       color: rgb(255, 155, 155);
+
+    .fa-trash:hover {
+        color: rgb(255, 155, 155);
     }
 
     .inline {
         display: inline;
     }
 
-    /* .task{
-        background-color: #2b2a2ab7; 
-        color: white;
-    } */
-
     .list-text-color {
         color: white;
     }
 
     .list-header {
-        /* background-color: #9796965e; */
         padding: 1rem;
     }
 
@@ -148,7 +136,7 @@
         margin: 1rem;
     }
 
-    .the-task {
+    .the-product {
         margin-top: 0.5rem;
     }
 </style>
