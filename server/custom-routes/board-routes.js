@@ -1,8 +1,8 @@
 var Users = require('../models/user')
 var Boards = require( '../models/board')
-var Tasks = require('../models/task')
+var Products = require('../models/product')
 var Lists = require('../models/list')
-var Comments = require('../models/comment')
+var Notes = require('../models/note')
 
 
 
@@ -40,27 +40,27 @@ module.exports = {
                 })
         }
     },
-    getTasksByListId: {
-        path: '/boards/:boardId/lists/:listId/tasks',
+    getProductsByListId: {
+        path: '/boards/:boardId/lists/:listId/products',
         reqType: 'get',
         method(req, res, next) {
-            let action = 'Find Tasks By ListId'
-            Tasks.find({ listId: req.params.listId })
-                .then(tasks => {
-                    res.send(handleResponse(action, tasks))
+            let action = 'Find Products By ListId'
+            Products.find({ listId: req.params.listId })
+                .then(products => {
+                    res.send(handleResponse(action, products))
                 }).catch(error => {
                     return next(handleResponse(action, null, error))
                 })
         }
     },
-    getCommentsByTaskId: {
-        path: '/boards/:boardId/lists/:listId/tasks/:taskId/comments',
+    getNotesByProductId: {
+        path: '/boards/:boardId/lists/:listId/products/:productId/notes',
         reqType: 'get',
         method(req, res, next) {
-            let action = 'Find Comments By TaskId'
-            Comments.find({ taskId: req.params.taskId })
-                .then(comments => {
-                    res.send(handleResponse(action, comments))
+            let action = 'Find Notes By ProductId'
+            Notes.find({ productId: req.params.productId })
+                .then(notes => {
+                    res.send(handleResponse(action, notes))
                 }).catch(error => {
                     return next(handleResponse(action, null, error))
                 })

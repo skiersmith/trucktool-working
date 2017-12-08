@@ -1,6 +1,6 @@
 var models = require('../config/constants').models
 let mongoose = require('mongoose')
-var Comments = require('./comment')
+var Notes = require('./note')
 let ObjectId = mongoose.Schema.ObjectId
 
 var schema = new mongoose.Schema({
