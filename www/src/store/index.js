@@ -21,7 +21,7 @@ var store = new vuex.Store({
     boards: [],
     activeBoard: {},
     activeLists: [],
-    activeTasks: {},
+    activeProducts: {},
     activeComments: {},
     error: {},
     user: {}
@@ -44,11 +44,11 @@ var store = new vuex.Store({
     setActiveLists(state, lists) {
       state.activeLists = lists
     },
-    setActiveTasks(state, payload) {
-      vue.set(state.activeTasks, payload.listId, payload.task)
+    setActiveProducts(state, payload) {
+      vue.set(state.activeProducts, payload.listId, payload.product)
     },
     setActiveComments(state, payload) {
-      vue.set(state.activeComments, payload.taskId, payload.comment)
+      vue.set(state.activeComments, payload.productId, payload.comment)
     }
   },
   actions: {
@@ -130,52 +130,52 @@ var store = new vuex.Store({
 
 
     //-------------TASKS-----------------//
-    getTasks({ commit, dispatch }, payload) {
-      api('boards/' + payload.boardId + '/lists/' + payload.listId + '/tasks')
+    getProducts({ commit, dispatch }, payload) {
+      api('boards/' + payload.boardId + '/lists/' + payload.listId + '/products')
         .then(res => {
-          commit('setActiveTasks', { task: res.data.data, listId: payload.listId })
+          commit('setActiveProducts', { product: res.data.data, listId: payload.listId })
         })
         .catch(err => {
           commit('handleError', err)
         })
     },
-    // createTask({ commit, dispatch }, payload) {
-    //   // payload.newTask.listId = payload.listId
-    //   api.post('tasks', payload.newTask)
+    // createProduct({ commit, dispatch }, payload) {
+    //   // payload.newProduct.listId = payload.listId
+    //   api.post('products', payload.newProduct)
     //     .then(res => {
-    //       dispatch('getTasks', {listId:payload.listId, boardId:payload.boardId })
+    //       dispatch('getProducts', {listId:payload.listId, boardId:payload.boardId })
     //     })
     //     .catch(err => {
     //       commit('handleError', err)
     //     })
     // },
-    createTask({ commit, dispatch }, payload) {
-      api.post('/tasks', payload.task)
+    createProduct({ commit, dispatch }, payload) {
+      api.post('/products', payload.product)
         .then(res => {
-          dispatch('getTasks', payload.task)
+          dispatch('getProducts', payload.product)
         })
         .catch(err => {
           commit('handleError', err)
         })
     },
-    moveTaskToDifferentList({ commit, dispatch }, payload) {
+    moveProductToDifferentList({ commit, dispatch }, payload) {
 
-      api.put('tasks/' + payload.taskId, {
+      api.put('products/' + payload.productId, {
         listId: payload.listId
       })
         .then(res => {
-          dispatch('getTasks', payload)
-          dispatch('getTasks', { listId: payload.oldListId, boardId: payload.boardId })
-          //getTasks?
+          dispatch('getProducts', payload)
+          dispatch('getProducts', { listId: payload.oldListId, boardId: payload.boardId })
+          //getProducts?
         })
         .catch(err => {
           commit('handleError', err)
         })
     },
-    removeTask({ commit, dispatch }, payload) {
-      api.delete('tasks/' + payload.taskId)
+    removeProduct({ commit, dispatch }, payload) {
+      api.delete('products/' + payload.productId)
         .then(res => {
-          dispatch('getTasks', payload)
+          dispatch('getProducts', payload)
         })
         .catch(err => {
           commit('handleError', err)
@@ -185,13 +185,13 @@ var store = new vuex.Store({
 
 
 
-    // 'boards/' + payload.boardId + '/lists/' + payload.listId + '/tasks/' + payload.taskId + 
+    // 'boards/' + payload.boardId + '/lists/' + payload.listId + '/products/' + payload.productId + 
     //------------COMMENTS--------------//
     getComments({ commit, dispatch }, payload) {
-      api('boards/' + payload.boardId + '/lists/' + payload.listId + '/tasks/' + payload.taskId + '/comments')
+      api('boards/' + payload.boardId + '/lists/' + payload.listId + '/products/' + payload.productId + '/comments')
         .then(res => {
 
-          commit('setActiveComments', { comment: res.data.data, taskId: payload.taskId })
+          commit('setActiveComments', { comment: res.data.data, productId: payload.productId })
         })
         .catch(err => {
           commit('handleError', err)

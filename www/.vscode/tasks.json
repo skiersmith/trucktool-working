@@ -1,22 +1,22 @@
 {
 	// See https://go.microsoft.com/fwlink/?LinkId=733558
-	// for the documentation about the tasks.json format
+	// for the documentation about the products.json format
 	"version": "0.1.0",
 	"command": "npm",
 	"isShellCommand": true,
 	"showOutput": "always",
-	"suppressTaskName": true,
-	"tasks": [
+	"suppressProductName": true,
+	"products": [
 		{
-			"taskName": "install",
+			"productName": "install",
 			"args": ["install"]
 		},
 		{
-			"taskName": "update",
+			"productName": "update",
 			"args": ["update"]
 		},
 		{
-			"taskName": "build",
+			"productName": "build",
 			"args": ["run", "dev"]
 		}
 	]
