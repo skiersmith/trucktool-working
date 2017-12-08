@@ -60,7 +60,6 @@
                 this.$store.dispatch('removeList', { listId: listId, boardId: this.boardId })
             },
             createProduct() {
-                debugger
                 this.product.order = this.$store.state.activeProducts[this.listId].length
                 this.$store.dispatch('createProduct', { product: this.product })
                 this.product = {
