@@ -11,22 +11,7 @@ module.exports = {
 
 
 
-
-
-    // getBoardByBoardId: {
-    //     path: '/dashboard/:categoryId',
-    //     reqType: 'get',
-    //     method(req, res, next){
-    //       let action = 'Find Lists By BoardId'
-    //       Lists.find({categoryId: req.params.categoryId})
-    //         .then(lists => {
-    //           res.send(handleResponse(action, lists))
-    //         }).catch(error => {
-    //           return next(handleResponse(action, null, error))
-    //         })
-    //     }
-    //   },
-    getListsByBoardId: {
+    getListsByCategoryId: {
         path: '/dashboard/:categoryId/lists',
         reqType: 'get',
         method(req, res, next) {
