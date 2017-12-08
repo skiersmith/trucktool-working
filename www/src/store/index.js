@@ -52,7 +52,6 @@ var store = new vuex.Store({
     }
   },
   actions: {
-    //when writing your auth routes (login, logout, register) be sure to use auth instead of api for the posts//
 
     //--------BOARDS-----------//
     getBoards({ commit, dispatch }) {
@@ -139,16 +138,7 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-    // createProduct({ commit, dispatch }, payload) {
-    //   // payload.newProduct.listId = payload.listId
-    //   api.post('products', payload.newProduct)
-    //     .then(res => {
-    //       dispatch('getProducts', {listId:payload.listId, boardId:payload.boardId })
-    //     })
-    //     .catch(err => {
-    //       commit('handleError', err)
-    //     })
-    // },
+
     createProduct({ commit, dispatch }, payload) {
       api.post('/products', payload.product)
         .then(res => {
@@ -185,7 +175,6 @@ var store = new vuex.Store({
 
 
 
-    // 'boards/' + payload.boardId + '/lists/' + payload.listId + '/products/' + payload.productId + 
     //------------COMMENTS--------------//
     getNotes({ commit, dispatch }, payload) {
       api('boards/' + payload.boardId + '/lists/' + payload.listId + '/products/' + payload.productId + '/notes')
@@ -245,9 +234,6 @@ var store = new vuex.Store({
     authenticate({ commit, dispatch }) {
       auth('authenticate')
         .then(res => {
-          // if (!res.data.data) {
-          //   router.push({ name: "Login" })
-          // }
           commit('setUser', res.data.data)
           router.push({ name: 'Boards' })
         })
@@ -260,7 +246,6 @@ var store = new vuex.Store({
         .then(res => {
           console.log(res)
           dispatch('authenticate')
-          // router.push({ name: 'Login' })
         })
         .catch(err => {
           console.log(err)

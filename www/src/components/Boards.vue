@@ -1,14 +1,12 @@
 <template>
   <div>
-<div class="boardsHeader container">
-  <h1>{{user.name}}'s Boards</h1>
-  <div class="header container-fluid">
-    <button @click="toggleBoradForm" class="btn-success">New Board</button>
-    <button class="btn-danger" @click="userLogout">Logout</button>
-  </div>
-</div>
-    <!-- <div class="boardHeader container">
-    </div> -->
+    <div class="boardsHeader container">
+      <h1>{{user.name}}'s Boards</h1>
+      <div class="header container-fluid">
+        <button @click="toggleBoradForm" class="btn-success">New Board</button>
+        <button class="btn-danger" @click="userLogout">Logout</button>
+      </div>
+    </div>
     <div class="boardList row">
 
       <div class="col-sm-3" v-for="board in boards">
@@ -94,9 +92,11 @@
     font-size: 150%;
     font-weight: bold;
   }
-  .boardName:hover{
+
+  .boardName:hover {
     color: rgb(232, 240, 158);
   }
+
   .boardForm {
     display: flex;
     max-width: 60rem;
@@ -111,7 +111,7 @@
   .boardHeader {
     display: flex;
     justify-content: flex-start;
-    
+
   }
 
   .boardList {
@@ -122,29 +122,24 @@
   .board-boarder {
     margin: 2rem;
   }
-  .boardsHeader{
+
+  .boardsHeader {
     background-color: rgb(104, 142, 255);
     width: 30rem;
     border-radius: 25px;
     padding: 1.5rem;
     color: white;
   }
-  /* .board {
-    background-color: rgb(255, 255, 255);
-    color: black;
-    margin: 1rem;
-    text-decoration: none;
-    font-size: 110%;
-  } */
 
   .remove {
     color: red;
     cursor: pointer;
     position: absolute;
     top: 10%;
-    right:15%;
+    right: 15%;
   }
-  .remove:hover{
+
+  .remove:hover {
     color: rgb(252, 135, 135);
     cursor: pointer;
   }

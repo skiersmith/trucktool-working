@@ -71,9 +71,11 @@
   .dalists {
     margin: 1rem;
   }
-  .board-description{
+
+  .board-description {
     color: rgb(233, 233, 233);
   }
+
   .boardheader {
     background-color: rgb(104, 142, 255);
     border-radius: 15px;
@@ -81,8 +83,9 @@
     display: inline block;
     padding: 1rem;
   }
-  .boardHeaderC{
+
+  .boardHeaderC {
     display: flex;
-    justify-content:center
+    justify-content: center
   }
 </style>

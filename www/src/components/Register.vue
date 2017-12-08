@@ -1,6 +1,8 @@
 <template>
-    
 
+    <div>
+
+    </div>
 
 
 </template>
@@ -25,7 +27,7 @@
             },
 
         },
-        props:{
+        props: {
 
         }
 

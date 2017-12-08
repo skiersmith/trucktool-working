@@ -23,7 +23,8 @@
             </div>
             <div class="list-footer">
                 <div class="the-product" v-for="product in products">
-                    <product :name="product.name" :description="product.description" :productId="product._id" :listId="listId" :boardId="boardId" :newListId="newListId"></product>
+                    <product :name="product.name" :description="product.description" :productId="product._id" :listId="listId" :boardId="boardId"
+                        :newListId="newListId"></product>
                 </div>
             </div>
 

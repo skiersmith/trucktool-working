@@ -1,38 +1,39 @@
 <template>
-    <!-- <draggable :options="{group: 'products'}" @end ="moveProductToDifferentList(lists[this._id])"> -->
-        <div class="note-container">
-            <div class="products open-notes">
-                <p class="productTitle" @click="notesSeen = !notesSeen"><b>Product: </b>{{name}}
-                    <i class="fa fa-trash float" @click="removeProduct"></i>
-                    <div class="notes" v-if="notesSeen" v-for="note in notes">
-                        <p>{{note.description}}
-                            <i class="fa fa-minus" @click="removeNote(note._id)"></i>
-                        </p>
-                    </div>
-                    <p class="add-note" v-if="notesSeen" @click="toggleNoteForm">Add Note <span class="fa fa-plus"></span> </p>
-                </p>
-            </div>
-
-            <div class="noteForm" v-if="showNoteForm">
-                <div class="newNote">
-                    <form @submit.prevent="newNote">
-                        <div class="form-group">
-                            <input placeholder="note" name="description" type="text" size="10" v-model="note.description">
-                            <button class="btn-success btn-xs" type="submit">Add</button>
-                        </div>
-                    </form>
+    <div class="note-container">
+        <div class="products open-notes">
+            <p class="productTitle" @click="notesSeen = !notesSeen">
+                <b>Product: </b>{{name}}
+                <i class="fa fa-trash float" @click="removeProduct"></i>
+                <div class="notes" v-if="notesSeen" v-for="note in notes">
+                    <p>{{note.description}}
+                        <i class="fa fa-minus" @click="removeNote(note._id)"></i>
+                    </p>
                 </div>
-            </div>
-            <div class="the-lists">
-                <form @change="moveProductToDifferentList">
-                    <select name="select list" v-model="formOption">
-                        <option disabled selected>Select List</option>
-                        <option v-for="list in lists" :value="list._id">{{list.name}}</option>
-                    </select>
+                <p class="add-note" v-if="notesSeen" @click="toggleNoteForm">Add Note
+                    <span class="fa fa-plus"></span>
+                </p>
+            </p>
+        </div>
+
+        <div class="noteForm" v-if="showNoteForm">
+            <div class="newNote">
+                <form @submit.prevent="newNote">
+                    <div class="form-group">
+                        <input placeholder="note" name="description" type="text" size="10" v-model="note.description">
+                        <button class="btn-success btn-xs" type="submit">Add</button>
+                    </div>
                 </form>
             </div>
         </div>
-    <!-- </draggable> -->
+        <div class="the-lists">
+            <form @change="moveProductToDifferentList">
+                <select name="select list" v-model="formOption">
+                    <option disabled selected>Select List</option>
+                    <option v-for="list in lists" :value="list._id">{{list.name}}</option>
+                </select>
+            </form>
+        </div>
+    </div>
 
 </template>
 
@@ -71,7 +72,7 @@
                     boardId: this.boardId,
                     listId: this.listId,
                     productId: this.productId
-                    
+
                 }
                 this.toggleNoteForm()
             },
@@ -97,57 +98,50 @@
             }
         },
         components: {
-            // draggable
         }
 
     }
 </script>
 
 <style scoped>
-    /* .fa-ban {
-        color: red;
-        float: right;
-    }
-    .fa-plus {
-        color: rgb(13, 173, 26);
-    
-    } */
     .open-notes {
-        /* color: white; */
         cursor: pointer;
-        /* font-size: 100%;  */
+        =
     }
 
     .fa-minus {
         color: red;
     }
-    .fa-trash:hover{
+
+    .fa-trash:hover {
         color: rgb(255, 137, 137);
     }
-    .fa-minus:hover{
+
+    .fa-minus:hover {
         color: rgb(255, 137, 137);
     }
+
     .note-container {
         margin-left: 2rem;
         margin-right: 2rem;
         border: 1px solid black;
         border-radius: 5px;
-        /* background: pink; */
-        /* background: rgb(252, 185, 185); */
         padding: 1rem;
     }
 
     .add-note {
-        /* color: white; */
         padding-top: 5%;
         cursor: pointer;
     }
-    .add-note:hover{
+
+    .add-note:hover {
         color: rgb(7, 7, 7);
     }
-    .productTitle:hover{
+
+    .productTitle:hover {
         color: rgb(2, 2, 2);
     }
+
     .notes {
         margin: 2rem;
         border: 1px solid black;
@@ -156,11 +150,8 @@
         word-wrap: normal;
         padding-top: .5rem;
     }
-    .float{
+
+    .float {
         float: right;
     }
-
-    /* .products{
-        margin-top: 0.5rem;
-    } */
 </style>
