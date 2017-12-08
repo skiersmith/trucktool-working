@@ -32,13 +32,13 @@ var store = new vuex.Store({
       console.log('setUser: ', data)
       console.log("User: ", state.user)
     },
-    setBoards(state, data) {
+    setCategorys(state, data) {
       state.dashboard = data
     },
     handleError(state, err) {
       state.error = err
     },
-    setActiveBoard(state, payload) {
+    setActiveCategory(state, payload) {
       state.activeCategory = payload
     },
     setActiveLists(state, lists) {
@@ -54,10 +54,10 @@ var store = new vuex.Store({
   actions: {
 
     //--------BOARDS-----------//
-    getBoards({ commit, dispatch }) {
+    getCategorys({ commit, dispatch }) {
       api('userboards')
         .then(res => {
-          commit('setBoards', res.data.data)
+          commit('setCategorys', res.data.data)
         })
         .catch(err => {
           commit('handleError', err)
@@ -66,7 +66,7 @@ var store = new vuex.Store({
     getCategory({ commit, dispatch }, payload) {
       api('dashboard/' + payload.categoryId)
         .then(res => {
-          commit('setActiveBoard', res.data.data)
+          commit('setActiveCategory', res.data.data)
           dispatch('getLists', res.data.data._id)
         })
         .catch(err => {
@@ -76,7 +76,7 @@ var store = new vuex.Store({
     createCategory({ commit, dispatch }, category) {
       api.post('dashboard/', category)
         .then(res => {
-          dispatch('getBoards')
+          dispatch('getCategorys')
         })
         .catch(err => {
           commit('handleError', err)
@@ -85,7 +85,7 @@ var store = new vuex.Store({
     removeCategory({ commit, dispatch }, category) {
       api.delete('dashboard/' + category._id)
         .then(res => {
-          dispatch('getBoards')
+          dispatch('getCategorys')
         })
         .catch(err => {
           commit('handleError', err)
