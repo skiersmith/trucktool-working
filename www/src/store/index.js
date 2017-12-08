@@ -22,7 +22,7 @@ var store = new vuex.Store({
     activeBoard: {},
     activeLists: [],
     activeProducts: {},
-    activeComments: {},
+    activeNotes: {},
     error: {},
     user: {}
   },
@@ -47,8 +47,8 @@ var store = new vuex.Store({
     setActiveProducts(state, payload) {
       vue.set(state.activeProducts, payload.listId, payload.product)
     },
-    setActiveComments(state, payload) {
-      vue.set(state.activeComments, payload.productId, payload.comment)
+    setActiveNotes(state, payload) {
+      vue.set(state.activeNotes, payload.productId, payload.note)
     }
   },
   actions: {
@@ -187,30 +187,30 @@ var store = new vuex.Store({
 
     // 'boards/' + payload.boardId + '/lists/' + payload.listId + '/products/' + payload.productId + 
     //------------COMMENTS--------------//
-    getComments({ commit, dispatch }, payload) {
-      api('boards/' + payload.boardId + '/lists/' + payload.listId + '/products/' + payload.productId + '/comments')
+    getNotes({ commit, dispatch }, payload) {
+      api('boards/' + payload.boardId + '/lists/' + payload.listId + '/products/' + payload.productId + '/notes')
         .then(res => {
 
-          commit('setActiveComments', { comment: res.data.data, productId: payload.productId })
+          commit('setActiveNotes', { note: res.data.data, productId: payload.productId })
         })
         .catch(err => {
           commit('handleError', err)
         })
     },
-    newComment({ commit, dispatch }, payload) {
-      api.post('/comments', payload.comment)
+    newNote({ commit, dispatch }, payload) {
+      api.post('/notes', payload.note)
         .then(res => {
 
-          dispatch('getComments', payload.comment)
+          dispatch('getNotes', payload.note)
         })
         .catch(err => {
           commit('handleError', err)
         })
     },
-    removeComment({ commit, dispatch }, payload) {
-      api.delete('comments/' + payload.commentId)
+    removeNote({ commit, dispatch }, payload) {
+      api.delete('notes/' + payload.noteId)
         .then(res => {
-          dispatch('getComments', payload)
+          dispatch('getNotes', payload)
         })
         .catch(err => {
           commit('handleError', err)
