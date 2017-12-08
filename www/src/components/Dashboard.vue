@@ -3,7 +3,7 @@
     <div class="categorysHeader container">
       <h1>{{user.name}}'s Categorys</h1>
       <div class="header container-fluid">
-        <button @click="toggleBoradForm" class="btn-success">New Category</button>
+        <button @click="toggleCategorydForm" class="btn-success">New Category</button>
         <button class="btn-danger" @click="userLogout">Logout</button>
       </div>
     </div>
@@ -62,7 +62,7 @@
       createCategory() {
         this.$store.dispatch('createCategory', this.category)
         this.category = {}
-        this.toggleBoradForm()
+        this.toggleCategoryForm()
       },
       userLogout() {
         this.$store.dispatch('logout', this.$store.state.user._id)
@@ -70,7 +70,7 @@
       removeCategory(category) {
         this.$store.dispatch('removeCategory', category)
       },
-      toggleBoradForm() {
+      toggleCategoryForm() {
         this.showCategoryForm = !this.showCategoryForm
       }
     }
