@@ -1,5 +1,5 @@
 <template>
-    <draggable :options="{group: 'tasks'}" @end ="moveTaskToDifferentList(lists[this._id])">
+    <!-- <draggable :options="{group: 'tasks'}" @end ="moveTaskToDifferentList(lists[this._id])"> -->
         <div class="comment-container">
             <div class="tasks open-comments">
                 <p class="taskTitle" @click="commentsSeen = !commentsSeen"><b>Task: </b>{{name}}
@@ -35,7 +35,7 @@
                 </form>
             </div>
         </div>
-    </draggable>
+    <!-- </draggable> -->
 
 </template>
 
@@ -100,21 +100,21 @@
             }
         },
         components: {
-            draggable
+            // draggable
         }
 
     }
 </script>
 
 <style scoped>
-    .fa-ban {
+    /* .fa-ban {
         color: red;
         float: right;
     }
     .fa-plus {
         color: rgb(13, 173, 26);
     
-    }
+    } */
     .open-comments {
         /* color: white; */
         cursor: pointer;
@@ -136,7 +136,7 @@
         border: 1px solid black;
         border-radius: 5px;
         /* background: pink; */
-        background: rgb(252, 185, 185);
+        /* background: rgb(252, 185, 185); */
         padding: 1rem;
     }
 
