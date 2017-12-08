@@ -106,7 +106,7 @@
 <style scoped>
     .open-notes {
         cursor: pointer;
-        =
+        
     }
 
     .fa-minus {
