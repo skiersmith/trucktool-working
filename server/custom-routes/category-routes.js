@@ -3,6 +3,7 @@ var Dashboard = require( '../models/category')
 var Products = require('../models/product')
 var Lists = require('../models/list')
 var Notes = require('../models/note')
+var Categorys = require('../models/category')
 
 
 
@@ -15,7 +16,8 @@ module.exports = {
         path: '/categorys/:categoryId/lists',
         reqType: 'get',
         method(req, res, next) {
-            let action = 'Find Lists By BoardId'
+            let action = 'Find Lists By CategoryId'
+           
             Lists.find({ categoryId: req.params.categoryId })
                 .then(lists => {
                     res.send(handleResponse(action, lists))
@@ -50,7 +52,26 @@ module.exports = {
                     return next(handleResponse(action, null, error))
                 })
         }
+    },
+    createList: {
+        path: '/categorys/:categoryId/lists',
+        reqType: 'post',
+        method(req, res, next) {
+            let action = 'create Notes By ProductId'
+            Categorys.findById( req.params.categoryId )
+                .then(category => {
+                    req.body.categoryId = category._id
+                    Lists.create(req.body)
+                    .then(list => {
+                        res.send(handleResponse(action, list))
+                    })
+
+                }).catch(error => {
+                    return next(handleResponse(action, null, error))
+                })
+        }
     }
+    
 
 
 
