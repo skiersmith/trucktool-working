@@ -29,24 +29,18 @@ var store = new vuex.Store({
   mutations: {
     setUser(state, data) {
       state.user = data
-      console.log('setUser: ', data)
-      console.log("User: ", state.user)
     },
     setCategorys(state, data) {
       state.activeCategorys = data
-      console.log('activeCategorys:', data)
     },
     handleError(state, err) {
       state.error = err
     },
     setActiveCategory(state, payload) {
       state.activeCategorys = payload
-      console.log(payload)
-      console.log(payload)
     },
     setActiveLists(state, lists) {
       state.activeLists = lists
-      console.log(lists)
     },
     setActiveProducts(state, payload) {
       vue.set(state.activeProducts, payload.listId, payload.product)
@@ -57,7 +51,7 @@ var store = new vuex.Store({
   },
   actions: {
 
-    //--------BOARDS-----------//
+    //--------CATEGORIES-----------//
     getCategorys({ commit, dispatch }) {
       api('userboards')
         .then(res => {
@@ -95,7 +89,7 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-    //^^^^^^^^^^^^^^BOARDS^^^^^^^^^^^^^^^^^//
+    //^^^^^^^^^^^^^^CATEGORIES^^^^^^^^^^^^^^^^^//
 
 
 
@@ -145,7 +139,7 @@ var store = new vuex.Store({
 
 
 
-    //-------------TASKS-----------------//
+    //-------------PRODUCTS-----------------//
     getProducts({ commit, dispatch }, payload) {
       api('dashboard/' + payload.categoryId + '/lists/' + payload.listId + '/products')
         .then(res => {
@@ -188,11 +182,11 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-    //^^^^^^^^^^^^^TASKS^^^^^^^^^^^^^^^^^//
+    //^^^^^^^^^^^^^PRODUCTS^^^^^^^^^^^^^^^^^//
 
 
 
-    //------------COMMENTS--------------//
+    //------------NOTES--------------//
     getNotes({ commit, dispatch }, payload) {
       api('dashboard/' + payload.categoryId + '/lists/' + payload.listId + '/products/' + payload.productId + '/notes')
         .then(res => {
@@ -222,7 +216,7 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-    //^^^^^^^^^^^COMMENTS^^^^^^^^^^^^^^//
+    //^^^^^^^^^^^NOTES^^^^^^^^^^^^^^//
 
 
 
