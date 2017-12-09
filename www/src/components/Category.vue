@@ -18,7 +18,7 @@
 
     <div class="row dalists">
       <div class="drawList col-sm-3" v-for="list in lists">
-        <list class="list" :name="list.name" :description="list.description" :listId="list._id" :categoryId="category._id"></list>
+        <list class="list" :name="list.name" :description="list.description" :listId="list._id" :categoryId="list.categoryId"></list>
       </div>
     </div>
 
@@ -31,16 +31,15 @@
     data() {
       return {
         list: {
-          // categoryId: this.$route.params.id
+          categoryId: this.$route.params.id
         },
         showAddListForm: false
       }
     },
     name: 'category',
+    props: ['name', 'description', 'listId', 'categoryId', 'productId', 'id'],
     mounted() {
-      console.log(this)
-      console.log(this.category[0]._id)
-      this.$store.dispatch('getLists', { categoryId: this.category[0]._id })
+      this.$store.dispatch('getLists', { categoryId: this.$route.params.id })
     },
     methods: {
       createList() {

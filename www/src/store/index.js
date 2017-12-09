@@ -67,16 +67,16 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-    setCategorys({ commit, dispatch }, payload) {
-      api('dashboard/' + payload.categoryId)
-        .then(res => {
-          commit('setActiveCategory', res.data.data)
-          dispatch('getCategorys', res.data.data._id)
-        })
-        .catch(err => {
-          commit('handleError', err)
-        })
-    },
+    // setCategorys({ commit, dispatch }, payload) {
+    //   api('dashboard/' + payload.categoryId)
+    //     .then(res => {
+    //       commit('setActiveCategory', res.data.data)
+    //       dispatch('getCategorys', res.data.data._id)
+    //     })
+    //     .catch(err => {
+    //       commit('handleError', err)
+    //     })
+    // },
     createCategory({ commit, dispatch }, category) {
       api.post('categorys/', category)
         .then(res => {
@@ -112,35 +112,38 @@ var store = new vuex.Store({
         })
     },
     createList({ commit, dispatch }, payload) {
-      
-      api.post('lists/', payload.list)
+      debugger
+      api.post('categorys/' + payload.list.categoryId + '/lists')
         .then(res => {
-          dispatch('getLists', payload.categoryId)
+         debugger
+         dispatch('getLists', {categoryId: payload.list.categoryId})
         })
         .catch(err => {
           commit('handleError', err)
         })
     },
     removeList({ commit, dispatch }, payload) {
+      console.log(payload)
+      debugger
       api.delete('lists/' + payload.listId)
         .then(res => {
           // commit('getLists', payload)
-          dispatch('getLists', payload.categoryId)
+          dispatch('getLists', {categoryId: payload.categoryId})
         })
         .catch(err => {
           commit('handleError', err)
         })
     },
-    setLists({ commit, dispatch }, payload) {
-      api('categorys/' + payload.categoryId)
-        .then(res => {
-          commit('setActiveLists', res.data.data)
-          dispatch('getLists', res.data.data._id)
-        })
-        .catch(err => {
-          commit('handleError', err)
-        })
-    },
+    // setLists({ commit, dispatch }, payload) {
+    //   api('categorys/' + payload.categoryId)
+    //     .then(res => {
+    //       commit('setActiveLists', res.data.data)
+    //       dispatch('getLists', res.data.data._id)
+    //     })
+    //     .catch(err => {
+    //       commit('handleError', err)
+    //     })
+    // },
     //^^^^^^^^^^^^^LISTS^^^^^^^^^^^^^^^^^^//
 
 
