@@ -107,7 +107,7 @@ var store = new vuex.Store({
     },
     createList({ commit, dispatch }, payload) {
       debugger
-      api.post('categorys/' + payload.list.categoryId + '/lists')
+      api.post('lists', payload.list)
         .then(res => {
          debugger
          dispatch('getLists', {categoryId: payload.list.categoryId})
