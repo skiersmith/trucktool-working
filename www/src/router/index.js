@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Dashboard from 'components/Dashboard'
 import Category from 'components/Category'
 import Login from 'components/Login'
-
+import List from 'components/List'
 Vue.use(Router)
 
 export default new Router({
@@ -16,7 +16,11 @@ export default new Router({
       path: '/categorys/:id',
       name: 'Category',
       component: Category
-    }, {
+    },{
+      path: '/lists/:id',
+      name: 'List',
+      component: List
+    },{
       path: '/login',
       name: 'Login',
       component: Login

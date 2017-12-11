@@ -18,7 +18,11 @@
 
     <div class="row dalists">
       <div class="drawList col-sm-3" v-for="list in lists">
-        <list class="list" :name="list.name" :description="list.description" :listId="list._id" :categoryId="list.categoryId"></list>
+          <router-link :to="'/lists/'+list._id">{{list.name}}}</router-link>
+        
+        <!-- <list class="list" :name="list.name" :description="list.description" :listId="list._id" :categoryId="list.categoryId">
+            
+        </list>    -->
       </div>
     </div>
 

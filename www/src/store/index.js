@@ -20,6 +20,7 @@ var store = new vuex.Store({
   state: {
     dashboard: [],
     activeCategorys: {},
+    activeCategory: {},
     activeLists: {},
     activeProducts: {},
     activeNotes: {},
@@ -37,6 +38,9 @@ var store = new vuex.Store({
       state.error = err
     },
     setActiveCategory(state, payload) {
+      state.activeCategory = payload
+    },
+    setActiveCategorys(state, payload) {
       state.activeCategorys = payload
     },
     setActiveLists(state, lists) {
@@ -96,7 +100,6 @@ var store = new vuex.Store({
 
     //-------------LISTS-------------------//
     getLists({ commit, dispatch }, payload) {
-      
       api('categorys/' + payload.categoryId + '/lists')
         .then(res => {
           commit('setActiveLists', res.data.data)
@@ -106,10 +109,8 @@ var store = new vuex.Store({
         })
     },
     createList({ commit, dispatch }, payload) {
-      debugger
       api.post('lists', payload.list)
         .then(res => {
-         debugger
          dispatch('getLists', {categoryId: payload.list.categoryId})
         })
         .catch(err => {
@@ -118,7 +119,6 @@ var store = new vuex.Store({
     },
     removeList({ commit, dispatch }, payload) {
       console.log(payload)
-      debugger
       api.delete('lists/' + payload.listId)
         .then(res => {
           // commit('getLists', payload)
@@ -144,8 +144,9 @@ var store = new vuex.Store({
 
     //-------------PRODUCTS-----------------//
     getProducts({ commit, dispatch }, payload) {
-      api('dashboard/' + payload.categoryId + '/lists/' + payload.listId + '/products')
+      api('catagorys/' + payload.categoryId + '/lists/' + payload.listId + '/products')
         .then(res => {
+          debugger
           commit('setActiveProducts', { product: res.data.data, listId: payload.listId })
         })
         .catch(err => {
@@ -154,7 +155,7 @@ var store = new vuex.Store({
     },
 
     createProduct({ commit, dispatch }, payload) {
-      api.post('/products', payload.product)
+      api.post('products', payload.product)
         .then(res => {
           dispatch('getProducts', payload.product)
         })

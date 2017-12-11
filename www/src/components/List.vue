@@ -42,9 +42,8 @@
             return {
                 list: {},
                 product: {
-                    listId: this.listId,
+                    listId: this.$route.params.id,
                     categoryId: this.categoryId
-
                 },
                 showAddProductForm: false,
                 newListId: document.getElementById('listId')
@@ -53,17 +52,18 @@
         name: 'list',
         props: ['name', 'description', 'listId', 'categoryId', 'productId', 'id'],
         mounted() {
-            this.$store.dispatch('getProducts', { listId: this.listId, categoryId: this.categoryId })
+            debugger
+            this.$store.dispatch('getProducts', { listId: this.product.listId, categoryId: this.categoryId })
         },
         methods: {
             removeList(listId) {
                 this.$store.dispatch('removeList', { listId: listId, categoryId: this.categoryId })
             },
             createProduct() {
-                this.product.order = this.$store.state.activeProducts[this.listId].length
+                // this.product.order = this.$store.state.activeProducts[this.listId].length
                 this.$store.dispatch('createProduct', { product: this.product })
                 this.product = {
-                    listId: this.listId,
+                    listId: this.product.listId,
                     categoryId: this.categoryId
 
                 }
