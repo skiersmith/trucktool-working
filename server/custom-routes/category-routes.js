@@ -7,9 +7,6 @@ var Categorys = require('../models/category')
 
 module.exports = {
 
-    getListsByCategoryId: {
-
-
     getistsLByCategoryId: {
         path: '/categorys/:categoryId/lists',
         reqType: 'get',
