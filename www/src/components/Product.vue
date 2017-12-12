@@ -1,4 +1,7 @@
 <template>
+    
+    
+    
     <div class="note-container">
         <div class="products open-notes">
             <p class="productTitle" @click="notesSeen = !notesSeen">

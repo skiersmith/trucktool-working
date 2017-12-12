@@ -20,7 +20,6 @@ var store = new vuex.Store({
   state: {
     dashboard: [],
     activeCategorys: {},
-    activeCategory: {},
     activeLists: {},
     activeProducts: {},
     activeNotes: {},
@@ -37,9 +36,6 @@ var store = new vuex.Store({
     handleError(state, err) {
       state.error = err
     },
-    setActiveCategory(state, payload) {
-      state.activeCategory = payload
-    },
     setActiveCategorys(state, payload) {
       state.activeCategorys = payload
     },
@@ -47,6 +43,7 @@ var store = new vuex.Store({
       state.activeLists = lists
     },
     setActiveProducts(state, payload) {
+      debugger
       vue.set(state.activeProducts, payload.listId, payload.product)
     },
     setActiveNotes(state, payload) {
@@ -144,9 +141,8 @@ var store = new vuex.Store({
 
     //-------------PRODUCTS-----------------//
     getProducts({ commit, dispatch }, payload) {
-      api('catagorys/' + payload.categoryId + '/lists/' + payload.listId + '/products')
+      api('lists/' + payload.listId + '/products')
         .then(res => {
-          debugger
           commit('setActiveProducts', { product: res.data.data, listId: payload.listId })
         })
         .catch(err => {
@@ -192,7 +188,7 @@ var store = new vuex.Store({
 
     //------------NOTES--------------//
     getNotes({ commit, dispatch }, payload) {
-      api('dashboard/' + payload.categoryId + '/lists/' + payload.listId + '/products/' + payload.productId + '/notes')
+      api('products/' + payload.productId + '/notes')
         .then(res => {
 
           commit('setActiveNotes', { note: res.data.data, productId: payload.productId })
