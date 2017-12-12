@@ -18,8 +18,8 @@
 
     <div class="row dalists">
       <div class="drawList col-sm-3" v-for="list in lists">
-          <router-link :to="'/lists/'+list._id">{{list.name}}}</router-link>
-        
+        <router-link :to="'/lists/'+list._id">{{list.name}}}</router-link>
+
         <!-- <list class="list" :name="list.name" :description="list.description" :listId="list._id" :categoryId="list.categoryId">
             
         </list>    -->
@@ -48,12 +48,12 @@
     methods: {
       createList() {
         this.list.categoryId = this.$route.params.id
-        
+
         this.$store.dispatch('createList', { list: this.list })
         this.toggleListForm()
       },
       toggleListForm() {
-        
+
         this.showAddListForm = !this.showAddListForm
       }
     },

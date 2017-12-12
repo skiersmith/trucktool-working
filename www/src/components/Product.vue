@@ -3,23 +3,23 @@
 
 
     <div class="note-container">
-      <div class="product-header">
-        <h2> Name: {{product.name}}</h2>
-        <p>Quantity: {{product.quantity}}</p>
-        <p>Price: {{product.unitPrice}}</p>
-        <p>{{product.resalePrice}}</p>
-        <p>{{product.sku}}</p>
-        
-          <i class="fa fa-trash float" @click="removeProduct"></i>
+        <div class="product-header">
+            <h2> Name: {{product.name}}</h2>
+            <p>Quantity: {{product.quantity}}</p>
+            <p>Price: {{product.unitPrice}}</p>
+            <p>{{product.resalePrice}}</p>
+            <p>{{product.sku}}</p>
 
-      </div>
-        
-        
-        
-        
-        
-        
-        
+            <i class="fa fa-trash float" @click="removeProduct"></i>
+
+        </div>
+
+
+
+
+
+
+
         <div class="products open-notes">
             <p class="productTitle" @click="notesSeen = !notesSeen">
                 <b>Notes: </b>
@@ -61,7 +61,7 @@
     import list from './List'
     export default {
         data() {
-            return { 
+            return {
                 showNoteForm: false,
                 note: {
                     categoryId: this.categoryId,
@@ -73,7 +73,7 @@
             }
         },
         name: 'product',
-        props: ['product','listId','categoryId','newListId','productId','description'],
+        props: ['product', 'listId', 'categoryId', 'newListId', 'productId', 'description'],
         mounted() {
             debugger
             this.$store.dispatch('getNotes', { productId: this.productId, listId: this.listId, categoryId: this.categoryId })
