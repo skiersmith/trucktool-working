@@ -15,11 +15,11 @@
         <button type="submit" class="btn btn-success btn-sm">Add</button>
       </form>
     </div>
-
     <div class="row dalists">
       <div class="drawList col-sm-3" v-for="list in lists">
-          <router-link :to="'/lists/'+list._id">{{list.name}}}</router-link>
-        
+        <i class="fa fa-trash fa-md" @click="removeList(listId)"></i>
+        <router-link :to="'/lists/'+list._id">{{list.name}}}</router-link>
+
         <!-- <list class="list" :name="list.name" :description="list.description" :listId="list._id" :categoryId="list.categoryId">
             
         </list>    -->
@@ -47,13 +47,13 @@
     },
     methods: {
       createList() {
-        this.list.categoryId = this.$route.params.id
-        
+        this.list.categoryId = this.categoryId
+
         this.$store.dispatch('createList', { list: this.list })
         this.toggleListForm()
       },
       toggleListForm() {
-        
+
         this.showAddListForm = !this.showAddListForm
       }
     },

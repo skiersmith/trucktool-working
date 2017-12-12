@@ -166,7 +166,6 @@ var store = new vuex.Store({
       })
         .then(res => {
           dispatch('getProducts', payload)
-          dispatch('getProducts', { listId: payload.oldListId, categoryId: payload.categoryId })
           //getProducts?
         })
         .catch(err => {
@@ -188,11 +187,9 @@ var store = new vuex.Store({
 
     //------------NOTES--------------//
     getNotes({ commit, dispatch }, payload) {
-      debugger
       api('products/' + payload.productId + '/notes')
-        .then(res => {
-
-          commit('setActiveNotes', { note: res.data.data, productId: payload.productId })
+      .then(res => {
+          commit('setActiveNotes',{ note: res.data.data, productId: payload.productId })
         })
         .catch(err => {
           commit('handleError', err)
@@ -211,6 +208,7 @@ var store = new vuex.Store({
     removeNote({ commit, dispatch }, payload) {
       api.delete('notes/' + payload.noteId)
         .then(res => {
+          debugger
           dispatch('getNotes', payload)
         })
         .catch(err => {

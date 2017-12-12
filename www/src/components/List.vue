@@ -2,7 +2,7 @@
         <div :id="listId">
 
             <div class="list-header">
-                <i class="fa fa-trash fa-md" @click="removeList(listId)"></i>
+         
             </div>
             <div class="list-body">
                 <h3 class="list-text-color">{{name}}</h3>
@@ -16,6 +16,8 @@
                             <input class="inline" size="15" type="text" name="name" placeholder="name" v-model="product.name" required>
                             <input class="inline" size="15" type="text" name="quantity" placeholder="quantity" v-model="product.quantity" required>
                             <input class="inline" size="15" type="text" name="unitPrice" placeholder="unitPrice" v-model="product.unitPrice" required>
+                            <input class="inline" size="15" type="text" name="resalePrice" placeholder="resalePrice" v-model="product.resalePrice" >
+                            <input class="inline" size="15" type="text" name="sku" placeholder="sku" v-model="product.sku" >
                             <button type="submit" class="btn-xs btn-success">Add</button>
                         </div>
                     </form>
@@ -24,7 +26,7 @@
             </div>
             <div class="list-footer">
                 <div class="the-product" v-for="product in products">
-                    <product :product="product" :listId="listId" :newListId="newListId" :productId="productId"></product>
+                    <product :product="product"></product>
                 </div>
             </div>
 

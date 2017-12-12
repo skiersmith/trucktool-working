@@ -66,41 +66,39 @@
                 note: {
                     categoryId: this.categoryId,
                     listId: this.listId,
-                    productId: this.productId
+                    productId: this.product._id
                 },
                 formOption: '',
                 notesSeen: false
             }
         },
         name: 'product',
-        props: ['product','listId','categoryId','newListId','productId','description'],
+        props: ['product'],
         mounted() {
-            debugger
-            this.$store.dispatch('getNotes', { productId: this.productId, listId: this.listId, categoryId: this.categoryId })
+            this.$store.dispatch('getNotes', { productId: this.product._id, listId: this.listId })
         },
         methods: {
             openNotes() {
-                this.$store.dispatch('getNotes', { productId: this.productId, listId: this.listId, categoryId: this.categoryId })
+                this.$store.dispatch('getNotes', { productId: this.productId, listId: this.listId })
             },
             moveProductToDifferentList(newListId) {
 
-                this.$store.dispatch('moveProductToDifferentList', { productId: this.productId, categoryId: this.categoryId, oldListId: this.listId, listId: this.formOption })
+                this.$store.dispatch('moveProductToDifferentList', { productId: this.productId, oldListId: this.listId, listId: this.formOption })
             },
             newNote() {
+
                 this.$store.dispatch('newNote', { note: this.note })
                 this.note = {
-                    categoryId: this.categoryId,
-                    listId: this.listId,
-                    productId: this.productId
-
+                    listId: this.product.listId,
+                    productId: this.product._id
                 }
                 this.toggleNoteForm()
             },
             removeProduct() {
-                this.$store.dispatch('removeProduct', { productId: this.productId, listId: this.listId, categoryId: this.categoryId })
+                this.$store.dispatch('removeProduct', { productId: this.product._id, listId: this.listId })
             },
             removeNote(noteId) {
-                this.$store.dispatch('removeNote', { productId: this.productId, listId: this.listId, categoryId: this.categoryId, noteId: noteId })
+                this.$store.dispatch('removeNote', { productId: this.product._id, listId: this.listId, noteId: noteId })
             },
             toggleNoteForm() {
                 this.showNoteForm = !this.showNoteForm
@@ -114,7 +112,8 @@
                 return this.$store.state.activeProducts
             },
             notes() {
-                return this.$store.state.activeNotes[this.productId]
+
+                return this.$store.state.activeNotes[this.product._id]
             }
         },
         components: {
