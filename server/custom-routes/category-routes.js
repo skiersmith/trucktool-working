@@ -5,12 +5,7 @@ var Lists = require('../models/list')
 var Notes = require('../models/note')
 var Categorys = require('../models/category')
 
-
-
-
 module.exports = {
-
-
 
     getListsByCategoryId: {
         path: '/categorys/:categoryId/lists',
