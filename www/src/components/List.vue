@@ -25,8 +25,7 @@
             </div>
             <div class="list-footer">
                 <div class="the-product" v-for="product in products">
-                    <product :name="product.name" :description="product.description" :productId="product._id" :listId="listId" :categoryId="categoryId"
-                        :newListId="newListId"></product>
+                    <product :name="product.name" :description="product.description" :productId="product._id" :listId="listId" :newListId="newListId"></product>
                 </div>
             </div>
 
@@ -42,7 +41,7 @@
             return {
                 list: {},
                 product: {
-                    listId: this.$route.params.id,
+                    listId: this.listId,
                     categoryId: this.categoryId
                 },
                 showAddProductForm: false,
@@ -52,7 +51,6 @@
         name: 'list',
         props: ['name', 'description', 'listId', 'categoryId', 'productId', 'id'],
         mounted() {
-            debugger
             this.$store.dispatch('getProducts', { listId: this.product.listId, categoryId: this.categoryId })
         },
         methods: {
@@ -76,6 +74,7 @@
         },
         computed: {
             products() {
+                debugger
                 return this.$store.state.activeProducts[this.listId]
             },
             lists() {

@@ -12,7 +12,7 @@ module.exports = {
 
 
 
-    getListsByCategoryId: {
+    getistsLByCategoryId: {
         path: '/categorys/:categoryId/lists',
         reqType: 'get',
         method(req, res, next) {
@@ -28,7 +28,7 @@ module.exports = {
         }
     },
     getProductsByListId: {
-        path: '/dashboard/:categoryId/lists/:listId/products',
+        path: '/lists/:listId/products',
         reqType: 'get',
         method(req, res, next) {
             let action = 'Find Products By ListId'
@@ -41,7 +41,7 @@ module.exports = {
         }
     },
     getNotesByProductId: {
-        path: '/dashboard/:categoryId/lists/:listId/products/:productId/notes',
+        path: '/products/:productId/notes',
         reqType: 'get',
         method(req, res, next) {
             let action = 'Find Notes By ProductId'
@@ -70,9 +70,21 @@ module.exports = {
                     return next(handleResponse(action, null, error))
                 })
         }
-    }
+    },
     
-
+    // getProductsByListId: {
+    //     path: '/dashboard/:categoryId/lists/:listId/products',
+    //     reqType: 'get',
+    //     method(req, res, next) {
+    //         let action = 'Find Products By ListId'
+    //         Products.find({ listId: req.params.listId })
+    //             .then(products => {
+    //                 res.send(handleResponse(action, products))
+    //             }).catch(error => {
+    //                 return next(handleResponse(action, null, error))
+    //             })
+    //     }
+    // },
 
 
 

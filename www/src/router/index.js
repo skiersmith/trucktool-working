@@ -13,11 +13,13 @@ export default new Router({
       name: 'Dashboard',
       component: Dashboard
     }, {
-      path: '/categorys/:id',
+      path: '/categorys/:categoryId',
+      props: true,
       name: 'Category',
       component: Category
     },{
-      path: '/lists/:id',
+      path: '/lists/:listId',
+      props: true,
       name: 'List',
       component: List
     },{

@@ -35,7 +35,7 @@
     data() {
       return {
         list: {
-          categoryId: this.$route.params.id
+          categoryId: this.categoryId
         },
         showAddListForm: false
       }
@@ -43,7 +43,7 @@
     name: 'category',
     props: ['name', 'description', 'listId', 'categoryId', 'productId', 'id'],
     mounted() {
-      this.$store.dispatch('getLists', { categoryId: this.$route.params.id })
+      this.$store.dispatch('getLists', { categoryId: this.categoryId })
     },
     methods: {
       createList() {
