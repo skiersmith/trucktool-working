@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
         <div :id="listId">
 
             <div class="list-header">
@@ -22,15 +23,45 @@
                         </div>
                     </form>
                 </div>
+=======
+    <div :id="listId">
+>>>>>>> 046345211a33d97a7064ba2c5f5de194b97b4f31
 
+        <div class="list-header">
+            <i class="fa fa-trash fa-md" @click="removeList(listId)"></i>
+        </div>
+        <div class="list-body">
+            <h3 class="list-text-color">{{name}}</h3>
+            <div v-if="description">
+                <p class="list-text-color">Description: {{description}}</p>
             </div>
+<<<<<<< HEAD
             <div class="list-footer">
                 <div class="the-product" v-for="product in products">
                     <product :product="product"></product>
                 </div>
+=======
+            <button class="btn-success btn-xs margin" @click="toggleProductForm">New Product</button>
+            <div class="create-product" v-if="showAddProductForm">
+                <form @submit.prevent="createProduct">
+                    <div class="form-group">
+                        <input class="inline" size="15" type="text" name="name" placeholder="name" v-model="product.name" required>
+                        <input class="inline" size="15" type="text" name="quantity" placeholder="quantity" v-model="product.quantity" required>
+                        <input class="inline" size="15" type="text" name="unitPrice" placeholder="unitPrice" v-model="product.unitPrice" required>
+                        <button type="submit" class="btn-xs btn-success">Add</button>
+                    </div>
+                </form>
+>>>>>>> 046345211a33d97a7064ba2c5f5de194b97b4f31
             </div>
 
         </div>
+        <div class="list-footer">
+            <div class="the-product" v-for="product in products">
+                <product :product="product" :listId="listId" :newListId="newListId" :productId="productId"></product>
+            </div>
+        </div>
+
+    </div>
 </template>
 
 <script>
@@ -39,11 +70,11 @@
         data() {
             return {
                 list: {},
-                
+
                 product: {
                     listId: this.listId,
                     categoryId: this.categoryId,
-                    
+
                 },
                 showAddProductForm: false,
                 newListId: document.getElementById('listId')
@@ -75,7 +106,7 @@
         },
         computed: {
             products() {
-                
+
                 return this.$store.state.activeProducts[this.listId]
             },
             lists() {
@@ -84,7 +115,7 @@
         },
         components: {
             product,
-            
+
 
         }
 

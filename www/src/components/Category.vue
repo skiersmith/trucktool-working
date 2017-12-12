@@ -17,7 +17,10 @@
     </div>
     <div class="row dalists">
       <div class="drawList col-sm-3" v-for="list in lists">
+<<<<<<< HEAD
         <i class="fa fa-trash fa-md" @click="removeList(listId)"></i>
+=======
+>>>>>>> 046345211a33d97a7064ba2c5f5de194b97b4f31
         <router-link :to="'/lists/'+list._id">{{list.name}}}</router-link>
 
         <!-- <list class="list" :name="list.name" :description="list.description" :listId="list._id" :categoryId="list.categoryId">
@@ -47,7 +50,11 @@
     },
     methods: {
       createList() {
+<<<<<<< HEAD
         this.list.categoryId = this.categoryId
+=======
+        this.list.categoryId = this.$route.params.id
+>>>>>>> 046345211a33d97a7064ba2c5f5de194b97b4f31
 
         this.$store.dispatch('createList', { list: this.list })
         this.toggleListForm()
