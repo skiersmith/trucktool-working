@@ -1,5 +1,4 @@
 <template>
-    <draggable :options="{group: 'lists'}">
         <div :id="listId">
 
             <div class="list-header">
@@ -25,24 +24,24 @@
             </div>
             <div class="list-footer">
                 <div class="the-product" v-for="product in products">
-                    <product :name="product.name" :description="product.description" :productId="product._id" :listId="listId" :newListId="newListId"></product>
+                    <product :product="product" :listId="listId" :newListId="newListId" :productId="productId"></product>
                 </div>
             </div>
 
         </div>
-    </draggable>
 </template>
 
 <script>
     import product from './product'
-    import draggable from 'vuedraggable'
     export default {
         data() {
             return {
                 list: {},
+                
                 product: {
                     listId: this.listId,
-                    categoryId: this.categoryId
+                    categoryId: this.categoryId,
+                    
                 },
                 showAddProductForm: false,
                 newListId: document.getElementById('listId')
@@ -74,7 +73,7 @@
         },
         computed: {
             products() {
-                debugger
+                
                 return this.$store.state.activeProducts[this.listId]
             },
             lists() {
@@ -83,7 +82,7 @@
         },
         components: {
             product,
-            draggable
+            
 
         }
 

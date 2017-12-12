@@ -43,7 +43,7 @@ var store = new vuex.Store({
       state.activeLists = lists
     },
     setActiveProducts(state, payload) {
-      debugger
+      
       vue.set(state.activeProducts, payload.listId, payload.product)
     },
     setActiveNotes(state, payload) {
@@ -188,6 +188,7 @@ var store = new vuex.Store({
 
     //------------NOTES--------------//
     getNotes({ commit, dispatch }, payload) {
+      debugger
       api('products/' + payload.productId + '/notes')
         .then(res => {
 

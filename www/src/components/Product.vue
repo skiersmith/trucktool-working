@@ -1,21 +1,37 @@
 <template>
-    
-    
-    
+
+
+
     <div class="note-container">
+      <div class="product-header">
+        <h2> Name: {{product.name}}</h2>
+        <p>Quantity: {{product.quantity}}</p>
+        <p>Price: {{product.unitPrice}}</p>
+        <p>{{product.resalePrice}}</p>
+        <p>{{product.sku}}</p>
+        
+          <i class="fa fa-trash float" @click="removeProduct"></i>
+
+      </div>
+        
+        
+        
+        
+        
+        
+        
         <div class="products open-notes">
             <p class="productTitle" @click="notesSeen = !notesSeen">
-                <b>Product: </b>{{name}}
-                <i class="fa fa-trash float" @click="removeProduct"></i>
-                <div class="notes" v-if="notesSeen" v-for="note in notes">
-                    <p>{{note.description}}
-                        <i class="fa fa-minus" @click="removeNote(note._id)"></i>
-                    </p>
-                </div>
+                <b>Notes: </b>
                 <p class="add-note" v-if="notesSeen" @click="toggleNoteForm">Add Note
                     <span class="fa fa-plus"></span>
                 </p>
             </p>
+            <div class="notes" v-if="notesSeen" v-for="note in notes">
+                <p>{{note.description}}
+                    <i class="fa fa-minus" @click="removeNote(note._id)"></i>
+                </p>
+            </div>
         </div>
 
         <div class="noteForm" v-if="showNoteForm">
@@ -30,6 +46,7 @@
         </div>
         <div class="the-lists">
             <form @change="moveProductToDifferentList">
+                <p>List:</p>
                 <select name="select list" v-model="formOption">
                     <option disabled selected>Select List</option>
                     <option v-for="list in lists" :value="list._id">{{list.name}}</option>
@@ -41,11 +58,10 @@
 </template>
 
 <script>
-    import draggable from 'vuedraggable'
     import list from './List'
     export default {
         data() {
-            return {
+            return { 
                 showNoteForm: false,
                 note: {
                     categoryId: this.categoryId,
@@ -57,8 +73,9 @@
             }
         },
         name: 'product',
-        props: ['name', 'description', 'productId', 'listId', 'categoryId', 'newListId'],
+        props: ['product','listId','categoryId','newListId','productId','description'],
         mounted() {
+            debugger
             this.$store.dispatch('getNotes', { productId: this.productId, listId: this.listId, categoryId: this.categoryId })
         },
         methods: {
@@ -66,7 +83,7 @@
                 this.$store.dispatch('getNotes', { productId: this.productId, listId: this.listId, categoryId: this.categoryId })
             },
             moveProductToDifferentList(newListId) {
-                
+
                 this.$store.dispatch('moveProductToDifferentList', { productId: this.productId, categoryId: this.categoryId, oldListId: this.listId, listId: this.formOption })
             },
             newNote() {
@@ -109,7 +126,7 @@
 <style scoped>
     .open-notes {
         cursor: pointer;
-        
+
     }
 
     .fa-minus {
