@@ -175,6 +175,7 @@ var store = new vuex.Store({
     removeProduct({ commit, dispatch }, payload) {
       api.delete('products/' + payload.productId)
         .then(res => {
+          debugger
           dispatch('getProducts', payload)
         })
         .catch(err => {

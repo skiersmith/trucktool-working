@@ -17,7 +17,7 @@
     </div>
     <div class="row dalists">
       <div class="drawList col-sm-3" v-for="list in lists">
-        <i class="fa fa-trash fa-md" @click="removeList(listId)"></i>
+        <i class="fa fa-trash fa-md delList" @click="removeList(listId)"></i>
         <router-link :to="'/lists/'+list._id">{{list.name}}}</router-link>
 
         <!-- <list class="list" :name="list.name" :description="list.description" :listId="list._id" :categoryId="list.categoryId">
@@ -92,4 +92,11 @@
     display: flex;
     justify-content: center
   }
+  .delList {
+        float: right;
+        color: rgb(235, 15, 15);
+    }
+  .delList:hover {
+        color: rgb(255, 155, 155);
+    }
 </style>

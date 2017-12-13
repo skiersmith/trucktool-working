@@ -23,23 +23,15 @@
                 </form>
             </div>
         </div>
-        <div class="list-header">
-            <i class="fa fa-trash fa-md" @click="removeList(listId)"></i>
-        </div>
-        <div class="list-body">
-            <h3 class="list-text-color">{{name}}</h3>
-            <div v-if="description">
-                <p class="list-text-color">Description: {{description}}</p>
+        <div class="list-footer row">
+            <div class="the-product" v-for="product in products">
+                <product  :product="product"></product>
             </div>
-            <div class="list-footer">
-                <div class="the-product" v-for="product in products">
-                    <product :product="product"></product>
-                </div>
-            </div>
-
         </div>
 
     </div>
+
+
 </template>
 
 <script>
@@ -122,15 +114,6 @@
         background: #888;
     }
 
-    .fa-trash {
-        float: right;
-        color: rgb(235, 15, 15);
-    }
-
-    .fa-trash:hover {
-        color: rgb(255, 155, 155);
-    }
-
     .inline {
         display: inline;
     }
@@ -150,4 +133,9 @@
     .the-product {
         margin-top: 0.5rem;
     }
+
+    /* .product {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    } */
 </style>
