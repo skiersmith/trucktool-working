@@ -18,7 +18,7 @@
     <div class="row dalists">
       <div class="drawList col-sm-3" v-for="list in lists">
         <i class="fa fa-trash fa-md delList" @click="removeList(listId)"></i>
-        <router-link :to="'/lists/'+list._id">{{list.name}}}</router-link>
+        <router-link class="router-link-text" :to="'/lists/'+list._id">{{list.name}}</router-link>
 
         <!-- <list class="list" :name="list.name" :description="list.description" :listId="list._id" :categoryId="list.categoryId">
             
@@ -72,6 +72,11 @@
 </script>
 
 <style scoped>
+  
+  .router-link-text {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+  }
   .dalists {
     margin: 1rem;
   }
@@ -79,6 +84,10 @@
   .category-description {
     color: rgb(233, 233, 233);
   }
+
+
+
+
 
   .categoryheader {
     background-color: rgb(104, 142, 255);
