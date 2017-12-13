@@ -8,7 +8,7 @@
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",
     "build": "node build/build.js",
-    "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
+    "unit": "cross-env karma start test/unit/karma.conf.js --single-run",
     "test": "npm run unit"
   },
   "dependencies": {
@@ -25,16 +25,10 @@
   },
   "devDependencies": {
     "autoprefixer": "^6.7.2",
-    "babel-core": "^6.22.1",
-    "babel-loader": "^6.2.10",
     "pug": "^2.0.0-beta11",
     "pug-loader": "^2.3.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^2.4.0",
-    "babel-plugin-transform-runtime": "^6.22.0",
-    "babel-preset-es2015": "^6.22.0",
-    "babel-preset-stage-2": "^6.22.0",
-    "babel-register": "^6.22.0",
     "chalk": "^1.1.3",
     "connect-history-api-fallback": "^1.3.0",
     "css-loader": "^0.26.1",
@@ -62,7 +56,6 @@
     "sinon": "^1.17.7",
     "sinon-chai": "^2.8.0",
     "inject-loader": "^2.0.1",
-    "babel-plugin-istanbul": "^3.1.2",
     "phantomjs-prebuilt": "^2.1.14",
     "semver": "^5.3.0",
     "opn": "^4.0.2",
