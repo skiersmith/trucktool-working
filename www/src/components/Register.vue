@@ -1,13 +1,7 @@
 <template>
-
     <div>
-
     </div>
-
-
 </template>
-
-
 <script>
     export default {
         name: 'login',
@@ -17,7 +11,6 @@
                     name: '',
                     email: '',
                     password: ''
-
                 }
             }
         },
@@ -25,12 +18,9 @@
             userRegister() {
                 this.$store.dispatch('userRegister', this.register)
             },
-
         },
         props: {
-
         }
-
     }
 </script>
 <style></style>

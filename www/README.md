@@ -1,6 +1,5 @@
-# vue-kanban-www
-
-> The web interface for vue-kanban
+# organizzle
+> The web interface for organizzle
 
 ## Build Setup
 

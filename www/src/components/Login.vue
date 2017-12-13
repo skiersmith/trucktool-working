@@ -96,18 +96,13 @@
             </div>
         </div>
     </div>
-
-
 </template>
-
-
 <script>
     export default {
         name: 'login',
         data() {
             return {
                 register: {
-
                 },
                 login: {
                     email: '',
@@ -131,62 +126,49 @@
 
     }
 </script>
-
 <style>
     .modal-body .form-horizontal .col-sm-2,
     .modal-body .form-horizontal .col-sm-10 {
         width: 100%
     }
-
     .modal-body .form-horizontal .control-label {
         text-align: left;
     }
-
     .modal-body .form-horizontal .col-sm-offset-2 {
         margin-left: 15px;
     }
-
     .header {
         display: flex;
         /* justify-content: center; */
     }
-
     .loginbox {
         background-color: #83bcf1a2;
         padding: .5rem;
         width: 90rem;
         border-radius: 25px;
     }
-
     .register .login {
         margin: 0rem;
         padding: 0rem;
     }
-
     .regheader {
         display: flex;
         /* justify-content: center */
     }
-
     label {
         display: inline-block;
     }
-
     a {
         display: block;
     }
-
     .title {
         display: block;
     }
-
     .top {
         display: flex;
         justify-content: center;
     }
-
     .action {
         cursor: pointer;
-
     }
 </style>

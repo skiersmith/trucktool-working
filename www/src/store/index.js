@@ -62,16 +62,6 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-    // setCategorys({ commit, dispatch }, payload) {
-    //   api('dashboard/' + payload.categoryId)
-    //     .then(res => {
-    //       commit('setActiveCategory', res.data.data)
-    //       dispatch('getCategorys', res.data.data._id)
-    //     })
-    //     .catch(err => {
-    //       commit('handleError', err)
-    //     })
-    // },
     createCategory({ commit, dispatch }, category) {
       api.post('categorys/', category)
         .then(res => {
@@ -91,9 +81,6 @@ var store = new vuex.Store({
         })
     },
     //^^^^^^^^^^^^^^CATEGORIES^^^^^^^^^^^^^^^^^//
-
-
-
 
     //-------------LISTS-------------------//
     getLists({ commit, dispatch }, payload) {
@@ -125,19 +112,7 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-    // setLists({ commit, dispatch }, payload) {
-    //   api('categorys/' + payload.categoryId)
-    //     .then(res => {
-    //       commit('setActiveLists', res.data.data)
-    //       dispatch('getLists', res.data.data._id)
-    //     })
-    //     .catch(err => {
-    //       commit('handleError', err)
-    //     })
-    // },
     //^^^^^^^^^^^^^LISTS^^^^^^^^^^^^^^^^^^//
-
-
 
     //-------------PRODUCTS-----------------//
     getProducts({ commit, dispatch }, payload) {
@@ -184,8 +159,6 @@ var store = new vuex.Store({
     },
     //^^^^^^^^^^^^^PRODUCTS^^^^^^^^^^^^^^^^^//
 
-
-
     //------------NOTES--------------//
     getNotes({ commit, dispatch }, payload) {
       api('products/' + payload.productId + '/notes')
@@ -217,8 +190,6 @@ var store = new vuex.Store({
         })
     },
     //^^^^^^^^^^^NOTES^^^^^^^^^^^^^^//
-
-
 
     //---------LOGIN/REGISTER/LOGOUT-----------//
     userLogin({ commit, dispatch }, login) {
@@ -270,6 +241,4 @@ var store = new vuex.Store({
     }
   }
 })
-
-
 export default store

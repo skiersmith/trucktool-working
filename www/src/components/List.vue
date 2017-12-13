@@ -1,8 +1,6 @@
 <template>
     <div :id="listId">
-
         <div class="list-header">
-
         </div>
         <div class="list-body">
             <h3 class="list-text-color">{{name}}</h3>
@@ -25,15 +23,11 @@
         </div>
         <div class="list-footer row">
             <div class="the-product" v-for="product in products">
-                <product  :product="product"></product>
+                <product :product="product"></product>
             </div>
         </div>
-
     </div>
-
-
 </template>
-
 <script>
     import product from './product'
     export default {
@@ -44,7 +38,6 @@
                 product: {
                     listId: this.listId,
                     categoryId: this.categoryId,
-
                 },
                 showAddProductForm: false,
                 newListId: document.getElementById('listId')
@@ -65,11 +58,9 @@
                 this.product = {
                     listId: this.product.listId,
                     categoryId: this.categoryId
-
                 }
                 this.toggleProductForm()
             },
-
             toggleProductForm() {
                 this.showAddProductForm = !this.showAddProductForm
             }
@@ -85,14 +76,9 @@
         },
         components: {
             product,
-
-
         }
-
     }
-
 </script>
-
 <style>
     .list {
         border-radius: 5px;
@@ -101,39 +87,30 @@
         overflow: auto;
         background: rgb(104, 142, 255);
     }
-
     ::-webkit-scrollbar {
         width: 5px;
     }
-
     ::-webkit-scrollbar-track {
         background: #f1f1f1;
     }
-
     ::-webkit-scrollbar-thumb {
         background: #888;
     }
-
     .inline {
         display: inline;
     }
-
     .list-text-color {
         color: white;
     }
-
     .list-header {
         padding: 1rem;
     }
-
     .margin {
         margin: 1rem;
     }
-
     .the-product {
         margin-top: 0.5rem;
     }
-
     /* .product {
         padding-top: 1rem;
         padding-bottom: 1rem;
