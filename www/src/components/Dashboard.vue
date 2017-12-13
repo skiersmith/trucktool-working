@@ -31,8 +31,10 @@
         </form>
       </div>
     </div>
+    <router-link class="router-link-text" :to="{name: 'transaction'}">
+      <button>Transactions</button>
+    </router-link>
   </div>
-
 
 
 </template>

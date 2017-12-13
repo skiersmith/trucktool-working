@@ -157,6 +157,19 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
+    updateProduct({ commit, dispatch }, payload) {
+      
+            api.put('products/' + payload.productId)
+              .then(res => {
+                dispatch('updateProduct', payload)
+                dispatch('getProducts')
+                // getProducts?
+              })
+              .catch(err => {
+                commit('handleError', err)
+              })
+          },
+    
     //^^^^^^^^^^^^^PRODUCTS^^^^^^^^^^^^^^^^^//
 
     //------------NOTES--------------//

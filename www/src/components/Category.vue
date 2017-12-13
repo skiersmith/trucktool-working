@@ -19,10 +19,6 @@
       <div class="drawList col-sm-3" v-for="list in lists">
         <i class="fa fa-trash fa-md delList" @click="removeList(listId)"></i>
         <router-link class="router-link-text" :to="'/lists/'+list._id">{{list.name}}</router-link>
-
-        <!-- <list class="list" :name="list.name" :description="list.description" :listId="list._id" :categoryId="list.categoryId">
-            
-        </list>    -->
       </div>
     </div>
 
@@ -79,16 +75,12 @@
   }
   .dalists {
     margin: 1rem;
+    /* background-color: grey; */
   }
 
   .category-description {
     color: rgb(233, 233, 233);
   }
-
-
-
-
-
   .categoryheader {
     background-color: rgb(104, 142, 255);
     border-radius: 15px;
@@ -96,7 +88,9 @@
     display: inline block;
     padding: 1rem;
   }
-
+  .drawlist{
+    background-color: white;
+  }
   .categoryHeaderC {
     display: flex;
     justify-content: center
