@@ -2,14 +2,12 @@
 
 
     <div class="product">
-        <div class="product-container">
-            <div class="product-header">
-                <P class="inline">Remove Product
-                    <i class="fa fa-trash delProd" @click="removeProduct"></i>
-                </P>
-                <h2 @click="prodSeen = !prodSeen"> Name: {{product.name}}</h2>
-            </div>
-            <div class="div" v-if="prodSeen">
+        <div class="product-header container">
+            <h2 @click="prodSeen = !prodSeen">{{product.name}}</h2>
+        </div>
+        <div class="div" v-if="prodSeen">
+            <div class="product-container">
+
 
 
                 <div class="product-body">
@@ -46,10 +44,14 @@
                         </div>
                     </div>
                     <div class="notes" v-if="notesSeen" v-for="note in notes">
-                        <p>{{note.description}}
-                            <i class="fa fa-minus" @click="removeNote(note._id)"></i>
-                        </p>
+                        <p>{{note.description}}</p>
+                         <timeago :since="note.created"></timeago> <i class="fa fa-minus" @click="removeNote(note._id)"></i>
                     </div>
+                </div>
+                <div class="removeProd">
+                    <P class="inline">Remove Product
+                        <i class="fa fa-trash delProd" @click="removeProduct"></i>
+                    </P>
                 </div>
             </div>
         </div>
@@ -123,6 +125,14 @@
 </script>
 
 <style scoped>
+    .product-header {
+        display: flex;
+        justify-content: space-around;
+
+    }
+
+
+
     .open-notes {
         cursor: pointer;
 
