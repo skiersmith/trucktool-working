@@ -1,7 +1,7 @@
 <template>
 
 
-    <div class="product">
+    <div>
         <div class="product-header container">
             <h2 @click="prodSeen = !prodSeen">{{product.name}}</h2>
         </div>

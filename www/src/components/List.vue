@@ -29,7 +29,7 @@
     </div>
 </template>
 <script>
-    import product from './product'
+    import product from './Product'
     export default {
         data() {
             return {
