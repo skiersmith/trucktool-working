@@ -73,11 +73,7 @@
             }
         },
         name: 'product',
-<<<<<<< HEAD
         props: ['product'],
-=======
-        props: ['product', 'listId', 'categoryId', 'newListId', 'productId', 'description'],
->>>>>>> 046345211a33d97a7064ba2c5f5de194b97b4f31
         mounted() {
             this.$store.dispatch('getNotes', { productId: this.product._id, listId: this.listId })
         },
