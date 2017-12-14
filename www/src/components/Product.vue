@@ -1,15 +1,10 @@
 <template>
-
-
     <div>
         <div class="product-header container">
             <h2 @click="prodSeen = !prodSeen">{{product.name}}</h2>
         </div>
         <div class="div" v-if="prodSeen">
             <div class="product-container">
-
-
-
                 <div class="product-body">
                     <p>Quantity: {{product.quantity}}</p>
                     <p>Price: {{product.unitPrice}}</p>
@@ -45,7 +40,8 @@
                     </div>
                     <div class="notes" v-if="notesSeen" v-for="note in notes">
                         <p>{{note.description}}</p>
-                         <timeago :since="note.created"></timeago> <i class="fa fa-minus" @click="removeNote(note._id)"></i>
+                        <timeago :since="note.created"></timeago>
+                        <i class="fa fa-minus" @click="removeNote(note._id)"></i>
                     </div>
                 </div>
                 <div class="removeProd">
