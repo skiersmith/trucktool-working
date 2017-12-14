@@ -38,15 +38,13 @@
       }
     },
     name: 'category',
-   
+    props: ['categoryId'],
     mounted() {
       this.$store.dispatch('getLists', { categoryId: this.categoryId })
     },
     methods: {
       createList() {
-        
         this.list.categoryId = this.categoryId
-
         this.$store.dispatch('createList', { list: this.list })
         this.toggleListForm()
       },

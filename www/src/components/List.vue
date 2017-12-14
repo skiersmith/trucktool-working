@@ -51,7 +51,6 @@
         name: 'list',
         props: ['name', 'description', 'listId', 'categoryId', 'productId', 'id'],
         mounted() {
-            debugger
             this.$store.dispatch('getCurrentList', { listId: this.product.listId, categoryId: this.categoryId })
             this.$store.dispatch('getProducts', { listId: this.product.listId, categoryId: this.categoryId })
         },
