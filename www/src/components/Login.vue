@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="title">
-            <h1>Welcome to Kanban</h1>
+            <h1>Organizzle</h1>
         </div>
         <div class="top container">
             <div class="loginbox">
