@@ -3,6 +3,7 @@ import vue from 'vue'
 import vuex from 'vuex'
 import router from '../router'
 
+
 let api = axios.create({
   baseURL: 'http://localhost:3000/api/',
   timeout: 2000,
@@ -21,6 +22,7 @@ var store = new vuex.Store({
     dashboard: [],
     activeCategorys: {},
     activeLists: {},
+    currentList:{},
     activeProducts: {},
     activeNotes: {},
     error: {},
@@ -41,6 +43,9 @@ var store = new vuex.Store({
     },
     setActiveLists(state, lists) {
       state.activeLists = lists
+    },
+    setCurrentList(state, list){
+      state.currentList = list
     },
     setActiveProducts(state, payload) {
       
@@ -92,6 +97,16 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
+    getCurrentList({ commit, dispatch }, payload) {
+      debugger
+      api('categorys/' + payload.categoryId + '/lists' + payload.listId)
+        .then(res => {
+          commit('setCurrentList', res.data.data)
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
+    },
     createList({ commit, dispatch }, payload) {
       api.post('lists', payload.list)
         .then(res => {
@@ -103,6 +118,7 @@ var store = new vuex.Store({
     },
     removeList({ commit, dispatch }, payload) {
       console.log(payload)
+      
       api.delete('lists/' + payload.listId)
         .then(res => {
           // commit('getLists', payload)
@@ -141,6 +157,7 @@ var store = new vuex.Store({
       })
         .then(res => {
           dispatch('getProducts', payload)
+          dispatch('getProducts', { listId: payload.oldListId, categoryId: payload.categoryId })
           //getProducts?
         })
         .catch(err => {
@@ -150,7 +167,6 @@ var store = new vuex.Store({
     removeProduct({ commit, dispatch }, payload) {
       api.delete('products/' + payload.productId)
         .then(res => {
-          debugger
           dispatch('getProducts', payload)
         })
         .catch(err => {
@@ -195,7 +211,6 @@ var store = new vuex.Store({
     removeNote({ commit, dispatch }, payload) {
       api.delete('notes/' + payload.noteId)
         .then(res => {
-          debugger
           dispatch('getNotes', payload)
         })
         .catch(err => {

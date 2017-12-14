@@ -17,7 +17,7 @@
     </div>
     <div class="row dalists">
       <div class="drawList col-sm-3" v-for="list in lists">
-        <i class="fa fa-trash fa-md delList" @click="removeList(listId)"></i>
+        <i class="fa fa-trash fa-md delList" @click="removeList(list)"></i>
         <router-link class="router-link-text" :to="'/lists/'+list._id">{{list.name}}</router-link>
       </div>
     </div>
@@ -31,25 +31,30 @@
     data() {
       return {
         list: {
-          categoryId: this.categoryId
+          categoryId: this.categoryId,
+          listId: this.listId
         },
         showAddListForm: false
       }
     },
     name: 'category',
-    props: ['name', 'description', 'listId', 'categoryId', 'productId', 'id'],
+   
     mounted() {
       this.$store.dispatch('getLists', { categoryId: this.categoryId })
     },
     methods: {
       createList() {
+        
         this.list.categoryId = this.categoryId
 
         this.$store.dispatch('createList', { list: this.list })
         this.toggleListForm()
       },
-      toggleListForm() {
+      removeList(list) {
+        this.$store.dispatch('removeList', { listId: list._id, categoryId: this.categoryId })
 
+      },
+      toggleListForm() {
         this.showAddListForm = !this.showAddListForm
       }
     },
@@ -68,11 +73,11 @@
 </script>
 
 <style scoped>
-  
   .router-link-text {
     text-decoration: none;
     color: rgb(0, 0, 0);
   }
+
   .dalists {
     margin: 1rem;
     /* background-color: grey; */
@@ -81,6 +86,7 @@
   .category-description {
     color: rgb(233, 233, 233);
   }
+
   .categoryheader {
     background-color: rgb(104, 142, 255);
     border-radius: 15px;
@@ -88,18 +94,22 @@
     display: inline block;
     padding: 1rem;
   }
-  .drawlist{
+
+  .drawlist {
     background-color: white;
   }
+
   .categoryHeaderC {
     display: flex;
     justify-content: center
   }
+
   .delList {
-        float: right;
-        color: rgb(235, 15, 15);
-    }
+    float: right;
+    color: rgb(235, 15, 15);
+  }
+
   .delList:hover {
-        color: rgb(255, 155, 155);
-    }
+    color: rgb(255, 155, 155);
+  }
 </style>
