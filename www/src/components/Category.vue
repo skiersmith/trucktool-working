@@ -18,7 +18,8 @@
     <div class="row dalists">
       <div class="drawList col-sm-3" v-for="list in lists">
         <i class="fa fa-trash fa-md delList" @click="removeList(list)"></i>
-        <router-link class="router-link-text"  :to="{ name: 'List', params: {placeName: detail.name } } "> {{list.name}}</router-link> '/lists/'+list._id
+        <router-link class="router-link-text"  :to="{name: 'List', params: {Overview: Overview}}"> {{list.name}}</router-link> 
+        <!-- "{ name: 'List', params: {categoryId: list.categoryId } } " -->
       </div>
     </div>
 
@@ -38,11 +39,7 @@
       }
     },
     name: 'category',
-<<<<<<< HEAD
-    
-=======
     props: ['categoryId'],
->>>>>>> 8fa0e25fbfeae3ebe9f3795789c76ba705d35ba0
     mounted() {
      
       this.$store.dispatch('getLists', { categoryId: this.categoryId })

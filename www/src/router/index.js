@@ -4,7 +4,7 @@ import Dashboard from 'components/Dashboard'
 import Category from 'components/Category'
 import Login from 'components/Login'
 import List from 'components/List'
-import Transaction from 'components/Transaction'
+import Overview from 'components/Overview'
 Vue.use(Router)
 
 export default new Router({
@@ -19,7 +19,7 @@ export default new Router({
       name: 'Category',
       component: Category
     },{
-      path: '/lists/:listId',
+      path: '/categorys/:categoryId/lists/:listId',
       props: true,
       name: 'List',
       component: List
@@ -29,9 +29,9 @@ export default new Router({
       component: Login
     },
     {
-      path: '/transaction',
-      name: 'Transaction',
-      component: Transaction,
+      path: '/overview',
+      name: 'Overview',
+      component: Overview,
       props: true
     },
     
