@@ -7,8 +7,23 @@ var Categorys = require('../models/category')
 
 module.exports = {
 
-    getistsLByCategoryId: {
+    getListsByCategoryId: {
         path: '/categorys/:categoryId/lists',
+        reqType: 'get',
+        method(req, res, next) {
+            let action = 'Find Lists By CategoryId'
+           
+            Lists.find({ categoryId: req.params.categoryId })
+                .then(lists => {
+                    res.send(handleResponse(action, lists))
+                }).catch(error => {
+                    console.log(error)
+                    return next(handleResponse(action, null, error))
+                })
+        }
+    },
+    getListByCategoryId: {
+        path: '/categorys/:categoryId/lists/:listId',
         reqType: 'get',
         method(req, res, next) {
             let action = 'Find Lists By CategoryId'

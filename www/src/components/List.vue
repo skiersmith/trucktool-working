@@ -1,12 +1,14 @@
 <template>
     <div :id="listId">
         <div class="list-header">
-        </div>
-        <div class="list-body">
             <h3 class="list-text-color">{{name}}</h3>
             <div v-if="description">
                 <p class="list-text-color">Description: {{description}}</p>
             </div>
+        </div>
+        <div class="list-body">
+
+
             <button class="btn-success btn-xs margin" @click="toggleProductForm">New Product</button>
             <div class="create-product" v-if="showAddProductForm">
                 <form @submit.prevent="createProduct">
@@ -33,7 +35,10 @@
     export default {
         data() {
             return {
-                list: {},
+                list: {
+                    name: this.name,
+
+                },
 
                 product: {
                     listId: this.listId,
@@ -46,12 +51,12 @@
         name: 'list',
         props: ['name', 'description', 'listId', 'categoryId', 'productId', 'id'],
         mounted() {
+            debugger
+            this.$store.dispatch('getCurrentList', { listId: this.product.listId, categoryId: this.categoryId })
             this.$store.dispatch('getProducts', { listId: this.product.listId, categoryId: this.categoryId })
         },
         methods: {
-            removeList(listId) {
-                this.$store.dispatch('removeList', { listId: listId, categoryId: this.categoryId })
-            },
+
             createProduct() {
                 // this.product.order = this.$store.state.activeProducts[this.listId].length
                 this.$store.dispatch('createProduct', { product: this.product })
@@ -87,30 +92,39 @@
         overflow: auto;
         background: rgb(104, 142, 255);
     }
+
     ::-webkit-scrollbar {
         width: 5px;
     }
+
     ::-webkit-scrollbar-track {
         background: #f1f1f1;
     }
+
     ::-webkit-scrollbar-thumb {
         background: #888;
     }
+
     .inline {
         display: inline;
     }
+
     .list-text-color {
-        color: white;
+        color: rgb(3, 3, 3);
     }
+
     .list-header {
         padding: 1rem;
     }
+
     .margin {
         margin: 1rem;
     }
+
     .the-product {
         margin-top: 0.5rem;
     }
+
     /* .product {
         padding-top: 1rem;
         padding-bottom: 1rem;

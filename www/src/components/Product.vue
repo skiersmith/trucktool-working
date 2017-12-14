@@ -75,7 +75,7 @@
             }
         },
         name: 'product',
-        props: ['product'],
+        props: ['product', 'listId', 'newListId'],
         mounted() {
             this.$store.dispatch('getNotes', { productId: this.product._id, listId: this.listId })
         },
@@ -83,9 +83,8 @@
             openNotes() {
                 this.$store.dispatch('getNotes', { productId: this.productId, listId: this.listId })
             },
-            moveProductToDifferentList(newListId) {
-
-                this.$store.dispatch('moveProductToDifferentList', { productId: this.productId, oldListId: this.listId, listId: this.formOption })
+            moveProductToDifferentList(newListId) {    
+                this.$store.dispatch('moveProductToDifferentList', { productId: this.product._id, oldListId: this.product.listId, listId: this.formOption })
             },
             newNote() {
 
@@ -97,7 +96,7 @@
                 this.toggleNoteForm()
             },
             removeProduct() {
-                this.$store.dispatch('removeProduct', { productId: this.product._id, listId: this.listId })
+                this.$store.dispatch('removeProduct', { productId: this.product._id, listId: this.product.listId})
             },
             removeNote(noteId) {
                 this.$store.dispatch('removeNote', { productId: this.product._id, listId: this.listId, noteId: noteId })

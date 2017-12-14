@@ -28,7 +28,6 @@ module.exports = {
         .then(products => {
           res.send(handleResponse(action, products))
         }).catch(error => {
-          console.log(error)
           return next(handleResponse(action, null, error))
         })
     }
