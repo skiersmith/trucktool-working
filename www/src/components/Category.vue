@@ -40,6 +40,7 @@
     name: 'category',
    
     mounted() {
+     
       this.$store.dispatch('getLists', { categoryId: this.categoryId })
     },
     methods: {

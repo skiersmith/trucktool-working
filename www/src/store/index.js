@@ -98,7 +98,7 @@ var store = new vuex.Store({
         })
     },
     getCurrentList({ commit, dispatch }, payload) {
-      debugger
+      
       api('categorys/' + payload.categoryId + '/lists' + payload.listId)
         .then(res => {
           commit('setCurrentList', res.data.data)
