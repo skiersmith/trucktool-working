@@ -98,7 +98,6 @@ var store = new vuex.Store({
         })
     },
     getCurrentList({ commit, dispatch }, payload) {
-      
       api('categorys/' + payload.categoryId + '/lists' + payload.listId)
         .then(res => {
           commit('setCurrentList', res.data.data)
@@ -121,7 +120,6 @@ var store = new vuex.Store({
       
       api.delete('lists/' + payload.listId)
         .then(res => {
-          // commit('getLists', payload)
           dispatch('getLists', {categoryId: payload.categoryId})
         })
         .catch(err => {
