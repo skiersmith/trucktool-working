@@ -7,8 +7,6 @@
             </div>
         </div>
         <div class="list-body">
-
-
             <button class="btn-success btn-xs margin" @click="toggleProductForm">New Product</button>
             <div class="create-product" v-if="showAddProductForm">
                 <form @submit.prevent="createProduct">
@@ -52,7 +50,7 @@
         name: 'list',
         props: ['name', 'description', 'listId', 'categoryId', 'productId', 'id'],
         mounted() {
-           debugger
+
             this.$store.dispatch('getCurrentList', { listId: this.product.listId, categoryId: this.categoryId })
             this.$store.dispatch('getProducts', { listId: this.product.listId, categoryId: this.categoryId })
         },

@@ -38,7 +38,7 @@
         },
         methods: {
             getProductsByTag() {
-                debugger
+                
                 this.$store.dispatch('getProductsByTag', { tag: this.tag })
             },
             props: {

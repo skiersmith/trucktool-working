@@ -41,42 +41,39 @@
             </div>
         </div>
         <div class="registerhere">
-            <p>Don't have an account? Register here.</p>
+            <div class="regButton">
+                <p @click="toggleRegForm">
+                    <span @click="regSeen = !regSeen">Don't have an account? Register here.</span>
+                </p>
+                <div v-if="regSeen">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="inputName">Full Name</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="inputName" placeholder="Name" v-model="register.name" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="inputEmail">Email</label>
+                            <div class="col-sm-10">
+                                <input type="email" class="form-control" id="inputEmail" placeholder="Email" v-model="register.email" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="inputPassword">Password</label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" id="inputPassword" placeholder="Password" v-model="register.password" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button @click="userRegister, toggleRegForm" data-dismiss="modal" class="btn btn-default">Register Me</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-        <form class="form-horizontal" role="form">
-            <div class="form-group">
-                <label class="col-sm-2 control-label" for="inputName">Full Name</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputName" placeholder="Name" v-model="register.name" />
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label" for="inputEmail">Email</label>
-                <div class="col-sm-10">
-                    <input type="email" class="form-control" id="inputEmail" placeholder="Email" v-model="register.email" />
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label" for="inputPassword">Password</label>
-                <div class="col-sm-10">
-                    <input type="password" class="form-control" id="inputPassword" placeholder="Password" v-model="register.password" />
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" /> Remember me
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button @click="userRegister" data-dismiss="modal" class="btn btn-default">Register Me</button>
-                </div>
-            </div>
-        </form>
     </div>
 </template>
 <script>
@@ -84,12 +81,15 @@
         name: 'login',
         data() {
             return {
+                showRegForm: false,
                 register: {
                 },
                 login: {
                     email: '',
                     password: ''
-                }
+                },
+                formOption: '',
+                regSeen: false
             }
         },
         methods: {
@@ -98,30 +98,18 @@
             },
             userRegister() {
                 this.$store.dispatch('userRegister', this.register)
+                this.toggleRegForm()
             },
             toggleForms() {
                 this.showForm = !this.showForm
             },
-            modalToggle() {
+            toggleRegForm() {
+                this.showRegForm = !this.showRegForm
             }
         }
-
     }
 </script>
 <style>
-    .modal-body .form-horizontal .col-sm-2,
-    .modal-body .form-horizontal .col-sm-10 {
-        width: 100%
-    }
-
-    .modal-body .form-horizontal .control-label {
-        text-align: left;
-    }
-
-    .modal-body .form-horizontal .col-sm-offset-2 {
-        margin-left: 15px;
-    }
-
     .header {
         display: flex;
         /* justify-content: center; */

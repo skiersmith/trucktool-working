@@ -1,7 +1,6 @@
 <template>
   <div class="category container-fluid">
     <div class="categoryHeaderC container">
-
       <div class="categoryheader">
         <h2>{{category.name}}</h2>
         <h4 v-if="category.description" class="category-description">Description: {{category.description}}</h4>
@@ -22,7 +21,6 @@
         <!-- "{ name: 'List', params: {categoryId: list.categoryId } } " -->
       </div>
     </div>
-
   </div>
 </template>
 
@@ -41,7 +39,6 @@
     name: 'category',
     props: ['categoryId'],
     mounted() {
-     
       this.$store.dispatch('getLists', { categoryId: this.categoryId })
     },
     methods: {

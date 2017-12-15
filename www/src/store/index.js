@@ -52,7 +52,7 @@ var store = new vuex.Store({
       vue.set(state.activeProducts, payload.listId, payload.product)
     },
     setTagProducts(state, payload) {
-      debugger
+      
       vue.set(state.tagProducts, payload.product.tag, payload.product)
       console.log(state.tagProducts)
     },
@@ -146,7 +146,7 @@ var store = new vuex.Store({
     getProductsByTag({ commit, dispatch }, payload) {
       api('products/tag/' + payload.tag)
         .then(res => {
-         debugger
+         
           commit('setTagProducts', { product: res.data.data })
         })
         .catch(err => {
@@ -163,12 +163,11 @@ var store = new vuex.Store({
         })
     },
     moveProductToDifferentList({ commit, dispatch }, payload) {
-      debugger
+      
       api.put('products/' + payload.productId, payload)
         .then(res => {
           dispatch('getProducts', payload)
           dispatch('getProducts', { listId: payload.oldListId, categoryId: payload.categoryId })
-          //getProducts?
         })
         .catch(err => {
           commit('handleError', err)
