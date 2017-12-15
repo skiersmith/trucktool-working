@@ -149,10 +149,8 @@ var store = new vuex.Store({
         })
     },
     moveProductToDifferentList({ commit, dispatch }, payload) {
-
-      api.put('products/' + payload.productId, {
-        listId: payload.listId
-      })
+      debugger
+      api.put('products/' + payload.productId, payload)
         .then(res => {
           dispatch('getProducts', payload)
           dispatch('getProducts', { listId: payload.oldListId, categoryId: payload.categoryId })

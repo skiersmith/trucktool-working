@@ -18,7 +18,7 @@
     <div class="row dalists">
       <div class="drawList col-sm-3" v-for="list in lists">
         <i class="fa fa-trash fa-md delList" @click="removeList(list)"></i>
-        <router-link class="router-link-text"  :to="{name: 'List', params: {Overview: Overview}}"> {{list.name}}</router-link> 
+        <router-link class="router-link-text"  :to="{name: 'List', params: {listId: list._id, categoryId: list.categoryId }}"> {{list.name}}</router-link> 
         <!-- "{ name: 'List', params: {categoryId: list.categoryId } } " -->
       </div>
     </div>
