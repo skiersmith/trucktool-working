@@ -54,7 +54,7 @@
         mounted() {
            debugger
             this.$store.dispatch('getCurrentList', { listId: this.product.listId, categoryId: this.categoryId })
-            this.$store.dispatch('getProducts', { listId: this.product.listId, categoryId: this.categoryId })
+            this.$store.dispatch('getProductsByList', { listId: this.product.listId, categoryId: this.categoryId })
         },
         methods: {
 

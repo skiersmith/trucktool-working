@@ -53,7 +53,7 @@ var store = new vuex.Store({
     },
     setTagProducts(state, payload) {
       debugger
-      vue.set(state.tagProducts, payload.product.tag, payload.product)
+      vue.set(state.tagProducts, payload.tag, payload.products)
       console.log(state.tagProducts)
     },
     setActiveNotes(state, payload) {
@@ -134,7 +134,7 @@ var store = new vuex.Store({
     //^^^^^^^^^^^^^LISTS^^^^^^^^^^^^^^^^^^//
 
     //-------------PRODUCTS-----------------//
-    getProducts({ commit, dispatch }, payload) {
+    getProductsByList({ commit, dispatch }, payload) {
       api('lists/' + payload.listId + '/products')
         .then(res => {
           commit('setActiveProducts', { product: res.data.data, listId: payload.listId })
@@ -147,7 +147,8 @@ var store = new vuex.Store({
       api('products/tag/' + payload.tag)
         .then(res => {
          debugger
-          commit('setTagProducts', { product: res.data.data })
+          commit('setTagProducts', { products: res.data.data , tag: payload.tag})
+        
         })
         .catch(err => {
           commit('handleError', err)
@@ -156,7 +157,7 @@ var store = new vuex.Store({
     createProduct({ commit, dispatch }, payload) {
       api.post('products', payload.product)
         .then(res => {
-          dispatch('getProducts', payload.product)
+          dispatch('getProductsByList', payload.product)
         })
         .catch(err => {
           commit('handleError', err)
