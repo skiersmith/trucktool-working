@@ -11,7 +11,18 @@
         </div>
         <div class="div">
             <p>quantity stuff </p>
+            <button>Get all Products</button>
+            <form class="form-inline" @submit.prevent="getProductsByTag">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="tag" placeholder="tag" v-model="tag" />
+                    <button type="submit" class="btn btn-primary">Get Products</button>
+                </div>
+            </form>
         </div>
+        <div v-for="product in products">
+            {{name}}
+        </div>
+
     </div>
 </template>
 <script>
@@ -20,13 +31,24 @@
         name: 'overview',
         data() {
             return {
-                product: {}
+                products:{},
+                product: {},
+                tag: {}
             }
         },
         methods: {
+            getProductsByTag() {
+                debugger
+                this.$store.dispatch('getProductsByTag', { tag: this.tag })
+            },
+            props: {
+            },
+            computed: {
+                products() {
+                    return this.$store.state.tagProducts
 
-        },
-        props: {
+                },
+            }
         }
     }
 </script>

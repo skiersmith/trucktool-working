@@ -3,10 +3,11 @@
     <div class="categorysHeader container">
       <h1>{{user.name}}'s Categorys</h1>
       <div class="header container-fluid">
-
+        
         <button @click="toggleCategoryForm" class="btn-success">New Category</button>
         <button class="btn-danger" @click="userLogout">Logout</button>
       </div>
+      <router-link class="router-link-text" :to="{name: 'Overview'}"><button class="overview btn-info">Overview</button></router-link>
     </div>
     <div class="categoryList row">
 
@@ -31,9 +32,6 @@
         </form>
       </div>
     </div>
-    <router-link class="router-link-text" :to="{name: 'Overview'}">
-      <button>Overviews</button>
-    </router-link>
   </div>
 
 
@@ -113,7 +111,9 @@
     padding: 1rem;
 
   }
-
+  .overview{
+    
+  }
   .categoryHeader {
     display: flex;
     justify-content: flex-start;

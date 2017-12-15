@@ -18,6 +18,7 @@
                         <input class="inline" size="15" type="text" name="unitPrice" placeholder="unitPrice" v-model="product.unitPrice" required>
                         <input class="inline" size="15" type="text" name="resalePrice" placeholder="resalePrice" v-model="product.resalePrice">
                         <input class="inline" size="15" type="text" name="sku" placeholder="sku" v-model="product.sku">
+                        <input class="inline" size="15" type="text" name="tag" placeholder="tag" v-model="product.tag">
                         <button type="submit" class="btn-xs btn-success">Add</button>
                     </div>
                 </form>

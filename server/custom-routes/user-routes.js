@@ -31,7 +31,20 @@ module.exports = {
           return next(handleResponse(action, null, error))
         })
     }
-  }
+  },
+  getProductsByTag: {
+    path: '/products/tag/:tag/',
+    reqType: 'get',
+    method(req, res, next) {
+        let action = 'Find Products By Tag'
+        Product.find({ tag: req.params.tag })
+            .then(products => {
+                res.send(handleResponse(action, products))
+            }).catch(error => {
+                return next(handleResponse(action, null, error))
+            })
+    }
+},
 
 
 

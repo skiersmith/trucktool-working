@@ -22,8 +22,9 @@ var store = new vuex.Store({
     dashboard: [],
     activeCategorys: {},
     activeLists: {},
-    currentList:{},
+    currentList: {},
     activeProducts: {},
+    tagProducts: {},
     activeNotes: {},
     error: {},
     user: {}
@@ -44,12 +45,16 @@ var store = new vuex.Store({
     setActiveLists(state, lists) {
       state.activeLists = lists
     },
-    setCurrentList(state, list){
+    setCurrentList(state, list) {
       state.currentList = list
     },
     setActiveProducts(state, payload) {
-      
       vue.set(state.activeProducts, payload.listId, payload.product)
+    },
+    setTagProducts(state, payload) {
+      debugger
+      vue.set(state.tagProducts, payload.product.tag, payload.product)
+      console.log(state.tagProducts)
     },
     setActiveNotes(state, payload) {
       vue.set(state.activeNotes, payload.productId, payload.note)
@@ -109,7 +114,7 @@ var store = new vuex.Store({
     createList({ commit, dispatch }, payload) {
       api.post('lists', payload.list)
         .then(res => {
-         dispatch('getLists', {categoryId: payload.list.categoryId})
+          dispatch('getLists', { categoryId: payload.list.categoryId })
         })
         .catch(err => {
           commit('handleError', err)
@@ -117,10 +122,10 @@ var store = new vuex.Store({
     },
     removeList({ commit, dispatch }, payload) {
       console.log(payload)
-      
+
       api.delete('lists/' + payload.listId)
         .then(res => {
-          dispatch('getLists', {categoryId: payload.categoryId})
+          dispatch('getLists', { categoryId: payload.categoryId })
         })
         .catch(err => {
           commit('handleError', err)
@@ -138,7 +143,16 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-
+    getProductsByTag({ commit, dispatch }, payload) {
+      api('products/tag/' + payload.tag)
+        .then(res => {
+         debugger
+          commit('setTagProducts', { product: res.data.data })
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
+    },
     createProduct({ commit, dispatch }, payload) {
       api.post('products', payload.product)
         .then(res => {
@@ -170,25 +184,25 @@ var store = new vuex.Store({
         })
     },
     updateProduct({ commit, dispatch }, payload) {
-      
-            api.put('products/' + payload.productId)
-              .then(res => {
-                dispatch('updateProduct', payload)
-                dispatch('getProducts')
-                // getProducts?
-              })
-              .catch(err => {
-                commit('handleError', err)
-              })
-          },
-    
+
+      api.put('products/' + payload.productId)
+        .then(res => {
+          dispatch('updateProduct', payload)
+          dispatch('getProducts')
+          // getProducts?
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
+    },
+
     //^^^^^^^^^^^^^PRODUCTS^^^^^^^^^^^^^^^^^//
 
     //------------NOTES--------------//
     getNotes({ commit, dispatch }, payload) {
       api('products/' + payload.productId + '/notes')
-      .then(res => {
-          commit('setActiveNotes',{ note: res.data.data, productId: payload.productId })
+        .then(res => {
+          commit('setActiveNotes', { note: res.data.data, productId: payload.productId })
         })
         .catch(err => {
           commit('handleError', err)
