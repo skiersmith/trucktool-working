@@ -11,7 +11,7 @@
         </div>
         <div class="div">
             <p>quantity stuff </p>
-            <button @click="getProducts">Get all Products</button>
+            <button @click="getProductsByList">Get all Products</button>
             <form class="form-inline" @submit.prevent="getProductsByTag">
                 <div class="form-group">
                     <input type="text" class="form-control" name="tag" placeholder="tag" v-model="tag" />
@@ -42,8 +42,8 @@
                 
                 this.$store.dispatch('getProductsByTag', { tag: this.tag })
             },
-            getProducts() {
-                this.$store.dispatch('getProducts')
+            getProductsByList() {
+                this.$store.dispatch('getProductsByList')
             },
         },
         computed: {
