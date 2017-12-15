@@ -11,7 +11,7 @@
         </div>
         <div class="div">
             <p>quantity stuff </p>
-            <button>Get all Products</button>
+            <button @click="getProducts">Get all Products</button>
             <form class="form-inline" @submit.prevent="getProductsByTag">
                 <div class="form-group">
                     <input type="text" class="form-control" name="tag" placeholder="tag" v-model="tag" />
@@ -20,7 +20,7 @@
             </form>
         </div>
         <div v-for="product in products">
-            {{name}}
+            {{product.name}}
         </div>
 
     </div>
@@ -31,9 +31,10 @@
         name: 'overview',
         data() {
             return {
-                products:{},
-                product: {},
-                tag: {}
+                // products: {},
+                product: {
+                },
+                tag: ""
             }
         },
         methods: {
@@ -41,13 +42,14 @@
                 
                 this.$store.dispatch('getProductsByTag', { tag: this.tag })
             },
-            props: {
+            getProducts() {
+                this.$store.dispatch('getProducts')
             },
-            computed: {
-                products() {
-                    return this.$store.state.tagProducts
+        },
+        computed: {
+            products() {
+                return this.$store.state.tagProducts[this.tag]
 
-                },
             }
         }
     }

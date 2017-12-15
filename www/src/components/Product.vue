@@ -10,6 +10,7 @@
                     <p>Price: {{product.unitPrice}}</p>
                     <p>Sell Price:{{product.resalePrice}}</p>
                     <p>{{product.sku}}</p>
+                    <p>Tags: {{product.tag}}</p>
 
                     <div class="the-lists">
                         <form @change="moveProductToDifferentList">
