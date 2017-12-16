@@ -26,10 +26,10 @@
     text-align: center;
     color: #2c3e50;
     margin-top: 60px;
-    background: rgb(238, 235, 190)
+    background: rgb(253, 251, 251)
   }
 
   html {
-    background: rgb(238, 235, 190)
+    background: rgb(252, 250, 250)
   }
 </style>

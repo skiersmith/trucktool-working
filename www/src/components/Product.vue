@@ -80,7 +80,7 @@
             openNotes() {
                 this.$store.dispatch('getNotes', { productId: this.productId, listId: this.listId })
             },
-            moveProductToDifferentList(newListId) {    
+            moveProductToDifferentList(newListId) {  
                 this.$store.dispatch('moveProductToDifferentList', { productId: this.product._id, oldListId: this.product.listId, listId: this.formOption })
             },
             newNote() {

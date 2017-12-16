@@ -18,20 +18,20 @@ module.exports = {
         })
     }
   },
-  updateProduct: {
-    path: '/products/:productId/',
-    reqType: 'put',
-    method(req, res, next) {
-      let action = 'Update Product'
+  // updateProduct: {
+  //   path: '/products/:productId/',
+  //   reqType: 'put',
+  //   method(req, res, next) {
+  //     let action = 'Update Product'
 
-      Product.find({ productId: req.params.productId })
-        .then(products => {
-          res.send(handleResponse(action, products))
-        }).catch(error => {
-          return next(handleResponse(action, null, error))
-        })
-    }
-  },
+  //     Product.find({ productId: req.params.productId })
+  //       .then(products => {
+  //         res.send(handleResponse(action, products))
+  //       }).catch(error => {
+  //         return next(handleResponse(action, null, error))
+  //       })
+  //   }
+  // },
   getProductsByTag: {
     path: '/products/tag/:tag/',
     reqType: 'get',

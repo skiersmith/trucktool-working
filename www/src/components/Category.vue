@@ -16,8 +16,10 @@
     </div>
     <div class="row dalists">
       <div class="drawList col-sm-3" v-for="list in lists">
-        <i class="fa fa-trash fa-md delList" @click="removeList(list)"></i>
-        <router-link class="router-link-text"  :to="{name: 'List', params: {listId: list._id, categoryId: list.categoryId }}"> {{list.name}}</router-link> 
+        <router-link class="router-link-text listName"  :to="{name: 'List', params: {listId: list._id, categoryId: list.categoryId }}"> 
+          <span class="">{{list.name}}</span>
+          <i class="fa fa-trash fa-md delList" @click="removeList(list)"></i>
+        </router-link> 
         <!-- "{ name: 'List', params: {categoryId: list.categoryId } } " -->
       </div>
     </div>
@@ -72,9 +74,16 @@
 <style scoped>
   .router-link-text {
     text-decoration: none;
-    color: rgb(0, 0, 0);
+    color: rgb(253, 253, 253);
   }
-
+  .listName{
+    background-color: rgb(89, 89, 231);
+    padding: 1rem;
+    border-radius: 5px;
+  }
+  .listName:hover{
+    background-color: rgba(101, 101, 230, 0.877)
+  }
   .dalists {
     margin: 1rem;
     /* background-color: grey; */
@@ -103,7 +112,8 @@
 
   .delList {
     float: right;
-    color: rgb(235, 15, 15);
+    color: rgb(180, 14, 14);
+    
   }
 
   .delList:hover {

@@ -164,6 +164,7 @@ var store = new vuex.Store({
       
       api.put('products/' + payload.productId, payload)
         .then(res => {
+          // console.log("here")
           dispatch('getProductsByList', payload)
           dispatch('getProductsByList', { listId: payload.oldListId, categoryId: payload.categoryId })
         })
