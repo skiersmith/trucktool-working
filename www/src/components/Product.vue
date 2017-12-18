@@ -1,7 +1,7 @@
 <template>
-    <div>
-        <div class="product-header container">
-            <h2 @click="prodSeen = !prodSeen">{{product.name}}</h2>
+    <div class="productt col-sm-3">
+        <div class="l">
+                <h2 class="title" @click="prodSeen = !prodSeen">{{product.name}}</h2>
         </div>
         <div class="div" v-if="prodSeen">
             <div class="product-container">
@@ -123,11 +123,25 @@
 <style scoped>
     .product-header {
         display: flex;
-        justify-content: space-around;
+        justify-content: center;
 
     }
+    /* .l{
+        background-color: rgb(253, 206, 147);
+        border-radius: 25px;
+        padding: .5rem .5rem .5rem .5rem;
 
+    } */
+    .title:hover{
+    color: rgb(131, 130, 130) 
 
+    }
+    .productt{
+        background-color: bisque;
+        border-radius: 25px;
+        margin: 1rem;
+        /* width: 30rem */
+    }
 
     .open-notes {
         cursor: pointer;
@@ -154,8 +168,8 @@
     .product-container {
         margin-left: 2rem;
         margin-right: 2rem;
-        border: 1px solid black;
-        border-radius: 5px;
+        /* border: 1px solid black; */
+        /* border-radius: 25px; */
         padding: 1rem;
     }
 

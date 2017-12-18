@@ -1,7 +1,7 @@
 <template>
-    <div :id="listId">
+    <div>
         <div class="list-header">
-            <h3 class="list-text-color">{{name}}</h3>
+            <h3 class="list-text-color">{{list.name}}</h3>
             <div v-if="description">
                 <p class="list-text-color">Description: {{description}}</p>
             </div>
@@ -23,8 +23,8 @@
             </div>
         </div>
         <div class="list-footer row">
-            <div class="the-product" v-for="product in products">
-                <product :product="product"></product>
+            <div class="col-sm-offset-2" v-for="product in products">
+                <product class="the-product" :product="product"></product>
             </div>
         </div>
     </div>
@@ -115,6 +115,10 @@
     .list-header {
         padding: 1rem;
     }
+    .list-footer{
+        display: ;
+        justify-content: space-around;
+    } 
 
     .margin {
         margin: 1rem;
@@ -122,6 +126,8 @@
 
     .the-product {
         margin-top: 0.5rem;
+        
+        /* width: 50rem; */
     }
 
     /* .product {
