@@ -25,6 +25,7 @@ var store = new vuex.Store({
     currentList: {},
     activeProducts: {},
     tagProducts: {},
+    allTagProducts: {},
     activeNotes: {},
     error: {},
     user: {}
@@ -52,7 +53,14 @@ var store = new vuex.Store({
       vue.set(state.activeProducts, payload.listId, payload.product)
     },
     setTagProducts(state, payload) {
+      debugger
       vue.set(state.tagProducts, payload.tag, payload.products)
+    
+    },
+    setAllTagProducts(state, payload) {
+      console.log(payload)
+      vue.set(state.allTagProducts, "all", payload.products)
+    
     },
     setActiveNotes(state, payload) {
       vue.set(state.activeNotes, payload.productId, payload.note)
@@ -132,6 +140,16 @@ var store = new vuex.Store({
     //^^^^^^^^^^^^^LISTS^^^^^^^^^^^^^^^^^^//
 
     //-------------PRODUCTS-----------------//
+    getProducts({ commit, dispatch }, payload) {
+      api('products')
+        .then(res => {
+          debugger
+          commit('setAllTagProducts', { products: res.data.data})
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
+    },
     getProductsByList({ commit, dispatch }, payload) {
       api('lists/' + payload.listId + '/products')
         .then(res => {

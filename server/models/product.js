@@ -11,7 +11,7 @@ var schema = new mongoose.Schema({
     tag: [{ type: String }],
     sku: { type: String },
     created: { type: Number, default: Date.now() },
-    listId: { type: ObjectId, ref: models.list.name, required: true },
+    listId: { type: ObjectId, ref: models.list.name},
 });
 
 
