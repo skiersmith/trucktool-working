@@ -1,5 +1,6 @@
 <template>
   <div>
+      <img class="logo" src="../assets/organizzlee.png">
     <div class="categorysHeader container">
       <h1>{{user.name}}'s Categorys</h1>
       <div class="header container-fluid">
@@ -176,4 +177,8 @@
     justify-content: center;
     align-items: center
   }
+  .logo{
+       
+       height: 25rem;
+   }
 </style>

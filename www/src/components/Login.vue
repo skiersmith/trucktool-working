@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="title">
-            <h1>Organize</h1>
+            <img class="logo" src="../assets/organizzlee.png">
         </div>
         <div class="top container">
             <div class="loginbox">
@@ -168,5 +168,9 @@
 
     .action {
         cursor: pointer;
+    }
+    .logo{
+       
+        height: 25rem;
     }
 </style>

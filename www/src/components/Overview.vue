@@ -1,6 +1,9 @@
 <template>
     <div>
-        <div class="baseContainer">
+        <div class="pimg container">
+            <img class="pGuy" src="../assets/pixel-guy.png">
+        </div>
+        <div class="baseContainer2">
             Profit?? ${{calc}}
             <br> Total Spent: ${{calc2}}
             <br>
@@ -206,5 +209,22 @@
         padding: 1rem;
         margin: 1rem;
         border-radius: 25px;
+    }
+    .baseContainer2 {
+        background-color: beige;
+        padding: 1rem;
+        margin: 0rem 1rem 1rem 1rem;
+        border-radius: 25px;
+    }
+    .pGuy{
+
+        height: 25px;
+  
+     
+     
+    }
+    .pimg{
+        display: flex;
+        justify-content: flex-end
     }
 </style>
