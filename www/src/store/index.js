@@ -24,6 +24,7 @@ var store = new vuex.Store({
     activeLists: {},
     currentList: {},
     activeProducts: {},
+    activeTransactions: {},
     tagProducts: {},
     allTagProducts: {},
     activeNotes: {},
@@ -52,15 +53,19 @@ var store = new vuex.Store({
     setActiveProducts(state, payload) {
       vue.set(state.activeProducts, payload.listId, payload.product)
     },
-    setTagProducts(state, payload) {
-      debugger
-      vue.set(state.tagProducts, payload.tag, payload.products)
+    setActiveTransactions(state, payload) {
     
+      vue.set(state.activeTransactions, payload.productId, payload.transactions)
+    },
+    setTagProducts(state, payload) {
+      
+      vue.set(state.tagProducts, payload.tag, payload.products)
+
     },
     setAllTagProducts(state, payload) {
-      console.log(payload)
+      
       vue.set(state.allTagProducts, "all", payload.products)
-    
+      console.log(state.allTagProducts)
     },
     setActiveNotes(state, payload) {
       vue.set(state.activeNotes, payload.productId, payload.note)
@@ -138,13 +143,47 @@ var store = new vuex.Store({
         })
     },
     //^^^^^^^^^^^^^LISTS^^^^^^^^^^^^^^^^^^//
+    //------------TRANSACTIONS-----------------//
 
+    getTransactions({ commit, dispatch }, payload) {
+      api('transactions')
+        .then(res => {
+          console.log(res)
+          commit('setActiveTransactions', { transactions: res.data.data})
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
+    },
+    getTransactionsByProduct({ commit, dispatch }, payload) {
+      api('transactions/' + payload.productId )
+        .then(res => {
+          console.log(res)
+          commit('setActiveTransactions', { transactions: res.data.data, productId: payload.productId })
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
+    },
+    newTransaction({ commit, dispatch }, payload) {
+      
+      api.post('/transactions', payload.transaction)
+        .then(res => {
+
+          dispatch('getTransactionsByProduct', payload.transaction.productId)
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
+    },
+
+    //^^^^^^^^^^^^TRANSACTIONS^^^^^^^^^^^^^^^^^^//
     //-------------PRODUCTS-----------------//
     getProducts({ commit, dispatch }, payload) {
       api('products')
         .then(res => {
-          debugger
-          commit('setAllTagProducts', { products: res.data.data})
+          
+          commit('setAllTagProducts', { products: res.data.data })
         })
         .catch(err => {
           commit('handleError', err)
@@ -162,8 +201,8 @@ var store = new vuex.Store({
     getProductsByTag({ commit, dispatch }, payload) {
       api('products/tag/' + payload.tag)
         .then(res => {
-          commit('setTagProducts', { products: res.data.data , tag: payload.tag})
-        
+          commit('setTagProducts', { products: res.data.data, tag: payload.tag })
+
         })
         .catch(err => {
           commit('handleError', err)
@@ -179,7 +218,7 @@ var store = new vuex.Store({
         })
     },
     moveProductToDifferentList({ commit, dispatch }, payload) {
-      
+
       api.put('products/' + payload.productId, payload)
         .then(res => {
           // console.log("here")

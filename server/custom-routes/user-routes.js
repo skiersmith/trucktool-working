@@ -4,6 +4,7 @@
 let Dashboard = require('../models/category')
 let Product = require('../models/product')
 
+
 module.exports = {
   userCategory: {
     path: '/userboards',

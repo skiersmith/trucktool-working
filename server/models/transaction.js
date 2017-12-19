@@ -7,10 +7,10 @@ var schema = new mongoose.Schema({
     name: { type: String, required: true },
     quantity: { type: Number, required: true },
     salePrice: { type: Number },
-    // tags: { type: String },
+    tags: { type: String },
     created: { type: Number, default: Date.now() },
     productId: { type: ObjectId, ref: models.list, required: true },
-    userId: { type: ObjectId, ref: models.list, required: true },
+    userId: { type: ObjectId, ref: models.list },
 });
 
 

@@ -28,6 +28,11 @@ const models = {
     endpoint: 'products'
     // useCustomRoutes: true
   },
+  transaction: {
+    name: 'Transaction',
+    endpoint: 'transactions',
+    useCustomRoutes: true
+  },
   note: {
     name: 'Note',
     endpoint: 'notes'
