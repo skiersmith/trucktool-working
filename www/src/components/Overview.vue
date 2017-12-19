@@ -1,35 +1,37 @@
 <template>
     <div>
-        <div class="overHeader">
+        <div class="baseContainer">
             Profit?? ${{calc}}
             <br> Total Spent: ${{calc2}}
             <br>
             <br>
         </div>
-
-        <form @submit.prevent="createProduct">
-            <div class="form-group">
-                <input class="inline" size="15" type="text" name="name" placeholder="name" v-model="product.name" required>
-                <input class="inline" size="15" type="text" name="quantity" placeholder="quantity" v-model="product.quantity" required>
-                <input class="inline" size="15" type="text" name="unitPrice" placeholder="unitPrice" v-model="product.unitPrice" required>
-                <input class="inline" size="15" type="text" name="resalePrice" placeholder="resalePrice" v-model="product.resalePrice">
-                <input class="inline" size="15" type="text" name="sku" placeholder="sku" v-model="product.sku">
-                <input class="inline" size="15" type="text" name="tag" placeholder="tag" v-model="product.tag">
-                <button type="submit" class="btn-xs btn-success">Add</button>
-            </div>
-        </form>
-        <div class="overview form">
-            <form @submit.prevent="updateProduct">
-                <input class="" placeholder="Price" type="text" name="price" v-model="product.resellPrice" required>
-                <input class="" placeholder="quantity" type="text" name="quantity" v-model="product.quantity">
-                <input class="inline" size="15" type="text" name="tag" placeholder="tag" v-model="product.tag">
-                <div class="blacktext">
-                    <button class="btn-success margins" type="submit">Submit</button>
+        <br>
+        <div class="baseContainer">
+            <form @submit.prevent="createProduct">
+                <div class="form-group">
+                    <input class="inline" size="15" type="text" name="name" placeholder="name" v-model="product.name" required>
+                    <input class="inline" size="15" type="text" name="quantity" placeholder="quantity" v-model="product.quantity" required>
+                    <input class="inline" size="15" type="text" name="unitPrice" placeholder="unitPrice" v-model="product.unitPrice" required>
+                    <input class="inline" size="15" type="text" name="resalePrice" placeholder="resalePrice" v-model="product.resalePrice">
+                    <input class="inline" size="15" type="text" name="sku" placeholder="sku" v-model="product.sku">
+                    <input class="inline" size="15" type="text" name="tag" placeholder="tag" v-model="product.tag">
+                    <button type="submit" class="btn-xs btn-success">Add</button>
                 </div>
             </form>
+            <div class="overview form">
+                <form @submit.prevent="updateProduct">
+                    <input class="" placeholder="Price" type="text" name="price" v-model="product.resellPrice" required>
+                    <input class="" placeholder="quantity" type="text" name="quantity" v-model="product.quantity">
+                    <input class="inline" size="15" type="text" name="tag" placeholder="tag" v-model="product.tag">
+                    <div class="blacktext">
+                        <button class="btn-success margins" type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
         </div>
         <br>
-        <div class="div">
+        <div class="baseContainer">
             <form class="form-inline" @submit.prevent="getProductsByTag">
                 <div class="form-group">
                     <input type="text" class="" name="tag" placeholder="tag" v-model="tag" />
@@ -38,7 +40,7 @@
             </form>
         </div>
         <br>
-        <div v-for="product in products">
+        <div class="baseContainer" v-for="product in products">
             <span>{{product.name}}</span>
             <P>
                 , Id: {{product._id}} -
@@ -46,11 +48,11 @@
             <b>Qty:</b> {{product.quantity}}
         </div>
         <br>
-        <div v-for="product in allProducts.all">
+        <div class="baseContainer" v-for="product in allProducts.all">
             {{product.name}} -
             <b>Qty:</b> {{product.quantity}}
         </div>
-        <div class="newTransaction">
+        <div class="newTransaction baseContainer">
             <form class="form-inline" @submit.prevent="newTransaction">
                 <div class="form-group">
                     <label for="name">name.</label>
@@ -69,7 +71,7 @@
             </form>
         </div>
         <br>
-        <div>
+        <div class="baseContainer">
             <button @click="getTransactions" class="btn-xs btn-primary">Get All Transactions</button>
             <form class="form-inline" @submit.prevent="getTransactionsByProduct">
                 <div class="form-group">
@@ -79,11 +81,12 @@
                 </div>
             </form>
         </div>
-        <div v-for="transaction in transactions">
-            <p>
-                {{transaction.name}}
-            </p>
-
+        <div class="baseContainer">
+            <div v-for="transaction in transactions">
+                <ul>
+                    <li>{{transaction.name}}</li>
+                </ul>
+            </div>
         </div>
     </div>
 </template>
@@ -198,7 +201,10 @@
     }
 </script>
 <style>
-    .overHeader {
-        background-color: beige
+    .baseContainer {
+        background-color: beige;
+        padding: 1rem;
+        margin: 1rem;
+        border-radius: 25px;
     }
 </style>
