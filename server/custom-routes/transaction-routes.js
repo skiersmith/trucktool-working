@@ -1,11 +1,11 @@
-let transactions = require('../models/transaction')
+let Transactions = require('../models/transaction')
 
 
 module.exports = {
 
 
 getTransactionsByProductId: {
-    path: '/transactions/:productId',
+    path: '/transactionsby/:productId',
     reqType: 'get',
     method(req, res, next) {
         let action = 'Get transaction by product'

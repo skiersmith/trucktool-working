@@ -1,6 +1,7 @@
 <template>
   <div>
-      <img class="logo" src="../assets/organizzlee.png">
+      <h1>Organize Title Here</h1>
+    <!-- <img class="logo" src="../assets/organizzlee.png"> -->
     <div class="categorysHeader container">
       <h1>{{user.name}}'s Categorys</h1>
       <div class="header container-fluid">
