@@ -1,7 +1,8 @@
 <template>
     <div>
         <div class="title">
-            <img class="logo" src="../assets/organizzlee.png">
+            <h1>Organize Title Here</h1>
+            <!-- <img class="logo" src="../assets/organizzlee.png"> -->
         </div>
         <div class="top container">
             <div class="loginbox">

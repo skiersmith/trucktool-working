@@ -1,10 +1,7 @@
 <template>
   <div>
-    <img class="logo" src="../assets/organizzlee.png">
-    <div class="categorysHeader container">
       <h1>{{user.name}}'s Categorys</h1>
       <div class="header container-fluid">
-
         <button @click="toggleCategoryForm" class="btn-success">New Category</button>
         <button class="btn-danger" @click="userLogout">Logout</button>
       </div>

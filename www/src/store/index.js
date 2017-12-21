@@ -25,6 +25,7 @@ var store = new vuex.Store({
     currentList: {},
     activeProducts: {},
     activeTransactions: {},
+    activeAllTransactions: {},
     tagProducts: {},
     allTagProducts: {},
     activeNotes: {},
@@ -54,11 +55,16 @@ var store = new vuex.Store({
       vue.set(state.activeProducts, payload.listId, payload.product)
     },
     setActiveTransactions(state, payload) {
-    
+    console.log(payload)
       vue.set(state.activeTransactions, payload.productId, payload.transactions)
+      console.log(state.activeTransactions)
+    },
+    setActiveAllTransactions(state, payload) {
+     
+      vue.set(state.activeAllTransactions, payload.transactions)
     },
     setTagProducts(state, payload) {
-      
+      debugger
       vue.set(state.tagProducts, payload.tag, payload.products)
 
     },
@@ -132,7 +138,7 @@ var store = new vuex.Store({
         })
     },
     removeList({ commit, dispatch }, payload) {
-      console.log(payload)
+    
 
       api.delete('lists/' + payload.listId)
         .then(res => {
@@ -148,15 +154,15 @@ var store = new vuex.Store({
     getTransactions({ commit, dispatch }, payload) {
       api('transactions')
         .then(res => {
-          console.log(res)
-          commit('setActiveTransactions', { transactions: res.data.data})
+          
+          commit('setActiveAllTransactions', { transactions: res.data.data})
         })
         .catch(err => {
           commit('handleError', err)
         })
     },
     getTransactionsByProduct({ commit, dispatch }, payload) {
-      api('transactions/' + payload.productId )
+      api('transactionsby/' + payload.productId )
         .then(res => {
           console.log(res)
           commit('setActiveTransactions', { transactions: res.data.data, productId: payload.productId })
@@ -211,7 +217,10 @@ var store = new vuex.Store({
     createProduct({ commit, dispatch }, payload) {
       api.post('products', payload.product)
         .then(res => {
-          dispatch('getProductsByList', payload.product)
+          if(payload.product.listId){
+            dispatch('getProductsByList', payload.product)
+          }
+          console.log("created")
         })
         .catch(err => {
           commit('handleError', err)
@@ -242,9 +251,20 @@ var store = new vuex.Store({
 
       api.put('products/' + payload.productId)
         .then(res => {
-          dispatch('updateProduct', payload)
+          // dispatch('updateProduct', payload)
           dispatch('getProductsByList')
           // getProductsBsyList?
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
+    },
+    updateQuantity({ commit, dispatch }, payload) {
+
+      api.put('products/' + payload.productId)
+        .then(res => {
+          console.log(payload)
+          console.log("res")
         })
         .catch(err => {
           commit('handleError', err)
