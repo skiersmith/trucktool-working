@@ -1,6 +1,5 @@
 <template>
   <div>
-<<<<<<< HEAD
     <!-- <h1>Organize Title Here</h1> -->
     <!-- <img class="logo" src="../assets/organizzlee.png"> -->
     <div class="overview-container">
@@ -34,19 +33,6 @@
         <button v-if="!deleteCat && addCatButt" class="btn-xs btn-danger" @click="toggleDeleteCat">Delete</button>
         <button v-if="deleteCat && addCatButt" class="btn-xs btn-danger" @click="toggleDeleteCat">Cancel</button>
       </div>
-=======
-      <h1>{{user.name}}'s Categorys</h1>
-      <div class="header container-fluid">
-        <button @click="toggleCategoryForm" class="btn-success">New Category</button>
-        <button class="btn-danger" @click="userLogout">Logout</button>
-      </div>
-      <router-link class="router-link-text" :to="{name: 'Overview'}">
-        <button class="overview btn-info">Overview</button>
-      </router-link>
-      <router-link class="router-link-text" :to="{name: 'Product'}">
-        <button class="product btn-info">All Products</button>
-      </router-link>
->>>>>>> 0e1c55ca36dc7f1eb1164835d43752125f0d306e
     </div>
 
     <div class="categoryList row">
@@ -176,7 +162,6 @@
 
   }
 
-<<<<<<< HEAD
   .textWhite {
     color: white
   }
@@ -209,9 +194,6 @@
     border-radius: 10px;
     margin: 1rem;
   }
-=======
-  .overview {}
->>>>>>> 0e1c55ca36dc7f1eb1164835d43752125f0d306e
 
   .categoryHeader {
     display: flex;
