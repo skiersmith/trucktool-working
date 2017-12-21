@@ -5,6 +5,7 @@ import Category from 'components/Category'
 import Login from 'components/Login'
 import List from 'components/List'
 import Overview from 'components/Overview'
+import Product from 'components/Product'
 Vue.use(Router)
 
 export default new Router({
@@ -33,7 +34,12 @@ export default new Router({
       name: 'Overview',
       component: Overview,
       props: true
-    },
+    }, {
+      path: '/products',
+      props: true,
+      name: 'Product',
+      component: Product
+    }
     
   ]
 })
