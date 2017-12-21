@@ -26,6 +26,7 @@ var store = new vuex.Store({
     activeProducts: {},
     activeTransactions: {},
     activeAllTransactions: {},
+    activeQuantity:{},
     tagProducts: {},
     allTagProducts: {},
     activeNotes: {},
@@ -75,6 +76,10 @@ var store = new vuex.Store({
     },
     setActiveNotes(state, payload) {
       vue.set(state.activeNotes, payload.productId, payload.note)
+    },
+    setActiveQuantity(state, payload) {
+      debugger
+      vue.set(state.activeNotes, payload.productId, payload.quantity)
     }
   },
   actions: {
@@ -259,12 +264,23 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-    updateQuantity({ commit, dispatch }, payload) {
-
-      api.put('products/' + payload.productId)
+    getQuantity({ commit, dispatch }, payload) {
+      api('products/' + payload.productId, payload)
         .then(res => {
+          // debugger
+          commit('setActiveQuantity', payload)
+    
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
+    },
+    updateQuantity({ commit, dispatch }, payload) {
+      api.put('products/' + payload.productId, payload)
+        .then(res => {
+          // debugger
           console.log(payload)
-          console.log("res")
+          console.log(res)
         })
         .catch(err => {
           commit('handleError', err)

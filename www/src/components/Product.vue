@@ -1,11 +1,12 @@
 <template>
     <div class="productt col-sm-3">
         <div class="l">
-                <h2 class="title" @click="prodSeen = !prodSeen">{{product.name}}</h2>
+            <h2 class="title" @click="prodSeen = !prodSeen">{{product.name}}</h2>
         </div>
         <div class="div" v-if="prodSeen">
+            <i class="fa fa-edit" @click="toggleProdBody"></i>
             <div class="product-container">
-                <div class="product-body">
+                <div v-if="prodBodySeen" class="product-body">
                     <p>Quantity: {{product.quantity}}</p>
                     <p>Price: {{product.unitPrice}}</p>
                     <p>Sell Price:{{product.resalePrice}}</p>
@@ -20,6 +21,24 @@
                                 <option v-for="list in lists" :value="list._id">{{list.name}}</option>
                             </select>
                         </form>
+                    </div>
+                </div>
+                <div v-if="!prodBodySeen" class="edit-product-body">
+                    <form @submit.prevent="updateProduct(this._id)">
+                        <div class="form-group">
+                            <input class="inline" size="15" type="text" name="name" placeholder="name" v-model="product.name">
+                            <input class="inline" size="15" type="text" name="quantity" placeholder="quantity" v-model="product.quantity">
+                            <input class="inline" size="15" type="text" name="unitPrice" placeholder="unitPrice" v-model="product.unitPrice">
+                            <input class="inline" size="15" type="text" name="resalePrice" placeholder="resalePrice" v-model="product.resalePrice">
+                            <input class="inline" size="15" type="text" name="sku" placeholder="sku" v-model="product.sku">
+                            <input class="inline" size="15" type="text" name="tag" placeholder="tag" v-model="product.tag">
+                            <button type="submit" class="btn-xs btn-success">Add</button>
+                        </div>
+                    </form>
+                    <div class="removeProd">
+                        <P class="inline">Remove Product
+                            <i class="fa fa-trash delProd" @click="removeProduct"></i>
+                        </P>
                     </div>
                 </div>
                 <div class="open-notes">
@@ -45,11 +64,7 @@
                         <i class="fa fa-minus" @click="removeNote(note._id)"></i>
                     </div>
                 </div>
-                <div class="removeProd">
-                    <P class="inline">Remove Product
-                        <i class="fa fa-trash delProd" @click="removeProduct"></i>
-                    </P>
-                </div>
+
             </div>
         </div>
     </div>
@@ -68,7 +83,8 @@
                 },
                 formOption: '',
                 notesSeen: false,
-                prodSeen: false
+                prodSeen: false,
+                prodBodySeen: false
             }
         },
         name: 'product',
@@ -80,7 +96,7 @@
             openNotes() {
                 this.$store.dispatch('getNotes', { productId: this.productId, listId: this.listId })
             },
-            moveProductToDifferentList(newListId) {  
+            moveProductToDifferentList(newListId) {
                 this.$store.dispatch('moveProductToDifferentList', { productId: this.product._id, oldListId: this.product.listId, listId: this.formOption })
             },
             newNote() {
@@ -93,13 +109,20 @@
                 this.toggleNoteForm()
             },
             removeProduct() {
-                this.$store.dispatch('removeProduct', { productId: this.product._id, listId: this.product.listId})
+                this.$store.dispatch('removeProduct', { productId: this.product._id, listId: this.product.listId })
             },
             removeNote(noteId) {
                 this.$store.dispatch('removeNote', { productId: this.product._id, listId: this.listId, noteId: noteId })
             },
             toggleNoteForm() {
                 this.showNoteForm = !this.showNoteForm
+            },
+            toggleProdBody() {
+                this.prodBodySeen = !this.prodBodySeen
+            },
+            updateProduct(){
+                debugger
+                this.$store.dispatch('updateProduct', { productId: this.product._id})
             }
         },
         computed: {
@@ -126,17 +149,19 @@
         justify-content: center;
 
     }
+
     /* .l{
         background-color: rgb(253, 206, 147);
         border-radius: 25px;
         padding: .5rem .5rem .5rem .5rem;
 
     } */
-    .title:hover{
-    color: rgb(131, 130, 130) 
 
+    .title:hover {
+        color: rgb(131, 130, 130)
     }
-    .productt{
+
+    .productt {
         background-color: bisque;
         border-radius: 25px;
         margin: 1rem;
