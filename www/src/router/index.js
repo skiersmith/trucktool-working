@@ -6,6 +6,7 @@ import Login from 'components/Login'
 import List from 'components/List'
 import Overview from 'components/Overview'
 import Product from 'components/Product'
+import All from 'components/All'
 Vue.use(Router)
 
 export default new Router({
