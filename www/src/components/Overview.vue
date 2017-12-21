@@ -10,7 +10,8 @@
             <p>Ideal Net Profit ${{calc}}</p>
             <p>Cost: ${{calc2}}</p>
             <p>Inventory: {{totalInv}}</p>
-            <br> 
+          
+            <br>
             <br>
             <br>
         </div>
@@ -60,13 +61,13 @@
                         <input type="number" class="" name="quantity" placeholder="quantity" v-model="transaction.quantity" />
                         <label for="salePrice">salePrice.</label>
                         <input type="text" class="" name="salePrice" placeholder="salePrice" v-model="transaction.salePrice" />
-                        
+
                         <br>
                         <label for="tag">Tag.</label>
                         <input type="text" class="" name="tag" placeholder="name" v-model="transaction.tag" />
                         <label for="productId">productId.</label>
                         <input type="text" class="" name="productId" placeholder="productId" v-model="transaction.productId" />
-                        <button type="submit" @click="updateQuantity" class="btn-xs btn-primary">New Transaction</button>
+                        <button type="submit" @click="getQuantity" class="btn-xs btn-primary">New Transaction</button>
                     </div>
                 </form>
 
@@ -194,15 +195,20 @@
                 this.$store.dispatch('getProductsByTag', { tag: this.tag })
             },
             getProducts() {
-                this.$store.dispatch('getProducts', )
+
+                this.$store.dispatch('getProducts')
             },
             updateQuantity() {
-                this.$store.dispatch('updateQuantity', { quantity: this.transaction.quantity, productId: this.transaction.productId })
+            },
+            getQuantity() {
+                this.$store.dispatch('getQuantity', { quantity: this.transaction.quantity, productId: this.transaction.productId })
+                // var quantity2 = this.updateActualQuantity()
+                this.$store.dispatch('updateQuantity', { quantity: this.quantity2, productId: this.transaction.productId })
             },
             createProduct() {
                 // this.product.order = this.$store.state.activeProducts[this.listId].length
                 this.$store.dispatch('createProduct', { product: this.product })
-                
+
                 // this.toggleProductForm()
             },
         },
@@ -231,15 +237,45 @@
 
                     debugger
                     var theTransactions = this.$store.state.activeTransactions[this.formOption]
-                    var unitPrice = 0
+                    var quantity = 0
+
                     debugger
                     for (var i = 0; i < theTransactions.length; i++) {
-                        unitPrice += theTransactions[i].quantity
+                        if (quantity < 0) {
+                            quantity += theTransactions[i].quantity
+                        }
+                        if (quantity > 0) {
+
+                        }
+
                     }
-                    // updateQuantity(unitPrice)
-                    return unitPrice
+                    // updateQuantity(newQuantity)
+                    return quantity
                 }
             },
+            // totalInv2() {
+            //     if (this.$store.state.activeTransactions[this.formOption]) {
+
+
+            //         var theTransactions = this.$store.state.activeTransactions[this.formOption]
+            //         var newNQuantity = 0
+            //         var newPQuantity = 0
+            //         debugger
+            //         for (var i = 0; i < theTransactions.length; i++) {
+            //             if (theTransactions[i].quantity < 0) {
+            //                 newNQuantity += theTransactions[i].quantity
+            //             }
+            //             if (theTransactions[i].quantity > 0) {
+            //                 newPQuantity += theTransactions[i].quantity
+            //             }
+
+            //         }
+            //         // updateQuantity(newQuantity)
+            //         return [newNQuantity, newPQuantity]
+            //     }
+
+            // },
+
             calc2() {
 
                 if (this.$store.state.activeTransactions[this.formOption]) {
@@ -276,7 +312,16 @@
                     }
                     return resalePrice - unitPrice
                 }
-            }
+            },
+            // updateActualQuantity() {
+            //     debugger
+            //     if (this.$store.state.activeQuantity.quantity) {
+            //         var quantity = this.$store.state.activeQuantity.quantity
+            //         var newQuantity = this.transaction.quantity
+            //         var totalQuantity = quantity + newQuantity
+            //         return totalQuantity
+            //     }
+            // }
         }
     }
 </script>

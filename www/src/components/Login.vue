@@ -126,7 +126,7 @@
         margin-left: 1rem; 
     }
     .loginbox {
-        background-color: #18191aa2;
+        background-color: rgba(78, 54, 32, 1);
         padding: .5rem;
         width: 90rem;
         border-radius: 25px;
