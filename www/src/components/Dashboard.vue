@@ -1,12 +1,5 @@
 <template>
   <div>
-<<<<<<< HEAD
-    <h1>{{user.name}}'s Categorys</h1>
-    <div class="header container-fluid">
-      <button @click="toggleCategoryForm" class="btn-success">New Category</button>
-      <button class="btn-danger" @click="userLogout">Logout</button>
-=======
-<<<<<<< HEAD
     <!-- <h1>Organize Title Here</h1> -->
     <!-- <img class="logo" src="../assets/organizzlee.png"> -->
     <div class="overview-container">
@@ -40,41 +33,10 @@
         <button v-if="!deleteCat && addCatButt" class="btn-xs btn-danger" @click="toggleDeleteCat">Delete</button>
         <button v-if="deleteCat && addCatButt" class="btn-xs btn-danger" @click="toggleDeleteCat">Cancel</button>
       </div>
-=======
-      <h1>{{user.name}}'s Categorys</h1>
-      <div class="header container-fluid">
-        <button @click="toggleCategoryForm" class="btn-success">New Category</button>
-        <button class="btn-danger" @click="userLogout">Logout</button>
-      </div>
-      <router-link class="router-link-text" :to="{name: 'Overview'}">
-        <button class="overview btn-info">Overview</button>
-      </router-link>
-      <router-link class="router-link-text" :to="{name: 'Product'}">
-        <button class="product btn-info">All Products</button>
-      </router-link>
->>>>>>> 0e1c55ca36dc7f1eb1164835d43752125f0d306e
->>>>>>> 5ddf47f96d1bed1938afe6354d7f8d23a7a9828c
     </div>
-    <router-link class="router-link-text" :to="{name: 'Overview'}">
-      <button class="overview btn-info">Overview</button>
-    </router-link>
-    <router-link class="router-link-text" :to="{name: 'All'}">
-      <button class="all btn-info">All Products</button>
-    </router-link>
-  </div>
 
-  <div class="categoryList row">
+    <div class="categoryList row">
 
-<<<<<<< HEAD
-    <div class="col-sm-3" v-for="category in categorys">
-      <div class="category flex">
-        <router-link class="router-link-text" :to="'/categorys/'+category._id">
-          <p class="categoryName">
-            {{category.name}}
-          </p>
-        </router-link>
-        <span class="remove" @click="removeCategory(category)">x</span>
-=======
       <div class="col-sm-3" v-for="category in categorys">
         <div class="category flex">
           <router-link class="router-link-text" :to="'/categorys/'+category._id">
@@ -90,16 +52,10 @@
           <!-- <span v-if="!deleteCat" @click="toggleDeleteCat" class="remove">X</span> -->
           <!-- <span v-if="deleteCat" @click="toggleDeleteCat" class="remove glyphicon glyphicon-arrow-left" aria-hidden="true"></span> -->
         </div>
->>>>>>> 5ddf47f96d1bed1938afe6354d7f8d23a7a9828c
       </div>
-    </div>
 
-<<<<<<< HEAD
-    <div v-if="showCategoryForm" class="categoryForm container">
-=======
     </div>
     <div v-if="!addCatButt" class="categoryForm container">
->>>>>>> 5ddf47f96d1bed1938afe6354d7f8d23a7a9828c
       <form @submit.prevent="createCategory">
         <input class="form-control" placeholder="name" type="text" name="name" v-model="category.name" required>
         <input class="form-control" placeholder="description" type="text" name="description" v-model="category.description">
@@ -108,7 +64,6 @@
         </div>
       </form>
     </div>
-  </div>
   </div>
 
 
@@ -207,7 +162,6 @@
 
   }
 
-<<<<<<< HEAD
   .textWhite {
     color: white
   }
@@ -240,9 +194,6 @@
     border-radius: 10px;
     margin: 1rem;
   }
-=======
-  .overview {}
->>>>>>> 0e1c55ca36dc7f1eb1164835d43752125f0d306e
 
   .categoryHeader {
     display: flex;
