@@ -1,15 +1,21 @@
 <template>
   <div>
-      <img class="logo" src="../assets/organizzlee.png">
+    <img class="logo" src="../assets/organizzlee.png">
     <div class="categorysHeader container">
       <h1>{{user.name}}'s Categorys</h1>
       <div class="header container-fluid">
-        
+
         <button @click="toggleCategoryForm" class="btn-success">New Category</button>
         <button class="btn-danger" @click="userLogout">Logout</button>
       </div>
-      <router-link class="router-link-text" :to="{name: 'Overview'}"><button class="overview btn-info">Overview</button></router-link>
+      <router-link class="router-link-text" :to="{name: 'Overview'}">
+        <button class="overview btn-info">Overview</button>
+      </router-link>
+      <router-link class="router-link-text" :to="{name: 'Product'}">
+        <button class="product btn-info">All Products</button>
+      </router-link>
     </div>
+
     <div class="categoryList row">
 
       <div class="col-sm-3" v-for="category in categorys">
@@ -112,9 +118,9 @@
     padding: 1rem;
 
   }
-  .overview{
-    
-  }
+
+  .overview {}
+
   .categoryHeader {
     display: flex;
     justify-content: flex-start;
@@ -177,8 +183,9 @@
     justify-content: center;
     align-items: center
   }
-  .logo{
-       
-       height: 25rem;
-   }
+
+  .logo {
+
+    height: 25rem;
+  }
 </style>
