@@ -35,10 +35,10 @@ export default new Router({
       component: Overview,
       props: true
     }, {
-      path: '/products',
+      path: '/all',
       props: true,
-      name: 'Product',
-      component: Product
+      name: 'All',
+      component: All
     }
     
   ]

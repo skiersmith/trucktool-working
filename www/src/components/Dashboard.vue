@@ -1,41 +1,41 @@
 <template>
   <div>
-      <h1>{{user.name}}'s Categorys</h1>
-      <div class="header container-fluid">
-        <button @click="toggleCategoryForm" class="btn-success">New Category</button>
-        <button class="btn-danger" @click="userLogout">Logout</button>
+    <h1>{{user.name}}'s Categorys</h1>
+    <div class="header container-fluid">
+      <button @click="toggleCategoryForm" class="btn-success">New Category</button>
+      <button class="btn-danger" @click="userLogout">Logout</button>
+    </div>
+    <router-link class="router-link-text" :to="{name: 'Overview'}">
+      <button class="overview btn-info">Overview</button>
+    </router-link>
+    <router-link class="router-link-text" :to="{name: 'All'}">
+      <button class="all btn-info">All Products</button>
+    </router-link>
+  </div>
+
+  <div class="categoryList row">
+
+    <div class="col-sm-3" v-for="category in categorys">
+      <div class="category flex">
+        <router-link class="router-link-text" :to="'/categorys/'+category._id">
+          <p class="categoryName">
+            {{category.name}}
+          </p>
+        </router-link>
+        <span class="remove" @click="removeCategory(category)">x</span>
       </div>
-      <router-link class="router-link-text" :to="{name: 'Overview'}">
-        <button class="overview btn-info">Overview</button>
-      </router-link>
-      <router-link class="router-link-text" :to="{name: 'Product'}">
-        <button class="product btn-info">All Products</button>
-      </router-link>
     </div>
 
-    <div class="categoryList row">
-
-      <div class="col-sm-3" v-for="category in categorys">
-        <div class="category flex">
-          <router-link class="router-link-text" :to="'/categorys/'+category._id">
-            <p class="categoryName">
-              {{category.name}}
-            </p>
-          </router-link>
-          <span class="remove" @click="removeCategory(category)">x</span>
+    <div v-if="showCategoryForm" class="categoryForm container">
+      <form @submit.prevent="createCategory">
+        <input class="form-control" placeholder="name" type="text" name="name" v-model="category.name" required>
+        <input class="form-control" placeholder="description" type="text" name="description" v-model="category.description">
+        <div class="blacktext">
+          <button class="btn-success margins" type="submit">Add Category</button>
         </div>
-      </div>
-
-      <div v-if="showCategoryForm" class="categoryForm container">
-        <form @submit.prevent="createCategory">
-          <input class="form-control" placeholder="name" type="text" name="name" v-model="category.name" required>
-          <input class="form-control" placeholder="description" type="text" name="description" v-model="category.description">
-          <div class="blacktext">
-            <button class="btn-success margins" type="submit">Add Category</button>
-          </div>
-        </form>
-      </div>
+      </form>
     </div>
+  </div>
   </div>
 
 
