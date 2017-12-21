@@ -37,6 +37,11 @@ const models = {
     name: 'Note',
     endpoint: 'notes'
     // useCustomRoutes: true
+  },
+  all: {
+    name: 'All',
+    endpoint: 'all'
+    // useCustomRoutes: true
   }
 }
 

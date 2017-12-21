@@ -80,7 +80,7 @@ module.exports = {
                     return next(handleResponse(action, null, error))
                 })
         }
-    },
+    }
     
     // getProductsByListId: {
     //     path: '/dashboard/:categoryId/lists/:listId/products',
@@ -96,13 +96,7 @@ module.exports = {
     //     }
     // },
 
-
-
-
 }
-
-
-
 
 
 function handleResponse(action, data, error) {
