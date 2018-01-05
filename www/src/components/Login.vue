@@ -2,7 +2,6 @@
     <div>
         <div class="title">
             <h1>Organize Title Here</h1>
-            <!-- <img class="logo" src="../assets/organizzlee.png"> -->
         </div>
         <div class="top container">
             <div class="loginbox">
@@ -27,7 +26,7 @@
                             <div class="col-sm-10">
                                 <div class="checkbox">
                                     <label class="white">
-                                        <input  type="checkbox" /> Remember me
+                                        <input type="checkbox" /> Remember me
                                     </label>
                                 </div>
                             </div>
@@ -118,38 +117,47 @@
         display: flex;
         /* justify-content: center; */
     }
-    .white{
+
+    .white {
         color: white;
     }
-    .regInput{
+
+    .regInput {
         width: 20%;
-        margin-left: 1rem; 
+        margin-left: 1rem;
     }
+
     .loginbox {
         background-color: rgba(78, 54, 32, 1);
         padding: .5rem;
         width: 90rem;
         border-radius: 25px;
     }
-    .regSub-container{
+
+    .regSub-container {
         display: flex;
         justify-content: center;
     }
+
     .register .login {
         margin: 0rem;
         padding: 0rem;
     }
-    .control-label{
+
+    .control-label {
         margin-left: 1rem;
     }
+
     .regheader {
         display: flex;
         /* justify-content: center */
     }
-    .reg-container{
+
+    .reg-container {
         display: flex;
         justify-content: center;
     }
+
     label {
         display: inline-block;
     }
@@ -170,8 +178,9 @@
     .action {
         cursor: pointer;
     }
-    .logo{
-       
+
+    .logo {
+
         height: 25rem;
     }
 </style>
