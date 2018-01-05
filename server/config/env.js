@@ -5,9 +5,10 @@ let env = {
 	DBPROTOCOL: 'mongodb',
 	DBUSERNAME: 'user1',
 	DBPASSWORD: 'password',
-	DBHOST: 'ds044887.mlab.com:44887',
-	DBNAME: 'productmanager',
+	DBHOST: 'ds143907.mlab.com:43907',
+	DBNAME: 'organizzle2',
 	SERVERNAME: 'dev-server'
+
 }
 
 
