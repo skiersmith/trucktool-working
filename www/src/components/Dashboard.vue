@@ -12,7 +12,9 @@
       </div>
       <div class="overview-container">
         <div class="overview2">
-          <b>Products</b>
+          <router-link class="all router-link-text" :to="{name: 'All'}">
+            <b>Products</b>
+          </router-link>
         </div>
       </div>
       <div class="overview-container">

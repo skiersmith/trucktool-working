@@ -51,7 +51,7 @@ module.exports = {
     reqType: 'get',
     method(req, res, next) {
       let action = 'Find All Products'
-      Products.find({ products })
+      Products.find({ listId: req.params.listId })
         .then(products => {
           res.send(handleResponse(action, products))
         }).catch(error => {
