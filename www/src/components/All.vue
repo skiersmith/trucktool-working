@@ -116,7 +116,7 @@
             padding: 1rem;
         }
         .list-footer{
-            display: ;
+            display: flex;
             justify-content: space-around;
         } 
     
