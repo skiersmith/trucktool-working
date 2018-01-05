@@ -26,7 +26,7 @@ var store = new vuex.Store({
     activeProducts: {},
     activeTransactions: {},
     activeAllTransactions: {},
-    activeQuantity:{},
+    activeQuantity: {},
     tagProducts: {},
     allTagProducts: {},
     activeNotes: {},
@@ -56,12 +56,12 @@ var store = new vuex.Store({
       vue.set(state.activeProducts, payload.listId, payload.product)
     },
     setActiveTransactions(state, payload) {
-    console.log(payload)
+      console.log(payload)
       vue.set(state.activeTransactions, payload.productId, payload.transactions)
       console.log(state.activeTransactions)
     },
     setActiveAllTransactions(state, payload) {
-     
+
       vue.set(state.activeAllTransactions, payload.transactions)
     },
     setTagProducts(state, payload) {
@@ -70,7 +70,7 @@ var store = new vuex.Store({
 
     },
     setAllTagProducts(state, payload) {
-      
+
       vue.set(state.allTagProducts, "all", payload.products)
       console.log(state.allTagProducts)
     },
@@ -143,7 +143,7 @@ var store = new vuex.Store({
         })
     },
     removeList({ commit, dispatch }, payload) {
-    
+
 
       api.delete('lists/' + payload.listId)
         .then(res => {
@@ -159,15 +159,15 @@ var store = new vuex.Store({
     getTransactions({ commit, dispatch }, payload) {
       api('transactions')
         .then(res => {
-          
-          commit('setActiveAllTransactions', { transactions: res.data.data})
+
+          commit('setActiveAllTransactions', { transactions: res.data.data })
         })
         .catch(err => {
           commit('handleError', err)
         })
     },
     getTransactionsByProduct({ commit, dispatch }, payload) {
-      api('transactionsby/' + payload.productId )
+      api('transactionsby/' + payload.productId)
         .then(res => {
           console.log(res)
           commit('setActiveTransactions', { transactions: res.data.data, productId: payload.productId })
@@ -177,7 +177,7 @@ var store = new vuex.Store({
         })
     },
     newTransaction({ commit, dispatch }, payload) {
-      
+
       api.post('/transactions', payload.transaction)
         .then(res => {
 
@@ -193,7 +193,7 @@ var store = new vuex.Store({
     getProducts({ commit, dispatch }, payload) {
       api('products')
         .then(res => {
-          
+
           commit('setAllTagProducts', { products: res.data.data })
         })
         .catch(err => {
@@ -222,7 +222,7 @@ var store = new vuex.Store({
     createProduct({ commit, dispatch }, payload) {
       api.post('products', payload.product)
         .then(res => {
-          if(payload.product.listId){
+          if (payload.product.listId) {
             dispatch('getProductsByList', payload.product)
           }
           console.log("created")
@@ -269,7 +269,7 @@ var store = new vuex.Store({
         .then(res => {
           // debugger
           commit('setActiveQuantity', payload)
-    
+
         })
         .catch(err => {
           commit('handleError', err)

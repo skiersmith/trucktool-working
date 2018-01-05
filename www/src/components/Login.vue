@@ -69,7 +69,7 @@
                             </div>
                             <div class="form-group regSub-container">
                                 <div class="col-sm-offset-2 col-sm-3">
-                                    <button @click="userRegister, toggleRegForm" data-dismiss="modal" class="btn btn-default">Register Me</button>
+                                    <button @click="userRegister" data-dismiss="modal" class="btn btn-default">Register Me</button>
                                 </div>
                             </div>
                         </div>

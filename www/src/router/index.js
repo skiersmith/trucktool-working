@@ -29,13 +29,12 @@ export default new Router({
       path: '/login',
       name: 'Login',
       component: Login
-    },
-    {
+    },{
       path: '/overview',
       name: 'Overview',
       component: Overview,
       props: true
-    }, {
+    },{
       path: '/all',
       props: true,
       name: 'All',
