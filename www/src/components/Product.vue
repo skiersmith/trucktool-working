@@ -121,7 +121,6 @@
                 this.prodBodySeen = !this.prodBodySeen
             },
             updateProduct(){
-                
                 this.$store.dispatch('updateProduct', { productId: this.product._id})
             }
         },

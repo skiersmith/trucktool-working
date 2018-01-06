@@ -65,7 +65,7 @@ var store = new vuex.Store({
       vue.set(state.activeAllTransactions, payload.transactions)
     },
     setTagProducts(state, payload) {
-      
+
       vue.set(state.tagProducts, payload.tag, payload.products)
 
     },
@@ -78,7 +78,7 @@ var store = new vuex.Store({
       vue.set(state.activeNotes, payload.productId, payload.note)
     },
     setActiveQuantity(state, payload) {
-      
+
       vue.set(state.activeNotes, payload.productId, payload.quantity)
     }
   },
@@ -249,10 +249,12 @@ var store = new vuex.Store({
         })
     },
     updateProduct({ commit, dispatch }, payload) {
+      debugger
       api.put('products/' + payload.productId, payload)
         .then(res => {
           dispatch('updateProduct', payload)
-          dispatch('getProductsByList')
+          dispatch('getProducts')
+          console.log("success")
           // getProductsBsyList?
         })
         .catch(err => {
