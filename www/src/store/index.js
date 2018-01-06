@@ -70,14 +70,14 @@ var store = new vuex.Store({
       vue.set(state.tagProducts, payload.tag, payload.products)
 
     },
-    setAllProducts(state, payload) {
-      debugger
-      vue.set(state.allProducts, payload)
-      console.log(state.allProducts)
-    },
+    // setAllProducts(state, payload) {
+    //   debugger
+    //   vue.set(state.allProducts, payload)
+    //   console.log(state.allProducts)
+    // },
     setAllTagProducts(state, payload) {
 
-      vue.set(state.allTagProducts, payload.products)
+      vue.set(state.allTagProducts,"all", payload)
       console.log(state.allTagProducts)
     },
     setActiveNotes(state, payload) {
@@ -196,11 +196,21 @@ var store = new vuex.Store({
     //^^^^^^^^^^^^TRANSACTIONS^^^^^^^^^^^^^^^^^^//
 
     //-------------PRODUCTS-----------------//
+    // getProducts({ commit, dispatch }, payload) {
+    //   api('products')
+    //     .then(res => {
+    //       debugger
+    //       commit('setAllProducts', res.data.data )
+    //     })
+    //     .catch(err => {
+    //       commit('handleError', err)
+    //     })
+    // },
     getProducts({ commit, dispatch }, payload) {
       api('products')
         .then(res => {
           debugger
-          commit('setAllProducts', res.data.data )
+          commit('setAllTagProducts', res.data.data )
         })
         .catch(err => {
           commit('handleError', err)

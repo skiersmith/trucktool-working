@@ -24,7 +24,7 @@
         </div>
        <!-- <div v-for="product in products"><p>hi</p></div> -->
         <div class="list-footer row">
-            <div class="col-sm-offset-2" v-for="product in products">
+            <div class="col-sm-offset-2" v-for="product in products.all">
                 <!-- <product class="the-product" ></product> -->
                 <!-- :product="product" -->
                 <!-- {{product.name}} -->
@@ -40,7 +40,7 @@
             return {
                 
                 product: {
-                    // name: product.name
+                    
                 },
                 showAddProductForm: false,
                 newListId: document.getElementById('productId')
@@ -67,7 +67,7 @@
             products() {
                 
                 debugger
-                return this.$store.state.allProducts
+                return this.$store.state.allTagProducts
             }
         },
         components: {
