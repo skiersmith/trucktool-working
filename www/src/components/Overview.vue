@@ -314,6 +314,7 @@
                     return resalePrice - unitPrice
                 }
             },
+<<<<<<< HEAD
             updateActualQuantity() {
                 debugger
                 // if (this.$store.state.activeQuantity) {
@@ -325,6 +326,17 @@
                     // return
                 // }
             }
+=======
+            // updateActualQuantity() {
+            //     
+            //     if (this.$store.state.activeQuantity.quantity) {
+            //         var quantity = this.$store.state.activeQuantity.quantity
+            //         var newQuantity = this.transaction.quantity
+            //         var totalQuantity = quantity + newQuantity
+            //         return totalQuantity
+            //     }
+            // }
+>>>>>>> a6f9d1bd161a3f8c33f5922d22d09cbad616078a
         }
     }
 </script>
