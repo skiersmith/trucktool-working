@@ -25,7 +25,9 @@
         <div class="list-footer row">
         </div>
         <div class="col-sm-offset-2" v-for="product in products">
-            <product class="the-product" :product="product"></product>
+            <!-- <product class="the-product" :product="product"></product> -->
+            <!-- {{product.nsame}} -->
+            <p>hi</p>
         </div>
     </div>
 </template>
@@ -34,13 +36,8 @@
     export default {
         data() {
             return {
-                list: {
-                    name: this.name,
-                },
-                product: {
-                    listId: this.listId,
-                    categoryId: this.categoryId,
-                },
+                
+                product: {},
                 showAddProductForm: false,
                 newListId: document.getElementById('productId')
             }
@@ -64,7 +61,8 @@
         },
         computed: {
             products() {
-                return this.$store.state.activeProducts
+                return this.$store.state.allProducts
+                debugger
             }
         },
         components: {

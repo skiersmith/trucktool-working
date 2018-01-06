@@ -84,7 +84,7 @@
                 formOption: '',
                 notesSeen: false,
                 prodSeen: false,
-                prodBodySeen: false
+                prodBodySeen: true
             }
         },
         name: 'product',
