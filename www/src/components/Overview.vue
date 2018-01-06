@@ -214,7 +214,7 @@
         },
         computed: {
             allTransactions() {
-                debugger
+                
                 return this.$store.state.activeAllTransactions
             },
             transactions() {
@@ -235,11 +235,11 @@
             totalInv() {
                 if (this.$store.state.activeTransactions[this.formOption]) {
 
-                    debugger
+                    
                     var theTransactions = this.$store.state.activeTransactions[this.formOption]
                     var quantity = 0
 
-                    debugger
+                    
                     for (var i = 0; i < theTransactions.length; i++) {
                         if (quantity < 0) {
                             quantity += theTransactions[i].quantity
@@ -260,7 +260,7 @@
             //         var theTransactions = this.$store.state.activeTransactions[this.formOption]
             //         var newNQuantity = 0
             //         var newPQuantity = 0
-            //         debugger
+            //         
             //         for (var i = 0; i < theTransactions.length; i++) {
             //             if (theTransactions[i].quantity < 0) {
             //                 newNQuantity += theTransactions[i].quantity
@@ -283,7 +283,7 @@
 
                     var theTransactions = this.$store.state.activeTransactions[this.formOption]
                     var unitPrice = 0
-                    debugger
+                    
                     for (var i = 0; i < theTransactions.length; i++) {
                         unitPrice += theTransactions[i].salePrice * theTransactions[i].quantity
                     }
@@ -314,7 +314,7 @@
                 }
             },
             // updateActualQuantity() {
-            //     debugger
+            //     
             //     if (this.$store.state.activeQuantity.quantity) {
             //         var quantity = this.$store.state.activeQuantity.quantity
             //         var newQuantity = this.transaction.quantity
