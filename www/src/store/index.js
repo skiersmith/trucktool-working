@@ -54,7 +54,8 @@ var store = new vuex.Store({
       state.currentList = list
     },
     setActiveProducts(state, payload) {
-      vue.set(state.activeProducts, payload.listId, payload)
+      
+      vue.set(state.activeProducts, payload.listId, payload.product)
     },
     setActiveTransactions(state, payload) {
       console.log(payload)

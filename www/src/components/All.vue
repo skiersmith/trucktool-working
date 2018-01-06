@@ -27,8 +27,8 @@
             <div class="col-sm-offset-2" v-for="product in products.all">
                 <!-- <product class="the-product" ></product> -->
                 <!-- :product="product" -->
-                <!-- {{product.name}} -->
-                <p>hi</p>
+                {{product.name}}
+                <!-- <p>hi</p> -->
             </div>
         </div>
     </div>
