@@ -198,12 +198,13 @@
 
                 this.$store.dispatch('getProducts')
             },
-            updateQuantity() {
-            },
             getQuantity() {
                 this.$store.dispatch('getQuantity', { quantity: this.transaction.quantity, productId: this.transaction.productId })
-                // var quantity2 = this.updateActualQuantity()
-                this.$store.dispatch('updateQuantity', { quantity: this.quantity2, productId: this.transaction.productId })
+             debugger
+            },
+             updateQuantity(){
+                dispatch('updateQuantity' , {quantity: updateActualQuantity, productId: this.transaction.productId })
+               
             },
             createProduct() {
                 // this.product.order = this.$store.state.activeProducts[this.listId].length
@@ -313,15 +314,17 @@
                     return resalePrice - unitPrice
                 }
             },
-            // updateActualQuantity() {
-            //     
-            //     if (this.$store.state.activeQuantity.quantity) {
-            //         var quantity = this.$store.state.activeQuantity.quantity
-            //         var newQuantity = this.transaction.quantity
-            //         var totalQuantity = quantity + newQuantity
-            //         return totalQuantity
-            //     }
-            // }
+            updateActualQuantity() {
+                debugger
+                // if (this.$store.state.activeQuantity) {
+                    var quantity = this.$store.state.activeQuantity
+                    var newQuantity = this.transaction.quantity
+                    var totalQuantity = quantity + newQuantity
+                    return totalQuantity
+                // }else{
+                    // return
+                // }
+            }
         }
     }
 </script>

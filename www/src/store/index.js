@@ -78,8 +78,9 @@ var store = new vuex.Store({
       vue.set(state.activeNotes, payload.productId, payload.note)
     },
     setActiveQuantity(state, payload) {
-
-      vue.set(state.activeNotes, payload.productId, payload.quantity)
+      debugger
+      vue.set(state.activeQuantity, payload.quantity)
+      
     }
   },
   actions: {
@@ -264,7 +265,12 @@ var store = new vuex.Store({
     getQuantity({ commit, dispatch }, payload) {
       api('products/' + payload.productId, payload)
         .then(res => {
-          commit('setActiveQuantity', payload)
+          debugger
+          commit('setActiveQuantity', {quantity: payload.quantity})
+          newQuantity = this.activeQuantity + payload.quantity
+          debugger
+          dispatch('updateQuantity', { quantity: newQuantity, productId: payload.productId })
+          
 
         })
         .catch(err => {
@@ -274,6 +280,8 @@ var store = new vuex.Store({
     updateQuantity({ commit, dispatch }, payload) {
       api.put('products/' + payload.productId, payload)
         .then(res => {
+          // 
+          debugger
           console.log(payload)
           console.log(res)
         })
