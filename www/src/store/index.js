@@ -271,7 +271,6 @@ var store = new vuex.Store({
       debugger
       api.put('products/' + payload.productId, payload)
         .then(res => {
-          dispatch('updateProduct', payload)
           dispatch('getProducts')
           console.log("success")
           // getProductsBsyList?

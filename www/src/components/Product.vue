@@ -164,7 +164,7 @@
         background-color: bisque;
         border-radius: 25px;
         margin: 1rem;
-        /* width: 30rem */
+        width: 30rem
     }
 
     .open-notes {
