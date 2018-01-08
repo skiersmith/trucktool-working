@@ -8,29 +8,76 @@
         </div>
         <div class="list-body">
         </div> -->
-        <button class="btn-success btn-xs margin" @click="toggleProductForm">New Product</button>
-        <div class="create-product" v-if="showAddProductForm">
-            <form @submit.prevent="createProduct">
-                <div class="form-group">
-                    <input class="inline" size="15" type="text" name="name" placeholder="name" v-model="product.name" required>
-                    <input class="inline" size="15" type="text" name="quantity" placeholder="quantity" v-model="product.quantity" required>
-                    <input class="inline" size="15" type="text" name="unitPrice" placeholder="unitPrice" v-model="product.unitPrice" required>
-                    <input class="inline" size="15" type="text" name="resalePrice" placeholder="resalePrice" v-model="product.resalePrice">
-                    <input class="inline" size="15" type="text" name="sku" placeholder="sku" v-model="product.sku">
-                    <input class="inline" size="15" type="text" name="tag" placeholder="tag" v-model="product.tag">
-                    <button type="submit" class="btn-xs btn-success">Add</button>
-                </div>
-            </form>
-        </div>
-       <!-- <div v-for="product in products"><p>hi</p></div> -->
-        <div class="list-footer row">
-            <div class="col-sm-offset-2" v-for="product in products.all">
-                <!-- <product class="the-product" ></product> -->
-                <!-- :product="product" -->
-                {{product.name}}
-                <!-- <p>hi</p> -->
+        <!-- <button v-if="!showEdit" @click="toggleEdit()">Edit</button> -->
+        <!-- <i class="fa fa-minus-square-o" v-if="showEdit" @click="toggleEdit()"></i> -->
+        <button class="btn-success btn-xs margin" @click="toggleProductForm">New/Edit Product</button>
+        <div>
+            <div class="create-product" v-if="showAddProductForm">
+                <form @submit.prevent="createProduct">
+                    <div class="form-group">
+                        <input class="inline" size="15" type="text" name="name" placeholder="name" v-model="product.name" required>
+                        <input class="inline" size="15" type="text" name="quantity" placeholder="quantity" v-model="product.quantity" required>
+                        <input class="inline" size="15" type="text" name="unitPrice" placeholder="unitPrice" v-model="product.unitPrice" required>
+                        <input class="inline" size="15" type="text" name="resalePrice" placeholder="resalePrice" v-model="product.resalePrice">
+                        <input class="inline" size="15" type="text" name="sku" placeholder="sku" v-model="product.sku">
+                        <input class="inline" size="15" type="text" name="tag" placeholder="tag" v-model="product.tag">
+                        <button type="submit" class="btn-xs btn-success">Add</button>
+                    </div>
+                </form>
+                <form @submit.prevent="updateProduct">
+                    <div class="form-group">
+                        <input class="inline" size="15" type="text" name="name" placeholder="name" v-model="product.name">
+                        <input class="inline" size="15" type="text" name="quantity" placeholder="quantity" v-model="product.quantity">
+                        <input class="inline" size="15" type="text" name="unitPrice" placeholder="unitPrice" v-model="product.unitPrice">
+                        <input class="inline" size="15" type="text" name="resalePrice" placeholder="resalePrice" v-model="product.resalePrice">
+                        <input class="inline" size="15" type="text" name="sku" placeholder="sku" v-model="product.sku">
+                        <input class="inline" size="15" type="text" name="tag" placeholder="tag" v-model="product.tag">
+                        <input class="inline" size="15" type="text" name="id" placeholder="id" v-model="product._id">
+                        <button type="submit" class="btn-xs btn-success">Update</button>
+                    </div>
+                </form>
             </div>
         </div>
+        <!-- <div v-for="p in check">
+            <p>hi</p>
+        </div> -->
+        <!-- if in stock all products -->
+        <div class="main-row">
+            <div class="col-lg-offset-1 col-lg-5 bg">
+                <h1 class="ap">All Products</h1>
+                <div class="product" v-for="product in products.all">
+                    <div class="prod-container">
+                        <p> Name: {{product.name}}</p>
+                        <p>ID: {{product._id}}</p>
+                        <p>Quantity: {{product.quantity}}</p>
+                        <p>Price: {{product.resalePrice}}</p>
+                    </div>
+
+                </div>
+            </div>
+            <div v-if="showEdit">
+                <p> Name: {{product.name}}</p>
+                <p>ID: {{product._id}}</p>
+                <p>Quantity: {{product.quantity}}</p>
+                <p>Price: {{product.resalePrice}}</p>
+            </div>
+
+            <!-- if quantity is 0 on this table. -->
+            <div class="col-lg-5 bg">
+                <h1 class="oos">Out of Stock</h1>
+                <div class="product" v-for="p in zeroProducts">
+                    <!-- <i class="fa fa-minus" v-if="!quantityCheck"></i> -->
+                    <div class="prod-container">
+                        <p> Name: {{p.name}} </p>
+                        <p>ID: {{p._id}}</p>
+                        <!-- <p>Quantity: {{p.quantity}}</p> -->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- </div> -->
     </div>
 </template>
 <script>
@@ -38,12 +85,15 @@
     export default {
         data() {
             return {
-                
+
                 product: {
-                    
+
                 },
                 showAddProductForm: false,
-                newListId: document.getElementById('productId')
+                newListId: document.getElementById('productId'),
+                // quantityCheck: true,
+                // listCheck: true
+                showEdit: false
             }
         },
         name: 'product',
@@ -54,21 +104,55 @@
         methods: {
             createProduct() {
                 // this.product.order = this.$store.state.activeProducts[this.listId].length
-                this.$store.dispatch('createProduct', { product: this.product })
-                this.product = {
-                }
+                this.$store.dispatch('createProduct', { product: this.product, productId: this._id})
+                // this.product = {
+                // }
                 this.toggleProductForm()
             },
             toggleProductForm() {
                 this.showAddProductForm = !this.showAddProductForm
+            },
+            toggleEdit() {
+                this.showEdit = !this.showEdit
+
+            },
+            updateProduct(product){
+                this.$store.dispatch('updateProduct', {product: this.product })
+                // { productId: this.product._id}
             }
         },
+
         computed: {
+            zeroProducts() {
+
+                var unfiltered = this.$store.state.allTagProducts.all
+                var filtered = []
+                if (unfiltered) {
+
+                    for (let i = 0; i < unfiltered.length; i++) {
+                        if (unfiltered[i].quantity < 1) {
+                            filtered.push(unfiltered[i])
+                        }
+                        else {
+                            continue
+                        }
+                    }
+                    console.log("yerrp")
+                    console.log(filtered)
+                    return filtered
+
+                }
+            },
             products() {
-                
-                debugger
+
+
                 return this.$store.state.allTagProducts
-            }
+
+
+
+
+            },
+
         },
         components: {
             // product
@@ -76,12 +160,28 @@
     }
 </script>
 <style>
+    .fa-edit:hover {
+        color: #888;
+    }
+
     .list {
         border-radius: 5px;
         height: 600px;
         margin-top: 1%;
         overflow: auto;
         background: rgb(104, 142, 255);
+    }
+
+    .oos {
+        background-color: firebrick;
+        color: white;
+        border-radius: 15px;
+    }
+
+    .ap {
+        background-color: rgb(34, 84, 178);
+        color: white;
+        border-radius: 15px;
     }
 
     ::-webkit-scrollbar {
@@ -123,8 +223,33 @@
         /* width: 50rem; */
     }
 
-    /* .product {
-            padding-top: 1rem;
-            padding-bottom: 1rem;
-        } */
+    .product {
+        display: block;
+        /* height: 3rem; */
+        padding: 0.3rem;
+        margin: 1rem;
+        border-style: ridge;
+        /* margin: 0.5rem; */
+        /* border-top-style: solid; */
+        /* border-bottom-style: solid; */
+        border-color: black;
+        border-width: 2px
+    }
+
+    .prod-container {
+        display: flex;
+        justify-content: space-between;
+        /* background-color: bisque; */
+    }
+
+    .bg {
+        background-color: rgb(214, 214, 190);
+        border-radius: 25px;
+        margin: 1rem;
+    }
+
+
+    /* .actualProd{
+        display: block;
+    } */
 </style>

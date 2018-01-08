@@ -200,7 +200,7 @@
             },
             getQuantity() {
                 this.$store.dispatch('getQuantity', { quantity: this.transaction.quantity, productId: this.transaction.productId })
-             debugger
+             
             },
              updateQuantity(){
                 dispatch('updateQuantity' , {quantity: updateActualQuantity, productId: this.transaction.productId })
@@ -315,7 +315,7 @@
                 }
             },
             updateActualQuantity() {
-                debugger
+                
                 // if (this.$store.state.activeQuantity) {
                     var quantity = this.$store.state.activeQuantity
                     var newQuantity = this.transaction.quantity
