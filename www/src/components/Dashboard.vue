@@ -10,13 +10,13 @@
           </router-link>
         </div>
       </div>
-      <div class="overview-container">
+      <!-- <div class="overview-container">
         <div class="overview2">
           <router-link class="overview router-link-text" :to="{name: 'All'}">
             <b>Products</b>
           </router-link>
         </div>
-      </div>
+      </div> -->
       <div class="overview-container">
         <div class="overview3">
           <span class="textWhite" @click="userLogout">
@@ -36,35 +36,38 @@
         <button v-if="deleteCat && addCatButt" class="btn-xs btn-danger" @click="toggleDeleteCat">Cancel</button>
       </div>
     </div>
-
-    <div class="categoryList row">
-
-      <div class="col-sm-3" v-for="category in categorys">
-        <div class="category flex">
-          <router-link class="router-link-text" :to="'/categorys/'+category._id">
-            <p v-if="!deleteCat" class="categoryName">
-              {{category.name}}
-            </p>
-          </router-link>
-          <div v-if="deleteCat">
-            <button @click="removeCategory(category)" class="btn-danger btn-xs">Delete</button>
-          </div>
-          <!-- <i v-if="!deleteCat" class="fa fa-window-close fa-md delList remove" @click="toggleDeleteCat"></i>
-          <i v-if="deleteCat" class="fa fa-arrow-circle-o-left fa-md delList remove" @click="toggleDeleteCat"></i> -->
-          <!-- <span v-if="!deleteCat" @click="toggleDeleteCat" class="remove">X</span> -->
-          <!-- <span v-if="deleteCat" @click="toggleDeleteCat" class="remove glyphicon glyphicon-arrow-left" aria-hidden="true"></span> -->
+    <div class="margin">
+      <div v-if="!addCatButt" class="categoryForm container">
+        <div class="margin">
+          <form @submit.prevent="createCategory">
+            <input size="30" placeholder="name" type="text" name="name" v-model="category.name" required>
+            <input size="30" placeholder="description" type="text" name="description" v-model="category.description">
+            <div class="blacktext">
+              <button class="btn-success margins" type="submit">Add Category</button>
+            </div>
+          </form>
         </div>
       </div>
+      <div class="categoryList row">
 
-    </div>
-    <div v-if="!addCatButt" class="categoryForm container">
-      <form @submit.prevent="createCategory">
-        <input class="form-control" placeholder="name" type="text" name="name" v-model="category.name" required>
-        <input class="form-control" placeholder="description" type="text" name="description" v-model="category.description">
-        <div class="blacktext">
-          <button class="btn-success margins" type="submit">Add Category</button>
+        <div class="col-sm-3" v-for="category in categorys">
+          <div class="category flex">
+            <router-link class="router-link-text" :to="'/categorys/'+category._id">
+              <p v-if="!deleteCat" class="categoryName">
+                {{category.name}}
+              </p>
+            </router-link>
+            <div v-if="deleteCat">
+              <button @click="removeCategory(category)" class="btn-danger btn-xs">Delete</button>
+            </div>
+            <!-- <i v-if="!deleteCat" class="fa fa-window-close fa-md delList remove" @click="toggleDeleteCat"></i>
+          <i v-if="deleteCat" class="fa fa-arrow-circle-o-left fa-md delList remove" @click="toggleDeleteCat"></i> -->
+            <!-- <span v-if="!deleteCat" @click="toggleDeleteCat" class="remove">X</span> -->
+            <!-- <span v-if="deleteCat" @click="toggleDeleteCat" class="remove glyphicon glyphicon-arrow-left" aria-hidden="true"></span> -->
+          </div>
         </div>
-      </form>
+
+      </div>
     </div>
   </div>
 
@@ -134,6 +137,9 @@
     background-color: rgb(240, 158, 158);
   }
 
+  .margin {
+    margin: 1rem;
+  }
 
   .header {
     display: flex;

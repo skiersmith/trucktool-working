@@ -276,8 +276,8 @@ var store = new vuex.Store({
         })
     },
     updateProduct({ commit, dispatch }, payload) {
-      debugger
-      api.put('products/' + payload.product._id, payload)
+      
+      api.put('products/' + payload.productId, payload)
         .then(res => {
           dispatch('getProducts')
           console.log(res)
@@ -290,10 +290,11 @@ var store = new vuex.Store({
     getQuantity({ commit, dispatch }, payload) {
       api('products/' + payload.productId, payload)
         .then(res => {
+          var old = payload.quantity
+          // commit('setActiveQuantity', { quantity: payload.quantity })
           
-          commit('setActiveQuantity', { quantity: payload.quantity })
-          newQuantity = this.activeQuantity + payload.quantity
-          
+          var newQuantity = ~~res.data.data.quantity + ~~old
+          console.log("yoooooooo" + newQuantity)
           dispatch('updateQuantity', { quantity: newQuantity, productId: payload.productId })
 
 
@@ -305,7 +306,7 @@ var store = new vuex.Store({
     updateQuantity({ commit, dispatch }, payload) {
       api.put('products/' + payload.productId, payload)
         .then(res => {
-          // 
+          
           
           console.log(payload)
           console.log(res)

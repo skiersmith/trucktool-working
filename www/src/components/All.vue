@@ -10,9 +10,9 @@
         </div> -->
         <!-- <button v-if="!showEdit" @click="toggleEdit()">Edit</button> -->
         <!-- <i class="fa fa-minus-square-o" v-if="showEdit" @click="toggleEdit()"></i> -->
-        <button class="btn-success btn-xs margin" @click="toggleProductForm">New/Edit Product</button>
+        <button class="btn-success btn-xs margin" @click="toggleProductForm">New Product</button>
         <div>
-            <div class="create-product" v-if="showAddProductForm">
+            <div class="create-product bg padding" v-if="showAddProductForm">
                 <form @submit.prevent="createProduct">
                     <div class="form-group">
                         <input class="inline" size="15" type="text" name="name" placeholder="name" v-model="product.name" required>
@@ -24,18 +24,7 @@
                         <button type="submit" class="btn-xs btn-success">Add</button>
                     </div>
                 </form>
-                <form @submit.prevent="updateProduct">
-                    <div class="form-group">
-                        <input class="inline" size="15" type="text" name="name" placeholder="name" v-model="product.name">
-                        <input class="inline" size="15" type="text" name="quantity" placeholder="quantity" v-model="product.quantity">
-                        <input class="inline" size="15" type="text" name="unitPrice" placeholder="unitPrice" v-model="product.unitPrice">
-                        <input class="inline" size="15" type="text" name="resalePrice" placeholder="resalePrice" v-model="product.resalePrice">
-                        <input class="inline" size="15" type="text" name="sku" placeholder="sku" v-model="product.sku">
-                        <input class="inline" size="15" type="text" name="tag" placeholder="tag" v-model="product.tag">
-                        <input class="inline" size="15" type="text" name="id" placeholder="id" v-model="product._id">
-                        <button type="submit" class="btn-xs btn-success">Update</button>
-                    </div>
-                </form>
+
             </div>
         </div>
         <!-- <div v-for="p in check">
@@ -45,16 +34,49 @@
         <div class="main-row">
             <div class="col-lg-offset-1 col-lg-5 bg">
                 <h1 class="ap">All Products</h1>
+                <button class="btn-xs btn-info" @click="toggleOther">toggle</button>
+                <button class="btn-xs btn-info" @click="toggleUpdate">Update</button>
                 <div class="product" v-for="product in products.all">
-                    <div class="prod-container">
-                        <p> Name: {{product.name}}</p>
-                        <p>ID: {{product._id}}</p>
-                        <p>Quantity: {{product.quantity}}</p>
-                        <p>Price: {{product.resalePrice}}</p>
+                    <div v-if="update">
+                        <div class="prod-container" v-if="!other">
+                            <p> Name: {{product.name}}</p>
+                            <p>ID: {{product._id}}</p>
+                            <p>Price: {{product.resalePrice}}</p>
+                            <p>Quantity: {{product.quantity}}</p>
+                        </div>
+                        <div class="prod-container" v-if="other">
+                            <p> Name: {{product.name}}</p>
+                            <p>tag: {{product.tag}}</p>
+                            <p>Sku: {{product.sku}}</p>
+                            <p>ListId: {{product.ListId}}</p>
+                        </div>
                     </div>
-
+                    <div class="margin padding" v-if="!update">
+                        <p> Name: {{product.name}}</p>
+                        <form @submit.prevent="updateProduct">
+                            <div class="form-group">
+                                <label for="name">name</label>
+                                <input class="inline" size="15" type="text" name="name" placeholder="name" v-model="product.name">
+                                <label for="name">name</label>
+                                <input class="inline" size="15" type="text" name="quantity" placeholder="quantity" v-model="product.quantity">
+                                <label for="name">name</label>
+                                <input class="inline" size="15" type="text" name="unitPrice" placeholder="unitPrice" v-model="product.unitPrice">
+                                <label for="name">name</label>
+                                <input class="inline" size="15" type="text" name="resalePrice" placeholder="resalePrice" v-model="product.resalePrice">
+                                <label for="name">name</label>
+                                <input class="inline" size="15" type="text" name="sku" placeholder="sku" v-model="product.sku">
+                                <label for="name">name</label>
+                                <input class="inline" size="15" type="text" name="tag" placeholder="tag" v-model="product.tag">
+                                <label for="name">name</label>
+                                <input class="inline" size="15" type="text" name="id" placeholder="id" v-model="product._id">
+                                <button type="submit" class="btn-xs btn-success">Update</button>
+                                
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
+
             <div v-if="showEdit">
                 <p> Name: {{product.name}}</p>
                 <p>ID: {{product._id}}</p>
@@ -82,10 +104,10 @@
 </template>
 <script>
     import product from './Product'
+    import product2 from './Product2'
     export default {
         data() {
             return {
-
                 product: {
 
                 },
@@ -93,7 +115,9 @@
                 newListId: document.getElementById('productId'),
                 // quantityCheck: true,
                 // listCheck: true
-                showEdit: false
+                showEdit: false,
+                other: false,
+                update: true
             }
         },
         name: 'product',
@@ -104,7 +128,7 @@
         methods: {
             createProduct() {
                 // this.product.order = this.$store.state.activeProducts[this.listId].length
-                this.$store.dispatch('createProduct', { product: this.product, productId: this._id})
+                this.$store.dispatch('createProduct', { product: this.product, productId: this.product._id })
                 // this.product = {
                 // }
                 this.toggleProductForm()
@@ -116,8 +140,15 @@
                 this.showEdit = !this.showEdit
 
             },
-            updateProduct(product){
-                this.$store.dispatch('updateProduct', {product: this.product })
+            toggleOther() {
+                this.other = !this.other
+            },
+            toggleUpdate() {
+                this.update = !this.update
+            },
+            updateProduct() {
+                
+                this.$store.dispatch('updateProduct', { product: this.product, productId: this.product.product_id })
                 // { productId: this.product._id}
             }
         },
@@ -155,7 +186,7 @@
 
         },
         components: {
-            // product
+            
         }
     }
 </script>
@@ -215,6 +246,10 @@
 
     .margin {
         margin: 1rem;
+    }
+
+    .padding {
+        padding: 1rem;
     }
 
     .the-product {

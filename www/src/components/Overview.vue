@@ -10,13 +10,13 @@
             <p>Ideal Net Profit ${{calc}}</p>
             <p>Cost: ${{calc2}}</p>
             <p>Inventory: {{totalInv}}</p>
-          
+
             <br>
             <br>
             <br>
         </div>
         <br>
-        <div class="baseContainer">
+        <!-- <div class="baseContainer">
             <form @submit.prevent="createProduct">
                 <div class="form-group">
                     <input class="inline" size="15" type="text" name="name" placeholder="name" v-model="product.name" required>
@@ -38,35 +38,27 @@
                     </div>
                 </form>
             </div>
-        </div>
+        </div> -->
         <br>
-        <div class="baseContainer">
-            <button @click="getProducts" class="btn-xs btn-primary">Get All Products</button>
-            <button @click="toggleHideAllProducts">Toggle Products Visibility</button>
-            <form class="form-inline" @submit.prevent="getProductsByTag">
-                <div class="form-group">
-                    <input type="text" class="" name="tag" placeholder="tag" v-model="tag" />
-                    <button type="submit" class="btn-xs btn-primary">Get Products</button>
-                </div>
-            </form>
-        </div>
+
         <br>
         <div>
+            <h1>New Purchase</h1>
             <div class="newTransaction baseContainer">
                 <form class="form-inline" @submit.prevent="newTransaction">
                     <div class="form-group">
                         <label for="name">name.</label>
-                        <input type="text" class="" name="name" placeholder="name" v-model="transaction.name" />
+                        <input type="text" class="tBlack" name="name" placeholder="name" v-model="transaction.name" />
                         <label for="quantity">quantity.</label>
-                        <input type="number" class="" name="quantity" placeholder="quantity" v-model="transaction.quantity" />
+                        <input type="number" class="tBlack" name="quantity" placeholder="quantity" v-model="transaction.quantity" />
                         <label for="salePrice">salePrice.</label>
-                        <input type="text" class="" name="salePrice" placeholder="salePrice" v-model="transaction.salePrice" />
+                        <input type="text" class="tBlack" name="salePrice" placeholder="salePrice" v-model="transaction.salePrice" />
 
                         <br>
                         <label for="tag">Tag.</label>
-                        <input type="text" class="" name="tag" placeholder="name" v-model="transaction.tag" />
+                        <input type="text" class="tBlack" name="tag" placeholder="name" v-model="transaction.tag" />
                         <label for="productId">productId.</label>
-                        <input type="text" class="" name="productId" placeholder="productId" v-model="transaction.productId" />
+                        <input type="text" class="tBlack" name="productId" placeholder="productId" v-model="transaction.productId" />
                         <button type="submit" @click="getQuantity" class="btn-xs btn-primary">New Transaction</button>
                     </div>
                 </form>
@@ -98,28 +90,20 @@
             <form class="form-inline" @submit.prevent="getTransactionsByProduct">
                 <div class="form-group">
                     <label for="productId">productId.</label>
-                    <input type="text" class="" name="productId" placeholder="productId" v-model="formOption" />
+                    <input type="text" class="tBlack" name="productId" placeholder="productId" v-model="formOption" />
                     <button type="submit" class="btn-xs btn-primary">Get Transactions</button>
                 </div>
             </form>
         </div>
-        <div>
-            <div class="baseContainer" v-for="product in products">
-                <span>{{product.name}}</span>
-                <P>
-                    , Id: {{product._id}} -
-                </P>
-                <b>Qty:</b> {{product.quantity}}
-            </div>
-            <br>
-            <div v-if="hideAllProducts">
+
+        <br>
+        <!-- <div v-if="hideAllProducts">
                 <div class="baseContainer" v-for="product in allProducts.all">
                     {{product.name}} -
                     <b>Qty:</b> {{product.quantity}}
                     <p>Id: {{product._id}}</p>
                 </div>
-            </div>
-        </div>
+            </div> -->
         <div>
             <div class="baseContainer3">
                 <div v-for="transaction in transactions">
@@ -134,24 +118,57 @@
                 </div>
             </div>
             <!-- <div class="baseContainer3">
-                <div v-for="transaction in allTransactions">
-
-
-                    <b>Name: {{transaction.name}}</b>
-                    <timeago :since="transaction.created"></timeago>
-
-
+                    <div v-for="transaction in allTransactions">
+                        
+                        
+                        <b>Name: {{transaction.name}}</b>
+                        <timeago :since="transaction.created"></timeago>
+                        
+                        
+                    </div>
+                </div> -->
+        </div>
+        <div class="tag-block">
+            <h3>Current tag group: {{tag}} </h3>
+            <div>
+                <form class="form-inline" @submit.prevent="getProductsByTag">
+                    <div class="form-group">
+                        <input type="text" class="" name="tag" placeholder="tag" v-model="tag" />
+                        <button type="submit" class="btn-xs btn-primary">Get Products</button>
+                    </div>
+                </form>
+            </div>
+            <div class="row">
+                <div class=col-lg-offset-2>
+                    <div class="newContainer col-lg-3" v-for="product in products">
+                        <div class="product">
+                            <h4>{{product.name}} </h4>
+                            <P>Id: {{product._id}} - </P>
+                            <b>Qty:</b>
+                            <p>{{product.quantity}}</p>
+                        </div>
+                    </div>
                 </div>
-            </div> -->
+            </div>
+        </div>
+        <div class="baseContainer">
+            <i @click="getProducts" class="fa fa-refresh" aria-hidden="true" v-if="!refresh"></i>
+            <i class="fa fa-refresh fa-spin fa-3x fa-fw" aria-hidden="true" v-if="refresh"></i>
+            <button @click="toggleHideAllProducts" class="btn-xs btn-info">Toggle Products Visibility</button>
+        </div>
+        <div class="container-block">
+
+            <all v-if="!hideAllProducts"></all>
+
         </div>
     </div>
 </template>
 <script>
     import product from './Product'
-
+    import all from './All'
     export default {
         components: {
-
+            all,
             product
         },
         name: 'overview',
@@ -165,6 +182,7 @@
                 formOption: "",
                 showTransactionForm: false,
                 hideAllProducts: true,
+                refresh: false
                 // allTransactions:{ }
                 // transactions: {}
             }
@@ -178,6 +196,14 @@
             },
             toggleHideAllProducts() {
                 this.hideAllProducts = !this.hideAllProducts
+            },
+            toggleRefresh() {
+
+                !this.refresh == this.refresh
+                setTimeout(3000);
+                this.refresh = !this.refresh
+                console.log(this.refresh)
+
             },
             newTransaction() {
                 this.$store.dispatch('newTransaction', { transaction: this.transaction })
@@ -197,15 +223,24 @@
             getProducts() {
 
                 this.$store.dispatch('getProducts')
+                this.refresh = true
+                setTimeout(() => {
+                    this.refresh = false
+                }, 3000);
             },
             getQuantity() {
+
                 this.$store.dispatch('getQuantity', { quantity: this.transaction.quantity, productId: this.transaction.productId })
-             
+
             },
-             updateQuantity(){
-                dispatch('updateQuantity' , {quantity: updateActualQuantity, productId: this.transaction.productId })
-               
+            updateQuantity() {
+                dispatch('updateQuantity', { quantity: updateActualQuantity, productId: this.transaction.productId })
+
             },
+            // updateProduct() {
+            //     this.$store.dispatch('updateProduct', { product: this.product })
+            //     // { productId: this.product._id}
+            // },
             createProduct() {
                 // this.product.order = this.$store.state.activeProducts[this.listId].length
                 this.$store.dispatch('createProduct', { product: this.product })
@@ -215,7 +250,7 @@
         },
         computed: {
             allTransactions() {
-                
+
                 return this.$store.state.activeAllTransactions
             },
             transactions() {
@@ -236,11 +271,11 @@
             totalInv() {
                 if (this.$store.state.activeTransactions[this.formOption]) {
 
-                    
+
                     var theTransactions = this.$store.state.activeTransactions[this.formOption]
                     var quantity = 0
 
-                    
+
                     for (var i = 0; i < theTransactions.length; i++) {
                         if (quantity < 0) {
                             quantity += theTransactions[i].quantity
@@ -284,7 +319,7 @@
 
                     var theTransactions = this.$store.state.activeTransactions[this.formOption]
                     var unitPrice = 0
-                    
+
                     for (var i = 0; i < theTransactions.length; i++) {
                         unitPrice += theTransactions[i].salePrice * theTransactions[i].quantity
                     }
@@ -315,39 +350,61 @@
                 }
             },
             updateActualQuantity() {
-                
+
                 // if (this.$store.state.activeQuantity) {
-                    var quantity = this.$store.state.activeQuantity
-                    var newQuantity = this.transaction.quantity
-                    var totalQuantity = quantity + newQuantity
-                    return totalQuantity
+                var quantity = this.$store.state.activeQuantity
+                var newQuantity = this.transaction.quantity
+                var totalQuantity = quantity + newQuantity
+                return totalQuantity
                 // }else{
-                    // return
+                // return
                 // }
             }
         }
     }
 </script>
 <style>
+    .tBlack {
+        color: black;
+    }
+
+    .fa-refresh {
+        font-size: 15px;
+    }
+
     .baseContainer {
-        background-color: beige;
+        background-color: rgb(92, 57, 57);
         padding: 1rem;
         margin: 1rem;
         border-radius: 25px;
+        color: white;
+    }
+
+    .newContainer {
+        background-color: rgb(214, 214, 190);
+        border-radius: 25px;
+        margin: 1rem;
+        color: black;
     }
 
     .baseContainer2 {
-        background-color: beige;
+        background-color: rgb(66, 79, 131);
         padding: 1rem;
         margin: 0rem 1rem 1rem 1rem;
         border-radius: 25px;
+        color: white;
     }
 
     .baseContainer3 {
-        background-color: rgb(245, 220, 220);
+        background-color: rgb(92, 57, 57);
         padding: 1rem;
         margin: 0rem 1rem 1rem 1rem;
         border-radius: 25px;
+        color: white;
+    }
+
+    .block {
+        display: block;
     }
 
     .pGuy {
