@@ -53,12 +53,12 @@
                             <p> Name: {{product.name}}</p>
                             <p>tag: {{product.tag}}</p>
                             <p>Sku: {{product.sku}}</p>
-                            <p>ListId: {{product.ListId}}</p>
+                            <p>ListId: {{product.listId}}</p>
                         </div>
                     </div>
                     <div class="margin padding" v-if="!update">
                         <p> Name: {{product.name}}</p>
-                        <form @submit.prevent="updateProduct">
+                        <form @submit.prevent="updateProduct(product)">
                             <div class="form-group">
                                 <label for="name">name</label>
                                 <input class="inline" size="15" type="text" name="name" placeholder="name" v-model="product.name">
@@ -154,9 +154,9 @@
             toggleUpdate() {
                 this.update = !this.update
             },
-            updateProduct() {
-                
-                this.$store.dispatch('updateProduct', { product: this.product, productId: this.product.product_id })
+            updateProduct(product) {
+                this.$store.dispatch('updateProduct', { product: product, productId: product._id })
+                debugger
                 // { productId: this.product._id}
             }
         },

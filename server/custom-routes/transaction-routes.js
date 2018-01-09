@@ -9,7 +9,7 @@ getTransactionsByProductId: {
     reqType: 'get',
     method(req, res, next) {
         let action = 'Get transaction by product'
-        Transactions.find({ productID: req.params.productID })
+        Transactions.find({ productId: req.params.productId })
             .then(transactions => {
                 res.send(handleResponse(action, transactions))
             }).catch(error => {

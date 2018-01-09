@@ -61,6 +61,7 @@ var store = new vuex.Store({
     setActiveTransactions(state, payload) {
       console.log(payload)
       vue.set(state.activeTransactions, payload.productId, payload.transactions)
+      debugger
       console.log(state.activeTransactions)
     },
     setActiveAllTransactions(state, payload) {
@@ -181,7 +182,7 @@ var store = new vuex.Store({
     },
     getTransactionsByProduct({ commit, dispatch }, payload) {
       api('transactionsby/' + payload.productId)
-        .then(res => {
+      .then(res => {
           
           console.log(res)
           console.log(payload.productId)
