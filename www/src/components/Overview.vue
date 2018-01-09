@@ -85,8 +85,8 @@
                 </div> -->
         </div>
         <br>
+        <h3>Get transactions by product id</h3>
         <div class="baseContainer3">
-
             <form class="form-inline" @submit.prevent="getTransactionsByProduct">
                 <div class="form-group">
                     <label for="productId">productId.</label>
@@ -118,18 +118,18 @@
                 </div>
             </div>
             <!-- <div class="baseContainer3">
-                    <div v-for="transaction in allTransactions">
-                        
-                        
-                        <b>Name: {{transaction.name}}</b>
-                        <timeago :since="transaction.created"></timeago>
-                        
-                        
-                    </div>
-                </div> -->
+                <div v-for="transaction in allTransactions"> -->
+
+            <!-- displaying all and filtered need to fix -->
+            <!-- <b>Name: {{transaction.name}}</b>
+                    <timeago :since="transaction.created"></timeago>
+
+
+                </div>
+            </div> -->
         </div>
         <div class="tag-block">
-            <h3>Current tag group: {{tag}} </h3>
+            <h3>Search by tag: {{tag}} </h3>
             <div>
                 <form class="form-inline" @submit.prevent="getProductsByTag">
                     <div class="form-group">
@@ -151,10 +151,14 @@
                 </div>
             </div>
         </div>
-        <div class="baseContainer">
-            <i @click="getProducts" class="fa fa-refresh" aria-hidden="true" v-if="!refresh"></i>
-            <i class="fa fa-refresh fa-spin fa-3x fa-fw" aria-hidden="true" v-if="refresh"></i>
-            <button @click="toggleHideAllProducts" class="btn-xs btn-info">Toggle Products Visibility</button>
+        <div class="allP2-container">
+            <div class="baseContainer allP-container">
+                <div>
+                    <i @click="getProducts" class="fa fa-refresh" aria-hidden="true" v-if="!refresh"></i>
+                    <i class="fa fa-refresh fa-spin fa-3x fa-fw" aria-hidden="true" v-if="refresh"></i>
+                </div>
+                <button @click="toggleHideAllProducts" class="btn-xs btn-info">Toggle Products Visibility</button>
+            </div>
         </div>
         <div class="container-block">
 
@@ -213,7 +217,7 @@
                 this.$store.dispatch('getTransactions')
             },
             getTransactionsByProduct() {
-
+                
                 this.$store.dispatch('getTransactionsByProduct', { productId: this.formOption })
             },
             getProductsByTag() {
@@ -415,8 +419,27 @@
 
     }
 
+    /* .width{
+        width: 20rem;
+    } */
+
+    .inline {
+        display: inline-block;
+    }
+
     .pimg {
         display: flex;
         justify-content: flex-end
+    }
+
+    .allP-container {
+        display: flex;
+        justify-content: space-around;
+        width: 30rem;
+    }
+
+    .allP2-container {
+        display: flex;
+        justify-content: center;
     }
 </style>

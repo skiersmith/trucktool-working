@@ -85,7 +85,7 @@
                 this.update = !this.update
             },
             updateProduct() {
-                debugger
+                
                 this.$store.dispatch('updateProduct', { product: this.product, productId: this.product.product_id })
                 // { productId: this.product._id}
             }

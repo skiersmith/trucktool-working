@@ -10,7 +10,12 @@
         </div> -->
         <!-- <button v-if="!showEdit" @click="toggleEdit()">Edit</button> -->
         <!-- <i class="fa fa-minus-square-o" v-if="showEdit" @click="toggleEdit()"></i> -->
-        <button class="btn-success btn-xs margin" @click="toggleProductForm">New Product</button>
+        <div class=" ">
+                    <i @click="toggleProductForm" class="fa fa-2x fa-plus" v-if="newP"></i>
+                    <i @click="toggleProductForm" class="fa fa-2x fa-minus" v-if="!newP"></i>
+        </div>
+        
+        
         <div>
             <div class="create-product bg padding" v-if="showAddProductForm">
                 <form @submit.prevent="createProduct">
@@ -117,7 +122,8 @@
                 // listCheck: true
                 showEdit: false,
                 other: false,
-                update: true
+                update: true,
+                newP: true
             }
         },
         name: 'product',
@@ -135,7 +141,9 @@
             },
             toggleProductForm() {
                 this.showAddProductForm = !this.showAddProductForm
+                this.newP = !this.newP
             },
+        
             toggleEdit() {
                 this.showEdit = !this.showEdit
 
@@ -282,7 +290,7 @@
         border-radius: 25px;
         margin: 1rem;
     }
-
+   
 
     /* .actualProd{
         display: block;

@@ -172,7 +172,7 @@ var store = new vuex.Store({
     getTransactions({ commit, dispatch }, payload) {
       api('transactions')
         .then(res => {
-
+    
           commit('setActiveAllTransactions', { transactions: res.data.data })
         })
         .catch(err => {
@@ -182,7 +182,9 @@ var store = new vuex.Store({
     getTransactionsByProduct({ commit, dispatch }, payload) {
       api('transactionsby/' + payload.productId)
         .then(res => {
+          
           console.log(res)
+          console.log(payload.productId)
           commit('setActiveTransactions', { transactions: res.data.data, productId: payload.productId })
         })
         .catch(err => {
