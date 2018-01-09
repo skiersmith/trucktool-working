@@ -182,12 +182,7 @@ var store = new vuex.Store({
     },
     getTransactionsByProduct({ commit, dispatch }, payload) {
       api('transactionsby/' + payload.productId)
-<<<<<<< HEAD
-      .then(res => {
-          
-=======
         .then(res => {
->>>>>>> 7443cdf905a12ccb7ea2151b393ebe90a4d217ee
           console.log(res)
           console.log(payload.productId)
           commit('setActiveTransactions', { transactions: res.data.data, productId: payload.productId })
