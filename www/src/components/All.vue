@@ -62,17 +62,17 @@
                             <div class="form-group">
                                 <label for="name">name</label>
                                 <input class="inline" size="15" type="text" name="name" placeholder="name" v-model="product.name">
-                                <label for="name">name</label>
+                                <label for="name">Quantity</label>
                                 <input class="inline" size="15" type="text" name="quantity" placeholder="quantity" v-model="product.quantity">
-                                <label for="name">name</label>
+                                <label for="name">Unit Price</label>
                                 <input class="inline" size="15" type="text" name="unitPrice" placeholder="unitPrice" v-model="product.unitPrice">
-                                <label for="name">name</label>
+                                <label for="name">Resale Price</label>
                                 <input class="inline" size="15" type="text" name="resalePrice" placeholder="resalePrice" v-model="product.resalePrice">
-                                <label for="name">name</label>
+                                <label for="name">Sku</label>
                                 <input class="inline" size="15" type="text" name="sku" placeholder="sku" v-model="product.sku">
-                                <label for="name">name</label>
+                                <label for="name">Tag</label>
                                 <input class="inline" size="15" type="text" name="tag" placeholder="tag" v-model="product.tag">
-                                <label for="name">name</label>
+                                <label for="name">Id</label>
                                 <input class="inline" size="15" type="text" name="id" placeholder="id" v-model="product._id">
                                 <button type="submit" class="btn-xs btn-success">Update</button>
                                 

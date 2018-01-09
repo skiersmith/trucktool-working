@@ -90,7 +90,7 @@
   }
 
   .category-description {
-    color: rgb(233, 233, 233);
+    color: rgb(0, 0, 0);
   }
 
   .categoryheader {
