@@ -1,5 +1,9 @@
 <template>
   <div class="category container-fluid">
+    <router-link class="dashboard routerhome" :to="{name: 'Dashboard'}">
+      <b>Home</b>
+    </router-link>
+
     <div class="categoryHeaderC container">
       <div class="categoryheader">
         <h2>{{category.name}}</h2>
@@ -16,10 +20,10 @@
     </div>
     <div class="row dalists">
       <div class="drawList col-sm-3" v-for="list in lists">
-        <router-link class="router-link-text listName"  :to="{name: 'List', params: {listId: list._id, categoryId: list.categoryId }}"> 
+        <router-link class="router-link-text listName" :to="{name: 'List', params: {listId: list._id, categoryId: list.categoryId }}">
           <span class="">{{list.name}}</span>
           <i class="fa fa-trash fa-md delList" @click="removeList(list)"></i>
-        </router-link> 
+        </router-link>
         <!-- "{ name: 'List', params: {categoryId: list.categoryId } } " -->
       </div>
     </div>
@@ -72,18 +76,25 @@
 </script>
 
 <style scoped>
+  .routerhome {
+    color: black;
+  }
+
   .router-link-text {
     text-decoration: none;
-    color: rgb(253, 253, 253);
+    color: rgb(255, 255, 255);
   }
-  .listName{
+
+  .listName {
     background-color: rgb(89, 89, 231);
     padding: 1rem;
     border-radius: 5px;
   }
-  .listName:hover{
+
+  .listName:hover {
     background-color: rgba(101, 101, 230, 0.877)
   }
+
   .dalists {
     margin: 1rem;
     /* background-color: grey; */
@@ -113,7 +124,7 @@
   .delList {
     float: right;
     color: rgb(180, 14, 14);
-    
+
   }
 
   .delList:hover {

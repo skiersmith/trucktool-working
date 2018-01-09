@@ -1,5 +1,6 @@
 <template>
   <div>
+    
     <!-- <h1>Organize Title Here</h1> -->
     <!-- <img class="logo" src="../assets/organizzlee.png"> -->
     <div class="overview-container">
@@ -130,7 +131,7 @@
 <style scoped>
   .router-link-text {
     text-decoration: none;
-    color: white;
+    color: rgb(255, 255, 255);
   }
 
   .logout {
