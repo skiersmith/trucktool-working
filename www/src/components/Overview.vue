@@ -1,5 +1,8 @@
 <template>
     <div>
+        <router-link class="dashboard routerhome" :to="{name: 'Dashboard'}">
+            <b>Home</b>
+        </router-link>
         <div class="title">
             <h1>Organize Title Here</h1>
         </div>
@@ -217,7 +220,7 @@
                 this.$store.dispatch('getTransactions')
             },
             getTransactionsByProduct() {
-                
+
                 this.$store.dispatch('getTransactionsByProduct', { productId: this.formOption })
             },
             getProductsByTag() {
@@ -368,6 +371,9 @@
     }
 </script>
 <style>
+    .routerhome{
+        color:black;
+    }
     .tBlack {
         color: black;
     }
