@@ -91,29 +91,29 @@
                 </form>
 
             </div>
-            <!-- <div>
+            <div>
                 <h1>New Sale</h1>
                 <div class="newTransaction baseContainer">
                     <form class="form-inline" @submit.prevent="newSaleTransaction">
                         <div class="form-group">
                             <label for="name">name.</label>
-                            <input type="text" class="tBlack" name="name" placeholder="name" v-model="transaction2.name" />
+                            <input type="text" class="tBlack" name="name" placeholder="name" v-model="transaction.name" />
                             <label for="quantity">quantity.</label>
-                            <input type="number" class="tBlack" name="quantity" placeholder="quantity" v-model="transaction2.quantity" />
+                            <input type="number" class="tBlack" name="quantity" placeholder="quantity" v-model="transaction.quantity" />
                             <label for="salePrice">salePrice.</label>
-                            <input type="text" class="tBlack" name="salePrice" placeholder="salePrice" v-model="transaction2.salePrice" />
+                            <input type="text" class="tBlack" name="salePrice" placeholder="salePrice" v-model="transaction.salePrice" />
 
                             <br>
                             <label for="tag">Tag.</label>
-                            <input type="text" class="tBlack" name="tag" placeholder="name" v-model="transaction2.tag" />
+                            <input type="text" class="tBlack" name="tag" placeholder="name" v-model="transaction.tag" />
                             <label for="productId">productId.</label>
-                            <input type="text" class="tBlack" name="productId" placeholder="productId" v-model="transaction2.productId" />
-                            <button type="submit" @click="getQuantity" class="btn-xs btn-primary">New Transaction</button>
+                            <input type="text" class="tBlack" name="productId" placeholder="productId" v-model="transaction.productId" />
+                            <button type="submit" @click="getNegQuantity" class="btn-xs btn-primary">New Transaction</button>
                         </div>
                     </form>
 
                 </div>
-            </div> -->
+            </div>
         </div>
         <br>
         <h3>Get transactions by product id</h3>
@@ -143,6 +143,7 @@
                             <b>Name: {{transaction.name}}</b>
                             <p>Quantity: {{transaction.quantity}}</p>
                             <p>Price: {{transaction.salePrice}}</p>
+                            <p>Type: {{transaction.type}}</p>
                             <timeago :since="transaction.created"></timeago>
                         </li>
                     </ul>
@@ -224,7 +225,7 @@
                 },
                 tag: "",
                 transaction: {},
-                transaction2: {},
+                // transaction2: {},
                 formOption: "",
                 showTransactionForm: false,
                 hideAllProducts: true,
@@ -256,13 +257,18 @@
 
             },
             newTransaction() {
+                this.transaction.type = "Purchase"
                 this.$store.dispatch('newTransaction', { transaction: this.transaction })
             },
-            // newSaleTransaction() {
-            //     this.saleNeg
-            //     this.$store.dispatch('newTransaction', { transaction: this.transaction2 })
-            //     
-            // },
+            newSaleTransaction() {
+                this.transaction.type = "Sale"
+                var s = parseInt(this.transaction.quantity)
+                s *= -1
+                this.transaction.quantity = s
+                console.log(this.transaction.quantity)
+                this.$store.dispatch('newTransaction', { transaction: this.transaction })
+
+            },
             getTransactions() {
 
                 this.$store.dispatch('getTransactions')
@@ -288,7 +294,16 @@
                 this.$store.dispatch('getQuantity', { quantity: this.transaction.quantity, productId: this.transaction.productId })
 
             },
+            getNegQuantity() {
+                var s = parseInt(this.transaction.quantity)
+                s *= -1
+                this.transaction.quantity = s
+                console.log(this.transaction.quantity)
+                this.$store.dispatch('getQuantity', { quantity: this.transaction.quantity, productId: this.transaction.productId })
+
+            },
             updateQuantity() {
+                debugger
                 dispatch('updateQuantity', { quantity: updateActualQuantity, productId: this.transaction.productId })
 
             },
@@ -304,10 +319,7 @@
             },
         },
         computed: {
-            saleNeg() {
 
-                this.transaction2.quantity *= -1
-            },
             allTransactions() {
 
                 return this.$store.state.activeAllTransactions

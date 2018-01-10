@@ -54,7 +54,7 @@
                 </div>
             </form>
         </div>
-        <div class="list-footer row">
+        <div class="row">
             <div class="col-lg-3" v-for="product in products">
                 <product class="the-product" :product="product"></product>
             </div>
@@ -329,7 +329,7 @@
 
     .list-footer {
         /* display: ; */
-        justify-content: space-around;
+        /* justify-content: space-around; */
     }
 
     .margin {
