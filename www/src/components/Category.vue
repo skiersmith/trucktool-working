@@ -19,11 +19,11 @@
       </form>
     </div>
     <div class="row dalists">
-      <div class="drawList col-sm-3" v-for="list in lists">
-        <router-link class="router-link-text listName" :to="{name: 'List', params: {listId: list._id, categoryId: list.categoryId}}">
-          <span>{{list.name}}</span>
-          <i class="fa fa-trash fa-md delList" @click="removeList(list)"></i>
+      <div class="listName col-sm-3" v-for="list in lists">
+        <router-link class="router-link-text " :to="{name: 'List', params: {listId: list._id, categoryId: list.categoryId}}">
+          <h3>{{list.name}}</h3>
         </router-link>
+        <i class="fa fa-trash fa-md delList" @click="removeList(list)"></i>
         <!-- "{ name: 'List', params: {categoryId: list.categoryId } } " -->
       </div>
     </div>
@@ -73,7 +73,7 @@
       lists() {
         return this.$store.state.activeLists
       }
-      
+
     },
     components: {
       // list
@@ -88,13 +88,21 @@
 
   .router-link-text {
     text-decoration: none;
-    color: rgb(255, 255, 255);
+    color: rgb(8, 8, 8);
   }
 
   .listName {
-    background-color: rgb(89, 89, 231);
+    /* background-color: rgb(89, 89, 231); */
     padding: 1rem;
     border-radius: 5px;
+    background-color: rgb(250, 250, 250);
+    color: black;
+    margin: 1rem;
+    width: 30rem;
+    border-style: solid;
+    border-color: black;
+    border-width: 3px;
+   
   }
 
   .listName:hover {
@@ -128,7 +136,7 @@
   }
 
   .delList {
-    float: right;
+    /* float: right; */
     color: rgb(180, 14, 14);
 
   }

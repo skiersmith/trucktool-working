@@ -159,7 +159,8 @@
                 this.update = !this.update
             },
             updateProduct(product) {
-                console.log("p " + product.listId)
+                console.log("i am hitting the right route")
+                console.log("p " + product.resalePrice)
                 this.$store.dispatch('updateProduct', { product: product, productId: product._id })
                 
                 // { productId: this.product._id}

@@ -26,9 +26,9 @@ module.exports = {
         path: '/categorys/:categoryId/lists/:listId',
         reqType: 'get',
         method(req, res, next) {
-            let action = 'Find Lists By CategoryId'
+            let action = 'Find List By CategoryId'
            
-            Lists.find({ categoryId: req.params.categoryId })
+            Lists.findone({ categoryId: req.params.categoryId })
                 .then(lists => {
                     res.send(handleResponse(action, lists))
                 }).catch(error => {
