@@ -1,4 +1,9 @@
 <template>
+    
+    <!-- add list of lists with listId. -->
+    <!-- sale transaction -->
+    <!-- fix update on product -->
+    
     <div>
         <router-link class="dashboard routerhome" :to="{name: 'Dashboard'}">
             <b>Home</b>
@@ -67,25 +72,29 @@
                 </form>
 
             </div>
-            <!-- <div class="newTransaction baseContainer">
-                    <form class="form-inline" @submit.prevent="newTransaction">
+            <!-- <div>
+                <h1>New Sale</h1>
+                <div class="newTransaction baseContainer">
+                    <form class="form-inline" @submit.prevent="newSaleTransaction">
                         <div class="form-group">
                             <label for="name">name.</label>
-                            <input type="text" class="" name="name" placeholder="name" v-model="transaction.name" />
+                            <input type="text" class="tBlack" name="name" placeholder="name" v-model="transaction2.name" />
                             <label for="quantity">quantity.</label>
-                            <input type="number" class="" name="quantity" placeholder="quantity" v-model="transaction.quantity" />
+                            <input type="number" class="tBlack" name="quantity" placeholder="quantity" v-model="transaction2.quantity" />
                             <label for="salePrice">salePrice.</label>
-                            <input type="text" class="" name="salePrice" placeholder="salePrice" v-model="transaction.salePrice" />
-        
+                            <input type="text" class="tBlack" name="salePrice" placeholder="salePrice" v-model="transaction2.salePrice" />
+
                             <br>
                             <label for="tag">Tag.</label>
-                            <input type="text" class="" name="tag" placeholder="name" v-model="transaction.tag" />
+                            <input type="text" class="tBlack" name="tag" placeholder="name" v-model="transaction2.tag" />
                             <label for="productId">productId.</label>
-                            <input type="text" class="" name="productId" placeholder="productId" v-model="transaction.productId" />
-                            <button type="submit" class="btn-xs btn-primary">New Transaction</button>
+                            <input type="text" class="tBlack" name="productId" placeholder="productId" v-model="transaction2.productId" />
+                            <button type="submit" @click="getQuantity" class="btn-xs btn-primary">New Transaction</button>
                         </div>
                     </form>
-                </div> -->
+
+                </div>
+            </div> -->
         </div>
         <br>
         <h3>Get transactions by product id</h3>
@@ -186,6 +195,7 @@
                 },
                 tag: "",
                 transaction: {},
+                transaction2: {},
                 formOption: "",
                 showTransactionForm: false,
                 hideAllProducts: true,
@@ -215,6 +225,11 @@
             newTransaction() {
                 this.$store.dispatch('newTransaction', { transaction: this.transaction })
             },
+            // newSaleTransaction() {
+            //     this.saleNeg
+            //     this.$store.dispatch('newTransaction', { transaction: this.transaction2 })
+            //     debugger
+            // },
             getTransactions() {
 
                 this.$store.dispatch('getTransactions')
@@ -256,6 +271,10 @@
             },
         },
         computed: {
+            saleNeg(){
+           
+                this.transaction2.quantity *= -1
+            },
             allTransactions() {
 
                 return this.$store.state.activeAllTransactions
@@ -371,9 +390,10 @@
     }
 </script>
 <style>
-    .routerhome{
-        color:black;
+    .routerhome {
+        color: black;
     }
+
     .tBlack {
         color: black;
     }
