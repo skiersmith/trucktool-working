@@ -113,7 +113,6 @@
 </template>
 <script>
     import product from './Product'
-    import product2 from './Product2'
     export default {
         data() {
             return {
@@ -161,7 +160,7 @@
             updateProduct(product) {
                 console.log("p " + product.listId)
                 this.$store.dispatch('updateProduct', { product: product, productId: product._id })
-                
+
                 // { productId: this.product._id}
             }
         },

@@ -1,12 +1,32 @@
 <template>
 
+
+
     <!-- sale transaction -->
     <!-- fix update on product NOT WORKING -->
 
+
     <div>
-        <router-link class="dashboard routerhome" :to="{name: 'Dashboard'}">
-            <b>Home</b>
-        </router-link>
+        <!-- the bootstrap navbar-->
+        <nav class="navbar navbar-fixed-top navbar--color--ghost navbar--size--xl" data-startColor="navbar--color--ghost" data-startSize="navbar--size--xl"
+            data-intoColor="navbar--color--secondary" data-intoSize="navbar--size--md">
+            <div class="container">
+                <div class="navbar-header">
+                    <router-link class="dashboard routerhome navbar-brand" :to="{name: 'Dashboard'}">
+                        <p class="organize-header">Organize</p>
+                    </router-link>
+                </div>
+                <router-link class="overview routerhome navbar-center" :to="{name: 'Overview'}">
+                    <p class="overview-header">Overview</p>
+                </router-link>
+                <div class="navbar-right navbar-text">
+                    <span @click="userLogout">
+                        <p class="logout-header">Logout</p>
+                    </span>
+                </div>
+            </div>
+        </nav>
+
         <div class="title">
             <h1>Organize Title Here</h1>
         </div>
@@ -171,7 +191,7 @@
                 <button @click="toggleHideAllProducts" class="btn-xs btn-info">Toggle Products Visibility</button>
             </div>
         </div>
-       <!-- started doing this then remembered doing with dropdown. gonna leave for now -->
+        <!-- started doing this then remembered doing with dropdown. gonna leave for now -->
         <!-- <div>
             <div v-for="list in lists">
                 <div class="listt">
@@ -218,6 +238,9 @@
             this.$store.dispatch('getAllLists')
         },
         methods: {
+            userLogout() {
+                this.$store.dispatch('logout', this.$store.state.user._id)
+            },
             toggleTransactionForm() {
                 this.showTransactionForm = !this.showTransactionForm
             },
@@ -304,7 +327,7 @@
                 return this.$store.state.allTagProducts
 
             },
-            
+
             totalInv() {
                 if (this.$store.state.activeTransactions[this.formOption]) {
 
@@ -348,6 +371,65 @@
             //     }
 
             // },
+            navbar() {
+                // grabbing the class names from the data attributes
+                var navBar = $('.navbar'),
+                    data = navBar.data();
+
+                // booleans used to tame the scroll event listening a little..
+                var scrolling = false,
+                    scrolledPast = false;
+
+                // transition Into
+                function switchInto() {
+                    // update `scrolledPast` bool
+                    scrolledPast = true;
+                    // add/remove CSS classes
+                    navBar.removeClass(data.startcolor);
+                    navBar.removeClass(data.startsize);
+                    navBar.addClass(data.intocolor);
+                    navBar.addClass(data.intosize);
+                    console.log('into transition triggered!');
+                };
+
+                // transition Start
+                function switchStart() {
+                    // update `scrolledPast` bool
+                    scrolledPast = false;
+                    // add/remove CSS classes
+                    navBar.addClass(data.startcolor);
+                    navBar.addClass(data.startsize);
+                    navBar.removeClass(data.intocolor);
+                    navBar.removeClass(data.intosize);
+                    console.log('start transition triggered!');
+                }
+
+                // set `scrolling` to true when user scrolls
+                $(window).scroll(function () {
+                    return scrolling = true;
+                });
+
+                setInterval(function () {
+                    // when `scrolling` becomes true... 
+                    if (scrolling) {
+                        // set it back to false
+                        scrolling = false;
+                        // check scroll position
+                        if ($(window).scrollTop() > 100) {
+                            // user has scrolled > 100px from top since last check
+                            if (!scrolledPast) {
+                                switchInto();
+                            }
+                        } else {
+                            // user has scrolled back <= 100px from top since last check
+                            if (scrolledPast) {
+                                switchStart();
+                            }
+                        }
+                    }
+                    // take a breath.. hold event listener from firing for 100ms
+                }, 100);
+            },
 
             calc2() {
 
@@ -401,6 +483,117 @@
     }
 </script>
 <style>
+    @import url("https://fonts.googleapis.com/css?family=Lato:400,700,900");
+    body {
+        font-family: 'Lato', Arial, sans-serif;
+        color: #6b6b6b;
+        font-size: 17px;
+        line-height: 1.6;
+    }
+
+    .hero {
+        position: relative;
+        height: 60vh;
+        z-index: -2;
+        background: url("https://unsplash.it/2000/800?image=563") center top/cover no-repeat;
+    }
+
+    .overlay {
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.6);
+    }
+
+    .main-content {
+        background: #f2f2f2;
+    }
+
+    section {
+        background: #fff;
+        padding: 2rem 0 7rem;
+    }
+
+    section:nth-child(even) {
+        background: #f5f5f5;
+    }
+
+    h2,
+    h3 {
+        padding: 1rem 0 0.75rem;
+        font-weight: 700;
+        color: #4b4b4b;
+    }
+
+    /* ===================================== */
+
+    /* ===== THE INTERESTING STUFF NOW ===== */
+
+    /* ===================================== */
+
+    .navbar {
+        border: none;
+        -webkit-transition: 0.4s;
+        transition: 0.4s;
+        /* --- navbar sizes --- */
+        /* --- navbar colors --- */
+    }
+
+    .navbar-center {
+        display: flex;
+        justify-content: center;
+    }
+
+    .navbar-brand {
+        font-size: 2.25rem;
+        font-weight: 900;
+        color: #4b4b4b;
+    }
+
+    .navbar--size--xl {
+        padding: 1px 0;
+    }
+
+    .navbar--size--lg {
+        padding: 2rem 0;
+    }
+
+    .navbar--size--md {
+        padding: 1rem 0;
+    }
+
+    .navbar--size--sm {
+        padding: 0;
+    }
+
+    .navbar--color--white {
+        background: #fff;
+    }
+
+    .navbar--color--primary {
+        background: #37ca7e;
+    }
+
+    .navbar--color--secondary {
+        background: #43a6dd;
+    }
+
+    .navbar--color--ghost {
+        background: rgba(0, 0, 0, 0.2);
+    }
+
+    .navbar--color--ghost .navbar-brand,
+    .navbar--color--ghost .navbar-text,
+    .navbar--color--ghost a {
+        color: #fff;
+    }
+
+
+    /* Normal stuff below */
+
     .routerhome {
         color: black;
     }
@@ -479,6 +672,7 @@
         display: flex;
         justify-content: center;
     }
+
     .listt {
         background-color: rgb(250, 250, 250);
         border-radius: 25px;
@@ -487,6 +681,5 @@
         border-style: solid;
         border-color: black;
         border-width: 3px
-        
     }
 </style>
