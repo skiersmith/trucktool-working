@@ -1,6 +1,5 @@
 <template>
 
-    <!-- sale transaction -->
     <!-- fix update on product NOT WORKING -->
 
     <div>
@@ -50,51 +49,60 @@
 
         <br>
         <div>
-            <h1>New Purchase</h1>
-            <div class="newTransaction baseContainer">
-                <form class="form-inline" @submit.prevent="newTransaction">
-                    <div class="form-group">
-                        <label for="name">name.</label>
-                        <input type="text" class="tBlack" name="name" placeholder="name" v-model="transaction.name" />
-                        <label for="quantity">quantity.</label>
-                        <input type="number" class="tBlack" name="quantity" placeholder="quantity" v-model="transaction.quantity" />
-                        <label for="salePrice">salePrice.</label>
-                        <input type="text" class="tBlack" name="salePrice" placeholder="salePrice" v-model="transaction.salePrice" />
+            <h1>New Transaction</h1>
+            <div class="transaction-container" >
+                <div>
+                    <div class="newTransaction baseContainer">
+                        <h3>New Purchase</h3>
+                        <form class="form-inline" @submit.prevent="newTransaction">
+                            <div class="form-group">
+                                <label for="name">name.</label>
+                                <input type="text" class="tBlack" name="name" placeholder="name" v-model="transaction.name" />
+                                <label for="quantity">quantity.</label>
+                                <input type="number" class="tBlack" name="quantity" placeholder="quantity" v-model="transaction.quantity" />
+                                <!-- <br> -->
+                                <label for="salePrice">salePrice.</label>
+                                <input type="text" class="tBlack" name="salePrice" placeholder="salePrice" v-model="transaction.salePrice" />
 
-                        <br>
-                        <label for="tag">Tag.</label>
-                        <input type="text" class="tBlack" name="tag" placeholder="name" v-model="transaction.tag" />
-                        <label for="productId">productId.</label>
-                        <input type="text" class="tBlack" name="productId" placeholder="productId" v-model="transaction.productId" />
-                        <button type="submit" @click="getQuantity" class="btn-xs btn-primary">New Transaction</button>
+                                <!-- <br> -->
+                                <label for="tag">Tag.</label>
+                                <input type="text" class="tBlack" name="tag" placeholder="name" v-model="transaction.tag" />
+                                <label for="productId">productId.</label>
+                                <input type="text" class="tBlack" name="productId" placeholder="productId" v-model="transaction.productId" />
+                                <button type="submit" @click="getQuantity" class="btn-xs btn-primary">New Transaction</button>
+                            </div>
+                        </form>
+
+
                     </div>
-                </form>
+                </div>
+                <div>
+                    <div class="newTransaction baseContainer">
+                        <h3>New Sale</h3>
+                        <form class="form-inline" @submit.prevent="newSaleTransaction">
+                            <div class="form-group">
+                                <label for="name">name.</label>
+                                <input type="text" class="tBlack" name="name" placeholder="name" v-model="transaction.name" />
+                                <label for="quantity">quantity.</label>
+                                <input type="number" class="tBlack" name="quantity" placeholder="quantity" v-model="transaction.quantity" />
+                                
+                                <label for="salePrice">salePrice.</label>
+                                <input type="text" class="tBlack" name="salePrice" placeholder="salePrice" v-model="transaction.salePrice" />
 
-            </div>
-            <div>
-                <h1>New Sale</h1>
-                <div class="newTransaction baseContainer">
-                    <form class="form-inline" @submit.prevent="newSaleTransaction">
-                        <div class="form-group">
-                            <label for="name">name.</label>
-                            <input type="text" class="tBlack" name="name" placeholder="name" v-model="transaction.name" />
-                            <label for="quantity">quantity.</label>
-                            <input type="number" class="tBlack" name="quantity" placeholder="quantity" v-model="transaction.quantity" />
-                            <label for="salePrice">salePrice.</label>
-                            <input type="text" class="tBlack" name="salePrice" placeholder="salePrice" v-model="transaction.salePrice" />
+                               
+                                <label for="tag">Tag.</label>
+                                <input type="text" class="tBlack" name="tag" placeholder="name" v-model="transaction.tag" />
+                                <label for="productId">productId.</label>
+                                <input type="text" class="tBlack" name="productId" placeholder="productId" v-model="transaction.productId" />
+                                <button type="submit" @click="getNegQuantity" class="btn-xs btn-primary">New Transaction</button>
+                            </div>
+                        </form>
 
-                            <br>
-                            <label for="tag">Tag.</label>
-                            <input type="text" class="tBlack" name="tag" placeholder="name" v-model="transaction.tag" />
-                            <label for="productId">productId.</label>
-                            <input type="text" class="tBlack" name="productId" placeholder="productId" v-model="transaction.productId" />
-                            <button type="submit" @click="getNegQuantity" class="btn-xs btn-primary">New Transaction</button>
-                        </div>
-                    </form>
-
+                    </div>
                 </div>
             </div>
         </div>
+
         <br>
         <h3>Get transactions by product id</h3>
         <div class="baseContainer3">
@@ -500,5 +508,9 @@
         border-style: solid;
         border-color: black;
         border-width: 3px
+    }
+    .transaction-container{
+        display: flex;
+        
     }
 </style>

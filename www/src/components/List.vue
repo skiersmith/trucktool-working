@@ -36,7 +36,7 @@
             </form>
         </div>
         <div class="row">
-            <div class="col-lg-3" v-for="product in products">
+            <div class="col-lg-3 col-sm-6 " v-for="product in products">
                 <product class="the-product" :product="product"></product>
             </div>
         </div>
