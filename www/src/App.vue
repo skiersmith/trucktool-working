@@ -26,10 +26,14 @@
     text-align: center;
     color: #2c3e50;
     margin-top: 60px;
-    background: rgb(253, 251, 251)
+    background: rgb(253, 251, 251);
+    background-image: url(./assets/WebBackground1.png);
+    background-size: 2300px
   }
 
   html {
-    background: rgb(252, 250, 250)
+    background: rgb(252, 250, 250);
+    background-image: url(./assets/WebBackground1.png);
+    background-size: 2300px
   }
 </style>

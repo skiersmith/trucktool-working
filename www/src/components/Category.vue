@@ -20,8 +20,8 @@
     </div>
     <div class="row dalists">
       <div class="drawList col-sm-3" v-for="list in lists">
-        <router-link class="router-link-text listName" :to="{name: 'List', params: {listId: list._id, categoryId: list.categoryId }}">
-          <span class="">{{list.name}}</span>
+        <router-link class="router-link-text listName" :to="{name: 'List', params: {listId: list._id, categoryId: list.categoryId}}">
+          <span>{{list.name}}</span>
           <i class="fa fa-trash fa-md delList" @click="removeList(list)"></i>
         </router-link>
         <!-- "{ name: 'List', params: {categoryId: list.categoryId } } " -->
@@ -31,7 +31,7 @@
 </template>
 
 <script>
-  import list from './List'
+  // import list from './List'
   export default {
     data() {
       return {
@@ -45,6 +45,8 @@
     name: 'category',
     props: ['categoryId'],
     mounted() {
+      console.log('wow')
+      this.$store.dispatch('getCat', { categoryId: this.categoryId })
       this.$store.dispatch('getLists', { categoryId: this.categoryId })
     },
     methods: {
@@ -63,14 +65,18 @@
     },
     computed: {
       category() {
+        return this.$store.state.currentCat
+      },
+      categorys() {
         return this.$store.state.activeCategorys
       },
       lists() {
         return this.$store.state.activeLists
       }
+      
     },
     components: {
-      list
+      // list
     }
   }
 </script>

@@ -11,11 +11,11 @@
         <!-- <button v-if="!showEdit" @click="toggleEdit()">Edit</button> -->
         <!-- <i class="fa fa-minus-square-o" v-if="showEdit" @click="toggleEdit()"></i> -->
         <div class=" ">
-                    <i @click="toggleProductForm" class="fa fa-2x fa-plus" v-if="newP"></i>
-                    <i @click="toggleProductForm" class="fa fa-2x fa-minus" v-if="!newP"></i>
+            <i @click="toggleProductForm" class="fa fa-2x fa-plus" v-if="newP"></i>
+            <i @click="toggleProductForm" class="fa fa-2x fa-minus" v-if="!newP"></i>
         </div>
-        
-        
+
+
         <div>
             <div class="create-product bg padding" v-if="showAddProductForm">
                 <form @submit.prevent="createProduct">
@@ -74,8 +74,12 @@
                                 <input class="inline" size="15" type="text" name="tag" placeholder="tag" v-model="product.tag">
                                 <label for="name">Id</label>
                                 <input class="inline" size="15" type="text" name="id" placeholder="id" v-model="product._id">
+                                <p class="inline">List:</p>
+                                <select name="select list" v-model="product.listId" class="listSelect">
+                                    <!-- <option disabled selected>Select List</option> -->
+                                    <option v-for="list in lists" :value="list._id">{{list.name}}</option>
+                                </select>
                                 <button type="submit" class="btn-xs btn-success">Update</button>
-                                
                             </div>
                         </form>
                     </div>
@@ -143,7 +147,7 @@
                 this.showAddProductForm = !this.showAddProductForm
                 this.newP = !this.newP
             },
-        
+
             toggleEdit() {
                 this.showEdit = !this.showEdit
 
@@ -155,13 +159,17 @@
                 this.update = !this.update
             },
             updateProduct(product) {
+                console.log("p " + product.listId)
                 this.$store.dispatch('updateProduct', { product: product, productId: product._id })
-                debugger
+                
                 // { productId: this.product._id}
             }
         },
 
         computed: {
+            lists() {
+                return this.$store.state.activeLists
+            },
             zeroProducts() {
 
                 var unfiltered = this.$store.state.allTagProducts.all
@@ -194,7 +202,7 @@
 
         },
         components: {
-            
+
         }
     }
 </script>
@@ -290,7 +298,7 @@
         border-radius: 25px;
         margin: 1rem;
     }
-   
+
 
     /* .actualProd{
         display: block;

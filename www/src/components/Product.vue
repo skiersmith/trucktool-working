@@ -24,7 +24,7 @@
                     </div>
                 </div>
                 <div v-if="!prodBodySeen" class="edit-product-body">
-                    <form @submit.prevent="updateProduct(this._id)">
+                    <form @submit.prevent="updateProduct(product)">
                         <div class="form-group">
                             <input class="inline" size="15" type="text" name="name" placeholder="name" v-model="product.name">
                             <input class="inline" size="15" type="text" name="quantity" placeholder="quantity" v-model="product.quantity">
@@ -120,8 +120,9 @@
             toggleProdBody() {
                 this.prodBodySeen = !this.prodBodySeen
             },
-            updateProduct(){
-                this.$store.dispatch('updateProduct', { productId: this.product._id})
+            updateProduct(product){
+                console.log(product.name)
+                this.$store.dispatch('updateProduct', { product: product, productId: product._id})
             }
         },
         computed: {
@@ -161,10 +162,14 @@
     }
 
     .productt {
-        background-color: bisque;
+        background-color: rgb(250, 250, 250);
         border-radius: 25px;
         margin: 1rem;
-        width: 30rem
+        width: 30rem;
+        border-style: solid;
+        border-color: black;
+        border-width: 3px
+        
     }
 
     .open-notes {

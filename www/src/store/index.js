@@ -22,7 +22,9 @@ var store = new vuex.Store({
     dashboard: [],
     activeCategorys: {},
     activeLists: {},
+    activeAllLists: {},
     currentList: {},
+    currentCat:{},
     activeProducts: {},
     activeTransactions: {},
     activeAllTransactions: {},
@@ -51,8 +53,14 @@ var store = new vuex.Store({
     setActiveLists(state, lists) {
       state.activeLists = lists
     },
+    setActiveAllLists(state, lists) {
+      state.activeAllLists = lists
+    },
     setCurrentList(state, list) {
       state.currentList = list
+    },
+    setCurrentCat(state, list) {
+      state.currentCat = list
     },
     setActiveProducts(state, payload) {
 
@@ -61,7 +69,7 @@ var store = new vuex.Store({
     setActiveTransactions(state, payload) {
       console.log(payload)
       vue.set(state.activeTransactions, payload.productId, payload.transactions)
-      debugger
+      
       console.log(state.activeTransactions)
     },
     setActiveAllTransactions(state, payload) {
@@ -100,6 +108,15 @@ var store = new vuex.Store({
   actions: {
 
     //--------CATEGORIES-----------//
+    getCat({ commit, dispatch }, payload) {
+      api('categorys/' + payload.categoryId)
+        .then(res => {
+          commit('setCurrentCat', res.data.data)
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
+    },
     getCategorys({ commit, dispatch }) {
       api('userboards')
         .then(res => {
@@ -130,6 +147,15 @@ var store = new vuex.Store({
     //^^^^^^^^^^^^^^CATEGORIES^^^^^^^^^^^^^^^^^//
 
     //-------------LISTS-------------------//
+    getAllLists({ commit, dispatch }, payload) {
+      api('lists')
+        .then(res => {
+          commit('setActiveAllLists', res.data.data)
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
+    },
     getLists({ commit, dispatch }, payload) {
       api('categorys/' + payload.categoryId + '/lists')
         .then(res => {
@@ -140,7 +166,7 @@ var store = new vuex.Store({
         })
     },
     getCurrentList({ commit, dispatch }, payload) {
-      api('categorys/' + payload.categoryId + '/lists/' + payload.listId)
+      api('lists/' + payload.listId)
         .then(res => {
           commit('setCurrentList', res.data.data)
         })
@@ -268,6 +294,7 @@ var store = new vuex.Store({
         })
     },
     updateProduct({ commit, dispatch }, payload) {
+      
       
       api.put('products/' + payload.productId, payload)
         .then(res => {

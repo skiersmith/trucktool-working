@@ -1,9 +1,8 @@
 <template>
-    
-    <!-- add list of lists with listId. -->
+
     <!-- sale transaction -->
-    <!-- fix update on product -->
-    
+    <!-- fix update on product NOT WORKING -->
+
     <div>
         <router-link class="dashboard routerhome" :to="{name: 'Dashboard'}">
             <b>Home</b>
@@ -172,6 +171,16 @@
                 <button @click="toggleHideAllProducts" class="btn-xs btn-info">Toggle Products Visibility</button>
             </div>
         </div>
+       <!-- started doing this then remembered doing with dropdown. gonna leave for now -->
+        <!-- <div>
+            <div v-for="list in lists">
+                <div class="listt">
+                    <h4> {{list.name}} </h4>
+                    <P>Id: {{list._id}}</P>
+                </div>
+
+            </div>
+        </div> -->
         <div class="container-block">
 
             <all v-if="!hideAllProducts"></all>
@@ -206,6 +215,7 @@
         },
         mounted() {
             this.$store.dispatch('getTransactions')
+            this.$store.dispatch('getAllLists')
         },
         methods: {
             toggleTransactionForm() {
@@ -228,7 +238,7 @@
             // newSaleTransaction() {
             //     this.saleNeg
             //     this.$store.dispatch('newTransaction', { transaction: this.transaction2 })
-            //     debugger
+            //     
             // },
             getTransactions() {
 
@@ -271,8 +281,8 @@
             },
         },
         computed: {
-            saleNeg(){
-           
+            saleNeg() {
+
                 this.transaction2.quantity *= -1
             },
             allTransactions() {
@@ -294,6 +304,7 @@
                 return this.$store.state.allTagProducts
 
             },
+            
             totalInv() {
                 if (this.$store.state.activeTransactions[this.formOption]) {
 
@@ -467,5 +478,15 @@
     .allP2-container {
         display: flex;
         justify-content: center;
+    }
+    .listt {
+        background-color: rgb(250, 250, 250);
+        border-radius: 25px;
+        margin: 1rem;
+        width: 30rem;
+        border-style: solid;
+        border-color: black;
+        border-width: 3px
+        
     }
 </style>

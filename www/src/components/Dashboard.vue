@@ -53,7 +53,8 @@
 
         <div class="col-sm-3" v-for="category in categorys">
           <div class="category flex">
-            <router-link class="router-link-text" :to="'/categorys/'+category._id">
+            <router-link class="router-link-text" :to="{name: 'Category', params: {categoryId: category._id}}">
+            <!--   '/categorys/'+category._id   -->
               <p v-if="!deleteCat" class="categoryName">
                 {{category.name}}
               </p>
@@ -91,7 +92,7 @@
     name: 'categorys',
     mounted() {
       this.$store.dispatch('getCategorys')
-
+ 
     },
     computed: {
       categorys() {
