@@ -1,5 +1,5 @@
 <template>
-    <div class="productt col-sm-3">
+    <div class="productt">
         <div class="l">
             <h2 class="title" @click="prodSeen = !prodSeen">{{product.name}}</h2>
         </div>

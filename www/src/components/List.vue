@@ -36,7 +36,7 @@
             </form>
         </div>
         <div class="list-footer row">
-            <div class="col-sm-offset-2" v-for="product in products">
+            <div class="col-lg-3" v-for="product in products">
                 <product class="the-product" :product="product"></product>
             </div>
         </div>
@@ -64,7 +64,7 @@
         name: 'list',
         props: ['name', 'description', 'listId', 'categoryId', 'productId', 'id'],
         mounted() {
-            debugger
+        
             this.$store.dispatch('getCurrentList', { listId: this.listId})
             this.$store.dispatch('getProductsByList', { listId: this.product.listId, categoryId: this.categoryId })
             console.log(this.list)
