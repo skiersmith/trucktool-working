@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- the bootstrap navbar-->
-        <nav class="navbar navbar-fixed-top navbar--color--ghost navbar--size--xl" data-startColor="navbar--color--ghost" data-startSize="navbar--size--xl"
+        <!-- <nav class="navbar navbar-fixed-top navbar--color--ghost navbar--size--xl" data-startColor="navbar--color--ghost" data-startSize="navbar--size--xl"
             data-intoColor="navbar--color--secondary" data-intoSize="navbar--size--md">
             <div class="container">
                 <div class="navbar-header">
@@ -18,11 +18,29 @@
                     </span>
                 </div>
             </div>
-        </nav>
-        <router-link class="dashboard routerhome" :to="{name: 'Dashboard'}">
-            <b>Home</b>
-        </router-link>
-
+        </nav> -->
+        <div class="fixL">
+                <router-link class="routerhome" :to="{name: 'Dashboard'}">
+                  <h1 class="organize-header">Organize</h1>
+                </router-link>
+              </div>
+          
+              <div class="supernavCont">
+                <div class="navCont">
+                  <div class="spacer1"></div>
+          
+                  <div>
+                    <router-link class="overview routerhome navbar-center" :to="{name: 'Overview'}">
+                      <p class="overview-header">Overview</p>
+                    </router-link>
+                  </div>
+                  <div class="spacer4"></div>
+                  <div>
+                    <p @click="userLogout" class="logout-header">Logout</p>
+                  </div>
+                </div>
+              </div>
+              <div class="spacer"></div>
         <div class="listHeaderC container">
             <div class="listheader">
                 <h2>{{list.name}}</h2>
@@ -45,8 +63,6 @@
             <form @submit.prevent="createProduct">
                 <div class="form-group">
                     <input class="inline" size="15" type="text" name="name" placeholder="name" v-model="product.name" required>
-                    <input class="inline" size="15" type="text" name="quantity" placeholder="quantity" v-model="product.quantity" required>
-                    <input class="inline" size="15" type="text" name="unitPrice" placeholder="unitPrice" v-model="product.unitPrice" required>
                     <input class="inline" size="15" type="text" name="resalePrice" placeholder="resalePrice" v-model="product.resalePrice">
                     <input class="inline" size="15" type="text" name="sku" placeholder="sku" v-model="product.sku">
                     <input class="inline" size="15" type="text" name="tag" placeholder="tag" v-model="product.tag">

@@ -1,6 +1,9 @@
 <template>
   <div>
+<!-- #region -->
+
     <!-- the bootstrap navbar-->
+<<<<<<< HEAD
     <div class="container">
       <nav class="navbar navbar-fixed-top navbar--color--ghost navbar--size--xl" data-startColor="navbar--color--ghost" data-startSize="navbar--size--xl"
         data-intoColor="navbar--color--secondary" data-intoSize="navbar--size--md">
@@ -14,6 +17,17 @@
         <div class="overview-item">
           <router-link class="overview routerhome navbar-center" :to="{name: 'Overview'}">
             <p class="overview-header">Overview</p>
+=======
+    <!-- <nav class="navbar navbar-fixed-top navbar--color--ghost navbar--size--xl" data-startColor="navbar--color--ghost" data-startSize="navbar--size--xl"
+      data-intoColor="navbar--color--secondary" data-intoSize="navbar--size--md">
+      <div class="nav-container">
+      <div class="navCont-container"><p>yo</p></div>
+      <div class="navCont-container"><p>yo</p></div>
+      <div class="navCont-container"><p>yo</p></div>
+        <div class="navbar-header">
+          <router-link class="dashboard routerhome navbar-brand" :to="{name: 'Dashboard'}">
+            <p class="organize-header">Organize</p>
+>>>>>>> da28241123e6a9acdbcbafb910b12725d51925ce
           </router-link>
         </div>
         <div class="logout-item">
@@ -23,18 +37,47 @@
             </span>
           </div>
         </div>
+<<<<<<< HEAD
       </nav>
     </div>
+=======
+      </div>
+    </nav> -->
+   
+<!-- #endregion -->
+
+    <div class="fixL">
+      <router-link class="routerhome" :to="{name: 'Dashboard'}">
+        <h1 class="organize-header">Organize</h1>
+      </router-link>
+    </div>
+
+    <div class="supernavCont top">
+      <div class="navCont">
+        <div class="spacer1"></div>
+        <div>
+          <router-link class="overview routerhome" :to="{name: 'Overview'}">
+            <b class="overview-header">Overview</b>
+          </router-link>
+        </div>
+        <div class="spacer4"></div>
+        <div>
+          <b @click="userLogout" class="logout-header">Logout</b>
+        </div>
+      </div>
+    </div>
+    <div class="spacer"></div>
+>>>>>>> da28241123e6a9acdbcbafb910b12725d51925ce
     <!-- <h1>Organize Title Here</h1> -->
     <!-- <img class="logo" src="../assets/organizzlee.png"> -->
-    <div class="overview-container">
+    <!-- <div class="overview-container">
       <div class="overview-container">
         <div class="overview2">
           <router-link class="overview router-link-text" :to="{name: 'Overview'}">
             <b>Overview</b>
           </router-link>
         </div>
-      </div>
+      </div> -->
       <!-- <div class="overview-container">
         <div class="overview2">
           <router-link class="overview router-link-text" :to="{name: 'All'}">
@@ -42,14 +85,15 @@
           </router-link>
         </div>
       </div> -->
-      <div class="overview-container">
+      <!-- <div class="overview-container">
         <div class="overview3">
           <span class="textWhite" @click="userLogout">
             <p>Logout</p>
           </span>
         </div>
       </div>
-    </div>
+    </div> -->
+    
     <div class="categorysHeader container">
       <h1>{{user.name}}'s Categories</h1>
       <div class="header container-fluid">
@@ -186,6 +230,7 @@
       }
     },
     methods: {
+
       createCategory() {
         this.$store.dispatch('createCategory', this.category)
         this.category = {}
@@ -230,6 +275,8 @@
     padding-right: 0px;
   }
 
+  
+
   @import url("https://fonts.googleapis.com/css?family=Lato:400,700,900");
   body {
     font-family: 'Lato', Arial, sans-serif;
@@ -244,7 +291,8 @@
     z-index: -2;
     background: url("https://unsplash.it/2000/800?image=563") center top/cover no-repeat;
   }
-
+  .top{
+    top: 10px;  }
   .overlay {
     position: absolute;
     z-index: -1;

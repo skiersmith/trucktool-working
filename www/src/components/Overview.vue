@@ -1,10 +1,13 @@
 <template>
+<<<<<<< HEAD
     <!-- fix update on product NOT WORKING -->
 
 
+=======
+>>>>>>> da28241123e6a9acdbcbafb910b12725d51925ce
     <div>
         <!-- the bootstrap navbar-->
-        <nav class="navbar navbar-fixed-top navbar--color--ghost navbar--size--xl" data-startColor="navbar--color--ghost" data-startSize="navbar--size--xl"
+        <!-- <nav class="navbar navbar-fixed-top navbar--color--ghost navbar--size--xl" data-startColor="navbar--color--ghost" data-startSize="navbar--size--xl"
             data-intoColor="navbar--color--secondary" data-intoSize="navbar--size--md">
             <div class="container">
                 <div class="navbar-header">
@@ -21,17 +24,42 @@
                     </span>
                 </div>
             </div>
-        </nav>
+        </nav> -->
+        <div class="fixL">
+                <router-link class="routerhome" :to="{name: 'Dashboard'}">
+                  <h1 class="organize-header">Organize</h1>
+                </router-link>
+              </div>
+          
+              <div class="supernavCont">
+                <div class="navCont">
+                  <div class="spacer1"></div>
+          
+                  <div>
+                    <router-link class="overview routerhome navbar-center" :to="{name: 'Overview'}">
+                      <b class="overview-header">Overview</b>
+                    </router-link>
+                  </div>
+                  <div class="spacer4"></div>
+                  <div>
+                    <b @click="userLogout" class="logout-header">Logout</b>
+                  </div>
+                </div>
+              </div>
+              <div class="spacer"></div>
+              <div class="spacer"></div>
 
         <div class="title">
-            <h1>Organize Title Here</h1>
+            <!-- <h1>Organize Title Here</h1> -->
         </div>
         <div class="pimg container">
             <img class="pGuy" src="../assets/pixel-guy.png">
         </div>
         <div class="baseContainer2">
             <p>Ideal Net Profit ${{calc}}</p>
-            <p>Cost: ${{calc2}}</p>
+            <p>Total Cost: ${{Purchase1}}</p>
+            <p>Total Sale: ${{Sale1}}</p>
+            <p>Total Profit: ${{Profit}}</p>
             <p>Inventory: {{totalInv}}</p>
 
             <br>
@@ -65,73 +93,77 @@
         <br>
 
         <br>
-        <div>
-            <h1>New Transaction</h1>
-            <div class="transaction-container" >
-                <div>
-                    <div class="newTransaction baseContainer">
-                        <h3>New Purchase</h3>
-                        <form class="form-inline" @submit.prevent="newTransaction">
-                            <div class="form-group">
-                                <label for="name">name.</label>
-                                <input type="text" class="tBlack" name="name" placeholder="name" v-model="transaction.name" />
-                                <label for="quantity">quantity.</label>
-                                <input type="number" class="tBlack" name="quantity" placeholder="quantity" v-model="transaction.quantity" />
-                                <!-- <br> -->
-                                <label for="salePrice">salePrice.</label>
-                                <input type="text" class="tBlack" name="salePrice" placeholder="salePrice" v-model="transaction.salePrice" />
+        <div class="supertransaction-container">
+            <div>
+                <h1>New Transaction</h1>
+                <div class="transaction-container">
+                    <div>
+                        <div class="newTransaction baseContainer width">
+                            <h3 class="trannyTitle" @click="toggleBFrm">New Purchase</h3>
+                            <form class="form-inline" @submit.prevent="newTransaction" v-if="BFrm">
+                                <div class="form-group">
+                                    <label for="name">name.</label>
+                                    <input type="text" class="tBlack" name="name" placeholder="name" v-model="transaction.name" />
+                                    <label for="quantity">quantity.</label>
+                                    <input type="number" class="tBlack" name="quantity" placeholder="quantity" v-model="transaction.quantity" />
+                                    <!-- <br> -->
+                                    <label for="salePrice">salePrice.</label>
+                                    <input type="text" class="tBlack" name="salePrice" placeholder="salePrice" v-model="transaction.salePrice" />
 
-                                <!-- <br> -->
-                                <label for="tag">Tag.</label>
-                                <input type="text" class="tBlack" name="tag" placeholder="name" v-model="transaction.tag" />
-                                <label for="productId">productId.</label>
-                                <input type="text" class="tBlack" name="productId" placeholder="productId" v-model="transaction.productId" />
-                                <button type="submit" @click="getQuantity" class="btn-xs btn-primary">New Transaction</button>
-                            </div>
-                        </form>
+                                    <!-- <br> -->
+                                    <label for="tag">Tag.</label>
+                                    <input type="text" class="tBlack" name="tag" placeholder="name" v-model="transaction.tag" />
+                                    <label for="productId">productId.</label>
+                                    <input type="text" class="tBlack" name="productId" placeholder="productId" v-model="transaction.productId" />
+                                    <button type="submit" @click="getQuantity" class="btn-xs btn-primary">New Transaction</button>
+                                </div>
+                            </form>
 
 
+                        </div>
+                    </div>
+                    <div>
+                        <div class="newTransaction baseContainer width">
+                            <h3 class="trannyTitle" @click="toggleSFrm">New Sale</h3>
+                            <form class="form-inline" @submit.prevent="newSaleTransaction" v-if="SFrm">
+                                <div class="form-group">
+                                    <label for="name">name.</label>
+                                    <input type="text" class="tBlack" name="name" placeholder="name" v-model="transaction.name" />
+                                    <label for="quantity">quantity.</label>
+                                    <input type="number" class="tBlack" name="quantity" placeholder="quantity" v-model="transaction.quantity" />
+
+                                    <label for="salePrice">salePrice.</label>
+                                    <input type="text" class="tBlack" name="salePrice" placeholder="salePrice" v-model="transaction.salePrice" />
+
+
+                                    <label for="tag">Tag.</label>
+                                    <input type="text" class="tBlack" name="tag" placeholder="name" v-model="transaction.tag" />
+                                    <label for="productId">productId.</label>
+                                    <input type="text" class="tBlack" name="productId" placeholder="productId" v-model="transaction.productId" />
+                                    <button type="submit" @click="getNegQuantity" class="btn-xs btn-primary">New Transaction</button>
+                                </div>
+                            </form>
+
+                        </div>
                     </div>
                 </div>
-                <div>
-                    <div class="newTransaction baseContainer">
-                        <h3>New Sale</h3>
-                        <form class="form-inline" @submit.prevent="newSaleTransaction">
-                            <div class="form-group">
-                                <label for="name">name.</label>
-                                <input type="text" class="tBlack" name="name" placeholder="name" v-model="transaction.name" />
-                                <label for="quantity">quantity.</label>
-                                <input type="number" class="tBlack" name="quantity" placeholder="quantity" v-model="transaction.quantity" />
-                                
-                                <label for="salePrice">salePrice.</label>
-                                <input type="text" class="tBlack" name="salePrice" placeholder="salePrice" v-model="transaction.salePrice" />
+            </div>
 
-                               
-                                <label for="tag">Tag.</label>
-                                <input type="text" class="tBlack" name="tag" placeholder="name" v-model="transaction.tag" />
-                                <label for="productId">productId.</label>
-                                <input type="text" class="tBlack" name="productId" placeholder="productId" v-model="transaction.productId" />
-                                <button type="submit" @click="getNegQuantity" class="btn-xs btn-primary">New Transaction</button>
+            <div>
+                <h3>Get transactions by product id</h3>
+                <div class="transaction-container">
+                    <div class="baseContainer3 width2">
+                        <form class="form-inline" @submit.prevent="getTransactionsByProduct">
+                            <div class="form-group">
+                                <!-- <label for="productId">productId.</label> -->
+                                <input type="text" class="tBlack" name="productId" placeholder="productId" v-model="formOption" />
+                                <button type="submit" class="btn-xs btn-primary">Get Transactions</button>
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>
         </div>
-
-        <br>
-        <h3>Get transactions by product id</h3>
-        <div class="baseContainer3">
-            <form class="form-inline" @submit.prevent="getTransactionsByProduct">
-                <div class="form-group">
-                    <label for="productId">productId.</label>
-                    <input type="text" class="tBlack" name="productId" placeholder="productId" v-model="formOption" />
-                    <button type="submit" class="btn-xs btn-primary">Get Transactions</button>
-                </div>
-            </form>
-        </div>
-
         <br>
         <!-- <div v-if="hideAllProducts">
                 <div class="baseContainer" v-for="product in allProducts.all">
@@ -141,17 +173,27 @@
                 </div>
             </div> -->
         <div>
-            <div class="baseContainer3">
+            <div class="">
                 <div v-for="transaction in transactions">
-                    <ul>
-                        <li>
+
+                    <div class="baseContainer4 tranny-container">
+                        <div>
                             <b>Name: {{transaction.name}}</b>
+                        </div>
+                        <div>
                             <p>Quantity: {{transaction.quantity}}</p>
+                        </div>
+                        <div>
                             <p>Price: {{transaction.salePrice}}</p>
+                        </div>
+                        <div>
                             <p>Type: {{transaction.type}}</p>
+                        </div>
+                        <div>
                             <timeago :since="transaction.created"></timeago>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
+
                 </div>
             </div>
             <!-- <div class="baseContainer3">
@@ -176,8 +218,8 @@
                 </form>
             </div>
             <div class="row">
-                <div class=col-lg-offset-2>
-                    <div class="newContainer col-lg-3" v-for="product in products">
+                <div class="col-sm-offset-1 col-lg-offset-2">
+                    <div class="newContainer col-sm-5 col-lg-3" v-for="product in products">
                         <div class="product">
                             <h4>{{product.name}} </h4>
                             <P>Id: {{product._id}} - </P>
@@ -234,7 +276,9 @@
                 formOption: "",
                 showTransactionForm: false,
                 hideAllProducts: true,
-                refresh: false
+                refresh: false,
+                BFrm: false,
+                SFrm: false
                 // allTransactions:{ }
                 // transactions: {}
             }
@@ -253,6 +297,12 @@
             toggleHideAllProducts() {
                 this.hideAllProducts = !this.hideAllProducts
             },
+            toggleSFrm() {
+                this.SFrm = !this.SFrm
+            },
+            toggleBFrm() {
+                this.BFrm = !this.BFrm
+            },
             toggleRefresh() {
 
                 !this.refresh == this.refresh
@@ -264,6 +314,7 @@
             newTransaction() {
                 this.transaction.type = "Purchase"
                 this.$store.dispatch('newTransaction', { transaction: this.transaction })
+                this.transaction = {}
             },
             newSaleTransaction() {
                 this.transaction.type = "Sale"
@@ -272,6 +323,7 @@
                 this.transaction.quantity = s
                 console.log(this.transaction.quantity)
                 this.$store.dispatch('newTransaction', { transaction: this.transaction })
+                this.transaction = {}
 
             },
             getTransactions() {
@@ -447,17 +499,40 @@
                     // take a breath.. hold event listener from firing for 100ms
                 }, 100);
             },
+            Profit() { 
+            return this.Sale1 - this.Purchase1
+            },
 
-            calc2() {
+            Purchase1() {
 
                 if (this.$store.state.activeTransactions[this.formOption]) {
-
-
                     var theTransactions = this.$store.state.activeTransactions[this.formOption]
                     var unitPrice = 0
-
                     for (var i = 0; i < theTransactions.length; i++) {
-                        unitPrice += theTransactions[i].salePrice * theTransactions[i].quantity
+                        if (theTransactions[i].type == "Purchase") {
+                            unitPrice += theTransactions[i].salePrice * theTransactions[i].quantity
+                        }
+                        else {
+                            console.log("here")
+                            continue;
+                        }
+                    }
+                    return unitPrice
+                }
+            },
+            Sale1() {
+
+                if (this.$store.state.activeTransactions[this.formOption]) {
+                    var theTransactions = this.$store.state.activeTransactions[this.formOption]
+                    var unitPrice = 0
+                    for (var i = 0; i < theTransactions.length; i++) {
+                        if (theTransactions[i].type == "Sale") {
+                            unitPrice += theTransactions[i].salePrice * theTransactions[i].quantity
+                        }
+                        else {
+                            console.log("here")
+                            continue;
+                        }
                     }
                     return unitPrice
                 }
@@ -506,6 +581,22 @@
         color: #6b6b6b;
         font-size: 17px;
         line-height: 1.6;
+    }
+
+    .yooooo{
+        position: fixed;
+        top: 5px;
+    }
+    .padding {
+        padding: 2rem;
+    }
+
+    .width {
+        width: 20rem;
+    }
+
+    .width2 {
+        width: 30rem;
     }
 
     .hero {
@@ -655,6 +746,18 @@
         color: white;
     }
 
+    .baseContainer4 {
+        background-color: rgba(92, 57, 57, 0.7);
+        padding: 1rem;
+        margin: 1rem;
+        border-radius: 25px;
+        color: white;
+    }
+    .baseContainer4:hover {
+        background-color: rgba(92, 57, 57, 0.856); 
+    }
+    
+
     .block {
         display: block;
     }
@@ -665,6 +768,11 @@
 
 
 
+    }
+
+    .trannyTitle:hover {
+        cursor: pointer;
+        color: #7b7b7b
     }
 
     /* .width{
@@ -700,8 +808,23 @@
         border-color: black;
         border-width: 3px
     }
-    .transaction-container{
+
+    .transaction-container {
         display: flex;
-        
+        justify-content: center;
+
+    }
+
+    .supertransaction-container {
+        display: flex;
+        justify-content: space-around;
+
+    }
+
+    .tranny-container {
+        display: flex;
+        justify-content: space-around;
+        margin: 1rem;
+
     }
 </style>

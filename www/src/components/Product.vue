@@ -8,8 +8,8 @@
             <div class="product-container">
                 <div v-if="prodBodySeen" class="product-body">
                     <p>Quantity: {{product.quantity}}</p>
-                    <p>Price: {{product.unitPrice}}</p>
-                    <p>Sell Price:{{product.resalePrice}}</p>
+
+                    <p>Price:{{product.resalePrice}}</p>
                     <p>{{product.sku}}</p>
                     <p>Tags: {{product.tag}}</p>
 
@@ -26,13 +26,32 @@
                 <div v-if="!prodBodySeen" class="edit-product-body">
                     <form @submit.prevent="updateProduct(product)">
                         <div class="form-group">
-                            <input class="inline" size="15" type="text" name="name" placeholder="name" v-model="product.name">
-                            <input class="inline" size="15" type="text" name="quantity" placeholder="quantity" v-model="product.quantity">
-                            <input class="inline" size="15" type="text" name="unitPrice" placeholder="unitPrice" v-model="product.unitPrice">
-                            <input class="inline" size="15" type="text" name="resalePrice" placeholder="resalePrice" v-model="product.resalePrice">
-                            <input class="inline" size="15" type="text" name="sku" placeholder="sku" v-model="product.sku">
-                            <input class="inline" size="15" type="text" name="tag" placeholder="tag" v-model="product.tag">
-                            <button type="submit" class="btn-xs btn-success">Add</button>
+                            <br>
+                            <div class="form-group">
+                                <button type="submit" class="btn-xs btn-success">Save</button>
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input class="inline" size="15" type="text" name="name" placeholder="name" v-model="product.name">
+                            </div>
+                            <div class="form-group">
+                                <label for="resalePrice">Price</label>
+                                <input class="inline" size="15" type="text" name="resalePrice" placeholder="resalePrice" v-model="product.resalePrice">
+
+                            </div>
+                            <div class="form-group">
+                                <label for="sku">Sku</label>
+                                <input class="inline" size="15" type="text" name="sku" placeholder="sku" v-model="product.sku">
+                            </div>
+                            <div class="form-group">
+                                <label for="tag">Tag</label>
+                                <input class="inline" size="15" type="text" name="tag" placeholder="tag" v-model="product.tag">
+                            </div>
+                            <div class="form-group"></div>
+
+
+
+
                         </div>
                     </form>
                     <div class="removeProd">
@@ -84,7 +103,7 @@
                 formOption: '',
                 notesSeen: false,
                 prodSeen: false,
-                prodBodySeen: true
+                prodBodySeen: true,
             }
         },
         name: 'product',
@@ -93,6 +112,7 @@
             this.$store.dispatch('getNotes', { productId: this.product._id, listId: this.listId })
         },
         methods: {
+
             openNotes() {
                 this.$store.dispatch('getNotes', { productId: this.productId, listId: this.listId })
             },
@@ -120,9 +140,9 @@
             toggleProdBody() {
                 this.prodBodySeen = !this.prodBodySeen
             },
-            updateProduct(product){
+            updateProduct(product) {
                 console.log(product.name)
-                this.$store.dispatch('updateProduct', { product: product, productId: product._id})
+                this.$store.dispatch('updateProduct', { product: product, productId: product._id })
             }
         },
         computed: {
@@ -144,6 +164,10 @@
 </script>
 
 <style scoped>
+    .red {
+        color: rgb(230, 70, 102)
+    }
+
     .product-header {
         display: flex;
         justify-content: center;
@@ -169,7 +193,6 @@
         border-style: solid;
         border-color: black;
         border-width: 3px
-        
     }
 
     .open-notes {

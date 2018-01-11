@@ -5,8 +5,7 @@ let ObjectId = mongoose.Schema.ObjectId
 
 var schema = new mongoose.Schema({
     name: { type: String, required: true },
-    quantity: { type: Number, required: true },
-    unitPrice: { type: Number, required: true },
+    quantity: { type: Number, default: 0},
     resalePrice: { type: Number },
     tag: [{ type: String }],
     sku: { type: String },
