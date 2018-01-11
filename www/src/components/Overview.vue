@@ -20,28 +20,28 @@
             </div>
         </nav> -->
         <div class="fixL">
-                <router-link class="routerhome" :to="{name: 'Dashboard'}">
-                  <h1 class="organize-header">Organize</h1>
-                </router-link>
-              </div>
-          
-              <div class="supernavCont">
-                <div class="navCont">
-                  <div class="spacer1"></div>
-          
-                  <div>
+            <router-link class="routerhome" :to="{name: 'Dashboard'}">
+                <h1 class="organize-header">Organize</h1>
+            </router-link>
+        </div>
+
+        <div class="supernavCont">
+            <div class="navCont">
+                <div class="spacer1"></div>
+
+                <div>
                     <router-link class="overview routerhome navbar-center" :to="{name: 'Overview'}">
-                      <b class="overview-header">Overview</b>
+                        <b class="overview-header">Overview</b>
                     </router-link>
-                  </div>
-                  <div class="spacer4"></div>
-                  <div>
-                    <b @click="userLogout" class="logout-header">Logout</b>
-                  </div>
                 </div>
-              </div>
-              <div class="spacer"></div>
-              <div class="spacer"></div>
+                <div class="spacer4"></div>
+                <div>
+                    <b @click="userLogout" class="logout-header">Logout</b>
+                </div>
+            </div>
+        </div>
+        <div class="spacer"></div>
+        <div class="spacer"></div>
 
         <div class="title">
             <!-- <h1>Organize Title Here</h1> -->
@@ -49,16 +49,20 @@
         <div class="pimg container">
             <img class="pGuy" src="../assets/pixel-guy.png">
         </div>
-        <div class="baseContainer2">
-            <p>Ideal Net Profit ${{calc}}</p>
-            <p>Total Cost: ${{Purchase1}}</p>
-            <p>Total Sale: ${{Sale1}}</p>
-            <p>Total Profit: ${{Profit}}</p>
-            <p>Inventory: {{totalInv}}</p>
+        <div class="baseContainer2 bc2-container">
 
-            <br>
-            <br>
-            <br>
+            <div>
+                <p>Ideal Net Profit ${{calc}}</p>
+                <p>Inventory: {{totalInv}}</p>
+            </div>
+            <div>
+                <p>yo</p>
+            </div>
+            <div>
+                <p>Total Cost: ${{Purchase1}}</p>
+                <p>Total Sale: ${{Sale1}}</p>
+                <p>Total Profit: ${{Profit}}</p>
+            </div>
         </div>
         <br>
         <!-- <div class="baseContainer">
@@ -493,8 +497,8 @@
                     // take a breath.. hold event listener from firing for 100ms
                 }, 100);
             },
-            Profit() { 
-            return this.Sale1 - this.Purchase1
+            Profit() {
+                return this.Sale1 - this.Purchase1
             },
 
             Purchase1() {
@@ -577,10 +581,16 @@
         line-height: 1.6;
     }
 
-    .yooooo{
+    .bc2-container {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .yooooo {
         position: fixed;
         top: 5px;
     }
+
     .padding {
         padding: 2rem;
     }
@@ -746,10 +756,11 @@
         border-radius: 25px;
         color: white;
     }
+
     .baseContainer4:hover {
-        background-color: rgba(92, 57, 57, 0.856); 
+        background-color: rgba(92, 57, 57, 0.856);
     }
-    
+
 
     .block {
         display: block;
