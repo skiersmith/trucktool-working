@@ -72,7 +72,7 @@
         </div>
         <div class="row">
             <div class="col-lg-3 col-sm-6 " v-for="product in products">
-                <product class="the-product" :product="product"></product>
+                <product class="the-product" :product="product"> </product>
             </div>
         </div>
     </div>

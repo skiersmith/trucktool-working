@@ -105,12 +105,12 @@
                                     <label for="quantity">quantity.</label>
                                     <input type="number" class="tBlack" name="quantity" placeholder="quantity" v-model="transaction.quantity" />
                                     <!-- <br> -->
-                                    <label for="salePrice">salePrice.</label>
-                                    <input type="text" class="tBlack" name="salePrice" placeholder="salePrice" v-model="transaction.salePrice" />
+                                    <label for="salePrice">Price.</label>
+                                    <input type="text" class="tBlack" name="salePrice" placeholder="Price" v-model="transaction.salePrice" />
 
                                     <!-- <br> -->
-                                    <label for="tag">Tag.</label>
-                                    <input type="text" class="tBlack" name="tag" placeholder="name" v-model="transaction.tag" />
+                                    <!-- <label for="tag">Tag.</label>
+                                    <input type="text" class="tBlack" name="tag" placeholder="name" v-model="transaction.tag" /> -->
                                     <label for="productId">productId.</label>
                                     <input type="text" class="tBlack" name="productId" placeholder="productId" v-model="transaction.productId" />
                                     <button type="submit" @click="getQuantity" class="btn-xs btn-primary">New Transaction</button>
@@ -130,12 +130,12 @@
                                     <label for="quantity">quantity.</label>
                                     <input type="number" class="tBlack" name="quantity" placeholder="quantity" v-model="transaction.quantity" />
 
-                                    <label for="salePrice">salePrice.</label>
-                                    <input type="text" class="tBlack" name="salePrice" placeholder="salePrice" v-model="transaction.salePrice" />
+                                    <label for="salePrice">Price.</label>
+                                    <input type="text" class="tBlack" name="salePrice" placeholder="Price" v-model="transaction.salePrice" />
 
 
-                                    <label for="tag">Tag.</label>
-                                    <input type="text" class="tBlack" name="tag" placeholder="name" v-model="transaction.tag" />
+                                    <!-- <label for="tag">Tag.</label>
+                                    <input type="text" class="tBlack" name="tag" placeholder="name" v-model="transaction.tag" /> -->
                                     <label for="productId">productId.</label>
                                     <input type="text" class="tBlack" name="productId" placeholder="productId" v-model="transaction.productId" />
                                     <button type="submit" @click="getNegQuantity" class="btn-xs btn-primary">New Transaction</button>

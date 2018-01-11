@@ -55,9 +55,7 @@
                         </div>
                     </form>
                     <div class="removeProd">
-                        <P class="inline">Remove Product
-                            <i class="fa fa-trash delProd" @click="removeProduct"></i>
-                        </P>
+                            <button class="btn-sm btn-danger" @click="removeProduct">Delete</button>
                     </div>
                 </div>
                 <div class="open-notes">
@@ -186,7 +184,7 @@
     }
 
     .productt {
-        background-color: rgb(250, 250, 250);
+        background-color: rgba(250, 250, 250, 0.747);
         border-radius: 25px;
         margin: 1rem;
         width: 30rem;

@@ -81,10 +81,13 @@
     background-color: #6666668c;
     position: fixed;
     /* right: 5px; */
-    top: 5px;
+    top: 10px;
     padding: 7px;
     border-radius: 10px;
-    left: 45%
+    left: 10px;
+    width: 25rem;
+    height: 10rem;
+
     /* font-size: 150% */
   }
 

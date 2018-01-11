@@ -51,6 +51,8 @@
           <h2>{{category.name}}</h2>
           <h4 v-if="category.description" class="category-description">Description: {{category.description}}</h4>
           <button class="btn-success" @click="toggleListForm">New List</button>
+          <button v-if="!deleteList" class="btn-danger" @click="toggleDeleteList">Delete</button>
+          <button v-else class="btn-danger" @click="toggleDeleteList">Cancel</button>
         </div>
       </div>
       <div class="createList" v-if="showAddListForm">
@@ -65,7 +67,9 @@
           <router-link class="router-link-text " :to="{name: 'List', params: {listId: list._id, categoryId: list.categoryId}}">
             <h3>{{list.name}}</h3>
           </router-link>
-          <i class="fa fa-trash fa-md delList" @click="removeList(list)"></i>
+          <div v-if="deleteList">
+              <button @click="removeList(list)" class="btn-danger btn-xs">Delete</button>
+            </div>
           <!-- "{ name: 'List', params: {categoryId: list.categoryId } } " -->
         </div>
       </div>
@@ -82,7 +86,8 @@
           categoryId: this.categoryId,
           listId: this.listId
         },
-        showAddListForm: false
+        showAddListForm: false,
+        deleteList: false
       }
     },
     name: 'category',
@@ -104,6 +109,9 @@
       },
       toggleListForm() {
         this.showAddListForm = !this.showAddListForm
+      },
+      toggleDeleteList() {
+        this.deleteList = !this.deleteList
       },
       userLogout() {
         this.$store.dispatch('logout', this.$store.state.user._id)
@@ -253,7 +261,7 @@
     /* background-color: rgb(89, 89, 231); */
     padding: 1rem;
     border-radius: 5px;
-    background-color: rgb(250, 250, 250);
+    background-color: rgba(250, 250, 250, 0.733);
     color: black;
     margin: 1rem;
     width: 30rem;
