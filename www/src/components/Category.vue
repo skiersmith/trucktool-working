@@ -158,11 +158,12 @@
   /* ===================================== */
 
   .navbar {
+    display: flex;
+    justify-content: space-around;
+    margin: -10px 50px 0px;
     border: none;
     -webkit-transition: 0.4s;
     transition: 0.4s;
-    /* --- navbar sizes --- */
-    /* --- navbar colors --- */
   }
 
   .navbar-center {

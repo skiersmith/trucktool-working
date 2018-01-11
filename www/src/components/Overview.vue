@@ -1,11 +1,4 @@
 <template>
-
-<<<<<<< HEAD
-=======
-
-
-    <!-- sale transaction -->
->>>>>>> 55e9f19eb8767178a818591bd141716ce20776b3
     <!-- fix update on product NOT WORKING -->
 
 
@@ -559,12 +552,13 @@
     /* ===================================== */
 
     .navbar {
+        display: flex;
+        justify-content: space-around;
+        margin: 0px 50px 0px;
         border: none;
         -webkit-transition: 0.4s;
         transition: 0.4s;
-        /* --- navbar sizes --- */
-        /* --- navbar colors --- */
-    }
+      }
 
     .navbar-center {
         display: flex;

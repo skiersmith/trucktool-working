@@ -232,12 +232,13 @@
     /* ===================================== */
 
     .navbar {
+        display: flex;
+        justify-content: space-around;
+        margin: -10px 50px 0px;
         border: none;
         -webkit-transition: 0.4s;
         transition: 0.4s;
-        /* --- navbar sizes --- */
-        /* --- navbar colors --- */
-    }
+      }
 
     .navbar-center {
         display: flex;
@@ -327,10 +328,10 @@
         padding: 1rem;
     }
 
-    .list-footer {
-        /* display: ; */
-        /* justify-content: space-around; */
-    }
+    /* .list-footer {
+         display: ; 
+         justify-content: space-around; 
+    } */
 
     .margin {
         margin: 1rem;
