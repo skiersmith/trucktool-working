@@ -1,4 +1,10 @@
 <template>
+<<<<<<< HEAD
+    <!-- fix update on product NOT WORKING -->
+
+
+=======
+>>>>>>> da28241123e6a9acdbcbafb910b12725d51925ce
     <div>
         <!-- the bootstrap navbar-->
         <!-- <nav class="navbar navbar-fixed-top navbar--color--ghost navbar--size--xl" data-startColor="navbar--color--ghost" data-startSize="navbar--size--xl"
@@ -647,12 +653,13 @@
     /* ===================================== */
 
     .navbar {
+        display: flex;
+        justify-content: space-around;
+        margin: 0px 50px 0px;
         border: none;
         -webkit-transition: 0.4s;
         transition: 0.4s;
-        /* --- navbar sizes --- */
-        /* --- navbar colors --- */
-    }
+      }
 
     .navbar-center {
         display: flex;

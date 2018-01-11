@@ -3,6 +3,21 @@
 <!-- #region -->
 
     <!-- the bootstrap navbar-->
+<<<<<<< HEAD
+    <div class="container">
+      <nav class="navbar navbar-fixed-top navbar--color--ghost navbar--size--xl" data-startColor="navbar--color--ghost" data-startSize="navbar--size--xl"
+        data-intoColor="navbar--color--secondary" data-intoSize="navbar--size--md">
+        <div class="organize-item">
+          <div class="navbar-header">
+            <router-link class="dashboard routerhome navbar-brand" :to="{name: 'Dashboard'}">
+              <p class="organize-header">Organize</p>
+            </router-link>
+          </div>
+        </div>
+        <div class="overview-item">
+          <router-link class="overview routerhome navbar-center" :to="{name: 'Overview'}">
+            <p class="overview-header">Overview</p>
+=======
     <!-- <nav class="navbar navbar-fixed-top navbar--color--ghost navbar--size--xl" data-startColor="navbar--color--ghost" data-startSize="navbar--size--xl"
       data-intoColor="navbar--color--secondary" data-intoSize="navbar--size--md">
       <div class="nav-container">
@@ -12,16 +27,20 @@
         <div class="navbar-header">
           <router-link class="dashboard routerhome navbar-brand" :to="{name: 'Dashboard'}">
             <p class="organize-header">Organize</p>
+>>>>>>> da28241123e6a9acdbcbafb910b12725d51925ce
           </router-link>
         </div>
-        <router-link class="overview routerhome navbar-center" :to="{name: 'Overview'}">
-          <p class="overview-header">Overview</p>
-        </router-link>
-        <div class="navbar-right navbar-text">
-          <span @click="userLogout">
-            <p class="logout-header">Logout</p>
-          </span>
+        <div class="logout-item">
+          <div class="navbar-right navbar-text">
+            <span @click="userLogout">
+              <p class="logout-header">Logout</p>
+            </span>
+          </div>
         </div>
+<<<<<<< HEAD
+      </nav>
+    </div>
+=======
       </div>
     </nav> -->
    
@@ -48,6 +67,7 @@
       </div>
     </div>
     <div class="spacer"></div>
+>>>>>>> da28241123e6a9acdbcbafb910b12725d51925ce
     <!-- <h1>Organize Title Here</h1> -->
     <!-- <img class="logo" src="../assets/organizzlee.png"> -->
     <!-- <div class="overview-container">
@@ -237,17 +257,22 @@
 </script>
 
 <style scoped>
-  organize-header {
+  container {
+    display: flex;
+    justify-content: center;
+  }
+
+  organize-item {
+    justify-content: center;
+  }
+
+  overview-item {
     margin: 0px 0px 0px;
   }
 
-  overview-header {
+  logout-item {
     margin: 0px 0px 0px;
-  }
-
-  logout-header {
-    margin: 0px 0px 0px;
-    padding-right: 100px;
+    padding-right: 0px;
   }
 
   
@@ -305,13 +330,15 @@
   /* ===================================== */
 
   .navbar {
-    margin: 21px -45px 10px;
+    display: flex;
+    justify-content: space-between;
+    margin: -10px 50px 0px;
     border: none;
     -webkit-transition: 0.4s;
     transition: 0.4s;
+  }
     /* --- navbar sizes --- */
     /* --- navbar colors --- */
-  }
 
   .navbar-center {
     display: flex;
