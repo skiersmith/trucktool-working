@@ -185,7 +185,7 @@
 
     .productt {
         background-color: rgba(250, 250, 250, 0.747);
-        border-radius: 25px;
+        border-radius: 10px;
         margin: 1rem;
         width: 30rem;
         border-style: solid;

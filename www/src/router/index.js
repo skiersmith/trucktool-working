@@ -7,6 +7,7 @@ import List from 'components/List'
 import Overview from 'components/Overview'
 import Product from 'components/Product'
 import All from 'components/All'
+import Report from 'components/Report'
 Vue.use(Router)
 
 export default new Router({
@@ -20,26 +21,32 @@ export default new Router({
       props: true,
       name: 'Category',
       component: Category
-    },{
+    }, {
       path: '/categorys/:categoryId/lists/:listId',
       props: true,
       name: 'List',
       component: List
-    },{
+    }, {
       path: '/login',
       name: 'Login',
       component: Login
-    },{
+    }, {
       path: '/overview',
       name: 'Overview',
       component: Overview,
       props: true
-    },{
+    }, {
       path: '/all',
       props: true,
       name: 'All',
       component: All
+    },
+    {
+      path: '/report',
+      name: 'Report',
+      component: Report,
+      props: true
     }
-    
+
   ]
 })

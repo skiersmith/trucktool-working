@@ -8,7 +8,7 @@ var schema = new mongoose.Schema({
     quantity: { type: Number, required: true },
     salePrice: { type: Number },
     tags: { type: String },
-    created: { type: Number, default: Date.now() },
+    created: { type: Number, default: Date.now },
     productId: { type: ObjectId, ref: models.list, required: true },
     userId: { type: ObjectId, ref: models.list },
     type: { type: String}

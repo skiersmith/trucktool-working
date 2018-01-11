@@ -48,8 +48,8 @@
 
       <div class="categoryHeaderC container">
         <div class="categoryheader">
-          <h2>{{category.name}}</h2>
-          <h4 v-if="category.description" class="category-description">Description: {{category.description}}</h4>
+          <h2 class="white">{{category.name}}</h2>
+          <h4 v-if="category.description" class="white">Description: {{category.description}}</h4>
           <button class="btn-success" @click="toggleListForm">New List</button>
           <button v-if="!deleteList" class="btn-danger" @click="toggleDeleteList">Delete</button>
           <button v-else class="btn-danger" @click="toggleDeleteList">Cancel</button>
@@ -247,7 +247,10 @@
 
 
   /* Normal stuff below */
+  .white{
+    color: white;
 
+  }
   .routerhome {
     color: black;
   }
@@ -268,6 +271,7 @@
     border-style: solid;
     border-color: black;
     border-width: 3px;
+    border-radius: 10px;
 
   }
 
@@ -280,12 +284,8 @@
     /* background-color: grey; */
   }
 
-  .category-description {
-    color: rgb(0, 0, 0);
-  }
-
   .categoryheader {
-    background-color: rgb(104, 142, 255);
+    background-color:  rgba(31, 30, 30, 0.816);
     border-radius: 15px;
     color: rgb(250, 248, 248);
     display: inline block;
@@ -298,7 +298,7 @@
 
   .categoryHeaderC {
     display: flex;
-    justify-content: center
+    justify-content: center;
   }
 
   .delList {

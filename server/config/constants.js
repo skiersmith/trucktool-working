@@ -42,7 +42,13 @@ const models = {
     name: 'All',
     endpoint: 'all'
     // useCustomRoutes: true
-  }
+  },
+  // report: {
+  //   name: 'Report',
+  //   endpoint: 'report'
+  //   // useCustomRoutes: true
+  // },
+  
 }
 
 

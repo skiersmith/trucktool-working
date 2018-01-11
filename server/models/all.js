@@ -9,7 +9,7 @@ var schema = new mongoose.Schema({
     resalePrice: { type: Number },
     tag: [{ type: String }],
     sku: { type: String },
-    created: { type: Number, default: Date.now() },
+    created: { type: Number, default: Date.now },
     listId: { type: ObjectId, ref: models.list.name},
 });
 

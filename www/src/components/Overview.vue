@@ -163,6 +163,9 @@
             </div>
         </div>
         <br>
+        <router-link class="" :to="{name: 'Report'}">
+            <b class="overview-header">Report</b>
+        </router-link>
         <!-- <div v-if="hideAllProducts">
                 <div class="baseContainer" v-for="product in allProducts.all">
                     {{product.name}} -
@@ -653,7 +656,7 @@
         border: none;
         -webkit-transition: 0.4s;
         transition: 0.4s;
-      }
+    }
 
     .navbar-center {
         display: flex;

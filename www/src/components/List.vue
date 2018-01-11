@@ -365,7 +365,7 @@
     }
 
     .listheader {
-        background-color: rgb(104, 142, 255);
+        background-color:  rgba(31, 30, 30, 0.816);
         border-radius: 15px;
         color: rgb(250, 248, 248);
         display: inline block;

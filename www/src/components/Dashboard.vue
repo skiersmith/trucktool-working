@@ -407,7 +407,7 @@
     max-width: 60rem;
     justify-content: center;
     background-color: rgba(31, 30, 30, 0.816);
-    color: white;
+    color: rgb(7, 7, 7);
     border-radius: 25px;
     padding: 1rem;
 
