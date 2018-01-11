@@ -267,8 +267,7 @@
     background: url("https://unsplash.it/2000/800?image=563") center top/cover no-repeat;
   }
   .top{
-    top: 110px
-  }
+    top: 10px;  }
   .overlay {
     position: absolute;
     z-index: -1;

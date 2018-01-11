@@ -494,28 +494,7 @@
                 }, 100);
             },
             Profit() { 
-                var theTransactions = this.$store.state.activeTransactions[this.formOption]
-                var unitPrice2 = 0
-                var unitPrice = 0
-                if (theTransactions) {
-                    for (var i = 0; i < theTransactions.length; i++) {
-                        if (theTransactions[i].type == "Purchase") {
-                            unitPrice += theTransactions[i].salePrice * theTransactions[i].quantity
-                            continue
-                        }
-                    }
-                }
-                if (theTransactions) {
-                    for (var i = 0; i < theTransactions.length; i++) {
-                        if (theTransactions[i].type == "Sale") {
-                            unitPrice2 += theTransactions[i].salePrice * theTransactions[i].quantity
-                            continue
-                        }
-                    }
-                }
-                console.log(unitPrice2)
-                console.log(unitPrice)
-              return unitPrice2 - unitPrice
+            return this.Sale1 - this.Purchase1
             },
 
             Purchase1() {

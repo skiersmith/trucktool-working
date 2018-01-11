@@ -74,23 +74,23 @@
     height: 14rem;
     width: 9rem;
     padding: 5px;
-    /* top: 555px; */
     border-radius: 10px;
   }
 
   .fixL {
-    background-color: #6b6b6b8c;
+    background-color: #6666668c;
     position: fixed;
-    right: 5px;
+    /* right: 5px; */
     top: 5px;
     padding: 7px;
     border-radius: 10px;
-
+    left: 45%
+    /* font-size: 150% */
   }
 
   .supernavCont {
-    right: 5px;
+    right: 10px;
     position: fixed;
-    top: 90px;
+    top: 10px;
   }
 </style>
