@@ -1,10 +1,4 @@
 <template>
-<<<<<<< HEAD
-    <!-- fix update on product NOT WORKING -->
-
-
-=======
->>>>>>> da28241123e6a9acdbcbafb910b12725d51925ce
     <div>
         <!-- the bootstrap navbar-->
         <!-- <nav class="navbar navbar-fixed-top navbar--color--ghost navbar--size--xl" data-startColor="navbar--color--ghost" data-startSize="navbar--size--xl"
