@@ -10,41 +10,71 @@
         </div> -->
         <!-- <button v-if="!showEdit" @click="toggleEdit()">Edit</button> -->
         <!-- <i class="fa fa-minus-square-o" v-if="showEdit" @click="toggleEdit()"></i> -->
-        <div class=" ">
-            <i @click="toggleProductForm" class="fa fa-2x fa-plus" v-if="newP"></i>
-            <i @click="toggleProductForm" class="fa fa-2x fa-minus" v-if="!newP"></i>
-        </div>
 
 
         <div>
             <div class="create-product bg padding" v-if="showAddProductForm">
                 <form @submit.prevent="createProduct">
                     <div class="form-group">
+                        <label for="name">Name</label>
                         <input class="inline" size="15" type="text" name="name" placeholder="name" v-model="product.name" required>
-                        <input class="inline" size="15" type="text" name="quantity" placeholder="quantity" v-model="product.quantity" required>
-                        <input class="inline" size="15" type="text" name="unitPrice" placeholder="unitPrice" v-model="product.unitPrice" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="resalePrice">Price</label>
                         <input class="inline" size="15" type="text" name="resalePrice" placeholder="resalePrice" v-model="product.resalePrice">
+                    </div>
+                    <div class="form-group">
+                        <label for="sku">Sku</label>
                         <input class="inline" size="15" type="text" name="sku" placeholder="sku" v-model="product.sku">
+                    </div>
+                    <div class="form-group">
+                       <label for="tag">Tag</label>
                         <input class="inline" size="15" type="text" name="tag" placeholder="tag" v-model="product.tag">
+                    </div>
+                    <!-- <input class="inline" size="15" type="text" name="quantity" placeholder="quantity" v-model="product.quantity" > -->
+
+
+
+                    <div class="form-group">
                         <button type="submit" class="btn-xs btn-success">Add</button>
                     </div>
                 </form>
-
             </div>
         </div>
+
         <!-- <div v-for="p in check">
             <p>hi</p>
         </div> -->
         <!-- if in stock all products -->
         <div class="main-row">
-            <div class="col-lg-offset-1 col-lg-5 bg">
+            <div class="col-xs-12 col-lg-5 bg">
+                <h1 class="oos">Out of Stock</h1>
+                <div class="product" v-for="p in zeroProducts">
+                    <!-- <i class="fa fa-minus" v-if="!quantityCheck"></i> -->
+
+                    <transition name="fade">
+                        <div class="prod-container">
+                            <p> Name: {{p.name}} </p>
+                            <p>ID: {{p._id}}</p>
+                            <!-- <p>Quantity: {{p.quantity}}</p> -->
+                        </div>
+                    </transition>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-lg-offset-1 col-lg-5 bg">
                 <h1 class="ap">All Products</h1>
                 <button class="btn-xs btn-info" @click="toggleOther">toggle</button>
                 <button class="btn-xs btn-info" @click="toggleUpdate">Update</button>
+
+                <button @click="toggleProductForm" class="btn-xs btn-info" v-if="newP">Add New</button>
+                <button @click="toggleProductForm" class="btn-xs btn-danger" v-if="!newP">Cancel</button>
+
+
                 <div class="product" v-for="product in products.all">
                     <div v-if="update">
                         <div class="prod-container" v-if="!other">
-                            <p> Name: {{product.name}}</p>
+                            <p>Name: {{product.name}}</p>
                             <p>ID: {{product._id}}</p>
                             <p>Price: {{product.resalePrice}}</p>
                             <p>Quantity: {{product.quantity}}</p>
@@ -62,10 +92,6 @@
                             <div class="form-group">
                                 <label for="name">name</label>
                                 <input class="inline" size="15" type="text" name="name" placeholder="name" v-model="product.name">
-                                <label for="name">Quantity</label>
-                                <input class="inline" size="15" type="text" name="quantity" placeholder="quantity" v-model="product.quantity">
-                                <label for="name">Unit Price</label>
-                                <input class="inline" size="15" type="text" name="unitPrice" placeholder="unitPrice" v-model="product.unitPrice">
                                 <label for="name">Resale Price</label>
                                 <input class="inline" size="15" type="text" name="resalePrice" placeholder="resalePrice" v-model="product.resalePrice">
                                 <label for="name">Sku</label>
@@ -76,7 +102,6 @@
                                 <input class="inline" size="15" type="text" name="id" placeholder="id" v-model="product._id">
                                 <p class="inline">List:</p>
                                 <select name="select list" v-model="product.listId" class="listSelect">
-                                    <!-- <option disabled selected>Select List</option> -->
                                     <option v-for="list in lists" :value="list._id">{{list.name}}</option>
                                 </select>
                                 <button type="submit" class="btn-xs btn-success">Update</button>
@@ -94,18 +119,7 @@
             </div>
 
             <!-- if quantity is 0 on this table. -->
-            <div class="col-lg-5 bg">
-                <h1 class="oos">Out of Stock</h1>
-                <div class="product" v-for="p in zeroProducts">
-                    <!-- <i class="fa fa-minus" v-if="!quantityCheck"></i> -->
-                    <div class="prod-container">
-                        <p> Name: {{p.name}} </p>
-                        <p>ID: {{p._id}}</p>
-                        <!-- <p>Quantity: {{p.quantity}}</p> -->
-                    </div>
 
-                </div>
-            </div>
         </div>
 
         <!-- </div> -->
@@ -297,8 +311,21 @@
         background-color: rgb(214, 214, 190);
         border-radius: 25px;
         margin: 1rem;
+        width: 25rem;
     }
 
+    .fade-enter-active,
+    .fade-leave-active {
+        transition: opacity .5s;
+    }
+
+    .fade-enter,
+    .fade-leave-to
+    /* .fade-leave-active below version 2.1.8 */
+
+        {
+        opacity: 0;
+    }
 
     /* .actualProd{
         display: block;
