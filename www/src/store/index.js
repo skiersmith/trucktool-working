@@ -94,7 +94,7 @@ var store = new vuex.Store({
     setAllTagProducts(state, payload) {
 
       vue.set(state.allTagProducts, "all", payload)
-      debugger
+      
       console.log("aye"+state.allTagProducts)
     },
     setActiveNotes(state, payload) {

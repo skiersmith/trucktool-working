@@ -1,6 +1,6 @@
 <template>
   <div>
-<!-- #region -->
+    <!-- #region -->
 
     <!-- the bootstrap navbar-->
     <!-- <nav class="navbar navbar-fixed-top navbar--color--ghost navbar--size--xl" data-startColor="navbar--color--ghost" data-startSize="navbar--size--xl"
@@ -17,16 +17,42 @@
         <div class="logout-item">
           <div class="navbar-right navbar-text">
             <span @click="userLogout">
-              <p class="logout-header">Logout</p>
+              <p class="RL-header">Logout</p>
             </span>
           </div>
         </div>
       </div>
     </nav> -->
-   
-<!-- #endregion -->
 
-    <div class="fixL">
+    <!-- #endregion -->
+
+    <div class="nav-header">
+      <div class="nav-header-container">
+
+        <div>
+          <div>
+            <router-link class="RLwhite headDown3" :to="{name: 'Dashboard'}">
+              <h1>Organize</h1>
+            </router-link>
+          </div>
+        </div>
+        <div>
+          <div>
+            <router-link class="headDown2 RL-header Overview-header font" :to="{name: 'Overview'}">
+              <b>Overview</b>
+            </router-link>
+          </div>
+        </div>
+        <div>
+          <div class="headDown">
+            <b @click="userLogout" class="logout-header RL-header">Logout</b>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- <div class="fixL">
       <router-link class="routerhome" :to="{name: 'Dashboard'}">
         <h1 class="organize-header">Organize</h1>
       </router-link>
@@ -42,10 +68,10 @@
         </div>
         <div class="spacer4"></div>
         <div>
-          <b @click="userLogout" class="logout-header">Logout</b>
+          <b @click="userLogout" class="RL-header">Logout</b>
         </div>
       </div>
-    </div>
+    </div> -->
     <div class="spacer"></div>
     <!-- <h1>Organize Title Here</h1> -->
     <!-- <img class="logo" src="../assets/organizzlee.png"> -->
@@ -57,14 +83,14 @@
           </router-link>
         </div>
       </div> -->
-      <!-- <div class="overview-container">
+    <!-- <div class="overview-container">
         <div class="overview2">
           <router-link class="overview router-link-text" :to="{name: 'All'}">
             <b>Products</b>
           </router-link>
         </div>
       </div> -->
-      <!-- <div class="overview-container">
+    <!-- <div class="overview-container">
         <div class="overview3">
           <span class="textWhite" @click="userLogout">
             <p>Logout</p>
@@ -72,7 +98,7 @@
         </div>
       </div>
     </div> -->
-    
+
     <div class="categorysHeader container">
       <h1>{{user.name}}'s Categories</h1>
       <div class="header container-fluid">
@@ -254,7 +280,7 @@
     padding-right: 0px;
   }
 
-  
+
 
   @import url("https://fonts.googleapis.com/css?family=Lato:400,700,900");
   body {
@@ -263,15 +289,22 @@
     font-size: 17px;
     line-height: 1.6;
   }
+.headDown3{
+  position: relative;
+  top: -1rem;
 
+}
   .hero {
     position: relative;
     height: 60vh;
     z-index: -2;
     background: url("https://unsplash.it/2000/800?image=563") center top/cover no-repeat;
   }
-  .top{
-    top: 10px;  }
+
+  .top {
+    top: 10px;
+  }
+
   .overlay {
     position: absolute;
     z-index: -1;
@@ -302,74 +335,7 @@
     color: #4b4b4b;
   }
 
-  /* ===================================== */
-
-  /* ===== THE INTERESTING STUFF NOW ===== */
-
-  /* ===================================== */
-
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    margin: -10px 50px 0px;
-    border: none;
-    -webkit-transition: 0.4s;
-    transition: 0.4s;
-  }
-    /* --- navbar sizes --- */
-    /* --- navbar colors --- */
-
-  .navbar-center {
-    display: flex;
-    justify-content: center;
-  }
-
-  .navbar-brand {
-    font-size: 2.25rem;
-    font-weight: 900;
-    color: #4b4b4b;
-  }
-
-  .navbar--size--xl {
-    padding: 1px 0;
-  }
-
-  .navbar--size--lg {
-    padding: 2rem 0;
-  }
-
-  .navbar--size--md {
-    padding: 1rem 0;
-  }
-
-  .navbar--size--sm {
-    padding: 0;
-  }
-
-  .navbar--color--white {
-    background: #fff;
-  }
-
-  .navbar--color--primary {
-    background: #37ca7e;
-  }
-
-  .navbar--color--secondary {
-    background: #43a6dd;
-  }
-
-  .navbar--color--ghost {
-    background: rgba(0, 0, 0, 0.2);
-  }
-
-  .navbar--color--ghost .navbar-brand,
-  .navbar--color--ghost .navbar-text,
-  .navbar--color--ghost a {
-    color: #fff;
-  }
-
-
-  /* Normal stuff below */
+  
 
   .router-link-text {
     text-decoration: none;

@@ -59,13 +59,18 @@
     align-content: center;
   }
 
-  .logout-header {
-    color: darkred
-  }
 
-  .logout-header:hover {
+  .RL-header {
+    color: rgb(255, 251, 251)
+  }
+  .Overview-header:hover {
+    color: rgb(37, 220, 20);
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .logout-header:hover:hover {
     color: crimson;
-    text-decoration: underline;
+    text-decoration: none;
     cursor: pointer;
   }
 
@@ -95,5 +100,47 @@
     right: 10px;
     position: fixed;
     top: 10px;
+  }
+
+  .nav-header {
+    background-color: black;
+    height: 8rem;
+    width: 100vw;
+    top: 0px;
+    position: fixed;
+    /* display: flex; */
+    /* justify-content: space-around; */
+  }
+
+  .nav-header-container {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .headDown {
+    position: relative;
+    top: 3rem;
+
+  }
+  .headDown2 {
+    position: relative;
+    top: 1.3rem;
+  }
+  /* .headDown3 {
+    position: relative;
+    top: 0.5rem;
+  } */
+  
+  .font{
+    /* font-size: 10%; */
+  }
+
+  .RLwhite {
+    color: white;
+  }
+
+  .RLwhite:hover {
+    color: rgb(38, 151, 185);
+    text-decoration: none;
   }
 </style>

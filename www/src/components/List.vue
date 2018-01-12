@@ -14,12 +14,38 @@
                 </router-link>
                 <div class="navbar-right navbar-text">
                     <span @click="userLogout">
-                        <p class="logout-header">Logout</p>
+                        <p class="RL-header">Logout</p>
                     </span>
                 </div>
             </div>
         </nav> -->
-        <div class="fixL">
+
+        <div class="nav-header">
+            <div class="nav-header-container">
+
+                <div>
+                    <div>
+                        <router-link class="RLwhite headDown3" :to="{name: 'Dashboard'}">
+                            <h1 class="organize-header">Organize</h1>
+                        </router-link>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <router-link class="headDown4 RL-header Overview-header font" :to="{name: 'Overview'}">
+                            <b>Overview</b>
+                        </router-link>
+                    </div>
+                </div>
+                <div>
+                    <div class="headDown">
+                        <b @click="userLogout" class="logout-header RL-header">Logout</b>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="fixL">
                 <router-link class="routerhome" :to="{name: 'Dashboard'}">
                   <h1 class="organize-header">Organize</h1>
                 </router-link>
@@ -36,11 +62,11 @@
                   </div>
                   <div class="spacer4"></div>
                   <div>
-                    <p @click="userLogout" class="logout-header">Logout</p>
+                    <p @click="userLogout" class="RL-header">Logout</p>
                   </div>
                 </div>
-              </div>
-              <div class="spacer"></div>
+              </div> -->
+        <div class="spacer"></div>
         <div class="listHeaderC container">
             <div class="listheader">
                 <h2>{{list.name}}</h2>
@@ -204,6 +230,12 @@
         line-height: 1.6;
     }
 
+    .headDown4 {
+        position: relative;
+        top: 3rem;
+        font-size: 150%
+    }
+
     .hero {
         position: relative;
         height: 60vh;
@@ -254,7 +286,7 @@
         border: none;
         -webkit-transition: 0.4s;
         transition: 0.4s;
-      }
+    }
 
     .navbar-center {
         display: flex;
@@ -365,7 +397,7 @@
     }
 
     .listheader {
-        background-color:  rgba(31, 30, 30, 0.816);
+        background-color: rgba(31, 30, 30, 0.816);
         border-radius: 15px;
         color: rgb(250, 248, 248);
         display: inline block;

@@ -14,12 +14,34 @@
                 </router-link>
                 <div class="navbar-right navbar-text">
                     <span @click="userLogout">
-                        <p class="logout-header">Logout</p>
+                        <p class="RL-header">Logout</p>
                     </span>
                 </div>
             </div>
         </nav> -->
-        <div class="fixL">
+        <div class="nav-header">
+            <div class="nav-header-container">
+
+                <div>
+                    <div>
+                        <router-link class="RLwhite" :to="{name: 'Dashboard'}">
+                            <h1 class="organize-header">Organize</h1>
+                        </router-link>
+                    </div>
+                </div>
+                <div>
+
+                </div>
+                <div>
+                    <div class="headDown">
+                        <b @click="userLogout" class="logout-header RL-header">Logout</b>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- <div class="fixL">
             <router-link class="routerhome" :to="{name: 'Dashboard'}">
                 <h1 class="organize-header">Organize</h1>
             </router-link>
@@ -36,10 +58,10 @@
                 </div>
                 <div class="spacer4"></div>
                 <div>
-                    <b @click="userLogout" class="logout-header">Logout</b>
+                    <b @click="userLogout" class="RL-header">Logout</b>
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="spacer"></div>
         <div class="spacer"></div>
 
@@ -287,6 +309,7 @@
         mounted() {
             this.$store.dispatch('getTransactions')
             this.$store.dispatch('getAllLists')
+
         },
         methods: {
             userLogout() {
@@ -361,7 +384,7 @@
 
             },
             updateQuantity() {
-                debugger
+
                 dispatch('updateQuantity', { quantity: updateActualQuantity, productId: this.transaction.productId })
 
             },
@@ -589,6 +612,7 @@
         justify-content: space-around;
     }
 
+    
     .yooooo {
         position: fixed;
         top: 5px;
@@ -835,4 +859,6 @@
         margin: 1rem;
 
     }
+    
+
 </style>

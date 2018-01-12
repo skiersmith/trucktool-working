@@ -14,12 +14,39 @@
         </router-link>
         <div class="navbar-right navbar-text">
           <span @click="userLogout">
-            <p class="logout-header">Logout</p>
+            <p class="RL-header">Logout</p>
           </span>
         </div>
       </div>
     </nav> -->
-    <div class="fixL">
+   
+    <div class="nav-header">
+        <div class="nav-header-container">
+  
+          <div>
+            <div>
+              <router-link class="RLwhite headDown5" :to="{name: 'Dashboard'}">
+                <h1 class="organize-header">Organize</h1>
+              </router-link>
+            </div>
+          </div>
+          <div>
+            <div>
+              <router-link class="headDown4 RL-header Overview-header font" :to="{name: 'Overview'}">
+                <b>Overview</b>
+              </router-link>
+            </div>
+          </div>
+          <div>
+            <div class="headDown">
+              <b @click="userLogout" class="logout-header RL-header">Logout</b>
+            </div>
+          </div>
+        </div>
+      </div>
+   
+   
+    <!-- <div class="fixL">
       <router-link class="routerhome" :to="{name: 'Dashboard'}">
         <h1 class="organize-header">Organize</h1>
       </router-link>
@@ -36,10 +63,10 @@
         </div>
         <div class="spacer4"></div>
         <div>
-          <b @click="userLogout" class="logout-header">Logout</b>
+          <b @click="userLogout" class="RL-header">Logout</b>
         </div>
       </div>
-    </div>
+    </div> -->
     <div class="spacer"></div>
     <div class="category container-fluid">
       <router-link class="dashboard routerhome" :to="{name: 'Dashboard'}">
@@ -143,7 +170,16 @@
     font-size: 17px;
     line-height: 1.6;
   }
-
+  headDown5{
+    position: relative;
+    top: 2rem;
+    font-size: 120%
+  }
+  .headDown4 {
+    position: relative;
+    top: 3rem;
+    font-size: 150%
+  }
   .hero {
     position: relative;
     height: 60vh;
@@ -181,72 +217,7 @@
     color: #4b4b4b;
   }
 
-  /* ===================================== */
-
-  /* ===== THE INTERESTING STUFF NOW ===== */
-
-  /* ===================================== */
-
-  .navbar {
-    display: flex;
-    justify-content: space-around;
-    margin: -10px 50px 0px;
-    border: none;
-    -webkit-transition: 0.4s;
-    transition: 0.4s;
-  }
-
-  .navbar-center {
-    display: flex;
-    justify-content: center;
-  }
-
-  .navbar-brand {
-    font-size: 2.25rem;
-    font-weight: 900;
-    color: #4b4b4b;
-  }
-
-  .navbar--size--xl {
-    padding: 1px 0;
-  }
-
-  .navbar--size--lg {
-    padding: 2rem 0;
-  }
-
-  .navbar--size--md {
-    padding: 1rem 0;
-  }
-
-  .navbar--size--sm {
-    padding: 0;
-  }
-
-  .navbar--color--white {
-    background: #fff;
-  }
-
-  .navbar--color--primary {
-    background: #37ca7e;
-  }
-
-  .navbar--color--secondary {
-    background: #43a6dd;
-  }
-
-  .navbar--color--ghost {
-    background: rgba(0, 0, 0, 0.2);
-  }
-
-  .navbar--color--ghost .navbar-brand,
-  .navbar--color--ghost .navbar-text,
-  .navbar--color--ghost a {
-    color: #fff;
-  }
-
-
-  /* Normal stuff below */
+  
   .white{
     color: white;
 
