@@ -22,7 +22,7 @@ let defaultErrorHandler = (err, req, res, next) => {
 }
 
 //Default Urls 
-var whitelist = ['http://localhost:8080', 'https://quiet-eyrie-56379.herokuapp.com/'];
+var whitelist = ['http://localhost:8080', 'https://serene-lowlands-35394.herokuapp.com/'];
 var corsOptions = {
 	origin: function (origin, callback) {
 		var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
