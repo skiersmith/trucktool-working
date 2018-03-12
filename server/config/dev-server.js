@@ -29,6 +29,7 @@ function logger(req, res, next) {
 }
 
 // REGISTER MIDDLEWARE
+app.use(express.static('trucktool-server-vue' + '/../../www/dist'))
 app.use(session)
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))

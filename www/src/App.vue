@@ -1,18 +1,26 @@
 <template>
   <div id="app">
-    <!-- <error></error> -->
-    <router-view></router-view>
+
+    <!-- <img src="./assets/logo.png"> -->
+    <router-view/>
   </div>
 </template>
 
 <script>
-  import Error from './components/Error'
   export default {
     name: 'app',
-    components: {
-      Error
+    method: {
+      userLogout() {
+        this.$store.dispatch('logout', this.$store.state.user._id)
+      },
     },
-    mounted() {
+    computed: {
+      user() {
+        console.log(this.$store.state.user)
+        return this.$store.state.user
+      },
+    },
+    mounted(){
       this.$store.dispatch('authenticate')
     }
   }
@@ -26,19 +34,28 @@
     text-align: center;
     color: #2c3e50;
     margin-top: 60px;
-    background: rgb(253, 251, 251);
-    background-image: url(./assets/WebBackground1.png);
-    background-size: 2300px
   }
 
-  html {
-    background: rgb(252, 250, 250);
-    background-image: url(./assets/WebBackground1.png);
-    background-size: 2300px
+  .nav-header {
+    background-color: rgb(216, 103, 103);
+    height: 7rem;
+    width: 100vw;
+    top: 0px;
+    position: fixed;
+    left: 0px;
+    z-index: 2;
+    /* display: flex; */
+    /* justify-content: space-around; */
   }
 
-
-  .spacer {
+  .RLwhite {
+    color: white;
+  }
+  .RLwhite:hover {
+    color: rgb(38, 151, 185);
+    text-decoration: none;
+  }
+  .spacer10 {
     height: 10rem;
   }
 
@@ -50,97 +67,53 @@
     height: 4rem;
   }
 
-
-
-
-
-  .navCont-container {
-    display: flex;
-    align-content: center;
-  }
-
-
-  .RL-header {
-    color: rgb(255, 251, 251)
-  }
-  .Overview-header:hover {
-    color: rgb(37, 220, 20);
-    text-decoration: none;
-    cursor: pointer;
-  }
-  .logout-header:hover:hover {
-    color: crimson;
-    text-decoration: none;
-    cursor: pointer;
-  }
-
-  .navCont {
-    background-color: #6b6b6b8c;
-    height: 14rem;
-    width: 9rem;
-    padding: 5px;
-    border-radius: 10px;
-  }
-
-  .fixL {
-    background-color: #6666668c;
-    position: fixed;
-    /* right: 5px; */
-    top: 10px;
-    padding: 7px;
-    border-radius: 10px;
-    left: 10px;
-    width: 25rem;
-    height: 10rem;
-
-    /* font-size: 150% */
-  }
-
-  .supernavCont {
-    right: 10px;
-    position: fixed;
-    top: 10px;
-  }
-
-  .nav-header {
-    background-color: black;
-    height: 8rem;
-    width: 100vw;
-    top: 0px;
-    position: fixed;
-    /* display: flex; */
-    /* justify-content: space-around; */
-  }
-
   .nav-header-container {
     display: flex;
     justify-content: space-around;
   }
 
-  .headDown {
-    position: relative;
-    top: 3rem;
+
+  .mainVault {
+    background-color: rgb(196, 231, 255);
 
   }
-  .headDown2 {
-    position: relative;
-    top: 1.3rem;
+
+  .mainDiv {
+    /* background-color: rgb(252, 243, 232); */
+    /* height: 20rem; */
+    width: 100vw;
+    /* margin: 1rem; */
+    padding: 1rem;
+    /* display: flex;
+    align-content: space-around; */
+    /* border-radius: 3px; */
+    /* border-bottom-style s: solid; */
+    /* height: 6rem; */
   }
-  /* .headDown3 {
-    position: relative;
-    top: 0.5rem;
-  } */
-  
-  .font{
-    /* font-size: 10%; */
+  .mainDiv2 {
+    /* background-color: rgb(252, 243, 232); */
+    /* height: 20rem; */
+    /* width: 50vw; */
+    /* margin: 1rem; */
+    /* padding: 1rem; */
+    /* display: flex;
+    align-content: space-around; */
+    /* border-radius: 3px; */
+    /* border-bottom-style: solid; */
+    /* height: 6rem; */
+    color: black;
   }
 
-  .RLwhite {
-    color: white;
+  .mainDiv:hover {
+    background-color: burlywood;
   }
 
-  .RLwhite:hover {
-    color: rgb(38, 151, 185);
-    text-decoration: none;
+  .keepStat-Container {
+    display: flex;
+    justify-content: space-around
+  }
+  .keepImg{
+    max-width: 250px;
+    max-height: 150px;
   }
 </style>
