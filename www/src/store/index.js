@@ -8,13 +8,13 @@ var zipcode_to_timezone = require('zipcode-to-timezone');
 var production = !window.location.host.includes('localhost');
 var baseUrl = production ? '//serene-lowlands-35394.herokuapp.com/' : '//localhost:5000/';
 let api = axios.create({
-    baseURL: '//localhost:5000/api/',
+    baseURL: baseUrl + 'api',
     timeout: 2000,
     withCredentials: true
 })
 
 let auth = axios.create({
-    baseURL: '//localhost:5000/',
+    baseURL: baseUrl,
     timeout: 2000,
     withCredentials: true
 })
