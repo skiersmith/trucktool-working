@@ -6,7 +6,7 @@ import { loadavg } from 'os';
 var zipcode_to_timezone = require('zipcode-to-timezone');
 
 var production = !window.location.host.includes('localhost');
-var baseUrl = production ? '//quiet-eyrie-56379.herokuapp.com/' : '//localhost:5000/';
+var baseUrl = production ? '//serene-lowlands-35394.herokuapp.com/' : '//localhost:5000/';
 let api = axios.create({
     baseURL: '//localhost:5000/api/',
     timeout: 2000,
