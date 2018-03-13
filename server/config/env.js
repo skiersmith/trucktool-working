@@ -1,10 +1,10 @@
 // LOCAL DEV VARIABLES
 let env = {
 	NODE_ENV: 'development',
-	PORT: 5000,
+	PORT: 3000,
 	DBPROTOCOL: 'mongodb',
-	DBUSERNAME: 'trucktool',
-	DBPASSWORD: 'trucktool',
+	DBUSERNAME: 'trucktool2',
+	DBPASSWORD: 'trucktool2',
 	DBHOST: 'ds012578.mlab.com:12578',
 	DBNAME: 'trucktool',
 	SERVERNAME: 'dev-server'
