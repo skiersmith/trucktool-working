@@ -2,7 +2,7 @@
   "name": "trucktoolmain",
   "version": "1.0.0",
   "description": "The web interface for Organizzle",
-  "author": "Hunter Smith, Morgan Waters",
+  "author": "Hunter Smith",
   "private": true,
   "scripts": {
     "dev": "node index.js",
