@@ -6,7 +6,6 @@ let connection = mongoose.connection;
 
 // Establishes MongoDb Connection
 mongoose.connect(process.env.CONNECTIONSTRING, {
-	useMongoClient: true,
 	keepAlive: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } }
 });
 
