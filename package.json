@@ -1,7 +1,7 @@
 {
   "name": "trucktoolmain",
   "version": "1.0.0",
-  "description": "The web interface for Organizzle",
+  "description": "The web interface for Trucktool",
   "author": "Hunter Smith",
   "private": true,
   "scripts": {
