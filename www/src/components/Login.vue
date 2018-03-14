@@ -43,7 +43,7 @@
         <div class="registerhere">
             <div class="regButton">
                 <p @click="toggleRegForm">
-                    <span @click="regSeen = !regSeen">Don't have an account? Register here.</span>
+                    <span v-if="!regSeen" @click="regSeen = !regSeen">Don't have an account? Register here.</span>
                 </p>
                 <div v-if="regSeen">
                     <form class="form-horizontal reg-container" role="form">
@@ -128,7 +128,7 @@
     }
 
     .loginbox {
-        background-color: rgba(78, 54, 32, 1);
+        background-color: rgba(31, 30, 30, 0.816);
         padding: .5rem;
         width: 90rem;
         border-radius: 25px;

@@ -17,7 +17,22 @@ router.post('/register', (req, res) => {
       res.send({ error: err })
     })
 })
-
+router.put('/updateuser', (req, res) => {
+  Users.findByIdAndUpdate(req.session.uid, req.body)
+    .then((user) => {
+      // req.session.uid = user._id
+      // req.session.save()
+      user.password = null
+      delete user.password
+      res.send({
+        message: 'Successfully updated user account',
+        data: user
+      })
+    })
+    .catch(err => {
+      res.send({ error: err })
+    })
+})
 
 router.post('/login', (req, res) => {
   Users.findOne({ email: req.body.email })

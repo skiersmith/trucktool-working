@@ -54,8 +54,14 @@
 
                     <transition name="fade">
                         <div class="prod-container">
-                            <p> Name: {{p.name}} </p>
-                            <p>ID: {{p._id}}</p>
+                            <div>
+                                <b class="inline">Name:</b>
+                                <p>{{p.name}} </p>
+                            </div>
+                            <div>
+                                <b class="inline">ID:</b>
+                                <p>{{p._id}}</p>
+                            </div>
                             <!-- <p>Quantity: {{p.quantity}}</p> -->
                         </div>
                     </transition>
@@ -74,20 +80,29 @@
                 <div class="product" v-for="product in products.all">
                     <div v-if="update">
                         <div class="prod-container" v-if="!other">
-                            <p>Name: {{product.name}}</p>
-                            <p>ID: {{product._id}}</p>
-                            <p>Price: {{product.resalePrice}}</p>
-                            <p>Quantity: {{product.quantity}}</p>
+                            <b>Name:</b>
+                            <p>{{product.name}}</p>
+                            <b>ID:</b>
+                            <p>{{product._id}}</p>
+                            <b>Price:</b>
+                            <p>{{product.resalePrice}}</p>
+                            <b>Quantity:</b>
+                            <p>{{product.quantity}}</p>
                         </div>
                         <div class="prod-container" v-if="other">
-                            <p> Name: {{product.name}}</p>
-                            <p>tag: {{product.tag}}</p>
-                            <p>Sku: {{product.sku}}</p>
-                            <p>ListId: {{product.listId}}</p>
+                            <b>Name:</b>
+                            <p>{{product.name}}</p>
+                            <b>tag:</b>
+                            <p>{{product.tag}}</p>
+                            <b>Sku:</b>
+                            <p>{{product.sku}}</p>
+                            <b>ListId:</b>
+                            <p>{{product.listId}}</p>
                         </div>
                     </div>
                     <div class="margin padding" v-if="!update">
-                        <p> Name: {{product.name}}</p>
+                        <b>Product:</b>
+                        <p>{{product.name}}</p>
                         <form @submit.prevent="updateProduct(product)">
                             <div class="form-group">
                                 <label for="name">name</label>
@@ -224,7 +239,7 @@
     .fa-edit:hover {
         color: #888;
     }
-
+    
     .list {
         border-radius: 5px;
         height: 600px;
@@ -303,7 +318,7 @@
 
     .prod-container {
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
         /* background-color: bisque; */
     }
 

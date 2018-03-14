@@ -1,106 +1,57 @@
 <template>
   <div>
-    <!-- the bootstrap navbar-->
-    <!-- <nav class="navbar navbar-fixed-top navbar--color--ghost navbar--size--xl" data-startColor="navbar--color--ghost" data-startSize="navbar--size--xl"
-      data-intoColor="navbar--color--secondary" data-intoSize="navbar--size--md">
-      <div class="container">
-        <div class="navbar-header">
-          <router-link class="dashboard routerhome navbar-brand" :to="{name: 'Dashboard'}">
-            <p class="organize-header">Organize</p>
-          </router-link>
-        </div>
-        <router-link class="overview routerhome navbar-center" :to="{name: 'Overview'}">
-          <p class="overview-header">Overview</p>
-        </router-link>
-        <div class="navbar-right navbar-text">
-          <span @click="userLogout">
-            <p class="RL-header">Logout</p>
-          </span>
-        </div>
-      </div>
-    </nav> -->
-   
     <div class="nav-header">
-        <div class="nav-header-container">
-  
+      <div class="nav-header-container">
+        <div>
           <div>
-            <div>
-              <router-link class="RLwhite headDown5" :to="{name: 'Dashboard'}">
-                <h1 class="organize-header">Organize</h1>
-              </router-link>
-            </div>
+            <router-link class="RLwhite headDown5" :to="{name: 'Dashboard'}">
+              <h1 class="organize-header">Organize</h1>
+            </router-link>
           </div>
+        </div>
+        <div>
           <div>
-            <div>
-              <router-link class="headDown4 RL-header Overview-header font" :to="{name: 'Overview'}">
-                <b>Overview</b>
-              </router-link>
-            </div>
+            <router-link class="headDown4 RL-header Overview-header font" :to="{name: 'Overview'}">
+              <b>Overview</b>
+            </router-link>
           </div>
-          <div>
-            <div class="headDown">
-              <b @click="userLogout" class="logout-header RL-header">Logout</b>
-            </div>
+        </div>
+        <div>
+          <div class="headDown">
+            <b @click="userLogout" class="logout-header RL-header">Logout</b>
           </div>
         </div>
       </div>
-   
-   
-    <!-- <div class="fixL">
-      <router-link class="routerhome" :to="{name: 'Dashboard'}">
-        <h1 class="organize-header">Organize</h1>
-      </router-link>
     </div>
-
-    <div class="supernavCont">
-      <div class="navCont">
-        <div class="spacer1"></div>
-
-        <div>
-          <router-link class="overview routerhome navbar-center" :to="{name: 'Overview'}">
-            <b class="overview-header">Overview</b>
-          </router-link>
-        </div>
-        <div class="spacer4"></div>
-        <div>
-          <b @click="userLogout" class="RL-header">Logout</b>
-        </div>
-      </div>
-    </div> -->
     <div class="spacer"></div>
-    <div class="category container-fluid">
-      <router-link class="dashboard routerhome" :to="{name: 'Dashboard'}">
-        <b>Home</b>
-      </router-link>
-
-      <div class="categoryHeaderC container">
-        <div class="categoryheader">
-          <h2 class="white">{{category.name}}</h2>
-          <h4 v-if="category.description" class="white">Description: {{category.description}}</h4>
-          <button class="btn-success" @click="toggleListForm">New List</button>
-          <button v-if="!deleteList" class="btn-danger" @click="toggleDeleteList">Delete</button>
-          <button v-else class="btn-danger" @click="toggleDeleteList">Cancel</button>
-        </div>
-      </div>
-      <div class="createList" v-if="showAddListForm">
-        <form @submit.prevent="createList">
-          <input type="text" name="name" placeholder="name" v-model="list.name" required>
-          <input type="text" name="description" placeholder="description" v-model="list.description">
-          <button type="submit" class="btn btn-success btn-sm">Add</button>
-        </form>
-      </div>
-      <div class="row dalists">
-        <div class="listName col-sm-3" v-for="list in lists">
-          <router-link class="router-link-text " :to="{name: 'List', params: {listId: list._id, categoryId: list.categoryId}}">
-            <h3>{{list.name}}</h3>
-          </router-link>
-          <div v-if="deleteList">
-              <button @click="removeList(list)" class="btn-danger btn-xs">Delete</button>
-            </div>
-          <!-- "{ name: 'List', params: {categoryId: list.categoryId } } " -->
-        </div>
+    <div class="categoryHeaderC container">
+      <div class="categoryheader">
+        <h2 class="white">{{category.name}}</h2>
+        <h4 v-if="category.description" class="white">Description: {{category.description}}</h4>
+        <button class="btn-success" @click="toggleListForm">New List</button>
+        <button v-if="!deleteList" class="btn-danger" @click="toggleDeleteList">Delete</button>
+        <button v-else class="btn-danger" @click="toggleDeleteList">Cancel</button>
       </div>
     </div>
+    <div class="createList" v-if="showAddListForm">
+      <form @submit.prevent="createList">
+        <input type="text" name="name" placeholder="name" v-model="list.name" required>
+        <input type="text" name="description" placeholder="description" v-model="list.description">
+        <button type="submit" class="btn btn-success btn-sm">Add</button>
+      </form>
+    </div>
+    <div class="row dalists">
+      <div class="listName col-sm-3" v-for="list in lists">
+        <router-link class="router-link-text " :to="{name: 'List', params: {listId: list._id, categoryId: list.categoryId}}">
+          <h3>{{list.name}}</h3>
+        </router-link>
+        <div v-if="deleteList">
+          <button @click="removeList(list)" class="btn-danger btn-xs">Delete</button>
+        </div>
+        <!-- "{ name: 'List', params: {categoryId: list.categoryId } } " -->
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -170,16 +121,19 @@
     font-size: 17px;
     line-height: 1.6;
   }
-  headDown5{
+
+  headDown5 {
     position: relative;
     top: 2rem;
     font-size: 120%
   }
+
   .headDown4 {
     position: relative;
     top: 3rem;
     font-size: 150%
   }
+
   .hero {
     position: relative;
     height: 60vh;
@@ -217,11 +171,12 @@
     color: #4b4b4b;
   }
 
-  
-  .white{
+
+  .white {
     color: white;
 
   }
+
   .routerhome {
     color: black;
   }
@@ -256,12 +211,20 @@
   }
 
   .categoryheader {
-    background-color:  rgba(31, 30, 30, 0.816);
+    background-color: rgba(31, 30, 30, 0.816);
+    width: 60rem;
+    border-radius: 15px;
+    padding: 1.5rem;
+    color: rgb(255, 254, 254);
+  }
+  /* {
+    background-color: rgba(31, 30, 30, 0.816);
     border-radius: 15px;
     color: rgb(250, 248, 248);
     display: inline block;
     padding: 1rem;
-  }
+    width: 50rem;
+  } */
 
   .drawlist {
     background-color: white;

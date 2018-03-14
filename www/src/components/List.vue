@@ -74,7 +74,7 @@
                 <button class="btn-success btn-xs margin" @click="toggleProductForm">New Product</button>
             </div>
         </div>
-
+        <div class="spacer"></div>
         <!-- <div class="list-body">
             <div class="productt">
             </div>
@@ -397,12 +397,19 @@
     }
 
     .listheader {
+    background-color: rgba(31, 30, 30, 0.816);
+    width: 60rem;
+    border-radius: 15px;
+    padding: 1.5rem;
+    color: rgb(255, 254, 254);
+  }
+   /* {
         background-color: rgba(31, 30, 30, 0.816);
         border-radius: 15px;
         color: rgb(250, 248, 248);
         display: inline block;
         padding: 1rem;
-    }
+    } */
 
     /* .product {
         padding-top: 1rem;

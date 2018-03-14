@@ -63,15 +63,21 @@
   .RL-header {
     color: rgb(255, 251, 251)
   }
+
   .Overview-header:hover {
     color: rgb(37, 220, 20);
     text-decoration: none;
     cursor: pointer;
   }
+
   .logout-header:hover:hover {
     color: crimson;
     text-decoration: none;
     cursor: pointer;
+  }
+
+  .logout-header {
+    font-size: 1.9rem;
   }
 
   .navCont {
@@ -122,16 +128,18 @@
     top: 3rem;
 
   }
+
   .headDown2 {
     position: relative;
-    top: 1.3rem;
+    top: 1.8rem;
   }
+
   /* .headDown3 {
     position: relative;
     top: 0.5rem;
   } */
-  
-  .font{
+
+  .font {
     /* font-size: 10%; */
   }
 

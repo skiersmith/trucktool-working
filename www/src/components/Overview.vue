@@ -1,24 +1,6 @@
 <template>
     <div>
-        <!-- the bootstrap navbar-->
-        <!-- <nav class="navbar navbar-fixed-top navbar--color--ghost navbar--size--xl" data-startColor="navbar--color--ghost" data-startSize="navbar--size--xl"
-            data-intoColor="navbar--color--secondary" data-intoSize="navbar--size--md">
-            <div class="container">
-                <div class="navbar-header">
-                    <router-link class="dashboard routerhome navbar-brand" :to="{name: 'Dashboard'}">
-                        <p class="organize-header">Organize</p>
-                    </router-link>
-                </div>
-                <router-link class="overview routerhome navbar-center" :to="{name: 'Overview'}">
-                    <p class="overview-header">Overview</p>
-                </router-link>
-                <div class="navbar-right navbar-text">
-                    <span @click="userLogout">
-                        <p class="RL-header">Logout</p>
-                    </span>
-                </div>
-            </div>
-        </nav> -->
+
         <div class="nav-header">
             <div class="nav-header-container">
 
@@ -63,30 +45,36 @@
             </div>
         </div> -->
         <div class="spacer"></div>
-        <div class="spacer"></div>
 
         <div class="title">
             <!-- <h1>Organize Title Here</h1> -->
         </div>
-        <div class="pimg container">
+        <!-- <div class="pimg container">
             <img class="pGuy" src="../assets/pixel-guy.png">
-        </div>
+        </div> -->
         <div class="baseContainer2 bc2-container">
 
             <div>
-                <p>Ideal Net Profit ${{calc}}</p>
-                <p>Inventory: {{totalInv}}</p>
+                <b>Ideal Net Profit:</b>
+                <p>${{calc}}</p>
             </div>
             <div>
-                <p>yo</p>
+                <b>More Stuff:</b>
+                <!-- <p>yo</p> -->
             </div>
             <div>
-                <p>Total Cost: ${{Purchase1}}</p>
-                <p>Total Sale: ${{Sale1}}</p>
-                <p>Total Profit: ${{Profit}}</p>
+                <b>Total Cost:</b>
+                <p> ${{Purchase1}}</p>
+                <b>Total Sale:</b>
+                <p> ${{Sale1}}</p>
+                <b>Total Profit:</b>
+                <p> ${{Profit}}</p>
             </div>
         </div>
         <br>
+        <router-link class="" :to="{name: 'Report'}">
+            <b class="overview-header">Report</b>
+        </router-link>
         <!-- <div class="baseContainer">
             <form @submit.prevent="createProduct">
                 <div class="form-group">
@@ -135,7 +123,9 @@
                                     <input type="text" class="tBlack" name="tag" placeholder="name" v-model="transaction.tag" /> -->
                                     <label for="productId">productId.</label>
                                     <input type="text" class="tBlack" name="productId" placeholder="productId" v-model="transaction.productId" />
-                                    <button type="submit" @click="getQuantity" class="btn-xs btn-primary">New Transaction</button>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" @click="getQuantity" class="btn-xs btn-primary padding1">New Transaction</button>
                                 </div>
                             </form>
 
@@ -160,7 +150,9 @@
                                     <input type="text" class="tBlack" name="tag" placeholder="name" v-model="transaction.tag" /> -->
                                     <label for="productId">productId.</label>
                                     <input type="text" class="tBlack" name="productId" placeholder="productId" v-model="transaction.productId" />
-                                    <button type="submit" @click="getNegQuantity" class="btn-xs btn-primary">New Transaction</button>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" @click="getNegQuantity" class="btn-xs btn-primary padding1">New Transaction</button>
                                 </div>
                             </form>
 
@@ -182,12 +174,19 @@
                         </form>
                     </div>
                 </div>
+                <h3>Search by tag: {{tag}} </h3>
+                <div class="baseContainer3 width2">
+                    <form class="form-inline" @submit.prevent="getProductsByTag">
+                        <div class="form-group">
+                            <input type="text" class="" name="tag" placeholder="tag" v-model="tag" />
+                            <button type="submit" class="btn-xs btn-primary">Get Products</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
         <br>
-        <router-link class="" :to="{name: 'Report'}">
-            <b class="overview-header">Report</b>
-        </router-link>
+
         <!-- <div v-if="hideAllProducts">
                 <div class="baseContainer" v-for="product in allProducts.all">
                     {{product.name}} -
@@ -231,23 +230,14 @@
             </div> -->
         </div>
         <div class="tag-block">
-            <h3>Search by tag: {{tag}} </h3>
-            <div>
-                <form class="form-inline" @submit.prevent="getProductsByTag">
-                    <div class="form-group">
-                        <input type="text" class="" name="tag" placeholder="tag" v-model="tag" />
-                        <button type="submit" class="btn-xs btn-primary">Get Products</button>
-                    </div>
-                </form>
-            </div>
             <div class="row">
                 <div class="col-sm-offset-1 col-lg-offset-2">
                     <div class="newContainer col-sm-5 col-lg-3" v-for="product in products">
                         <div class="product">
-                            <h4>{{product.name}} </h4>
-                            <P>Id: {{product._id}} - </P>
-                            <b>Qty:</b>
-                            <p>{{product.quantity}}</p>
+                        <b class="fontsize">{{product.name}} </b>
+                        <P>Id: {{product._id}} - </P>
+                        <b>Qty:</b>
+                        <p>{{product.quantity}}</p>
                         </div>
                     </div>
                 </div>
@@ -612,7 +602,10 @@
         justify-content: space-around;
     }
 
-    
+    .fontsize {
+        font-size: 175%;
+    }
+
     .yooooo {
         position: fixed;
         top: 5px;
@@ -620,6 +613,10 @@
 
     .padding {
         padding: 2rem;
+    }
+
+    .padding1 {
+        padding: 1rem;
     }
 
     .width {
@@ -667,73 +664,6 @@
         color: #4b4b4b;
     }
 
-    /* ===================================== */
-
-    /* ===== THE INTERESTING STUFF NOW ===== */
-
-    /* ===================================== */
-
-    .navbar {
-        display: flex;
-        justify-content: space-around;
-        margin: 0px 50px 0px;
-        border: none;
-        -webkit-transition: 0.4s;
-        transition: 0.4s;
-    }
-
-    .navbar-center {
-        display: flex;
-        justify-content: center;
-    }
-
-    .navbar-brand {
-        font-size: 2.25rem;
-        font-weight: 900;
-        color: #4b4b4b;
-    }
-
-    .navbar--size--xl {
-        padding: 1px 0;
-    }
-
-    .navbar--size--lg {
-        padding: 2rem 0;
-    }
-
-    .navbar--size--md {
-        padding: 1rem 0;
-    }
-
-    .navbar--size--sm {
-        padding: 0;
-    }
-
-    .navbar--color--white {
-        background: #fff;
-    }
-
-    .navbar--color--primary {
-        background: #37ca7e;
-    }
-
-    .navbar--color--secondary {
-        background: #43a6dd;
-    }
-
-    .navbar--color--ghost {
-        background: rgba(0, 0, 0, 0.2);
-    }
-
-    .navbar--color--ghost .navbar-brand,
-    .navbar--color--ghost .navbar-text,
-    .navbar--color--ghost a {
-        color: #fff;
-    }
-
-
-    /* Normal stuff below */
-
     .routerhome {
         color: black;
     }
@@ -760,12 +690,13 @@
         margin: 1rem;
         color: black;
     }
+    
 
     .baseContainer2 {
         background-color: rgb(66, 79, 131);
         padding: 1rem;
         margin: 0rem 1rem 1rem 1rem;
-        border-radius: 25px;
+        /* border-radius: 25px; */
         color: white;
     }
 
@@ -859,6 +790,4 @@
         margin: 1rem;
 
     }
-    
-
 </style>

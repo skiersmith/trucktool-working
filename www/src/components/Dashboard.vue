@@ -106,7 +106,7 @@
         <button v-if="addCatButt" @click="toggleCatButt" class="btn-xs btn-success">New Category</button>
         <button v-if="!addCatButt" @click="toggleCatButt" class="btn-danger margins" type="submit">Cancel</button>
 
-        <button v-if="!deleteCat && addCatButt" class="btn-xs btn-danger" @click="toggleDeleteCat">Delete</button>
+        <button v-if="!deleteCat && addCatButt" class="btn-xs btn-danger" @click="toggleDeleteCat">Delete Category</button>
         <button v-if="deleteCat && addCatButt" class="btn-xs btn-danger" @click="toggleDeleteCat">Cancel</button>
       </div>
     </div>

@@ -7,11 +7,14 @@
             <i class="fa fa-edit" @click="toggleProdBody"></i>
             <div class="product-container">
                 <div v-if="prodBodySeen" class="product-body">
-                    <p>Quantity: {{product.quantity}}</p>
-
-                    <p>Price:{{product.resalePrice}}</p>
+                    <b>Quantity:</b>
+                    <p>{{product.quantity}}</p>
+                    <b>Price:</b>
+                    <p>{{product.resalePrice}}</p>
+                    <b>Sku:</b>
                     <p>{{product.sku}}</p>
-                    <p>Tags: {{product.tag}}</p>
+                    <b>Tags:</b>
+                    <p>{{product.tag}}</p>
 
                     <div class="the-lists">
                         <form @change="moveProductToDifferentList">
