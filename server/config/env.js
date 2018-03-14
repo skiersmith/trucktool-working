@@ -3,8 +3,8 @@ let env = {
 	NODE_ENV: 'development',
 	PORT: 5000,
 	DBPROTOCOL: 'mongodb',
-	DBUSERNAME: 'trucktool2',
-	DBPASSWORD: 'trucktool2',
+	DBUSERNAME: 'trucktool',
+	DBPASSWORD: 'trucktool',
 	DBHOST: 'ds012578.mlab.com:12578',
 	DBNAME: 'trucktool',
 	SERVERNAME: 'dev-server'

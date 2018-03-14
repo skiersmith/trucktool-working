@@ -14,8 +14,8 @@ const models = {
   },
   transaction: {
     name: 'Transaction',
-    endpoint: 'transactions'
-    // useCustomRoutes: true
+    endpoint: 'transactions',
+    useCustomRoutes: true
   },
   user: {
     name: 'User',

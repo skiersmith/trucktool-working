@@ -19,8 +19,7 @@ var schema = new mongoose.Schema({
     CENSUS_MAILING_ADDRESS_STATE: { type: String},
     CENSUS_MAILING_ADDRESS_ZIP_CODE: { type: String},
     Called: { type: Boolean},
-    userId: { type: ObjectId, ref: models.user}
-    
+    UserId: { type: ObjectId, ref: models.user}
 });
 
 module.exports = mongoose.model(models.record.name, schema);

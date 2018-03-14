@@ -1,18 +1,26 @@
 <template>
   <div id="app">
-    <!-- <error></error> -->
-    <router-view></router-view>
+
+    <!-- <img src="./assets/logo.png"> -->
+    <router-view/>
   </div>
 </template>
 
 <script>
-  import Error from './components/Error'
   export default {
     name: 'app',
-    components: {
-      Error
+    method: {
+      userLogout() {
+        this.$store.dispatch('logout', this.$store.state.user._id)
+      },
     },
-    mounted() {
+    computed: {
+      user() {
+        console.log(this.$store.state.user)
+        return this.$store.state.user
+      },
+    },
+    mounted(){
       this.$store.dispatch('authenticate')
     }
   }
@@ -26,19 +34,28 @@
     text-align: center;
     color: #2c3e50;
     margin-top: 60px;
-    background: rgb(253, 251, 251);
-    background-image: url(./assets/WebBackground1.png);
-    background-size: 2300px
   }
 
-  html {
-    background: rgb(252, 250, 250);
-    background-image: url(./assets/WebBackground1.png);
-    background-size: 2300px
+  .nav-header {
+    background-color: rgb(216, 103, 103);
+    height: 7rem;
+    width: 100vw;
+    top: 0px;
+    position: fixed;
+    left: 0px;
+    z-index: 2;
+    /* display: flex; */
+    /* justify-content: space-around; */
   }
 
-
-  .spacer {
+  .RLwhite {
+    color: white;
+  }
+  .RLwhite:hover {
+    color: rgb(38, 151, 185);
+    text-decoration: none;
+  }
+  .spacer10 {
     height: 10rem;
   }
 
@@ -50,11 +67,7 @@
     height: 4rem;
   }
 
-
-
-
-
-  .navCont-container {
+  .nav-header-container {
     display: flex;
     align-content: center;
   }
@@ -86,39 +99,46 @@
     width: 9rem;
     padding: 5px;
     border-radius: 10px;
+    justify-content: space-around;
   }
 
-  .fixL {
-    background-color: #6666668c;
-    position: fixed;
-    /* right: 5px; */
-    top: 10px;
-    padding: 7px;
-    border-radius: 10px;
-    left: 10px;
-    width: 25rem;
-    height: 10rem;
 
-    /* font-size: 150% */
+  .mainVault {
+    background-color: rgb(196, 231, 255);
+
   }
 
-  .supernavCont {
-    right: 10px;
-    position: fixed;
-    top: 10px;
-  }
-
-  .nav-header {
-    background-color: black;
-    height: 8rem;
+  .mainDiv {
+    /* background-color: rgb(252, 243, 232); */
+    /* height: 20rem; */
     width: 100vw;
-    top: 0px;
-    position: fixed;
-    /* display: flex; */
-    /* justify-content: space-around; */
+    /* margin: 1rem; */
+    padding: 1rem;
+    /* display: flex;
+    align-content: space-around; */
+    /* border-radius: 3px; */
+    /* border-bottom-style s: solid; */
+    /* height: 6rem; */
+  }
+  .mainDiv2 {
+    /* background-color: rgb(252, 243, 232); */
+    /* height: 20rem; */
+    /* width: 50vw; */
+    /* margin: 1rem; */
+    /* padding: 1rem; */
+    /* display: flex;
+    align-content: space-around; */
+    /* border-radius: 3px; */
+    /* border-bottom-style: solid; */
+    /* height: 6rem; */
+    color: black;
   }
 
-  .nav-header-container {
+  .mainDiv:hover {
+    background-color: burlywood;
+  }
+
+  .keepStat-Container {
     display: flex;
     justify-content: space-around;
   }
@@ -145,10 +165,10 @@
 
   .RLwhite {
     color: white;
+    justify-content: space-around
   }
-
-  .RLwhite:hover {
-    color: rgb(38, 151, 185);
-    text-decoration: none;
+  .keepImg{
+    max-width: 250px;
+    max-height: 150px;
   }
 </style>

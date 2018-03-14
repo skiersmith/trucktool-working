@@ -1,52 +1,60 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Dashboard from 'components/Dashboard'
-import Category from 'components/Category'
-import Login from 'components/Login'
-import List from 'components/List'
-import Overview from 'components/Overview'
-import Product from 'components/Product'
-import All from 'components/All'
-import Report from 'components/Report'
+import Register from '../components/Register'
+import Home from '../components/Home'
+import Account from '../components/Account'
+import Keep from '../components/Keep'
+import Vault from '../components/Vault'
+import Good from '../components/Good'
+import Admin from '../components/Admin'
+import Test from '../components/Test'
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/',
-      name: 'Dashboard',
-      component: Dashboard
-    }, {
-      path: '/categorys/:categoryId',
-      props: true,
-      name: 'Category',
-      component: Category
-    }, {
-      path: '/categorys/:categoryId/lists/:listId',
-      props: true,
-      name: 'List',
-      component: List
-    }, {
-      path: '/login',
-      name: 'Login',
-      component: Login
-    }, {
-      path: '/overview',
-      name: 'Overview',
-      component: Overview,
-      props: true
-    }, {
-      path: '/all',
-      props: true,
-      name: 'All',
-      component: All
+      path: '/register',
+      name: 'Register',
+      component: Register
     },
     {
-      path: '/report',
-      name: 'Report',
-      component: Report,
+      path: '/',
+      name: 'Home',
+      component: Home
+    },
+    {
+      path: '/account',
+      name: 'Account',
+      component: Account
+    },
+    {
+      path: '/keep',
+      name: 'Keep',
+      component: Keep
+    },
+    {
+      path: '/vault/:vaultId',
+      name: 'Vault',
+      component: Vault,
       props: true
-    }
-
+    },
+    {
+      path: '/good',
+      name: 'Good',
+      component: Good,
+    },
+    {
+      path: '/admin',
+      name: 'Admin',
+      component: Admin,
+    },
+    {
+      path: '/test',
+      name: 'Test',
+      component: Test,
+    },
+   
+    
+    
   ]
 })
