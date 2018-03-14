@@ -2,18 +2,18 @@
 
 
 // let Dashboard = require('../models/category')
-// let Product = require('../models/product')
+let User = require('../models/user')
 
 
 module.exports = {
-  // userCategory: {
-  //   path: '/userboards',
-  //   reqType: 'get',
+  // updateUser: {
+  //   path: '/updateuser/user/:_id',
+  //   reqType: 'put',
   //   method(req, res, next) {
-  //     let action = 'Find User Dashboard'
-  //     Dashboard.find({ creatorId: req.session.uid })
-  //       .then(dashboard => {
-  //         res.send(handleResponse(action, dashboard))
+  //     let action = 'update'
+  //     User.find({ _id: req.params._id })
+  //       .then(user => {
+  //         res.send(handleResponse(action, user))
   //       }).catch(error => {
   //         return next(handleResponse(action, null, error))
   //       })

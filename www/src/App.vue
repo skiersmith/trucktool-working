@@ -69,6 +69,36 @@
 
   .nav-header-container {
     display: flex;
+    align-content: center;
+  }
+
+
+  .RL-header {
+    color: rgb(255, 251, 251)
+  }
+
+  .Overview-header:hover {
+    color: rgb(37, 220, 20);
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .logout-header:hover:hover {
+    color: crimson;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .logout-header {
+    font-size: 1.9rem;
+  }
+
+  .navCont {
+    background-color: #6b6b6b8c;
+    height: 14rem;
+    width: 9rem;
+    padding: 5px;
+    border-radius: 10px;
     justify-content: space-around;
   }
 
@@ -110,6 +140,31 @@
 
   .keepStat-Container {
     display: flex;
+    justify-content: space-around;
+  }
+
+  .headDown {
+    position: relative;
+    top: 3rem;
+
+  }
+
+  .headDown2 {
+    position: relative;
+    top: 1.8rem;
+  }
+
+  /* .headDown3 {
+    position: relative;
+    top: 0.5rem;
+  } */
+
+  .font {
+    /* font-size: 10%; */
+  }
+
+  .RLwhite {
+    color: white;
     justify-content: space-around
   }
   .keepImg{
