@@ -27,7 +27,7 @@
         <div class="userChange">
             <div>
                 <h3>Username</h3>
-                <p>{{user.username}}</p>
+                <p>{{user.name}}</p>
                 <h3>Email</h3>
                 <p>{{user.email}}</p>
             </div>
@@ -42,16 +42,16 @@
                         </div>
                         <div class="form-group">
                             <label for="name">Name</label>
-                            <input class="inline" size="15" type="text" name="name" placeholder="name" v-model="user.username">
+                            <input class="inline" size="15" type="text" name="name" placeholder="name" v-model="user2.name">
                         </div>
                         <div class="form-group">
                             <label for="resalePrice">Email</label>
-                            <input class="inline" size="15" type="text" name="email@email.com" placeholder="resalePrice" v-model="user.email">
+                            <input class="inline" size="15" type="text" name="email@email.com" placeholder="resalePrice" v-model="user2.email">
                         </div>
                     </div>
                 </form>
             </div>
-            <div v-if="updateB">
+            <!-- <div v-if="updateB">
                 <form @submit.prevent="updateUserPassword">
                     <div class="form-group">
                         <br>
@@ -60,16 +60,16 @@
                         </div>
                         <div class="form-group">
                             <label for="name"> Old Password</label>
-                            <input class="inline" size="15" type="password" name="password" placeholder="Password" v-model="user.OldPassword">
+                            <input class="inline" size="15" type="password" name="password" placeholder="Password" v-model="user2.OldPassword">
                         </div>
                         <div class="form-group">
                             <label for="name">New Password</label>
-                            <input class="inline" size="15" type="password" name="password" placeholder="Password" v-model="user.NewPassword">
+                            <input class="inline" size="15" type="password" name="password" placeholder="Password" v-model="user2.password">
                         </div>
 
                     </div>
                 </form>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
@@ -85,6 +85,7 @@
                 updateB: false,
                 vaultForm: false,
                 keepForm: false,
+                user2: {}
             }
         },
         methods: {
@@ -101,11 +102,12 @@
                 this.vaultForm = !this.vaultForm
             },
             updateUser() {
-                this.$store.dispatch('updateUser', this.user)
+                debugger
+                this.$store.dispatch('updateUser', this.user2)
             },
             updateUserPassword() {
                 console.log("yooo" + this.user.password)
-                this.$store.dispatch('updateUserPassword', this.user)
+                this.$store.dispatch('updateUserPassword', this.user2)
             },
             newTransaction() {
 
@@ -140,6 +142,7 @@
         },
         computed: {
             user() {
+                this.user2 = this.$store.state.user
                 console.log(this.$store.state.user)
                 return this.$store.state.user
             },
@@ -155,7 +158,7 @@
         },
         mounted() {
 
-            console.log(this.$store.state.user.id),
+            console.log(this.$store.state.user._id),
                 // this.$store.dispatch('getUserVaults', this.$store.state.user.id),
                 // this.$store.dispatch('getMyKeeps', this.user.id)
                 this.$store.dispatch('authenticate')

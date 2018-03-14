@@ -128,7 +128,7 @@ var store = new vuex.Store({
         searchTransByDot({ commit, dispatch }, dot) {
             api('transactions/record/' + dot, dot)
                 .then(res => {
-                    
+
                     if (res.data.data != []) {
                         console.log("this is why I'm broken")
                     }
@@ -184,10 +184,10 @@ var store = new vuex.Store({
         },
         // must get record id before userrecord can be deleted
         getRecord({ commit, dispatch }, Dot) {
-            
+
             api('records/dot/' + Dot, Dot)
                 .then(res => {
-                    
+
                     commit('setActiveRecord', res.data.data[0])
                 })
                 .catch(err => {
@@ -217,6 +217,33 @@ var store = new vuex.Store({
         newRecords({ commit, dispatch }, data) {
             api.post('records', data)
                 .then(res => {
+                    debugger
+                    console.log(res)
+                })
+                .catch(err => {
+                    commit('handleError', err)
+
+                })
+        },
+        updateRecord({ commit, dispatch }, data) {
+            debugger
+
+            api.put('records/' + data._id, data)
+                .then(res => {
+                    debugger
+                    console.log(res)
+                })
+                .catch(err => {
+                    commit('handleError', err)
+
+                })
+        },
+        deleteRecord({ commit, dispatch }, data) {
+            debugger
+
+            api.delete('records/' + data._id)
+                .then(res => {
+                    debugger
                     console.log(res)
                 })
                 .catch(err => {
@@ -226,7 +253,7 @@ var store = new vuex.Store({
         },
         //---------KEEPS-----------//
         newTransaction({ commit, dispatch }, transaction) {
-            
+
             transaction.UserId = this.state.user._id
             api.post('transactions', transaction)
                 .then(res => {
@@ -297,7 +324,7 @@ var store = new vuex.Store({
 
             api('records/user/' + userId)
                 .then(res => {
-                    
+                    debugger
                     commit('setActiveRecords', res.data.data)
                     var sendObj = {
                         eastern: [],
@@ -311,7 +338,7 @@ var store = new vuex.Store({
                     for (let l = 0; l < res.data.data.length; l++) {
                         var record = res.data.data[l];
                         var zip2 = record.CENSUS_MAILING_ADDRESS_ZIP_CODE
-                        
+
                         var zip = ""
                         for (let p = 0; p < zip2.length; p++) {
                             const element = zip2[p];
@@ -422,7 +449,7 @@ var store = new vuex.Store({
 
             api('transactions/users/' + userId)
                 .then(res => {
-                    
+
                     var green = {
                     }
                     var retObj = []
@@ -442,11 +469,11 @@ var store = new vuex.Store({
                         else { }
 
                     }
-                    
+
                     for (const key in green) {
                         if (green.hasOwnProperty(key)) {
                             const element4 = green[key];
-                            
+
                             if (element4[0] != undefined) {
                                 console.log(element4[0])
                                 retObj.push(element4[0])
@@ -454,7 +481,7 @@ var store = new vuex.Store({
                             else {
                                 console.log("hello")
                             }
-                            
+
 
                             // for (let k = 0; k < element4.length; k++) {
                             //     const element2 = element4[i];
@@ -464,7 +491,7 @@ var store = new vuex.Store({
                         }
                     }
                     console.log(green)
-                    
+
                     commit('setActiveUGTransactions', retObj)
                 })
                 .catch(err => {
@@ -483,51 +510,57 @@ var store = new vuex.Store({
                     // router.push({ name: "Register" })
                 })
         },
-        getUsers({ commit, dispatch }) {
-            api('users')
-                .then(res => {
-                    commit('setUsers', res.data)
+        // getUsers({ commit, dispatch }) {
+        //     api('users')
+        //         .then(res => {
+        //             commit('setUsers', res.data)
 
-                    // if (!res.data) {
-                    //     // router.push({ name: "Register" })
-                    // } else {
-                    //     // dispatch('getUserVaults', res.data.id)
-                    // }
-                })
-                .catch(() => {
-                    router.push({ name: "Register" })
-                })
-        },
+        //             // if (!res.data) {
+        //             //     // router.push({ name: "Register" })
+        //             // } else {
+        //             //     // dispatch('getUserVaults', res.data.id)
+        //             // }
+        //         })
+        //         .catch(() => {
+        //             router.push({ name: "Register" })
+        //         })
+        // },
         //---------LOGIN/REGISTER/LOGOUT-----------//
 
         updateUser({ commit, dispatch }, user) {
-            // auth.put('accounts', user)
-            //     .then(res => {
+            // var user2 = user
+            debugger
+            delete user._id
+            delete user.password
+            // user.password = "test2"
+            auth.put('updateuser', user)
+                .then(res => {
+                    debugger
+                    // commit('setUser', res.data.data)
+                    // router.push({ name: 'Home' })
+                    dispatch('authenticate')
 
-            //         commit('setUser', res.data)
-            //         // router.push({ name: 'Home' })
-            //         dispatch('authenticate')
-
-            //     })
-            //     .catch(err => {
-            //         commit('handleError', err)
-            //         // router.push({ name: "Register" })
-            //     })
+                })
+                .catch(err => {
+                    commit('handleError', err)
+                    // router.push({ name: "Register" })
+                })
         },
 
         updateUserPassword({ commit, dispatch }, user) {
-            // auth.put('accounts/change-password', user)
-            //     .then(res => {
+            delete user._id
+            auth.put('updateuser', user)
+                .then(res => {
 
-            //         commit('setUser', res.data)
-            //         // router.push({ name: 'Home' })
-            //         dispatch('authenticate')
+                    commit('setUser', res.data.data)
+                    // router.push({ name: 'Home' })
+                    dispatch('authenticate')
 
-            //     })
-            //     .catch(err => {
-            //         commit('handleError', err)
-            //         // router.push({ name: "Register" })
-            //     })
+                })
+                .catch(err => {
+                    commit('handleError', err)
+                    // router.push({ name: "Register" })
+                })
         },
         userLogin({ commit, dispatch }, login) {
             auth.post('/login', login)
@@ -563,7 +596,6 @@ var store = new vuex.Store({
         authenticate({ commit, dispatch }) {
             auth('/authenticate')
                 .then(res => {
-                    
                     if (!res.data.data) {
                         // router.push({ name: "Register" })
                     } else {
@@ -577,7 +609,7 @@ var store = new vuex.Store({
         authenticate2({ commit, dispatch }) {
             auth('/authenticate')
                 .then(res => {
-                    
+
                     dispatch('getUserRecords', res.data.data._id)
 
                 })

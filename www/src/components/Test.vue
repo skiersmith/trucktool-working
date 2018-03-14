@@ -119,7 +119,7 @@
 
 
     <p>id</p>
-    <p  v-if="recordsT">{{recordsT.dot}}</p>
+    <p  v-if="recordsT">{{recordsT.Dot}}</p>
     <div>
       <h2>Records</h2>
       <div>
@@ -129,7 +129,7 @@
       <div class="row">
         <h2>Dot: </h2>
         <div class="col-lg-2" v-for="record in records">
-          <p class="textcolor" @click="show(record.dot)">{{record.dot}}</p>
+          <p class="textcolor" @click="show(record.Dot)">{{record.Dot}}</p>
         </div>
       </div>
 
@@ -139,21 +139,31 @@
     <modal height="auto" :scrollable="true" name="hello-world">
       <div class="margin2">
         <h5>Dot:</h5>
-        <p>{{record4.dot}}</p>
+        <p>{{record4.Dot}}</p>
         <h5>Email</h5>
-        <p>{{record4.emaiL_ADDRESS}}</p>
+        <p>{{record4.EMAIL_ADDRESS}}</p>
         <h5>censuS_DBA</h5>
-        <p>{{record4.censuS_DBA}}</p>
+        <p>{{record4.CENSUS_DBA}}</p>
         <h5>censuS_CELL_PHONE_NUMBER</h5>
-        <p>{{record4.censuS_CELL_PHONE_NUMBER}}</p>
+        <p>{{record4.CENSUS_CELL_PHONE_NUMBER}}</p>
         <h5>censuS_LEGAL_NAME</h5>
-        <p>{{record4.censuS_LEGAL_NAME}}</p>
+        <p>{{record4.CENSUS_LEGAL_NAME}}</p>
         <h5>censuS_MAILING_ADDRESS_STATE</h5>
-        <p>{{record4.censuS_MAILING_ADDRESS_STATE}}</p>
+        <p>{{record4.CENSUS_MAILING_ADDRESS_STATE}}</p>
         <h5>companY_REP_1</h5>
-        <p>{{record4.companY_REP_1}}</p>
-        <h5></h5>
-        <p></p>
+        <p>{{record4.COMPANY_REP_1}}</p>
+        <h5>Update</h5>
+       <form @submit.prevent="updateRecord(record4)">
+        <label for="userId">userId</label> 
+        <input type="text" name="userId" v-model="recordUser">
+        <button type="submit">Submit</button>
+       </form>
+      
+
+       <button class="btn-xs btn-danger" @click="deleteRecord(record4)" >Delete Record</button>
+       
+       
+
       </div>
 
     </modal>
@@ -168,6 +178,13 @@
       XlsCsvParser,
     },
     methods: {
+      updateRecord(record){
+        record.userId = this.recordUser
+        this.$store.dispatch('updateRecord', record)
+      },
+      deleteRecord(record){
+        this.$store.dispatch('deleteRecord', record)
+      },
       show(dot) {
 
         this.$store.dispatch('getRecord', dot)
@@ -460,6 +477,7 @@
     },
     data() {
       return {
+        recordUser: "",
         inputF: {},
         usersC: 0,
         records9: [],
