@@ -3,8 +3,6 @@ import Router from 'vue-router'
 import Register from '../components/Register'
 import Home from '../components/Home'
 import Account from '../components/Account'
-import Keep from '../components/Keep'
-import Vault from '../components/Vault'
 import Good from '../components/Good'
 import Admin from '../components/Admin'
 import Test from '../components/Test'
@@ -26,17 +24,6 @@ export default new Router({
       path: '/account',
       name: 'Account',
       component: Account
-    },
-    {
-      path: '/keep',
-      name: 'Keep',
-      component: Keep
-    },
-    {
-      path: '/vault/:vaultId',
-      name: 'Vault',
-      component: Vault,
-      props: true
     },
     {
       path: '/good',

@@ -74,7 +74,6 @@
     </div>
 </template>
 <script>
-    import vault from './Vault'
     export default {
         name: 'Account',
         data() {
