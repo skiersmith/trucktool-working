@@ -152,9 +152,6 @@
                 return this.$store.state.myKeeps
             }
         },
-        components: {
-            vault
-        },
         mounted() {
 
             console.log(this.$store.state.user._id),
