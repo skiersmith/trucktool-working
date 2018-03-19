@@ -46,6 +46,7 @@
                             <tr>
                                 <th scope="col">Dot (click to expand)</th>
                                 <th scope="col">Notes</th>
+                                <th scope="col">Company</th>
                                 <th scope="col">Created</th>
                                 <th scope="col">------</th>
                             </tr>
@@ -54,6 +55,7 @@
                             <tr v-for="t in ugTransactions">
                                 <th @click="show(t.Dot)" scope="row">{{t.Dot}}</th>
                                 <td>{{t.Notes}}</td>
+                                <td>{{t.CENSUS_LEGAL_NAME}}</td>
                                 <td>{{t.Created}}</td>
                                 <td>
                                     <button class="btn-xs" @click="show2(t.Dot)">Open</button>
@@ -129,8 +131,8 @@
                         <p>{{record4.Dot}}</p>
                         <h5>Email</h5>
                         <p>{{record4.CENSUS_EMAIL_ADDRESS}}</p>
-                        <h5>censuS_DBA</h5>
-                        <p>{{record4.CENSUS_DBA}}</p>
+                        <h5>CENSUS_LEGAL_NAME</h5>
+                        <p>{{record4.CENSUS_LEGAL_NAME}}</p>
                         <h5>censuS_CELL_PHONE_NUMBER</h5>
                         <p>{{record4.CENSUS_CELL_PHONE_NUMBER}}</p>
                         <h5>censuS_LEGAL_NAME</h5>
@@ -141,6 +143,8 @@
                         <p>{{record4.COMPANY_REP_1}}</p>
                         <h5></h5>
                         <p></p>
+                        <a target="_blank"  :href="'https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=' + record4.Dot" class="btn btn-primary btn-xs ">Safer</a>
+
                     </div>
 
                 </modal>
@@ -183,9 +187,12 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="margin3">
                         <button class="btn-sm" type="submit">Submit</button>
+                    </div>
+                    <div>
+                        <h3></h3>
+                        <button class="btn-sm btn-danger" @click="changeStatus(transaction)">Remove this Record</button>
                     </div>
                 </form>
             </div>
@@ -238,6 +245,10 @@
             }
         },
         methods: {
+            changeStatus(transaction){
+                transaction.Status = "done"
+                this.$store.dispatch('updateTransaction', transaction)
+            },
             show(dot) {
                 this.$store.dispatch('getRecord', dot)
                 this.$modal.show('hello-world');
@@ -366,6 +377,8 @@
                 return this.$store.state.activeGTransactions
             },
             ugTransactions() {
+                debugger
+                console.log(this.$store.state.activeUGTransactions)
                 return this.$store.state.activeUGTransactions
             },
             yTransactions() {

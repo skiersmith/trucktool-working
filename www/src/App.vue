@@ -154,14 +154,8 @@
     top: 1.8rem;
   }
 
-  /* .headDown3 {
-    position: relative;
-    top: 0.5rem;
-  } */
 
-  .font {
-    /* font-size: 10%; */
-  }
+  
 
   .RLwhite {
     color: white;

@@ -22,7 +22,7 @@ getRecordsByDot: {
     reqType: 'get',
     method(req, res, next) {
         let action = 'Get records by UserId'
-        Records.find({ UserId: req.params.UserId })
+        Records.find({ userId: req.params.UserId })
             .then(records => {
                 res.send(handleResponse(action, records))
             }).catch(error => {

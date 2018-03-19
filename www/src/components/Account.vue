@@ -102,7 +102,7 @@
                 this.vaultForm = !this.vaultForm
             },
             updateUser() {
-                debugger
+                
                 this.$store.dispatch('updateUser', this.user2)
             },
             updateUserPassword() {

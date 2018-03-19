@@ -161,9 +161,11 @@ var store = new vuex.Store({
                 })
         },
         //---------VAULTS-----------//
-        newUserRecord({ commit, dispatch }, userRecord) {
-            api.post('userrecords', userRecord)
+        newUserRecord({ commit, dispatch }, data) {
+           
+            api.put('records/' + data._id, data)
                 .then(res => {
+                    console.log("res")
                     console.log(res)
                 })
                 .catch(err => {
@@ -217,7 +219,7 @@ var store = new vuex.Store({
         newRecords({ commit, dispatch }, data) {
             api.post('records', data)
                 .then(res => {
-                    debugger
+                    
                     console.log(res)
                 })
                 .catch(err => {
@@ -226,11 +228,11 @@ var store = new vuex.Store({
                 })
         },
         updateRecord({ commit, dispatch }, data) {
-            debugger
-
+            
+            // data.CENSUS_MAILING_ADDRESS_ZIP_CODE = "83702"
             api.put('records/' + data._id, data)
                 .then(res => {
-                    debugger
+                    
                     console.log(res)
                 })
                 .catch(err => {
@@ -239,11 +241,11 @@ var store = new vuex.Store({
                 })
         },
         deleteRecord({ commit, dispatch }, data) {
-            debugger
+            
 
             api.delete('records/' + data._id)
                 .then(res => {
-                    debugger
+                    
                     console.log(res)
                 })
                 .catch(err => {
@@ -324,7 +326,7 @@ var store = new vuex.Store({
 
             api('records/user/' + userId)
                 .then(res => {
-                    debugger
+                    
                     commit('setActiveRecords', res.data.data)
                     var sendObj = {
                         eastern: [],
@@ -359,6 +361,7 @@ var store = new vuex.Store({
                                 tz = "Central"
                             }
                             else if (tz == "America/Detroit" || tz == "America/New_York" || tz == "America/Indiana/Indianapolis" || tz == "America/Indiana/Vevay" || tz == "America/Kentucky/Louisville" || tz == "America/Kentucky/Monticello") {
+                               debugger
                                 tz = "Eastern"
                             }
                             else if (tz == "America/Boise" || tz == "America/Phoenix" || tz == "America/Denver" || tz == "America/Shiprock") {
@@ -502,6 +505,7 @@ var store = new vuex.Store({
         updateCalled({ commit, dispatch }, payload) {
             api.put('records/' + payload._id, payload)
                 .then(res => {
+                    
                     console.log(res)
                     console.log("done")
                     dispatch('authenticate2')
@@ -529,13 +533,13 @@ var store = new vuex.Store({
 
         updateUser({ commit, dispatch }, user) {
             // var user2 = user
-            debugger
+            
             delete user._id
             delete user.password
             // user.password = "test2"
             auth.put('updateuser', user)
                 .then(res => {
-                    debugger
+                    
                     // commit('setUser', res.data.data)
                     // router.push({ name: 'Home' })
                     dispatch('authenticate')

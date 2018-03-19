@@ -69,6 +69,7 @@
         <h3 v-if="tableTimeZone == 2">Mountain</h3>
         <h3 v-if="tableTimeZone == 1">Central</h3>
         <h3 v-if="tableTimeZone == 4">Eastern</h3>
+        <h3 v-if="tableTimeZone == 5">The Great White North</h3>
         <!-- col-lg-offset-1 col-lg-6 -->
         <div class="recordCont">
             <!-- table-bordered table-striped -->
@@ -78,7 +79,8 @@
                     <tr>
                         <th scope="col">Dot #</th>
                         <th scope="col">Company Name</th>
-                        <th scope="col">Phone Number</th>
+                        <th scope="col">Office Phone Number</th>
+                        <th scope="col">Cell Phone Number</th>
                         <th scope="col">Company Rep</th>
                         <th scope="col">Company Rep 2</th>
                         <th scope="col">State</th>
@@ -91,7 +93,8 @@
                 <tbody v-if="tableTimeZone == 3">
                     <tr v-if="record" v-for="(record, key) in pRecords">
                         <th scope="row">{{record.Dot}}</th>
-                        <td>{{record.CENSUS_DBA}}</td>
+                        <td>{{record.CENSUS_LEGAL_NAME}}</td>
+                        <td>{{record.CENSUS_OFFICE_TELEPHONE_NUMBER}}</td>
                         <td>{{record.CENSUS_CELL_PHONE_NUMBER}}</td>
                         <td>{{record.COMPANY_REP_1}}</td>
                         <td>{{record.COMPANY_REP_2}}</td>
@@ -100,6 +103,7 @@
                         <td>
                             <p class="inline">{{ifCalled(record.Called)}}</p>
                             <button class="btn-xs btn-info" @click="show(record)">Call</button>
+                            <a target="_blank"  :href="'https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=' + record.Dot" class="btn btn-primary btn-xs ">Safer</a>
                         </td>
 
                     </tr>
@@ -111,7 +115,8 @@
                 <tbody v-if="tableTimeZone == 2">
                     <tr v-if="record" v-for="(record, key) in mRecords">
                         <th scope="row">{{record.Dot}}</th>
-                        <td>{{record.CENSUS_DBA}}</td>
+                        <td>{{record.CENSUS_LEGAL_NAME}}</td>
+                        <td>{{record.CENSUS_OFFICE_TELEPHONE_NUMBER}}</td>
                         <td>{{record.CENSUS_CELL_PHONE_NUMBER}}</td>
                         <td>{{record.COMPANY_REP_1}}</td>
                         <td>{{record.COMPANY_REP_2}}</td>
@@ -120,6 +125,8 @@
                         <td>
                             <p class="inline">{{ifCalled(record.Called)}}</p>
                             <button class="btn-xs btn-info" @click="show(record)">Call</button>
+                            <a target="_blank"  :href="'https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=' + record.Dot" class="btn btn-primary btn-xs ">Safer</a>
+
                         </td>
 
                     </tr>
@@ -132,7 +139,8 @@
                 <tbody v-if="tableTimeZone == 1">
                     <tr v-if="record" v-for="(record, key) in cRecords">
                         <th scope="row">{{record.Dot}}</th>
-                        <td>{{record.CENSUS_DBA}}</td>
+                        <td>{{record.CENSUS_LEGAL_NAME}}</td>
+                        <td>{{record.CENSUS_OFFICE_TELEPHONE_NUMBER}}</td>
                         <td>{{record.CENSUS_CELL_PHONE_NUMBER}}</td>
                         <td>{{record.COMPANY_REP_1}}</td>
                         <td>{{record.COMPANY_REP_2}}</td>
@@ -141,6 +149,8 @@
                         <td>
                             <p class="inline">{{ifCalled(record.Called)}}</p>
                             <button class="btn-xs btn-info" @click="show(record)">Call</button>
+                            <a target="_blank"  :href="'https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=' + record.Dot" class="btn btn-primary btn-xs ">Safer</a>
+
                         </td>
 
                     </tr>
@@ -151,7 +161,8 @@
                 <tbody v-if="tableTimeZone == 4">
                     <tr v-if="record" v-for="(record, key) in eRecords">
                         <th scope="row">{{record.Dot}}</th>
-                        <td>{{record.CENSUS_DBA}}</td>
+                        <td>{{record.CENSUS_LEGAL_NAME}}</td>
+                        <td>{{record.CENSUS_OFFICE_TELEPHONE_NUMBER}}</td>
                         <td>{{record.CENSUS_CELL_PHONE_NUMBER}}</td>
                         <td>{{record.COMPANY_REP_1}}</td>
                         <td>{{record.COMPANY_REP_2}}</td>
@@ -160,6 +171,48 @@
                         <td>
                             <p class="inline">{{ifCalled(record.Called)}}</p>
                             <button class="btn-xs btn-info" @click="show(record)">Call</button>
+                            <a target="_blank"  :href="'https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=' + record.Dot" class="btn btn-primary btn-xs ">Safer</a>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+                <tbody v-if="tableTimeZone == 5">
+                    <tr v-if="record" v-for="(record, key) in caRecords">
+                        <th scope="row">{{record.Dot}}</th>
+                        <td>{{record.CENSUS_LEGAL_NAME}}</td>
+                        <td>{{record.CENSUS_OFFICE_TELEPHONE_NUMBER}}</td>
+                        <td>{{record.CENSUS_CELL_PHONE_NUMBER}}</td>
+                        <td>{{record.COMPANY_REP_1}}</td>
+                        <td>{{record.COMPANY_REP_2}}</td>
+                        <td>{{record.CENSUS_MAILING_ADDRESS_STATE}}</td>
+                        <td>{{record.DOCKET}}</td>
+                        <td>
+                            <p class="inline">{{ifCalled(record.Called)}}</p>
+                            <button class="btn-xs btn-info" @click="show(record)">Call</button>
+                            <a target="_blank"  :href="'https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=' + record.Dot" class="btn btn-primary btn-xs ">Safer</a>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+                <tbody v-if="tableTimeZone == 5">
+                    <tr v-if="record" v-for="(record, key) in caRecords">
+                        <th scope="row">{{record.Dot}}</th>
+                        <td>{{record.CENSUS_LEGAL_NAME}}</td>
+                        <td>{{record.CENSUS_OFFICE_TELEPHONE_NUMBER}}</td>
+                        <td>{{record.CENSUS_CELL_PHONE_NUMBER}}</td>
+                        <td>{{record.COMPANY_REP_1}}</td>
+                        <td>{{record.COMPANY_REP_2}}</td>
+                        <td>{{record.CENSUS_MAILING_ADDRESS_STATE}}</td>
+                        <td>{{record.DOCKET}}</td>
+                        <td>
+                            <p class="inline">{{ifCalled(record.Called)}}</p>
+                            <button class="btn-xs btn-info" @click="show(record)">Call</button>
+                            <a target="_blank"  :href="'https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=' + record.Dot" class="btn btn-primary btn-xs ">Safer</a>
+
                         </td>
 
                     </tr>
@@ -257,7 +310,7 @@
             </div>
 
         </modal>
-    <button @click="sortList()"></button>
+    <!-- <button @click="sortList()"></button> -->
     </div>
 </template>
 <script>
@@ -278,6 +331,7 @@
                 zip1: "",
                 timezone2: "",
                 lZip: false,
+                safUrl: ""
                 // rowColor: "danger",
 
 
@@ -286,10 +340,27 @@
         },
         methods: {
             //modal methods
+           openSafer(dot){
+               var url = "https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=" + dot
+               this.safUrl = url
+               console.log(url)
+                return url
+           },
             sortList() {
+                //have to account for called records probably going to seperate them from the others
                 var records = this.eRecords
+                var records2 = []
+                for (let p = 0; p < records.length; p++) {
+                    const record = records[p];
+                    if(record.Called === "Called"){
+                        records2
+                    }
+                }
+
+                
                 var returnO = records.sort(function (a, b) {
-                    var nameA = a.censuS_DBA.toLowerCase(), nameB = b.censuS_DBA.toLowerCase();
+                    var nameA = a.CENSUS_MAILING_ADDRESS_STATE.toLowerCase(), nameB = b.CENSUS_MAILING_ADDRESS_STATE.toLowerCase();
+                    
                     if (nameA < nameB) //sort string ascending
                         return -1;
                     if (nameA > nameB)
@@ -327,10 +398,10 @@
                 console.log(this.cRecords[1])
             },
             show(record) {
-                
                 this.transaction = {}
                 this.transaction.Dot = record.Dot
-                this.transaction.censuS_DBA = record.censuS_DBA
+                this.transaction.CENSUS_LEGAL_NAME = record.CENSUS_LEGAL_NAME
+                debugger
                 this.$store.dispatch('searchTransByDot', record.Dot)
                 this.$modal.show('transaction-modal');
             },
@@ -385,7 +456,7 @@
             },
             //rotate table 4 each timezone
             tableTimeToggle() {
-                if (this.tableTimeZone < 4) {
+                if (this.tableTimeZone < 5) {
                     this.tableTimeZone++
                 }
                 else {

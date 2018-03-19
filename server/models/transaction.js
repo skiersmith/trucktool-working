@@ -9,7 +9,8 @@ var schema = new mongoose.Schema({
     Status: { type: String },
     UserId: { type: ObjectId, ref: models.user },
     Created: { type: Date, default: Date.now },
-    Updated: { type: String }
+    Updated: { type: String },
+    CENSUS_LEGAL_NAME: { type: String },
 });
 
 

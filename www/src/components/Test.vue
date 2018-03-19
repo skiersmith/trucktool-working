@@ -44,7 +44,7 @@
         <div v-for="(r,  index) in records9" class="form-group">
           <p>Group: {{index}}</p>
           <label for="count">UserId</label>
-          <input v-model="inputF[index]" name="count" type="number" size="10">
+          <input v-model="inputF[index]" name="count" type="text" size="15">
         </div>
         <button type="submit"> Assign</button>
       </form>
@@ -89,7 +89,7 @@
         <tbody>
             <tr v-for="r in records9">
                 <th scope="row">{{r.dot}}</th>
-                <td>{{r.census_DBA}}</td>
+                <td>{{r.CENSUS_LEGAL_NAME}}</td>
                 <td>{{r.censuS_CELL_PHONE_NUMBER}}</td>
                 <td>{{r.email}}</td>
                 <td>{{r.companY_REP_1}}</td>
@@ -142,8 +142,8 @@
         <p>{{record4.Dot}}</p>
         <h5>Email</h5>
         <p>{{record4.EMAIL_ADDRESS}}</p>
-        <h5>censuS_DBA</h5>
-        <p>{{record4.CENSUS_DBA}}</p>
+        <h5>CENSUS_LEGAL_NAME</h5>
+        <p>{{record4.CENSUS_LEGAL_NAME}}</p>
         <h5>censuS_CELL_PHONE_NUMBER</h5>
         <p>{{record4.CENSUS_CELL_PHONE_NUMBER}}</p>
         <h5>censuS_LEGAL_NAME</h5>
@@ -156,7 +156,8 @@
        <form @submit.prevent="updateRecord(record4)">
         <label for="userId">userId</label> 
         <input type="text" name="userId" v-model="recordUser">
-        <button type="submit">Submit</button>
+        <button class="btn-xs btn-success" type="submit">Submit</button>
+        <button class="btn-xs btn-info" type="reset">Clear</button>
        </form>
       
 
@@ -180,6 +181,8 @@
     methods: {
       updateRecord(record){
         record.userId = this.recordUser
+        debugger
+        console.log(record)
         this.$store.dispatch('updateRecord', record)
       },
       deleteRecord(record){
@@ -285,17 +288,19 @@
           if (userRecords.hasOwnProperty(key)) {
             for (let q = 0; q < userRecords[key][0].length; q++) {
               var ur = userRecords[key][0][q];
+              console.log(ur)
               var userRecord = {
-                UserId: key,
-                RecordId: ur.id
+                userId: key,
+                _id: ur._id
               }
-              urs.push(userRecord)
+              this.$store.dispatch('newUserRecord', userRecord)
+              // urs.push(userRecord)
               // console.log(userRecord)
             }
           }
         }
 
-        this.newUR(urs)
+        // this.newUR(urs)
       },
       newUR(userRecords) {
         
@@ -377,8 +382,8 @@
             else if (column["column"] == "ENTITY_TYPE") {
               records[i]["ENTITY_TYPE"] = element
             }
-            else if (column["column"] == "CENSUS_DBA") {
-              records[i]["CENSUS_DBA"] = element
+            else if (column["column"] == "CENSUS_LEGAL_NAME") {
+              records[i]["CENSUS_LEGAL_NAME"] = element
             }
             else if (column["column"] == "EMAIL_ADDRESS") {
               records[i]["EMAIL_ADDRESS"] = element
@@ -397,6 +402,9 @@
             }
             else if (column["column"] == "CENSUS_LEGAL_NAME") {
               records[i]["CENSUS_LEGAL_NAME"] = element
+            }
+            else if (column["column"] == "CENSUS_OFFICE_TELEPHONE_NUMBER") {
+              records[i]["CENSUS_CELL_PHONE_NUMBER"] = element
             }
             else if (column["column"] == "CENSUS_CELL_PHONE_NUMBER") {
               records[i]["CENSUS_CELL_PHONE_NUMBER"] = element
@@ -442,6 +450,7 @@
         return this.$store.state.users
       },
       user() {
+        console.log(this.$store.state.user)
         return this.$store.state.user
       },
       gTransactions() {
@@ -489,7 +498,7 @@
           { name: 'DOCKET', value: 'DOCKET', isOptional: true },
           { name: 'ENTITY_TYPE', value: 'ENTITY_TYPE', isOptional: true },
           { name: 'CENSUS_LEGAL_NAME', value: 'CENSUS_LEGAL_NAME', isOptional: true },
-          { name: 'CENSUS_DBA', value: 'CENSUS_DBA', isOptional: true },
+          { name: 'CENSUS_LEGAL_NAME', value: 'CENSUS_LEGAL_NAME', isOptional: true },
           { name: 'CENSUS_OFFICE_TELEPHONE_NUMBER', value: 'CENSUS_OFFICE_TELEPHONE_NUMBER', isOptional: true },
           { name: 'CENSUS_CELL_PHONE_NUMBER', value: 'CENSUS_CELL_PHONE_NUMBER', isOptional: true },
           { name: 'CENSUS_MAILING_ADDRESS_STATE', value: 'CENSUS_MAILING_ADDRESS_STATE', isOptional: true },
