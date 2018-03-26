@@ -1,6 +1,82 @@
 <template>
     <div>
-        <div class="nav-header">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+                        aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="pointer navbar-brand" @click="routeHome">Transportation Compliance Services</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a>Hello, {{user.name}}</a>
+                        </li>
+                        <li>
+                            <a class="pointer" @click="routeIntra">Intrastate</a>
+                        </li>
+                        <li>
+                            <a class="pointer" @click="worldClockToggle">World Clock
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <!-- <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#">Action</a>
+                                </li>
+                                <li>
+                                    <a href="#">Another action</a>
+                                </li>
+                                <li>
+                                    <a href="#">Something else here</a>
+                                </li>
+                                <li role="separator" class="divider"></li>
+                                <li>
+                                    <a href="#">Separated link</a>
+                                </li>
+                                <li role="separator" class="divider"></li>
+                                <li>
+                                    <a href="#">One more separated link</a>
+                                </li>
+                            </ul>
+                        </li> -->
+                    </ul>
+                    <form @submit.prevent="lookupTZ" class="navbar-form navbar-left">
+                        <div class="form-group">
+                            <input type="text" v-model="zip1" class="form-control" placeholder="Zip To Timezone">
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <!-- <router-link class="" :to="{name: 'Good'}">
+                                Good Records
+                            </router-link> -->
+                            <a class="pointer" @click="routeGood">Good Records</a>
+                        </li>
+                       <li>
+                           <a class="pointer" @click="userLogout">Logout</a>
+                       </li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+
+        <!-- <div class="nav-header">
             <div class="nav-header-container">
                 <div>
                     <div class="nav-header-sub">
@@ -21,7 +97,6 @@
                         <span @click="userLogout">
                             <p class="white">Logout</p>
                         </span>
-                        <!-- <button @click="lZipToggle">Zip to Timezone</button> -->
                         <a @click="lZipToggle">Zip to Timezone</a>
                     </div>
                 </div>
@@ -37,6 +112,10 @@
                     </div>
                 </div>
             </div>
+        </div> -->
+        <div v-if="worldClock">
+            <span class="pointer" style="position:relative;left: 15rem;color: red;" @click="worldClockToggle">X</span>
+            <test2></test2>
         </div>
         <div class="spacer10"></div>
 
@@ -62,14 +141,14 @@
                 </div>
             </div>
         </div>
-        <h1 class="title">My Records</h1>
-        <button @click="tableTimeToggle">TableTimeToggle</button>
-
-        <h3 v-if="tableTimeZone == 3">Pacific</h3>
-        <h3 v-if="tableTimeZone == 2">Mountain</h3>
-        <h3 v-if="tableTimeZone == 1">Central</h3>
-        <h3 v-if="tableTimeZone == 4">Eastern</h3>
-        <h3 v-if="tableTimeZone == 5">The Great White North</h3>
+        <!-- <h1 class="title">My Records</h1> -->
+        <h2 style="display: inline; margin-left: 1rem;">Current Zone </h2>
+        <h3 style="display: inline; margin-left: 1rem;" v-if="tableTimeZone == 3">Pacific</h3>
+        <h3 style="display: inline; margin-left: 1rem;" v-if="tableTimeZone == 2">Mountain</h3>
+        <h3 style="display: inline; margin-left: 1rem;" v-if="tableTimeZone == 1">Central</h3>
+        <h3 style="display: inline; margin-left: 1rem;" v-if="tableTimeZone == 4">Eastern</h3>
+        <h3 style="display: inline; margin-left: 1rem;" v-if="tableTimeZone == 5">Canada</h3>
+        <button style="margin-left: 3rem;" class="btn-xs" @click="tableTimeToggle">Toggle</button>
         <!-- col-lg-offset-1 col-lg-6 -->
         <div class="recordCont">
             <!-- table-bordered table-striped -->
@@ -103,7 +182,8 @@
                         <td>
                             <p class="inline">{{ifCalled(record.Called)}}</p>
                             <button class="btn-xs btn-info" @click="show(record)">Call</button>
-                            <a target="_blank"  :href="'https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=' + record.Dot" class="btn btn-primary btn-xs ">Safer</a>
+                            <a target="_blank" :href="'https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=' + record.Dot"
+                                class="btn btn-primary btn-xs ">Safer</a>
                         </td>
 
                     </tr>
@@ -125,7 +205,8 @@
                         <td>
                             <p class="inline">{{ifCalled(record.Called)}}</p>
                             <button class="btn-xs btn-info" @click="show(record)">Call</button>
-                            <a target="_blank"  :href="'https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=' + record.Dot" class="btn btn-primary btn-xs ">Safer</a>
+                            <a target="_blank" :href="'https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=' + record.Dot"
+                                class="btn btn-primary btn-xs ">Safer</a>
 
                         </td>
 
@@ -149,7 +230,8 @@
                         <td>
                             <p class="inline">{{ifCalled(record.Called)}}</p>
                             <button class="btn-xs btn-info" @click="show(record)">Call</button>
-                            <a target="_blank"  :href="'https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=' + record.Dot" class="btn btn-primary btn-xs ">Safer</a>
+                            <a target="_blank" :href="'https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=' + record.Dot"
+                                class="btn btn-primary btn-xs ">Safer</a>
 
                         </td>
 
@@ -171,7 +253,8 @@
                         <td>
                             <p class="inline">{{ifCalled(record.Called)}}</p>
                             <button class="btn-xs btn-info" @click="show(record)">Call</button>
-                            <a target="_blank"  :href="'https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=' + record.Dot" class="btn btn-primary btn-xs ">Safer</a>
+                            <a target="_blank" :href="'https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=' + record.Dot"
+                                class="btn btn-primary btn-xs ">Safer</a>
 
                         </td>
 
@@ -191,7 +274,8 @@
                         <td>
                             <p class="inline">{{ifCalled(record.Called)}}</p>
                             <button class="btn-xs btn-info" @click="show(record)">Call</button>
-                            <a target="_blank"  :href="'https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=' + record.Dot" class="btn btn-primary btn-xs ">Safer</a>
+                            <a target="_blank" :href="'https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=' + record.Dot"
+                                class="btn btn-primary btn-xs ">Safer</a>
 
                         </td>
 
@@ -211,7 +295,8 @@
                         <td>
                             <p class="inline">{{ifCalled(record.Called)}}</p>
                             <button class="btn-xs btn-info" @click="show(record)">Call</button>
-                            <a target="_blank"  :href="'https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=' + record.Dot" class="btn btn-primary btn-xs ">Safer</a>
+                            <a target="_blank" :href="'https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=' + record.Dot"
+                                class="btn btn-primary btn-xs ">Safer</a>
 
                         </td>
 
@@ -310,13 +395,15 @@
             </div>
 
         </modal>
-    <!-- <button @click="sortList()"></button> -->
+        <!-- <button @click="sortList()"></button> -->
     </div>
 </template>
 <script>
     var zipcode_to_timezone = require('zipcode-to-timezone');
     // require('datatables.net-bs')();
     // require('datatables.net-scroller-bs')();
+    import test2 from './Test2'
+    import router from '../router'
     export default {
         name: 'Home',
         data() {
@@ -331,36 +418,51 @@
                 zip1: "",
                 timezone2: "",
                 lZip: false,
-                safUrl: ""
+                safUrl: "",
+                worldClock: false
                 // rowColor: "danger",
 
 
 
             }
         },
+
         methods: {
             //modal methods
-           openSafer(dot){
-               var url = "https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=" + dot
-               this.safUrl = url
-               console.log(url)
+           
+            routeHome() {
+                router.push('/')
+            },
+            routeIntra() {
+                router.push('intrastate')
+            },
+            routeGood() {
+                router.push('good')
+            },
+            worldClockToggle() {
+                this.worldClock = !this.worldClock
+            },
+            openSafer(dot) {
+                var url = "https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=" + dot
+                this.safUrl = url
+                console.log(url)
                 return url
-           },
+            },
             sortList() {
                 //have to account for called records probably going to seperate them from the others
                 var records = this.eRecords
                 var records2 = []
                 for (let p = 0; p < records.length; p++) {
                     const record = records[p];
-                    if(record.Called === "Called"){
+                    if (record.Called === "Called") {
                         records2
                     }
                 }
 
-                
+
                 var returnO = records.sort(function (a, b) {
                     var nameA = a.CENSUS_MAILING_ADDRESS_STATE.toLowerCase(), nameB = b.CENSUS_MAILING_ADDRESS_STATE.toLowerCase();
-                    
+
                     if (nameA < nameB) //sort string ascending
                         return -1;
                     if (nameA > nameB)
@@ -368,7 +470,7 @@
                     return 0; //default return value (no sorting)
                 });
                 console.log(returnO)
-                
+
             },
             lZipToggle() {
                 this.lZip = !this.lZip
@@ -382,7 +484,7 @@
                 document.documentElement.scrollTop = document.documentElement.scrollHeight
             },
             ifCalled(called) {
-                
+
                 if (called === true) {
                     return "Called"
                 }
@@ -401,7 +503,7 @@
                 this.transaction = {}
                 this.transaction.Dot = record.Dot
                 this.transaction.CENSUS_LEGAL_NAME = record.CENSUS_LEGAL_NAME
-                debugger
+
                 this.$store.dispatch('searchTransByDot', record.Dot)
                 this.$modal.show('transaction-modal');
             },
@@ -444,8 +546,9 @@
                         console.log("missed one")
                     }
                 }
-                this.zip1 = ""
+                // this.zip1 = ""
                 this.timezone2 = tz
+                this.zip1 = tz
                 return tz
 
             },
@@ -474,12 +577,14 @@
                 this.newTransactionT = true
             },
             newTransaction() {
+               
+                this.$notify('New Transaction', 'info', { itemClass: 'alert col-6 alert-info', visibility: 1000 })
                 this.$store.dispatch('authenticate')
                 this.$store.dispatch('newTransaction', this.transaction)
                 if (this.transaction.Status == "red") {
                     this.hide()
                 }
-                
+
                 this.updateCalled(this.transaction)
                 // else if (this.transaction.Status == "yellow") {
                 // }
@@ -489,7 +594,7 @@
 
             },
             updateCalled(transaction) {
-                
+
                 var record2 = this.$store.state.activeRecords
                 for (let q = 0; q < record2.length; q++) {
                     const element = record2[q];
@@ -532,7 +637,7 @@
                 return 'bg-' + this.rowColor
             },
             checkRecords(records) {
-                
+
                 var last = 0
                 for (let q = 0; q < records.length; q++) {
 
@@ -655,34 +760,42 @@
         mounted() {
             this.$store.dispatch('authenticate')
             this.$store.dispatch('authenticate2')
-            
+
             // this.$store.dispatch('getUserRecords', this.user._id)
             // $(document).ready(function () {
             //     $('#ifThisWorks').DataTable();
             // });
+        },
+        components: {
+            // <my-component> will only be available in parent's template
+            test2
         }
     }
 </script>
-<style>
-    .transactions1 {
-        border-top-style: solid;
-        border-bottom-style: solid;
-        border-bottom-width: 1px;
-        border-top-width: 1px;
+<style scoped>
+    /* .transactions1 {
+       
         padding: 0.5rem;
-        /* border-radius: 25px; */
-    }
+        border-radius: 25px;
+    } */
 
     .transactions2 {
         padding: 1rem;
     }
 
     .bg2 {
-        background-color: rgba(252, 255, 80, 0.719);
+        background-color: rgba(225, 228, 81, 0.719);
+        border-radius: 25px;
+        padding: 0.5rem;
+        margin: 0.5rem;
+
     }
 
     .bg1 {
-        background-color: rgba(248, 145, 10, 0.726);
+        background-color: rgba(228, 153, 55, 0.726);
+        border-radius: 25px;
+        padding: 0.5rem;
+        margin: 0.5rem;
     }
 
     .padding {
@@ -798,5 +911,9 @@
 
     .inline {
         display: inline;
+    }
+
+    .pointer:hover {
+        cursor: pointer;
     }
 </style>

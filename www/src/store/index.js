@@ -4,7 +4,6 @@ import vuex from 'vuex'
 import router from '../router'
 import { loadavg } from 'os';
 var zipcode_to_timezone = require('zipcode-to-timezone');
-
 var production = !window.location.host.includes('localhost');
 var baseUrl = production ? '//serene-lowlands-35394.herokuapp.com/' : '//localhost:5000/';
 let api = axios.create({
@@ -12,21 +11,29 @@ let api = axios.create({
     timeout: 2000,
     withCredentials: true
 })
-
+let tzapi = axios.create({
+    baseURL: 'http://worldclockapi.com/api/json/utc/now',
+    timeout: 2000,
+    // withCredentials: true
+})
 let auth = axios.create({
     baseURL: baseUrl,
     timeout: 2000,
     withCredentials: true
 })
 vue.use(vuex)
-
+//https://maps.googleapis.com/maps/api/timezone/json?parameters
+//AIzaSyDc2wND7FnDnKvQLFJo68r_nqciB30a8SU
+//location=-33.86,151.20
 var store = new vuex.Store({
     state: {
 
+        time: false,
         error: {},
         user: {},
         users: {},
         activeRecords: {},
+        activeSplitRecords: [],
         activeRecord: {},
         eastern: {},
         // yEastern: {},
@@ -51,7 +58,8 @@ var store = new vuex.Store({
         activeUYTransactions: {},
         activeUOTransactions: {},
         activeUGTransactions: {},
-        activeSTD: {}
+        activeSTD: {},
+        actveTF: false
     },
     mutations: {
         clearTZRecords(state, data) {
@@ -72,8 +80,14 @@ var store = new vuex.Store({
         //     state.yPacific = data.pacific
         //     state.yMountain = data.mountain
         // },
+        clearError(state, data){
+            state.error = {}
+        },
         setUser(state, data) {
             state.user = data
+        },
+        setTime(state, data) {
+            state.time = data
         },
         setUsers(state, data) {
             state.users = data
@@ -93,6 +107,10 @@ var store = new vuex.Store({
             else if (!data.data) {
                 state.activeRecords = data
             }
+        },
+        addActiveSplitRecords(state, data) {
+            state.activeSplitRecords.push(data)
+
         },
         setActiveOTransactions(state, data) {
             state.activeOTransactions = data
@@ -118,6 +136,12 @@ var store = new vuex.Store({
         setActiveSTD(state, data) {
             state.activeSTD = data
         },
+        setTF(state, data) {
+            if (data = true) { state.activeTF = true }
+            if (data = false) {
+                state.activeSTD = false
+            }
+        },
         clearSTD(state, data) {
             state.activeYTransactions = data
             state.activeOTransactions = data
@@ -125,6 +149,28 @@ var store = new vuex.Store({
 
     },
     actions: {
+        getTime({ commit, dispatch }) {
+
+            tzapi('')
+                .then(res => {
+                    
+                    var d = new Date(res.data.currentDateTime);
+                    var hour = d.getHours();
+                    var day = d.getDay();
+                    var minutes = d.getMinutes();
+                    if(day > 0 && day < 6 && hour > 6 && hour < 18){
+                        console.log('Time is between 6 and 5 M - F');
+                        commit('setTime', true)
+                    }
+                   
+
+                })
+                .catch(err => {
+                    commit('handleError', err)
+
+
+                })
+        },
         searchTransByDot({ commit, dispatch }, dot) {
             api('transactions/record/' + dot, dot)
                 .then(res => {
@@ -158,11 +204,12 @@ var store = new vuex.Store({
                 })
                 .catch(err => {
                     commit('handleError', err)
+
                 })
         },
         //---------VAULTS-----------//
         newUserRecord({ commit, dispatch }, data) {
-           
+
             api.put('records/' + data._id, data)
                 .then(res => {
                     console.log("res")
@@ -170,6 +217,7 @@ var store = new vuex.Store({
                 })
                 .catch(err => {
                     commit('handleError', err)
+
 
                 })
         },
@@ -182,19 +230,22 @@ var store = new vuex.Store({
                 })
                 .catch(err => {
                     commit('handleError', err)
+
                 })
         },
         // must get record id before userrecord can be deleted
         getRecord({ commit, dispatch }, Dot) {
-
             api('records/dot/' + Dot, Dot)
                 .then(res => {
-
                     commit('setActiveRecord', res.data.data[0])
                 })
                 .catch(err => {
                     commit('handleError', err)
+
                 })
+        },
+        addRecords({ commit, dispatch }, records) {
+            commit('addActiveSplitRecords', records)
         },
         getRecord3({ commit, dispatch }, dot) {
             api('records/dot/' + dot, dot)
@@ -205,6 +256,25 @@ var store = new vuex.Store({
                 .catch(err => {
                     commit('handleError', err)
 
+
+                })
+        },
+        getRecordByDot({ commit, dispatch }, dot) {
+            api('records/dot/' + dot, dot)
+                .then(res => {
+                    var true1 = true
+                    var false1 = false
+                    if (res.data.data.Dot) {
+                        commit('setTF', true1)
+                    }
+                    else {
+                        commit('setTF', false1)
+                    }
+                })
+                .catch(err => {
+                    commit('handleError', err)
+
+
                 })
         },
         getAllRecords({ commit, dispatch }) {
@@ -214,52 +284,70 @@ var store = new vuex.Store({
                 })
                 .catch(err => {
                     commit('handleError', err)
+
                 })
         },
         newRecords({ commit, dispatch }, data) {
             api.post('records', data)
                 .then(res => {
-                    
+
                     console.log(res)
                 })
                 .catch(err => {
                     commit('handleError', err)
+
 
                 })
         },
         updateRecord({ commit, dispatch }, data) {
-            
+
             // data.CENSUS_MAILING_ADDRESS_ZIP_CODE = "83702"
             api.put('records/' + data._id, data)
                 .then(res => {
-                    
+
                     console.log(res)
                 })
                 .catch(err => {
                     commit('handleError', err)
+
 
                 })
         },
         deleteRecord({ commit, dispatch }, data) {
-            
+
 
             api.delete('records/' + data._id)
                 .then(res => {
-                    
+
                     console.log(res)
                 })
                 .catch(err => {
                     commit('handleError', err)
 
+
                 })
         },
         //---------KEEPS-----------//
+        updateTransaction({ commit, dispatch }, payload) {
+
+            api.put('transactions/dot/' + payload.Dot, payload)
+                .then(res => {
+                    
+                    dispatch('searchTransByDot', payload.Dot)
+                })
+                .catch(err => {
+                    commit('handleError', err)
+
+
+                })
+        },
         newTransaction({ commit, dispatch }, transaction) {
 
             transaction.UserId = this.state.user._id
             api.post('transactions', transaction)
                 .then(res => {
                     console.log(res)
+                    // this.$notify('Success', 'type', { itemClass: 'alert col-6 alert-info', iconClass: 'fa fa-lg fa-handshake-o', visibility: 10000 })
                     if (transaction.Status == "red") {
 
                         console.log("redTRan")
@@ -272,6 +360,7 @@ var store = new vuex.Store({
                 })
                 .catch(err => {
                     commit('handleError', err)
+
 
                 })
         },
@@ -314,6 +403,7 @@ var store = new vuex.Store({
         //                     .catch(err => {
         //                         commit('handleError', err)
 
+
         //                     })
         //             }
         //         }
@@ -326,7 +416,7 @@ var store = new vuex.Store({
 
             api('records/user/' + userId)
                 .then(res => {
-                    
+
                     commit('setActiveRecords', res.data.data)
                     var sendObj = {
                         eastern: [],
@@ -361,7 +451,7 @@ var store = new vuex.Store({
                                 tz = "Central"
                             }
                             else if (tz == "America/Detroit" || tz == "America/New_York" || tz == "America/Indiana/Indianapolis" || tz == "America/Indiana/Vevay" || tz == "America/Kentucky/Louisville" || tz == "America/Kentucky/Monticello") {
-                               debugger
+
                                 tz = "Eastern"
                             }
                             else if (tz == "America/Boise" || tz == "America/Phoenix" || tz == "America/Denver" || tz == "America/Shiprock") {
@@ -398,6 +488,7 @@ var store = new vuex.Store({
                 .catch(err => {
                     commit('handleError', err)
 
+
                 })
         },
         deleteUserRecord({ commit, dispatch }, payload) {
@@ -410,6 +501,7 @@ var store = new vuex.Store({
                 })
                 .catch(err => {
                     commit('handleError', err)
+
 
                 })
         },
@@ -445,6 +537,7 @@ var store = new vuex.Store({
                 })
                 .catch(err => {
                     commit('handleError', err)
+
 
                 })
         },
@@ -500,12 +593,13 @@ var store = new vuex.Store({
                 .catch(err => {
                     commit('handleError', err)
 
+
                 })
         },
         updateCalled({ commit, dispatch }, payload) {
             api.put('records/' + payload._id, payload)
                 .then(res => {
-                    
+
                     console.log(res)
                     console.log("done")
                     dispatch('authenticate2')
@@ -533,13 +627,13 @@ var store = new vuex.Store({
 
         updateUser({ commit, dispatch }, user) {
             // var user2 = user
-            
+
             delete user._id
             delete user.password
             // user.password = "test2"
             auth.put('updateuser', user)
                 .then(res => {
-                    
+
                     // commit('setUser', res.data.data)
                     // router.push({ name: 'Home' })
                     dispatch('authenticate')
@@ -547,6 +641,7 @@ var store = new vuex.Store({
                 })
                 .catch(err => {
                     commit('handleError', err)
+
                     // router.push({ name: "Register" })
                 })
         },
@@ -563,24 +658,36 @@ var store = new vuex.Store({
                 })
                 .catch(err => {
                     commit('handleError', err)
+
                     // router.push({ name: "Register" })
                 })
         },
         userLogin({ commit, dispatch }, login) {
             auth.post('/login', login)
                 .then(res => {
-                    if (res.data = "") {
+                    if (res.data.data.access === true) {
+                        this.$notify.success('This is success message');
+                        commit('setUser', res.data)
+                        router.push({ name: 'Home' })
+                        dispatch('authenticate')
+                    }
+                    else if(store.state.time === true){
+                        this.$notify.success('This is success message');
+                        commit('setUser', res.data)
+                        router.push({ name: 'Home' })
+                        dispatch('authenticate')
+                    }
+                    else{
+                        alert("Contact Manager to Login")
+                        router.push({ name: "Register" })
                     }
 
-
-                    commit('setUser', res.data)
-                    router.push({ name: 'Home' })
-                    dispatch('authenticate')
 
 
                 })
                 .catch(err => {
                     commit('handleError', err)
+
                     router.push({ name: "Register" })
                 })
         },
@@ -594,6 +701,7 @@ var store = new vuex.Store({
                 })
                 .catch(err => {
                     commit('handleError', err)
+
                     router.push({ name: "Register" })
                 })
         },
@@ -615,6 +723,17 @@ var store = new vuex.Store({
                 .then(res => {
 
                     dispatch('getUserRecords', res.data.data._id)
+
+                })
+                .catch(() => {
+                    // router.push({ name: "Register" })
+                })
+        },
+        authenticate3({ commit, dispatch }) {
+            auth('/authenticate')
+                .then(res => {
+
+                    dispatch('getUserTransactions2', res.data.data._id)
 
                 })
                 .catch(() => {

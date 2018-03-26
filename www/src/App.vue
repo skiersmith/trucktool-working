@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-
+    <div @click="closeError" v-if="error">
+    </div>
     <!-- <img src="./assets/logo.png"> -->
     <router-view/>
   </div>
@@ -13,15 +14,22 @@
       userLogout() {
         this.$store.dispatch('logout', this.$store.state.user._id)
       },
+      closeError(){
+        this.$store.commit('clearError')
+      }
     },
     computed: {
       user() {
         console.log(this.$store.state.user)
         return this.$store.state.user
       },
+      error() {
+        // return this.$store.state.error
+      },
     },
     mounted(){
       this.$store.dispatch('authenticate')
+      this.$store.dispatch('getTime')
     }
   }
 </script>

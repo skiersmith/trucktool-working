@@ -29,6 +29,25 @@ module.exports = {
           return next(handleResponse(action, null, error))
         })
     }
+  },
+  updateTransactionsByDot: {
+    path: '/transactions/dot/:Dot',
+    reqType: 'put',
+    method(req, res, next) {
+      let action = 'update transactions'
+      // Transactions.updateMany({ Dot: req.params.Dot, status: "green"}, req.params)
+      Transactions.updateMany(
+        { Dot: req.params.Dot, Status: "green"},
+        {$set: {Status: req.params.Status}},
+     )
+
+      // Transactions.update({ Dot : req.params.Dot, Status : "green"}, )
+        .then(transactions => {
+          res.send(handleResponse(action, transactions))
+        }).catch(error => {
+          return next(handleResponse(action, null, error))
+        })
+    }
   }
 }
 

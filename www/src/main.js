@@ -5,9 +5,11 @@ import App from './App'
 import router from './router'
 import store from './store'
 import VModal from 'vue-js-modal'
+import Notify from 'vue2-notify'
 
 Vue.config.productionTip = false
 Vue.use(VModal)
+Vue.use(Notify)
 
 /* eslint-disable no-new */
 new Vue({

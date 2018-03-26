@@ -6,6 +6,8 @@ import Account from '../components/Account'
 import Good from '../components/Good'
 import Admin from '../components/Admin'
 import Test from '../components/Test'
+import Test2 from '../components/Test2'
+import Intrastate from '../components/Intrastate'
 Vue.use(Router)
 
 export default new Router({
@@ -40,7 +42,16 @@ export default new Router({
       name: 'Test',
       component: Test,
     },
-   
+    {
+      path: '/test2',
+      name: 'Test2',
+      component: Test2,
+    },
+    {
+      path: '/intrastate',
+      name: 'Intrastate',
+      component: Intrastate,
+    },
     
     
   ]

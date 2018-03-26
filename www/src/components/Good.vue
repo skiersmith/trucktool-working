@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="nav-header">
+        <!-- <div class="nav-header">
             <div class="nav-header-container">
                 <div>
                     <div class="nav-header-sub">
@@ -27,7 +27,80 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+                        aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand pointer" @click="routeHome">Transportation Compliance Service</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a>Hello, {{user.name}}</a>
+                        </li>
+                        <li>
+                            <a class="pointer" @click="routeIntra">Intrastate</a>
+                        </li>
+                        <li>
+                           
+                        </li>
+                        <!-- <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="#">Action</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Another action</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Something else here</a>
+                                    </li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>
+                                        <a href="#">Separated link</a>
+                                    </li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>
+                                        <a href="#">One more separated link</a>
+                                    </li>
+                                </ul>
+                            </li> -->
+                    </ul>
+                    <!-- <form @submit.prevent="lookupTZ" class="navbar-form navbar-left">
+                        <div class="form-group">
+                            <input type="text" v-model="zip1" class="form-control" placeholder="Zip To Timezone">
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form> -->
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <!-- <router-link class="" :to="{name: 'Good'}">
+                                    Good Records
+                                </router-link> -->
+                            <!-- <a class="pointer" @click="routeGood">Good Records</a> -->
+                        </li>
+                        <li>
+                            <a class="pointer" href="">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
         <div class="spacer10"></div>
         <div>
             <div class="margin2">
@@ -143,7 +216,8 @@
                         <p>{{record4.COMPANY_REP_1}}</p>
                         <h5></h5>
                         <p></p>
-                        <a target="_blank"  :href="'https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=' + record4.Dot" class="btn btn-primary btn-xs ">Safer</a>
+                        <a target="_blank" :href="'https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=' + record4.Dot"
+                            class="btn btn-primary btn-xs ">Safer</a>
 
                     </div>
 
@@ -188,13 +262,20 @@
                         </div>
                     </div>
                     <div class="margin3">
-                        <button class="btn-sm" type="submit">Submit</button>
-                    </div>
-                    <div>
-                        <h3></h3>
-                        <button class="btn-sm btn-danger" @click="changeStatus(transaction)">Remove this Record</button>
+                        <button class="btn-sm btn-info" type="submit">Submit</button>
                     </div>
                 </form>
+                <div>
+                    <div v-if="completeTrans">
+                        <h3></h3>
+                        <button class="btn-sm btn-danger" style="position: relative; left: 8rem;" @click="changeStatusNoSale(transaction)">No Sale</button>
+                        <button class="btn-sm btn-success" style="position: relative; left: 14rem;" @click="changeStatusSale(transaction)">Sale</button>
+                        <!-- <a @click="changeStatus(transaction)">yoooo</a> -->
+                    </div>
+                    <div v-else>
+                        <button class="btn-xs" @click="ctToggle">Finish</button>
+                    </div>
+                </div>        
             </div>
             <div>
                 <div class="transactions2">
@@ -226,7 +307,7 @@
 
 
 <script>
-
+    import router from '../router'
     export default {
         name: 'Good',
         data() {
@@ -240,13 +321,28 @@
                 seen: false,
                 recordDetail: false,
                 transactionDetail: false,
-
+                completeTrans: false,
 
             }
         },
         methods: {
-            changeStatus(transaction){
-                transaction.Status = "done"
+            ctToggle(){
+                this.completeTrans = !this.completeTrans
+            },
+            routeIntra() {
+                router.push('intrastate')
+            },
+            routeHome() {
+                router.push('/')
+            },
+            changeStatusNoSale(transaction) {
+                transaction.Status = "bad"
+                
+                this.$store.dispatch('updateTransaction', transaction)
+            },
+            changeStatusSale(transaction) {
+                transaction.Status = "sale"
+                
                 this.$store.dispatch('updateTransaction', transaction)
             },
             show(dot) {
@@ -314,8 +410,8 @@
             },
 
             newTransaction() {
-
-
+                
+                this.$notify('New Transaction', 'info', { itemClass: 'alert col-6 alert-info', visibility: 1000 })
                 this.$store.dispatch('authenticate')
                 this.$store.dispatch('newTransaction', this.transaction)
                 this.transaction = {}
@@ -357,10 +453,10 @@
             },
             record4() {
                 console.log(this.$store.state.activeRecord)
-                
+
                 // if(this.$store.state.activeRecord[0] = []){return this.$store.state.activeRecord[0]}
                 this.theRecord = this.$store.state.activeRecord
-                
+
                 return this.$store.state.activeRecord
             },
             records() {
@@ -377,7 +473,7 @@
                 return this.$store.state.activeGTransactions
             },
             ugTransactions() {
-                debugger
+
                 console.log(this.$store.state.activeUGTransactions)
                 return this.$store.state.activeUGTransactions
             },
@@ -399,15 +495,15 @@
             }
         },
         mounted() {
-            
-            
-            this.$store.dispatch('getUserTransactions2', this.user._id)
+
+
+            this.$store.dispatch('authenticate3')
             // this.$store.dispatch('getUserTransactions')
 
         }
     }
 </script>
-<style>
+<style scoped>
     h5 {
         text-decoration: underline;
         font-weight: bold;
@@ -415,24 +511,25 @@
     }
 
     .transactions1 {
-        border-top-style: solid;
-        border-bottom-style: solid;
-        border-bottom-width: 1px;
-        border-top-width: 1px;
+        background-color: rgba(79, 209, 74, 0.719);
+
+        border-radius: 25px;
         padding: 0.5rem;
-        /* border-radius: 25px; */
+        margin: 0.5rem;
     }
 
     .transactions2 {
         padding: 1rem;
     }
 
-    .bg3 {
+    /* .bg3 {
         background-color: rgba(86, 255, 80, 0.719);
-    }
+        
+    } */
 
     .bg1 {
         background-color: rgba(248, 145, 10, 0.726);
+
     }
 
     .padding {
@@ -524,5 +621,8 @@
 
     .topMargin {
         margin-top: 4rem;
+    }
+    .pointer:hover {
+        cursor: pointer;
     }
 </style>

@@ -3,7 +3,7 @@ let mongoose = require('mongoose')
 let ObjectId = mongoose.Schema.ObjectId
 
 var schema = new mongoose.Schema({
-    Dot: { type: String, required: true },
+    Dot: { type: String, required: true, unique: true, dropDups: true},
     DOCKET: { type: String },
     ENTITY_TYPE: { type: String },
     CENSUS_DBA: { type: String },

@@ -102,7 +102,6 @@
     </table> -->
 
 
-    <div class="spacer50"></div>
     <div class="app">
       <h3>Example - Import file with required login, firstname, lastname and optional values</h3>
       <br>
@@ -119,7 +118,7 @@
 
 
     <p>id</p>
-    <p  v-if="recordsT">{{recordsT.Dot}}</p>
+    <p v-if="recordsT">{{recordsT.Dot}}</p>
     <div>
       <h2>Records</h2>
       <div>
@@ -153,17 +152,17 @@
         <h5>companY_REP_1</h5>
         <p>{{record4.COMPANY_REP_1}}</p>
         <h5>Update</h5>
-       <form @submit.prevent="updateRecord(record4)">
-        <label for="userId">userId</label> 
-        <input type="text" name="userId" v-model="recordUser">
-        <button class="btn-xs btn-success" type="submit">Submit</button>
-        <button class="btn-xs btn-info" type="reset">Clear</button>
-       </form>
-      
+        <form @submit.prevent="updateRecord(record4)">
+          <label for="userId">userId</label>
+          <input type="text" name="userId" v-model="recordUser">
+          <button class="btn-xs btn-success" type="submit">Submit</button>
+          <button class="btn-xs btn-info" type="reset">Clear</button>
+        </form>
 
-       <button class="btn-xs btn-danger" @click="deleteRecord(record4)" >Delete Record</button>
-       
-       
+
+        <button class="btn-xs btn-danger" @click="deleteRecord(record4)">Delete Record</button>
+
+
 
       </div>
 
@@ -179,13 +178,13 @@
       XlsCsvParser,
     },
     methods: {
-      updateRecord(record){
+      updateRecord(record) {
         record.userId = this.recordUser
-        debugger
+
         console.log(record)
         this.$store.dispatch('updateRecord', record)
       },
-      deleteRecord(record){
+      deleteRecord(record) {
         this.$store.dispatch('deleteRecord', record)
       },
       show(dot) {
@@ -218,7 +217,6 @@
 
           const user = users[p];
           returnO.push([])
-
         }
 
         for (let i = 0; i < records.length; i++) {
@@ -256,9 +254,9 @@
       assignRecords() {
         //assigns key (user id) value pair (arr of records)
         var userRecords = {}
-        var records = this.records9
+        var records = this.activeRecords
         var users = this.inputF
-        
+
         for (const key in users) {
           if (users.hasOwnProperty(key)) {
             const user = users[key];
@@ -302,8 +300,12 @@
 
         // this.newUR(urs)
       },
-      newUR(userRecords) {
+      getRecordByDot(dot){
+        var record = this.$store.dispatch('getRecordByDot', dot)
         
+      },
+      newUR(userRecords) {
+
         var store = this.$store
         for (var p = 0; p < userRecords.length; p++) {
           (function (p) {
@@ -335,12 +337,17 @@
         for (var p = 0; p < results.length; p++) {
           (function (p) {
             var results1 = results[p]
-            setTimeout(function () {
-              // alert("hello");
-              // JSON.stringify(results1)
+            // var record = store.dispatch('getRecordByDot', results1)
+            if ((Date.parse(results1.MCS_150_DATE) + 94670856000) > Date.now()) {
               
-              store.dispatch('newRecords', results1)
-            }, 100 * p);
+              setTimeout(function () {
+                // alert("hello");
+                // JSON.stringify(results1)
+
+                store.dispatch('addRecords', results1)
+                store.dispatch('newRecords', results1)
+              }, 100 * p);
+            }
           })(p);
 
           // console.log(results)
@@ -363,18 +370,18 @@
       },
       //installed tool only sorts by column. this constructs the records into rows.
       count99() {
-        
+
         var records = []
         var results = this.results
         results.forEach(column => {
           for (let i = 0; i < column["data"].length; i++) {
             var element = column["data"][i]
-           
-           if (!records[i]) { records[i] = {} }
-           records[i]["Called"] = false
-           if (column["column"] == "DOT") {
-             // if(element.dot = null){}
-             records[i]["Dot"] = element
+
+            if (!records[i]) { records[i] = {} }
+            records[i]["Called"] = false
+            if (column["column"] == "DOT") {
+              // if(element.dot = null){}
+              records[i]["Dot"] = element
             }
             else if (column["column"] == "DOCKET") {
               records[i]["DOCKET"] = element
@@ -463,8 +470,6 @@
         return this.$store.state.activeGTransactions
       },
       records() {
-
-
         var records = this.$store.state.activeRecords
         var count = 0
         for (let p = 0; p < records.length; p++) {
@@ -473,6 +478,9 @@
         }
         this.recCount = count
         return this.$store.state.activeRecords
+      },
+      activeSplitRecords() {
+        return this.$store.state.activeSplitRecords
       },
       record4() {
         console.log(this.$store.state.activeRecord)
@@ -542,7 +550,8 @@
   .inline {
     display: inline
   }
-  .textcolor:hover{
+
+  .textcolor:hover {
     color: cadetblue;
     cursor: pointer;
   }
