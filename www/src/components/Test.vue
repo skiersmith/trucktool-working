@@ -1,8 +1,11 @@
 <template>
   <div>
 
-
-    <div class="nav-header">
+<div>
+  <button @click="getSplit">Get Recent Expirations (1 Year)</button>
+  <button @click="getSplit2">Get Recent Expirations (4 Months)</button>
+</div>
+    <!-- <div class="nav-header">
       <div class="nav-header-container">
         <div>
           <div class="nav-header-sub">
@@ -28,7 +31,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <div class="spacer5"></div>
     <div class="userGroup margin">
       <div>
@@ -40,7 +43,7 @@
       </div>
     </div>
     <div>
-      <form @submit.prevent="assignRecords()">
+      <form @submit.prevent="assignRecords">
         <div v-for="(r,  index) in records9" class="form-group">
           <p>Group: {{index}}</p>
           <label for="count">UserId</label>
@@ -178,6 +181,15 @@
       XlsCsvParser,
     },
     methods: {
+      getRecordCreated(){
+        this.$store.dispatch('getRecordCreated')
+      },
+      getSplit(){
+        this.$store.dispatch('getSplitRecords')
+      },
+      getSplit2(){
+        this.$store.dispatch('getSplitRecords2')
+      },
       updateRecord(record) {
         record.userId = this.recordUser
 
@@ -207,7 +219,7 @@
       },
       splitRecords() {
         var users = parseInt(this.usersC)
-        var records = this.$store.state.activeRecords
+        var records = this.$store.state.activeSplitRecords
         var lastUser = users
         var currentUser = 0
         var returnO = []
@@ -254,7 +266,7 @@
       assignRecords() {
         //assigns key (user id) value pair (arr of records)
         var userRecords = {}
-        var records = this.activeRecords
+        var records = this.activeSplitRecords
         var users = this.inputF
 
         for (const key in users) {
@@ -268,29 +280,31 @@
           for (const key in users) {
             if (users.hasOwnProperty(key)) {
               const uid = users[key];
-              if (key == p) {
-                userRecords[uid].push(recGroup)
-              }
+              userRecords[uid].push(recGroup)
+              // if (key === p) {
+              // }
             }
           }
         }
         console.log(userRecords)
         this.records9 = userRecords
+        
         this.createUserRecords()
-        return userRecords
+        // return userRecords
       },
       createUserRecords() {
         var userRecords = this.records9
         var urs = []
         for (var key in userRecords) {
           if (userRecords.hasOwnProperty(key)) {
-            for (let q = 0; q < userRecords[key][0].length; q++) {
-              var ur = userRecords[key][0][q];
+            for (let q = 0; q < userRecords[key].length; q++) {
+              var ur = userRecords[key][q];
               console.log(ur)
               var userRecord = {
                 userId: key,
                 _id: ur._id
               }
+              
               this.$store.dispatch('newUserRecord', userRecord)
               // urs.push(userRecord)
               // console.log(userRecord)
@@ -333,6 +347,7 @@
       },
       createRecords(results) {
         var store = this.$store
+        
         // var results = this.actualResults
         for (var p = 0; p < results.length; p++) {
           (function (p) {
@@ -343,28 +358,15 @@
               setTimeout(function () {
                 // alert("hello");
                 // JSON.stringify(results1)
-
-                store.dispatch('addRecords', results1)
+                
+                // store.dispatch('addRecords', results1)
                 store.dispatch('newRecords', results1)
               }, 100 * p);
             }
           })(p);
-
-          // console.log(results)
-          // console.log("hi")
-          // for (var i = 0; i < results.length; i++) {
-          //   var results1 = results[i]
-          //   setTimeout(function (results1) {
-
-          //     console.log(results1)
-          //   }, 1e3 * i);
-          //   console.log("heres")
-          // }
-
-
-          // this.$store.dispatch('newRecords', records)
         }
       },
+
       onValidate(results) {
         this.results = results;
       },
@@ -411,13 +413,10 @@
               records[i]["CENSUS_LEGAL_NAME"] = element
             }
             else if (column["column"] == "CENSUS_OFFICE_TELEPHONE_NUMBER") {
-              records[i]["CENSUS_CELL_PHONE_NUMBER"] = element
+              records[i]["CENSUS_OFFICE_TELEPHONE_NUMBER"] = element
             }
             else if (column["column"] == "CENSUS_CELL_PHONE_NUMBER") {
               records[i]["CENSUS_CELL_PHONE_NUMBER"] = element
-            }
-            else if (column["column"] == "CENSUS_OFFICE_TELEPHONE_NUMBER") {
-              records[i]["CENSUS_OFFICE_TELEPHONE_NUMBER"] = element
             }
             else if (column["column"] == "CENSUS_MAILING_ADDRESS_STATE") {
               records[i]["CENSUS_MAILING_ADDRESS_STATE"] = element
@@ -433,6 +432,7 @@
       },
       setResults(records) {
         this.actualResults = records
+        
         console.log(this.actualResults)
       },
     },
@@ -470,14 +470,14 @@
         return this.$store.state.activeGTransactions
       },
       records() {
-        var records = this.$store.state.activeRecords
+        var records = this.$store.state.activeSplitRecords
         var count = 0
         for (let p = 0; p < records.length; p++) {
           var record = records[p];
           count++
         }
         this.recCount = count
-        return this.$store.state.activeRecords
+        return this.$store.state.activeSplitRecords
       },
       activeSplitRecords() {
         return this.$store.state.activeSplitRecords
@@ -491,6 +491,8 @@
     },
     mounted() {
       this.$store.dispatch('getAllRecords')
+      this.$store.dispatch('getRecordsCreated')
+
     },
     data() {
       return {

@@ -12,7 +12,7 @@ let api = axios.create({
     withCredentials: true
 })
 let tzapi = axios.create({
-    baseURL: 'http://worldclockapi.com/api/json/utc/now',
+    baseURL: 'https://maps.googleapis.com/maps/api/timezone/json?parametersAIzaSyDc2wND7FnDnKvQLFJo68r_nqciB30a8SUlocation=-33.86,151.20',
     timeout: 2000,
     // withCredentials: true
 })
@@ -22,9 +22,7 @@ let auth = axios.create({
     withCredentials: true
 })
 vue.use(vuex)
-//https://maps.googleapis.com/maps/api/timezone/json?parameters
-//AIzaSyDc2wND7FnDnKvQLFJo68r_nqciB30a8SU
-//location=-33.86,151.20
+// http://worldclockapi.com/api/json/utc/now
 var store = new vuex.Store({
     state: {
 
@@ -35,20 +33,14 @@ var store = new vuex.Store({
         activeRecords: {},
         activeSplitRecords: [],
         activeRecord: {},
-        eastern: {},
-        // yEastern: {},
-
-        central: {},
-        // yCentral: {},
-
-
-        mountain: {},
-        // yMountain: {},
-
-
-        pacific: {},
-        // yPacific: {},
-
+        eastern: [],
+        easternC: [],
+        central: [],
+        centralC: [],
+        mountain: [],
+        mountainC: [],
+        pacific: [],
+        pacificC: [],
 
         activeVaults: {},
         activeYTransactions: {},
@@ -69,10 +61,62 @@ var store = new vuex.Store({
             state.mountain = data
         },
         setTimeZoneRecord(state, data) {
-            state.eastern = data.eastern
-            state.central = data.central
-            state.pacific = data.pacific
-            state.mountain = data.mountain
+
+            var eastern = []
+            var easternC = []
+            var mountain = []
+            var mountainC = []
+            var central = []
+            var centralC = []
+            var pacific = []
+            var pacificC = []
+            for (let q = 0; q < data.eastern.length; q++) {
+                const record = data.eastern[q];
+                if (record.Called === true) {
+                    easternC.push(record)
+                }
+                else {
+                    eastern.push(record)
+                }
+            }
+            for (let q = 0; q < data.central.length; q++) {
+                const record = data.central[q];
+                if (record.Called === true) {
+                    centralC.push(record)
+                }
+                else {
+                    central.push(record)
+                }
+            }
+            for (let q = 0; q < data.pacific.length; q++) {
+                const record = data.pacific[q];
+                if (record.Called === true) {
+                    pacificC.push(record)
+                }
+                else {
+                    pacific.push(record)
+                }
+            }
+            for (let q = 0; q < data.mountain.length; q++) {
+                const record = data.mountain[q];
+                if (record.Called === true) {
+                    mountainC.push(record)
+                    console.log("1")
+                }
+                else {
+                    mountain.push(record)
+                    console.log("2")
+                }
+            }
+
+            state.eastern = eastern
+            state.central = central
+            state.pacific = pacific
+            state.mountain = mountain
+            state.easternC = easternC
+            state.centralC = centralC
+            state.pacificC = pacificC
+            state.mountainC = mountainC
         },
         // setTimeZoneRecord2(state, data) {
         //     state.yEastern = data.eastern
@@ -80,7 +124,8 @@ var store = new vuex.Store({
         //     state.yPacific = data.pacific
         //     state.yMountain = data.mountain
         // },
-        clearError(state, data){
+
+        clearError(state, data) {
             state.error = {}
         },
         setUser(state, data) {
@@ -108,8 +153,9 @@ var store = new vuex.Store({
                 state.activeRecords = data
             }
         },
-        addActiveSplitRecords(state, data) {
-            state.activeSplitRecords.push(data)
+        setActiveSplitRecords(state, data) {
+            state.activeSplitRecords = data
+            // .push(data)
 
         },
         setActiveOTransactions(state, data) {
@@ -149,20 +195,82 @@ var store = new vuex.Store({
 
     },
     actions: {
+        getSplitRecords({ commit, dispatch }) {
+
+            api('records')
+                .then(res => {
+                    var records2 = []
+                    for (let q = 0; q < res.data.data.length; q++) {
+
+                        const record = res.data.data[q];
+                        var mcs = Date.parse(record.MCS_150_DATE)
+                        var today = Date.now()
+                        var twoYears = Date.now() - 63113904000
+                        var hbd = mcs + 63113904000
+                        var hbd2 = twoYears - 31104000000
+                        var hbd3 = twoYears + 2592000000
+
+
+                        if (!record.userId) {
+                            if (hbd < today && mcs > hbd2 || mcs < hbd3) {
+                                records2.push(record)
+                            }
+                        }
+                    }
+                    commit('setActiveSplitRecords', records2)
+
+                })
+                .catch(err => {
+                    commit('handleError', err)
+
+
+                })
+        },
+        getSplitRecords2({ commit, dispatch }) {
+
+            api('records')
+                .then(res => {
+                    var records2 = []
+                    for (let q = 0; q < res.data.data.length; q++) {
+                        
+                        const record = res.data.data[q];
+                        var mcs = Date.parse(record.MCS_150_DATE)
+                        var today = Date.now()
+                        var twoYears = Date.now() - 63113904000
+                        var hbd = mcs + 63113904000
+                        var hbd2 = twoYears - 10368000000
+                        var hbd3 = twoYears + 2592000000
+
+                        // || mcs < hbd3
+                        if (!record.userId) {
+                            if (hbd < today && mcs > hbd2 && mcs < hbd3) {
+                                records2.push(record)
+                            }
+                        }
+                    }
+                    commit('setActiveSplitRecords', records2)
+
+                })
+                .catch(err => {
+                    commit('handleError', err)
+
+
+                })
+        },
         getTime({ commit, dispatch }) {
 
-            tzapi('')
+            api('get-time')
                 .then(res => {
                     
-                    var d = new Date(res.data.currentDateTime);
+                    var d = new Date(res.data.data.currentDateTime);
                     var hour = d.getHours();
                     var day = d.getDay();
                     var minutes = d.getMinutes();
-                    if(day > 0 && day < 6 && hour > 6 && hour < 18){
+                    if (day > 0 && day < 6 && hour > 6 && hour < 18) {
                         console.log('Time is between 6 and 5 M - F');
                         commit('setTime', true)
                     }
-                   
+
 
                 })
                 .catch(err => {
@@ -212,6 +320,7 @@ var store = new vuex.Store({
 
             api.put('records/' + data._id, data)
                 .then(res => {
+                    
                     console.log("res")
                     console.log(res)
                 })
@@ -245,7 +354,7 @@ var store = new vuex.Store({
                 })
         },
         addRecords({ commit, dispatch }, records) {
-            commit('addActiveSplitRecords', records)
+            commit('setActiveSplitRecords', records)
         },
         getRecord3({ commit, dispatch }, dot) {
             api('records/dot/' + dot, dot)
@@ -270,6 +379,24 @@ var store = new vuex.Store({
                     else {
                         commit('setTF', false1)
                     }
+                })
+                .catch(err => {
+                    commit('handleError', err)
+
+
+                })
+        },
+        getRecordsCreated({ commit, dispatch }, data) {
+            api('records', data)
+                .then(res => {
+                    var created = {}
+                    
+                    for (let q = 0; q < res.data.data.length; q++) {
+                        const record = res.data.data[q];
+                        created[record.Created] += record 
+                    }
+                    
+                    
                 })
                 .catch(err => {
                     commit('handleError', err)
@@ -332,7 +459,7 @@ var store = new vuex.Store({
 
             api.put('transactions/dot/' + payload.Dot, payload)
                 .then(res => {
-                    
+
                     dispatch('searchTransByDot', payload.Dot)
                 })
                 .catch(err => {
@@ -342,6 +469,7 @@ var store = new vuex.Store({
                 })
         },
         newTransaction({ commit, dispatch }, transaction) {
+            // commit('clearRecords')
 
             transaction.UserId = this.state.user._id
             api.post('transactions', transaction)
@@ -355,6 +483,7 @@ var store = new vuex.Store({
                     }
                     else {
                         dispatch('searchTransByDot', transaction.Dot)
+                        // dispatch('getUserRecords', this.state.user._id)
                     }
 
                 })
@@ -416,7 +545,6 @@ var store = new vuex.Store({
 
             api('records/user/' + userId)
                 .then(res => {
-
                     commit('setActiveRecords', res.data.data)
                     var sendObj = {
                         eastern: [],
@@ -665,25 +793,21 @@ var store = new vuex.Store({
         userLogin({ commit, dispatch }, login) {
             auth.post('/login', login)
                 .then(res => {
+                    
                     if (res.data.data.access === true) {
-                        this.$notify.success('This is success message');
-                        commit('setUser', res.data)
+                        commit('setUser', res.data.data)
                         router.push({ name: 'Home' })
                         dispatch('authenticate')
                     }
-                    else if(store.state.time === true){
-                        this.$notify.success('This is success message');
-                        commit('setUser', res.data)
+                    else if (store.state.time === true) {
+                        commit('setUser', res.data.data)
                         router.push({ name: 'Home' })
                         dispatch('authenticate')
                     }
-                    else{
+                    else {
                         alert("Contact Manager to Login")
                         router.push({ name: "Register" })
                     }
-
-
-
                 })
                 .catch(err => {
                     commit('handleError', err)

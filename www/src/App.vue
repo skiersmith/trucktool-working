@@ -1,9 +1,10 @@
 <template>
   <div id="app">
-    <div @click="closeError" v-if="error">
-    </div>
+    <!-- <div @click="closeError" v-if="error">
+    </div> -->
     <!-- <img src="./assets/logo.png"> -->
-    <router-view/>
+    <router-view></router-view>
+    <!-- <router-view/> -->
   </div>
 </template>
 

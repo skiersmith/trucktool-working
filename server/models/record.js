@@ -1,9 +1,10 @@
 var models = require('../config/constants').models
 let mongoose = require('mongoose')
+var uniqueValidator = require('mongoose-unique-validator');
 let ObjectId = mongoose.Schema.ObjectId
 
 var schema = new mongoose.Schema({
-    Dot: { type: String, required: true, unique: true, dropDups: true},
+    Dot: { type: String, required: true, unique: true},
     DOCKET: { type: String },
     ENTITY_TYPE: { type: String },
     CENSUS_DBA: { type: String },
@@ -19,7 +20,9 @@ var schema = new mongoose.Schema({
     CENSUS_MAILING_ADDRESS_STATE: { type: String},
     CENSUS_MAILING_ADDRESS_ZIP_CODE: { type: String},
     Called: { type: Boolean},
-    userId: { type: ObjectId, ref: models.user}
+    userId: { type: ObjectId, ref: models.user},
+    Created: { type : Date, default: Date.now }
 });
+schema.plugin(uniqueValidator);
 
 module.exports = mongoose.model(models.record.name, schema);
