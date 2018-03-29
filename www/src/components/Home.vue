@@ -348,7 +348,7 @@
                         <td>{{record.CENSUS_MAILING_ADDRESS_STATE}}</td>
                         <td>{{record.DOCKET}}</td>
                         <td>
-                            <p class="inline">{{record.Called}}</p>
+                            <p class="inline">{{ifCalled(record.Called)}}</p>
                             <!-- <p class="inline">{{ifCalled(record.Called)}}</p> -->
 
                             <button class="btn-xs btn-info" @click="show(record)">Call</button>
@@ -663,6 +663,7 @@
                 this.$store.dispatch('newTransaction', this.transaction)
                 if (this.transaction.Status == "red") {
                     this.hide()
+
                 }
 
                 this.updateCalled(this.transaction)

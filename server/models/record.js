@@ -21,7 +21,8 @@ var schema = new mongoose.Schema({
     CENSUS_MAILING_ADDRESS_ZIP_CODE: { type: String},
     Called: { type: Boolean},
     userId: { type: ObjectId, ref: models.user},
-    Created: { type : Date, default: Date.now }
+    Created: { type : Date, default: Date.now },
+    noSale: { type : Boolean},
 });
 schema.plugin(uniqueValidator);
 

@@ -508,7 +508,12 @@ var store = new vuex.Store({
                     console.log(res)
                     // this.$notify('Success', 'type', { itemClass: 'alert col-6 alert-info', iconClass: 'fa fa-lg fa-handshake-o', visibility: 10000 })
                     if (transaction.Status == "red") {
-
+                        var record = {
+                            noSale: true,
+                            Dot: transaction.Dot
+                        }
+                        dispatch('updateRecordByDot', record)
+                        
                         console.log("redTRan")
                         dispatch('getRecord3', res.data.dot)
                     }
@@ -517,6 +522,20 @@ var store = new vuex.Store({
                         // dispatch('getUserRecords', this.state.user._id)
                     }
 
+                })
+                .catch(err => {
+                    commit('handleError', err)
+
+
+                })
+        },
+        updateRecordByDot({ commit, dispatch }, data) {
+
+            
+            api.put('records/dot/' + data.Dot, data)
+                .then(res => {
+                    
+                    console.log(res)
                 })
                 .catch(err => {
                     commit('handleError', err)
@@ -576,7 +595,18 @@ var store = new vuex.Store({
 
             api('records/user/' + userId)
                 .then(res => {
-                    commit('setActiveRecords', res.data.data)
+                   var records2 = []
+                    for (let n = 0; n < res.data.data.length; n++) {
+                        
+                        var record = res.data.data[n];
+                        if(record.noSale){
+                            continue
+                        }
+                        else{
+                            records2.push(record)
+                        }
+                    }
+                    commit('setActiveRecords', records2)
                     var sendObj = {
                         eastern: [],
                         central: [],
@@ -586,8 +616,8 @@ var store = new vuex.Store({
                     var nothing = []
                     // commit('clearTZRecords', nothing)
                     console.log(res)
-                    for (let l = 0; l < res.data.data.length; l++) {
-                        var record = res.data.data[l];
+                    for (let l = 0; l < records2.length; l++) {
+                        var record = records2[l];
                         var zip2 = record.CENSUS_MAILING_ADDRESS_ZIP_CODE
 
                         var zip = ""
