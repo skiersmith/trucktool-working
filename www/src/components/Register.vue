@@ -26,7 +26,7 @@
                           <div class="col-sm-10">
                               <div class="checkbox">
                                   <label class="white">
-                                      <input type="checkbox" /> Remember me
+                                      <!-- <input type="checkbox" /> Remember me -->
                                   </label>
                               </div>
                           </div>
@@ -43,7 +43,7 @@
       <div class="registerhere">
           <div class="regButton">
               <p @click="toggleRegForm">
-                  <span @click="regSeen = !regSeen">Don't have an account? Register here.</span>
+                  <!-- <span @click="regSeen = !regSeen">Don't have an account? Register here.</span> -->
               </p>
               <div v-if="regSeen">
                   <form class="form-horizontal reg-container" role="form">

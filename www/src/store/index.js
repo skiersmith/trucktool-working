@@ -232,7 +232,7 @@ var store = new vuex.Store({
                 .then(res => {
                     var records2 = []
                     for (let q = 0; q < res.data.data.length; q++) {
-                        
+
                         const record = res.data.data[q];
                         var mcs = Date.parse(record.MCS_150_DATE)
                         var today = Date.now()
@@ -257,11 +257,42 @@ var store = new vuex.Store({
 
                 })
         },
+        getSplitRecords3({ commit, dispatch }) {
+
+            api('records')
+                .then(res => {
+                    var records2 = []
+                    for (let q = 0; q < res.data.data.length; q++) {
+
+                        const record = res.data.data[q];
+                        var mcs = Date.parse(record.MCS_150_DATE)
+                        var today = Date.now()
+                        var twoYears = Date.now() - 63113904000
+                        var hbd = mcs + 63113904000
+                        var hbd2 = twoYears - 63113852000
+                        var hbd3 = twoYears + 2592000000
+
+
+                        if (!record.userId) {
+                            if (hbd < today && mcs > hbd2 || mcs < hbd3) {
+                                records2.push(record)
+                            }
+                        }
+                    }
+                    commit('setActiveSplitRecords', records2)
+
+                })
+                .catch(err => {
+                    commit('handleError', err)
+
+
+                })
+        },
         getTime({ commit, dispatch }) {
 
             api('get-time')
                 .then(res => {
-                    
+
                     var d = new Date(res.data.data.currentDateTime);
                     var hour = d.getHours();
                     var day = d.getDay();
@@ -320,7 +351,7 @@ var store = new vuex.Store({
 
             api.put('records/' + data._id, data)
                 .then(res => {
-                    
+
                     console.log("res")
                     console.log(res)
                 })
@@ -390,13 +421,13 @@ var store = new vuex.Store({
             api('records', data)
                 .then(res => {
                     var created = {}
-                    
+
                     for (let q = 0; q < res.data.data.length; q++) {
                         const record = res.data.data[q];
-                        created[record.Created] += record 
+                        created[record.Created] += record
                     }
-                    
-                    
+
+
                 })
                 .catch(err => {
                     commit('handleError', err)
@@ -793,7 +824,7 @@ var store = new vuex.Store({
         userLogin({ commit, dispatch }, login) {
             auth.post('/login', login)
                 .then(res => {
-                    
+
                     if (res.data.data.access === true) {
                         commit('setUser', res.data.data)
                         router.push({ name: 'Home' })

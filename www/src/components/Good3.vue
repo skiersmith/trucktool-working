@@ -119,7 +119,7 @@
 
     }
 </script>
-<style>
+<style scoped>
     bg3 {
         background-color: darkgreen;
     }

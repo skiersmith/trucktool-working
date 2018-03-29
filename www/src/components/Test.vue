@@ -2,6 +2,7 @@
   <div>
 
 <div>
+    <button @click="getSplit3">Get Recent Expirations (2 Years)</button>
   <button @click="getSplit">Get Recent Expirations (1 Year)</button>
   <button @click="getSplit2">Get Recent Expirations (4 Months)</button>
 </div>
@@ -189,6 +190,9 @@
       },
       getSplit2(){
         this.$store.dispatch('getSplitRecords2')
+      },
+      getSplit3(){
+        this.$store.dispatch('getSplitRecords3')
       },
       updateRecord(record) {
         record.userId = this.recordUser
@@ -394,6 +398,9 @@
             else if (column["column"] == "CENSUS_LEGAL_NAME") {
               records[i]["CENSUS_LEGAL_NAME"] = element
             }
+            else if (column["column"] == "CENSUS_DBA") {
+              records[i]["CENSUS_DBA"] = element
+            }
             else if (column["column"] == "EMAIL_ADDRESS") {
               records[i]["EMAIL_ADDRESS"] = element
             }
@@ -408,9 +415,6 @@
             }
             else if (column["column"] == "SAFER_OPERATING_STATUS") {
               records[i]["SAFER_OPERATING_STATUS"] = element
-            }
-            else if (column["column"] == "CENSUS_LEGAL_NAME") {
-              records[i]["CENSUS_LEGAL_NAME"] = element
             }
             else if (column["column"] == "CENSUS_OFFICE_TELEPHONE_NUMBER") {
               records[i]["CENSUS_OFFICE_TELEPHONE_NUMBER"] = element
@@ -508,11 +512,12 @@
           { name: 'DOCKET', value: 'DOCKET', isOptional: true },
           { name: 'ENTITY_TYPE', value: 'ENTITY_TYPE', isOptional: true },
           { name: 'CENSUS_LEGAL_NAME', value: 'CENSUS_LEGAL_NAME', isOptional: true },
-          { name: 'CENSUS_LEGAL_NAME', value: 'CENSUS_LEGAL_NAME', isOptional: true },
+          { name: 'CENSUS_DBA', value: 'CENSUS_DBA', isOptional: true },
           { name: 'CENSUS_OFFICE_TELEPHONE_NUMBER', value: 'CENSUS_OFFICE_TELEPHONE_NUMBER', isOptional: true },
           { name: 'CENSUS_CELL_PHONE_NUMBER', value: 'CENSUS_CELL_PHONE_NUMBER', isOptional: true },
           { name: 'CENSUS_MAILING_ADDRESS_STATE', value: 'CENSUS_MAILING_ADDRESS_STATE', isOptional: true },
           { name: 'CENSUS_MAILING_ADDRESS_ZIP_CODE', value: 'CENSUS_MAILING_ADDRESS_ZIP_CODE', isOptional: true },
+          { name: 'CLASSIFICATION_INTER', value: 'CLASSIFICATION_INTER', isOptional: true },
           { name: 'EMAIL_ADDRESS', value: 'EMAIL_ADDRESS', isOptional: true },
           { name: 'COMPANY_REP_1', value: 'COMPANY_REP_1', isOptional: true },
           { name: 'COMPANY_REP_2', value: 'COMPANY_REP_2', isOptional: true },

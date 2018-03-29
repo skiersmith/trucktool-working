@@ -757,7 +757,7 @@
                 var var1 = this.$store.state.activeRecords
                 for (let i = 0; i < var1.length; i++) {
                     const element = var1[i];
-                    
+
                 }
                 return var1
             },
@@ -938,11 +938,11 @@
     }
 </script>
 <style scoped>
-    /* .transactions1 {
-       
+    .transactions1 {
+        margin: 0.5rem;
         padding: 0.5rem;
         border-radius: 25px;
-    } */
+    }
 
     .transactions2 {
         padding: 1rem;
@@ -950,17 +950,16 @@
 
     .bg2 {
         background-color: rgba(225, 228, 81, 0.719);
-        border-radius: 25px;
+        /* border-radius: 25px;
         padding: 0.5rem;
-        margin: 0.5rem;
-
+        margin: 0.5rem; */
     }
 
     .bg1 {
         background-color: rgba(228, 153, 55, 0.726);
-        border-radius: 25px;
+        /* border-radius: 25px;
         padding: 0.5rem;
-        margin: 0.5rem;
+        margin: 0.5rem; */
     }
 
     .padding {
