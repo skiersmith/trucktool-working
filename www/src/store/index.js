@@ -41,6 +41,14 @@ var store = new vuex.Store({
         mountainC: [],
         pacific: [],
         pacificC: [],
+        ieastern: [],
+        ieasternC: [],
+        icentral: [],
+        icentralC: [],
+        imountain: [],
+        imountainC: [],
+        ipacific: [],
+        ipacificC: [],
 
         activeVaults: {},
         activeYTransactions: {},
@@ -70,41 +78,99 @@ var store = new vuex.Store({
             var centralC = []
             var pacific = []
             var pacificC = []
+            var ieastern = []
+            var ieasternC = []
+            var icentral = []
+            var icentralC = []
+            var imountain = []
+            var imountainC = []
+            var ipacific = []
+            var ipacificC = []
+            debugger
             for (let q = 0; q < data.eastern.length; q++) {
                 const record = data.eastern[q];
                 if (record.Called === true) {
-                    easternC.push(record)
+                    if (record.CLASSIFICATION_INTER) {
+
+                        easternC.push(record)
+                    }
+                    else if (record.INTRASTATE_NONHAZMAT) {
+                        ieasternC.push(record)
+                    }
                 }
                 else {
-                    eastern.push(record)
+                    debugger
+                    if (record.CLASSIFICATION_INTER) {
+                        eastern.push(record)
+
+                    }
+                    else if (record.INTRASTATE_NONHAZMAT) {
+                        ieastern.push(record)
+                    }
                 }
             }
             for (let q = 0; q < data.central.length; q++) {
                 const record = data.central[q];
                 if (record.Called === true) {
-                    centralC.push(record)
+                    if (record.CLASSIFICATION_INTER) {
+                        centralC.push(record)
+
+                    }
+                    else if (record.INTRASTATE_NONHAZMAT) {
+                        icentralC.push(record)
+                    }
                 }
                 else {
-                    central.push(record)
+                    if (record.CLASSIFICATION_INTER) {
+                        central.push(record)
+
+                    }
+                    else if (record.INTRASTATE_NONHAZMAT) {
+                        icentral.push(record)
+                    }
                 }
             }
             for (let q = 0; q < data.pacific.length; q++) {
                 const record = data.pacific[q];
                 if (record.Called === true) {
-                    pacificC.push(record)
+                    if (record.CLASSIFICATION_INTER) {
+                        pacificC.push(record)
+
+                    }
+                    else if (record.INTRASTATE_NONHAZMAT) {
+                        ipacificC.push(record)
+                    }
                 }
                 else {
-                    pacific.push(record)
+                    if (record.CLASSIFICATION_INTER) {
+                        pacific.push(record)
+
+                    }
+                    else if (record.INTRASTATE_NONHAZMAT) {
+                        ipacific.push(record)
+                    }
                 }
             }
             for (let q = 0; q < data.mountain.length; q++) {
                 const record = data.mountain[q];
                 if (record.Called === true) {
-                    mountainC.push(record)
+                    if (record.CLASSIFICATION_INTER) {
+                        mountainC.push(record)
+
+                    }
+                    else if (record.INTRASTATE_NONHAZMAT) {
+                        imountainC.push(record)
+                    }
                     console.log("1")
                 }
                 else {
-                    mountain.push(record)
+                    if (record.CLASSIFICATION_INTER) {
+                        mountain.push(record)
+
+                    }
+                    else if (record.INTRASTATE_NONHAZMAT) {
+                        imountain.push(record)
+                    }
                     console.log("2")
                 }
             }
@@ -117,6 +183,14 @@ var store = new vuex.Store({
             state.centralC = centralC
             state.pacificC = pacificC
             state.mountainC = mountainC
+            state.ieastern = ieastern
+            state.icentral = icentral
+            state.ipacific = ipacific
+            state.imountain = imountain
+            state.ieasternC = ieasternC
+            state.icentralC = icentralC
+            state.ipacificC = ipacificC
+            state.imountainC = imountainC
         },
         // setTimeZoneRecord2(state, data) {
         //     state.yEastern = data.eastern
@@ -239,11 +313,11 @@ var store = new vuex.Store({
                         var twoYears = Date.now() - 63113904000
                         var hbd = mcs + 63113904000
                         var hbd2 = twoYears - 10368000000
-                        var hbd3 = twoYears + 2592000000
+                        // var hbd3 = twoYears + 2592000000
+                        // && mcs < hbd3
 
-                        // || mcs < hbd3
                         if (!record.userId) {
-                            if (hbd < today && mcs > hbd2 && mcs < hbd3) {
+                            if (hbd < today && mcs > hbd2) {
                                 records2.push(record)
                             }
                         }
@@ -513,7 +587,7 @@ var store = new vuex.Store({
                             Dot: transaction.Dot
                         }
                         dispatch('updateRecordByDot', record)
-                        
+
                         console.log("redTRan")
                         dispatch('getRecord3', res.data.dot)
                     }
@@ -531,10 +605,10 @@ var store = new vuex.Store({
         },
         updateRecordByDot({ commit, dispatch }, data) {
 
-            
+
             api.put('records/dot/' + data.Dot, data)
                 .then(res => {
-                    
+
                     console.log(res)
                 })
                 .catch(err => {
@@ -595,14 +669,14 @@ var store = new vuex.Store({
 
             api('records/user/' + userId)
                 .then(res => {
-                   var records2 = []
+                    var records2 = []
                     for (let n = 0; n < res.data.data.length; n++) {
-                        
+
                         var record = res.data.data[n];
-                        if(record.noSale){
+                        if (record.noSale) {
                             continue
                         }
-                        else{
+                        else {
                             records2.push(record)
                         }
                     }
@@ -671,7 +745,7 @@ var store = new vuex.Store({
                         }
                         // console.log(record.tz)
                     }
-
+                    debugger
                     commit('setTimeZoneRecord', sendObj)
                 })
                 .catch(err => {

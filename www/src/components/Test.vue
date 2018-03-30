@@ -227,27 +227,16 @@
         var lastUser = users
         var currentUser = 0
         var returnO = []
-        // console.log(records)
         var count = 0
         for (let p = 0; p < users; p++) {
-
           const user = users[p];
           returnO.push([])
         }
-
         for (let i = 0; i < records.length; i++) {
-
           count++
           var record2 = records[i];
-
           returnO[currentUser].push(record2)
-          //  console.log(record3)
-          // console.log(record)
-          // returnO[record2] = currentUser
-
-          // console.log(returnO[1])
-
-          if (currentUser < users - 1) {
+         if (currentUser < users - 1) {
             currentUser++
           }
           else { currentUser = 0 }
@@ -258,9 +247,6 @@
             lastUser = 0
           }
         }
-        // console.log("hi")
-        // console.log(returnO[1][1])
-
         var count2 = Math.round(count / users)
         this.count2 = count2
         this.count = count
@@ -272,25 +258,57 @@
         var userRecords = {}
         var records = this.activeSplitRecords
         var users = this.inputF
-
+        var userCount = 0
         for (const key in users) {
           if (users.hasOwnProperty(key)) {
             const user = users[key];
             userRecords[user] = []
+            userCount++
           }
         }
+        
+       userCount = userCount - 1
+        // var lastRecord = 0
+        // for (let p = 0; p < records.length; p++) {
+        //   const recGroup = records[p];
+        //   for (let l = 0; l < userRecords.length; l++) {
+        //     const ur = userRecords[l];
+            
+
+
+        //     lastRecord = p 
+        //   }
+            
+          
+        //   if (users.hasOwnProperty(key)) {
+        //       const uid = users[key];
+        //       userRecords[uid].push(recGroup)
+        //       // if (key === p) {
+        //       // }
+        //     }
+          
+        // }
+        var userPush = 0
         for (let p = 0; p < records.length; p++) {
           const recGroup = records[p];
           for (const key in users) {
             if (users.hasOwnProperty(key)) {
-              const uid = users[key];
+              const uid = users[userPush];
               userRecords[uid].push(recGroup)
-              // if (key === p) {
-              // }
+              
+              if(userPush < userCount){
+                userPush ++
+                break
+              }
+              else if(userPush = userCount){
+                userPush = 0
+                break
+              }
             }
           }
         }
         console.log(userRecords)
+        debugger
         this.records9 = userRecords
         
         this.createUserRecords()
@@ -351,7 +369,7 @@
       },
       createRecords(results) {
         var store = this.$store
-        
+        debugger
         // var results = this.actualResults
         for (var p = 0; p < results.length; p++) {
           (function (p) {
@@ -415,6 +433,12 @@
             }
             else if (column["column"] == "SAFER_OPERATING_STATUS") {
               records[i]["SAFER_OPERATING_STATUS"] = element
+            }
+            else if (column["column"] == "CLASSIFICATION_INTER") {
+              records[i]["CLASSIFICATION_INTER"] = element
+            }
+            else if (column["column"] == "INTRASTATE_NONHAZMAT") {
+              records[i]["INTRASTATE_NONHAZMAT"] = element
             }
             else if (column["column"] == "CENSUS_OFFICE_TELEPHONE_NUMBER") {
               records[i]["CENSUS_OFFICE_TELEPHONE_NUMBER"] = element
@@ -518,6 +542,7 @@
           { name: 'CENSUS_MAILING_ADDRESS_STATE', value: 'CENSUS_MAILING_ADDRESS_STATE', isOptional: true },
           { name: 'CENSUS_MAILING_ADDRESS_ZIP_CODE', value: 'CENSUS_MAILING_ADDRESS_ZIP_CODE', isOptional: true },
           { name: 'CLASSIFICATION_INTER', value: 'CLASSIFICATION_INTER', isOptional: true },
+          { name: 'INTRASTATE_NON_HAZMAT_CARRIER', value: 'INTRASTATE_NONHAZMAT', isOptional: true },
           { name: 'EMAIL_ADDRESS', value: 'EMAIL_ADDRESS', isOptional: true },
           { name: 'COMPANY_REP_1', value: 'COMPANY_REP_1', isOptional: true },
           { name: 'COMPANY_REP_2', value: 'COMPANY_REP_2', isOptional: true },

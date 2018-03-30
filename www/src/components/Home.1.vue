@@ -681,7 +681,7 @@
                 return var1
             },
             eRecords() {
-                var records = this.$store.state.eastern
+                var records = this.$store.state.ieastern
                 var one = true
                 while (one === true) {
 
@@ -698,7 +698,7 @@
 
             },
             cRecords() {
-                var records = this.$store.state.central
+                var records = this.$store.state.icentral
                 var one = true
                 while (one === true) {
 
@@ -714,7 +714,8 @@
                 }
             },
             mRecords() {
-                var records = this.$store.state.mountain
+                debugger
+                var records = this.$store.state.imountain
                 var one = true
                 while (one === true) {
 
@@ -730,7 +731,7 @@
                 }
             },
             pRecords() {
-                var records = this.$store.state.pacific
+                var records = this.$store.state.ipacific
                 var one = true
                 while (one === true) {
 

@@ -23,6 +23,9 @@ var schema = new mongoose.Schema({
     userId: { type: ObjectId, ref: models.user},
     Created: { type : Date, default: Date.now },
     noSale: { type : Boolean},
+    CLASSIFICATION_INTER: { type : String},
+    INTRASTATE_NONHAZMAT: { type : String},
+    
 });
 schema.plugin(uniqueValidator);
 
