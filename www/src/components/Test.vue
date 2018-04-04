@@ -1,11 +1,11 @@
 <template>
   <div>
 
-<div>
-    <button @click="getSplit3">Get Recent Expirations (2 Years)</button>
-  <button @click="getSplit">Get Recent Expirations (1 Year)</button>
-  <button @click="getSplit2">Get Recent Expirations (4 Months)</button>
-</div>
+    <div>
+      <button @click="getSplit3">Get Recent Expirations (2 Years)</button>
+      <button @click="getSplit">Get Recent Expirations (1 Year)</button>
+      <button @click="getSplit2">Get Recent Expirations (4 Months)</button>
+    </div>
     <!-- <div class="nav-header">
       <div class="nav-header-container">
         <div>
@@ -171,6 +171,55 @@
       </div>
 
     </modal>
+    <div class="deletePanel">
+      <form @submit.prevent="getRecordsByUserId">
+        <div class="form-group">
+          <input type="text" v-model="delUID" value="">
+        </div>
+        <div class="form-group">
+          <button type="submit">Yo</button>
+        </div>
+      </form>
+
+      <div class="row">
+        <h2>Dot: </h2>
+        <div class="col-lg-2" v-for="record in deleteUserRecords">
+          <p class="textcolor" @click="show(record.Dot)">{{record.Dot}}</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div>
+      <form class="form-horizontal reg-container" role="form">
+        <div class="form-group">
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="inputName">Name:</label>
+            <div class="col-sm-3 regInput">
+              <input type="text" size="40" id="inputName" placeholder="Name" v-model="register.name" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="inputEmail">Email:</label>
+            <div class="col-sm-3 regInput">
+              <input type="email" size="40" id="inputEmail" placeholder="Email" v-model="register.email" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="inputPassword">Password:</label>
+            <div class="col-sm-3 regInput">
+              <input type="password" size="40" id="inputPassword" placeholder="Password" v-model="register.password" />
+            </div>
+          </div>
+          <div class="form-group regSub-container">
+            <div class="col-sm-offset-2 col-sm-3">
+              <button @click="userRegister" data-dismiss="modal" class="btn btn-default">Register Me</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -182,16 +231,24 @@
       XlsCsvParser,
     },
     methods: {
-      getRecordCreated(){
+      userRegister() {
+        this.$store.dispatch('userRegister', this.register)
+      },
+      getRecordsByUserId() {
+        debugger
+        var userId = this.delUID
+        this.$store.dispatch('getUserRecords3', userId)
+      },
+      getRecordCreated() {
         this.$store.dispatch('getRecordCreated')
       },
-      getSplit(){
+      getSplit() {
         this.$store.dispatch('getSplitRecords')
       },
-      getSplit2(){
+      getSplit2() {
         this.$store.dispatch('getSplitRecords2')
       },
-      getSplit3(){
+      getSplit3() {
         this.$store.dispatch('getSplitRecords3')
       },
       updateRecord(record) {
@@ -236,7 +293,7 @@
           count++
           var record2 = records[i];
           returnO[currentUser].push(record2)
-         if (currentUser < users - 1) {
+          if (currentUser < users - 1) {
             currentUser++
           }
           else { currentUser = 0 }
@@ -266,27 +323,27 @@
             userCount++
           }
         }
-        
-       userCount = userCount - 1
+
+        userCount = userCount - 1
         // var lastRecord = 0
         // for (let p = 0; p < records.length; p++) {
         //   const recGroup = records[p];
         //   for (let l = 0; l < userRecords.length; l++) {
         //     const ur = userRecords[l];
-            
+
 
 
         //     lastRecord = p 
         //   }
-            
-          
+
+
         //   if (users.hasOwnProperty(key)) {
         //       const uid = users[key];
         //       userRecords[uid].push(recGroup)
         //       // if (key === p) {
         //       // }
         //     }
-          
+
         // }
         var userPush = 0
         for (let p = 0; p < records.length; p++) {
@@ -295,12 +352,12 @@
             if (users.hasOwnProperty(key)) {
               const uid = users[userPush];
               userRecords[uid].push(recGroup)
-              
-              if(userPush < userCount){
-                userPush ++
+
+              if (userPush < userCount) {
+                userPush++
                 break
               }
-              else if(userPush = userCount){
+              else if (userPush = userCount) {
                 userPush = 0
                 break
               }
@@ -310,35 +367,45 @@
         console.log(userRecords)
         debugger
         this.records9 = userRecords
-        
+
         this.createUserRecords()
         // return userRecords
       },
       createUserRecords() {
         var userRecords = this.records9
+        var store = this.$store
+
         var urs = []
+        debugger
         for (var key in userRecords) {
           if (userRecords.hasOwnProperty(key)) {
             for (let q = 0; q < userRecords[key].length; q++) {
+              (function (q) {
               var ur = userRecords[key][q];
               console.log(ur)
               var userRecord = {
                 userId: key,
                 _id: ur._id
               }
-              
-              this.$store.dispatch('newUserRecord', userRecord)
-              // urs.push(userRecord)
-              // console.log(userRecord)
+
+                // urs.push(userRecord)
+                // console.log(userRecord)
+                  // var ur = userRecords[key][q];
+                  setTimeout(function () {
+                    // alert("hello");
+                    // JSON.stringify(results1)
+                    store.dispatch('newUserRecord', userRecord)
+                  }, 100 * q);
+                })(q);
             }
           }
         }
 
         // this.newUR(urs)
       },
-      getRecordByDot(dot){
+      getRecordByDot(dot) {
         var record = this.$store.dispatch('getRecordByDot', dot)
-        
+
       },
       newUR(userRecords) {
 
@@ -376,11 +443,11 @@
             var results1 = results[p]
             // var record = store.dispatch('getRecordByDot', results1)
             if ((Date.parse(results1.MCS_150_DATE) + 94670856000) > Date.now()) {
-              
+
               setTimeout(function () {
                 // alert("hello");
                 // JSON.stringify(results1)
-                
+
                 // store.dispatch('addRecords', results1)
                 store.dispatch('newRecords', results1)
               }, 100 * p);
@@ -460,11 +527,16 @@
       },
       setResults(records) {
         this.actualResults = records
-        
+
         console.log(this.actualResults)
       },
     },
     computed: {
+      deleteUserRecords() {
+        debugger
+        console.log(this.$store.state.activeDeleteRecords)
+        return this.$store.state.activeDeleteRecords
+      },
       inputF1() {
 
         return this.inputF[1]
@@ -525,9 +597,11 @@
     data() {
       return {
         recordUser: "",
+        register: {},
         inputF: {},
         usersC: 0,
         records9: [],
+        delUID: "",
         count: 0,
         count2: 0,
         recCount: 0,

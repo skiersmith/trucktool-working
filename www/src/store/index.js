@@ -25,7 +25,7 @@ vue.use(vuex)
 // http://worldclockapi.com/api/json/utc/now
 var store = new vuex.Store({
     state: {
-
+        activeDeleteRecords: {},
         time: false,
         error: {},
         user: {},
@@ -99,7 +99,7 @@ var store = new vuex.Store({
                     }
                 }
                 else {
-                    debugger
+                    
                     if (record.CLASSIFICATION_INTER) {
                         eastern.push(record)
 
@@ -249,6 +249,9 @@ var store = new vuex.Store({
         },
         setActiveUGTransactions(state, data) {
             state.activeUGTransactions = data
+        },
+        setDeleteRecords(state, data) {
+            state.activeDeleteRecords = data
         },
         handleError(state, err) {
             state.error = err
@@ -745,8 +748,21 @@ var store = new vuex.Store({
                         }
                         // console.log(record.tz)
                     }
-                    debugger
+                    
                     commit('setTimeZoneRecord', sendObj)
+                })
+                .catch(err => {
+                    commit('handleError', err)
+
+
+                })
+        },
+        getUserRecords3({ commit, dispatch }, userId) {
+
+            api('records/user/' + userId)
+                .then(res => {
+                   debugger
+                    commit('setActiveSplitRecords', res.data.data)
                 })
                 .catch(err => {
                     commit('handleError', err)

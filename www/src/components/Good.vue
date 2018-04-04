@@ -52,7 +52,7 @@
                             <a class="pointer" @click="routeIntra">Intrastate</a>
                         </li>
                         <li>
-                           
+
                         </li>
                         <!-- <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown
@@ -102,43 +102,42 @@
             <!-- /.container-fluid -->
         </nav>
         <div class="spacer10"></div>
-        <div>
-            <div class="margin2">
+        <div class="margin2">
 
 
 
 
 
-                <h1 class="title">Good Transactions</h1>
-                <!-- <button @click="tableTimeToggle">TableTimeToggle</button>
+            <h1 class="title">Good Transactions</h1>
+            <!-- <button @click="tableTimeToggle">TableTimeToggle</button>
                 <h1>{{tableTimeZone1}}</h1> -->
 
-                <div class="recordCont">
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th scope="col">Dot (click to expand)</th>
-                                <th scope="col">Notes</th>
-                                <th scope="col">Company</th>
-                                <th scope="col">Created</th>
-                                <th scope="col">------</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="t in ugTransactions">
-                                <th @click="show(t.Dot)" scope="row">{{t.Dot}}</th>
-                                <td>{{t.Notes}}</td>
-                                <td>{{t.CENSUS_LEGAL_NAME}}</td>
-                                <td>{{t.Created}}</td>
-                                <td>
-                                    <button class="btn-xs" @click="show2(t.Dot)">Open</button>
-                                </td>
+            <div class="recordCont">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Dot (click to expand)</th>
+                            <th scope="col">Notes</th>
+                            <th scope="col">Company</th>
+                            <th scope="col">Created</th>
+                            <th scope="col">------</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="t in ugTransactions">
+                            <th @click="show(t.Dot)" scope="row">{{t.Dot}}</th>
+                            <td>{{t.Notes}}</td>
+                            <td>{{t.CENSUS_LEGAL_NAME}}</td>
+                            <td>{{t.Created}}</td>
+                            <td>
+                                <button class="btn-xs" @click="show2(t.Dot)">Open</button>
+                            </td>
 
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <!-- <div class="col-lg-offset-1 col-lg-4 center-container">
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- <div class="col-lg-offset-1 col-lg-4 center-container">
                     <div class="transForm padding" v-if="newTransactionT">
                         <form id="transForm1" @submit.prevent="newTransaction">
                             <div class="form-group fT-container">
@@ -198,34 +197,34 @@
                 </div> -->
 
 
-                <modal height="auto" :scrollable="true" name="hello-world">
-                    <div class="margin2">
-                        <h5>Dot:</h5>
-                        <p>{{record4.Dot}}</p>
-                        <h5>Email</h5>
-                        <p>{{record4.CENSUS_EMAIL_ADDRESS}}</p>
-                        <h5>CENSUS_LEGAL_NAME</h5>
-                        <p>{{record4.CENSUS_LEGAL_NAME}}</p>
-                        <h5>censuS_CELL_PHONE_NUMBER</h5>
-                        <p>{{record4.CENSUS_CELL_PHONE_NUMBER}}</p>
-                        <h5>censuS_LEGAL_NAME</h5>
-                        <p>{{record4.CENSUS_LEGAL_NAME}}</p>
-                        <h5>censuS_MAILING_ADDRESS_STATE</h5>
-                        <p>{{record4.CENSUS_MAILING_ADDRESS_STATE}}</p>
-                        <h5>companY_REP_1</h5>
-                        <p>{{record4.COMPANY_REP_1}}</p>
-                        <h5></h5>
-                        <p></p>
-                        <a target="_blank" :href="'https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=' + record4.Dot"
-                            class="btn btn-primary btn-xs ">Safer</a>
+            <modal height="auto" :scrollable="true" name="hello-world">
+                <div class="margin2">
+                    <h5>Dot:</h5>
+                    <p>{{record4.Dot}}</p>
+                    <h5>Email</h5>
+                    <p>{{record4.CENSUS_EMAIL_ADDRESS}}</p>
+                    <h5>CENSUS_LEGAL_NAME</h5>
+                    <p>{{record4.CENSUS_LEGAL_NAME}}</p>
+                    <h5>censuS_CELL_PHONE_NUMBER</h5>
+                    <p>{{record4.CENSUS_CELL_PHONE_NUMBER}}</p>
+                    <h5>censuS_LEGAL_NAME</h5>
+                    <p>{{record4.CENSUS_LEGAL_NAME}}</p>
+                    <h5>censuS_MAILING_ADDRESS_STATE</h5>
+                    <p>{{record4.CENSUS_MAILING_ADDRESS_STATE}}</p>
+                    <h5>companY_REP_1</h5>
+                    <p>{{record4.COMPANY_REP_1}}</p>
+                    <h5></h5>
+                    <p></p>
+                    <a target="_blank" :href="'https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=' + record4.Dot"
+                        class="btn btn-primary btn-xs ">Safer</a>
 
-                    </div>
+                </div>
 
-                </modal>
-
-            </div>
+            </modal>
 
         </div>
+
+
 
         <modal height="auto" :scrollable="true" name="transaction-modal">
             <div class="margin2">
@@ -275,7 +274,7 @@
                     <div v-else>
                         <button class="btn-xs" @click="ctToggle">Finish</button>
                     </div>
-                </div>        
+                </div>
             </div>
             <div>
                 <div class="transactions2">
@@ -326,7 +325,8 @@
             }
         },
         methods: {
-            ctToggle(){
+
+            ctToggle() {
                 this.completeTrans = !this.completeTrans
             },
             routeIntra() {
@@ -337,12 +337,12 @@
             },
             changeStatusNoSale(transaction) {
                 transaction.Status = "bad"
-                
+
                 this.$store.dispatch('updateTransaction', transaction)
             },
             changeStatusSale(transaction) {
                 transaction.Status = "sale"
-                
+
                 this.$store.dispatch('updateTransaction', transaction)
             },
             show(dot) {
@@ -410,7 +410,7 @@
             },
 
             newTransaction() {
-                
+
                 this.$notify('New Transaction', 'info', { itemClass: 'alert col-6 alert-info', visibility: 1000 })
                 this.$store.dispatch('authenticate')
                 this.$store.dispatch('newTransaction', this.transaction)
@@ -447,6 +447,7 @@
             tableTimeZone1() {
                 return this.tableTimeZone
             },
+
             user() {
 
                 return this.$store.state.user
@@ -622,6 +623,7 @@
     .topMargin {
         margin-top: 4rem;
     }
+
     .pointer:hover {
         cursor: pointer;
     }
