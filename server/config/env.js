@@ -22,7 +22,7 @@
 
 // }
 let env = {
-	NODE_ENV: 'production',
+	NODE_ENV: 'development',
 	PORT: 5000,
 	DBPROTOCOL: 'mongodb',
 	DBUSERNAME: 'trucktoolprimary',
@@ -32,8 +32,8 @@ let env = {
 	SERVERNAME: 'dev-server'
 
 }
-mongodb://<dbuser>:<dbpassword>@ds014118.mlab.com:14118/trucktool-dev
-mongodb://<dbuser>:<dbpassword>@ds014298-a0.mlab.com:14298,ds014298-a1.mlab.com:14296/trucktool?replicaSet=rs-ds014298
+// mongodb://<dbuser>:<dbpassword>@ds014118.mlab.com:14118/trucktool-dev
+// mongodb://<dbuser>:<dbpassword>@ds014298-a0.mlab.com:14298,ds014298-a1.mlab.com:14296/trucktool?replicaSet=rs-ds014298
 Object.keys(env).forEach(v => {
 	process.env[v] = process.env[v] || env[v]
 }) 
