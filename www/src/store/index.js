@@ -5,16 +5,11 @@ import router from '../router'
 import { loadavg } from 'os';
 var zipcode_to_timezone = require('zipcode-to-timezone');
 var production = !window.location.host.includes('localhost');
-var baseUrl = production ? '//serene-lowlands-35394.herokuapp.com/' : '//localhost:5000/';
+var baseUrl = production ? '//floating-brushlands-87135.herokuapp.com/' : '//localhost:5000/';
 let api = axios.create({
     baseURL: baseUrl + 'api',
     timeout: 2000,
     withCredentials: true
-})
-let tzapi = axios.create({
-    baseURL: 'https://maps.googleapis.com/maps/api/timezone/json?parametersAIzaSyDc2wND7FnDnKvQLFJo68r_nqciB30a8SUlocation=-33.86,151.20',
-    timeout: 2000,
-    // withCredentials: true
 })
 let auth = axios.create({
     baseURL: baseUrl,
