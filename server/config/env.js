@@ -21,8 +21,9 @@
 // 	SERVERNAME: 'dev-server'
 
 // }
+
 let env = {
-	NODE_ENV: 'development',
+	NODE_ENV: 'production',
 	PORT: 5000,
 	DBPROTOCOL: 'mongodb',
 	DBUSERNAME: 'trucktoolprimary',
