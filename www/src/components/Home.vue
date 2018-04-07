@@ -1,5 +1,6 @@
 <template>
     <div>
+        <button @click"getUserRecords"></button>
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -509,7 +510,10 @@
 
         methods: {
             //modal methods
-
+            getUserRecords(){
+                
+                this.$store.dispatch('getUserRecords', this.user._id)
+            },
             routeHome() {
                 router.push('/')
             },
