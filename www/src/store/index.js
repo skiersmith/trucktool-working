@@ -668,6 +668,7 @@ var store = new vuex.Store({
             api('records/user/' + userId)
                 .then(res => {
                     console.log("test1")
+                    console.log(res)
                     console.log(res.data.data)
                     var records2 = []
                     for (let n = 0; n < res.data.data.length; n++) {
