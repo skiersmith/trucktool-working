@@ -664,7 +664,7 @@ var store = new vuex.Store({
         //     commit('setTimeZoneRecord2', sendObj2)
         // },
         getUserRecords({ commit, dispatch }, userId) {
-
+            console.log("getUserRecords")
             api('records/user/' + userId)
                 .then(res => {
                     console.log("test1")
