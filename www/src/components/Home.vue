@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button @click="getUserRecords">Button</button>
+        <button @click="getUserRecords4">Button</button>
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -510,7 +510,7 @@
 
         methods: {
             //modal methods
-            getUserRecords(){
+            getUserRecords4(){
                 
                 this.$store.dispatch('getUserRecords', this.user._id)
             },
