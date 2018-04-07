@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button @click"getUserRecords"></button>
+        <button @click="getUserRecords">Button</button>
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
