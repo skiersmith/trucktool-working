@@ -667,6 +667,8 @@ var store = new vuex.Store({
 
             api('records/user/' + userId)
                 .then(res => {
+                    console.log("test1")
+                    console.log(res.data.data)
                     var records2 = []
                     for (let n = 0; n < res.data.data.length; n++) {
 
@@ -740,6 +742,10 @@ var store = new vuex.Store({
                         else if (record.timezone == "Pacific") {
                             sendObj.pacific.push(record)
                             console.log("pacific")
+                        }
+                        else if (record.timezone == "Canada") {
+                            // sendObj.pacific.push(record)
+                            // console.log("pacific")
                         }
                         // console.log(record.tz)
                     }
