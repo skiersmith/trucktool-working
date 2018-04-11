@@ -44,6 +44,19 @@ module.exports = {
                 })
         }
     },
+    getRecordsByUserId: {
+        path: '/records/user/:UserId',
+        reqType: 'get',
+        method(req, res, next) {
+            let action = 'Get records by UserId'
+            Records.find({ userId: req.params.UserId})
+                .then(records => {
+                    res.send(handleResponse(action, records))
+                }).catch(error => {
+                    return next(handleResponse(action, null, error))
+                })
+        }
+    },
 
     updateRecordsByDot: {
         path: '/records/dot/:Dot',

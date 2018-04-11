@@ -282,15 +282,18 @@
                         <div v-for="z in gTransactions">
                             <div class="flex-container transactions1">
 
-                                <div>
+                                <div style="margin: .5rem;">
                                     <b>Dot #: </b>
                                     <p>{{z.Dot}}</p>
 
                                 </div>
-                                <div>
+                                <div style="margin: .5rem;">
                                     <b>Notes: </b>
                                     <p>{{z.Notes}}</p>
-
+                                </div>
+                                <div style="margin: .5rem;">
+                                    <b>Created: </b>
+                                    <p>{{z.Created}}</p>
                                 </div>
                             </div>
                         </div>
@@ -513,7 +516,7 @@
 
     .transactions1 {
         background-color: rgba(79, 209, 74, 0.719);
-
+        height: 9rem;
         border-radius: 25px;
         padding: 0.5rem;
         margin: 0.5rem;

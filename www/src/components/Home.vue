@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button @click="getUserRecords4">Button</button>
+        <!-- <button @click="getUserRecords4">Button</button> -->
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -181,7 +181,7 @@
                         <td>{{record.CENSUS_MAILING_ADDRESS_STATE}}</td>
                         <td>{{record.DOCKET}}</td>
                         <td>
-                            <p class="inline">{{record.Called}}</p>
+                            <p class="inline">{{ifCalled(record.Called)}}</p>
                             <button class="btn-xs btn-info" @click="show(record)">Call</button>
                             <a target="_blank" :href="'https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=' + record.Dot"
                                 class="btn btn-primary btn-xs ">Safer</a>
@@ -201,7 +201,7 @@
                         <td>{{record.CENSUS_MAILING_ADDRESS_STATE}}</td>
                         <td>{{record.DOCKET}}</td>
                         <td>
-                            <p class="inline">{{record.Called}}</p>
+                            <p class="inline">{{ifCalled(record.Called)}}</p>
                             <button class="btn-xs btn-info" @click="show(record)">Call</button>
                             <a target="_blank" :href="'https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=' + record.Dot"
                                 class="btn btn-primary btn-xs ">Safer</a>
@@ -222,7 +222,7 @@
                         <td>{{record.CENSUS_MAILING_ADDRESS_STATE}}</td>
                         <td>{{record.DOCKET}}</td>
                         <td>
-                            <p class="inline">{{record.Called}}</p>
+                            <p class="inline">{{ifCalled(record.Called)}}</p>
                             <button class="btn-xs btn-info" @click="show(record)">Call</button>
                             <a target="_blank" :href="'https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=' + record.Dot"
                                 class="btn btn-primary btn-xs ">Safer</a>
@@ -243,7 +243,7 @@
                         <td>{{record.CENSUS_MAILING_ADDRESS_STATE}}</td>
                         <td>{{record.DOCKET}}</td>
                         <td>
-                            <p class="inline">{{record.Called}}</p>
+                            <p class="inline">{{ifCalled(record.Called)}}</p>
                             <button class="btn-xs btn-info" @click="show(record)">Call</button>
                             <a target="_blank" :href="'https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=' + record.Dot"
                                 class="btn btn-primary btn-xs ">Safer</a>
@@ -286,7 +286,7 @@
                         <td>{{record.CENSUS_MAILING_ADDRESS_STATE}}</td>
                         <td>{{record.DOCKET}}</td>
                         <td>
-                            <p class="inline">{{record.Called}}</p>
+                            <p class="inline">{{ifCalled(record.Called)}}</p>
                             <button class="btn-xs btn-info" @click="show(record)">Call</button>
                             <a target="_blank" :href="'https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=' + record.Dot"
                                 class="btn btn-primary btn-xs ">Safer</a>
@@ -307,7 +307,7 @@
                         <td>{{record.CENSUS_MAILING_ADDRESS_STATE}}</td>
                         <td>{{record.DOCKET}}</td>
                         <td>
-                            <p class="inline">{{record.Called}}</p>
+                            <p class="inline">{{ifCalled(record.Called)}}</p>
                             <button class="btn-xs btn-info" @click="show(record)">Call</button>
                             <a target="_blank" :href="'https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=' + record.Dot"
                                 class="btn btn-primary btn-xs ">Safer</a>
@@ -328,7 +328,7 @@
                         <td>{{record.CENSUS_MAILING_ADDRESS_STATE}}</td>
                         <td>{{record.DOCKET}}</td>
                         <td>
-                            <p class="inline">{{record.Called}}</p>
+                            <p class="inline">{{ifCalled(record.Called)}}</p>
                             <button class="btn-xs btn-info" @click="show(record)">Call</button>
                             <a target="_blank" :href="'https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=' + record.Dot"
                                 class="btn btn-primary btn-xs ">Safer</a>
@@ -372,7 +372,7 @@
                         <td>{{record.CENSUS_MAILING_ADDRESS_STATE}}</td>
                         <td>{{record.DOCKET}}</td>
                         <td>
-                            <p class="inline">{{record.Called}}</p>
+                            <p class="inline">{{ifCalled(record.Called)}}</p>
                             <button class="btn-xs btn-info" @click="show(record)">Call</button>
                             <a target="_blank" :href="'https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=' + record.Dot"
                                 class="btn btn-primary btn-xs ">Safer</a>
@@ -451,7 +451,10 @@
                                 <div>
                                     <b>Notes: </b>
                                     <p>{{z.Notes}}</p>
-
+                                </div>
+                                <div>
+                                    <b>Notes: </b>
+                                    <p>{{z.Created}}</p>
                                 </div>
                             </div>
                         </div>
@@ -468,6 +471,10 @@
                                 <div>
                                     <b>Notes: </b>
                                     <p>{{t.Notes}}</p>
+                                </div>
+                                <div>
+                                    <b>Created: </b>
+                                    <p>{{t.Created}}</p>
                                 </div>
                             </div>
                         </div>

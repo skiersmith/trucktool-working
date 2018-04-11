@@ -1,6 +1,6 @@
 <template>
         <div>
-            <p>intra</p>
+            <h2>Intrastate</h2>
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
                     <!-- Brand and toggle get grouped for better mobile display -->
@@ -371,7 +371,12 @@
                                     <div>
                                         <b>Notes: </b>
                                         <p>{{z.Notes}}</p>
-    
+
+                                    </div>
+                                    <div>
+                                        <b>Created: </b>
+                                        <p>{{z.Created}}</p>
+
                                     </div>
                                 </div>
                             </div>
@@ -388,6 +393,11 @@
                                     <div>
                                         <b>Notes: </b>
                                         <p>{{t.Notes}}</p>
+                                    </div>
+                                    <div>
+                                        <b>Created: </b>
+                                        <p>{{t.Created}}</p>
+
                                     </div>
                                 </div>
                             </div>
