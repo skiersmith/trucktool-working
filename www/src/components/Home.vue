@@ -929,8 +929,8 @@
         },
         mounted() {
             // this.$store.dispatch('authenticate')
-            this.$store.dispatch('authenticate2')
-            console.log("hello")
+            this.$store.dispatch('authenticateInter')
+            // console.log("hello")
             // this.$store.dispatch('getUserRecords', this.user._id)
             // $(document).ready(function () {
             //     $('#ifThisWorks').DataTable();

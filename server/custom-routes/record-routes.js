@@ -17,12 +17,26 @@ module.exports = {
                 })
         }
     },
-    getRecordsByUserId: {
-        path: '/records/user/:UserId',
+    // ,{ qty: { $gt: 25 } }
+    getIntraByUserId: {
+        path: '/intra/user/:UserId',
         reqType: 'get',
         method(req, res, next) {
             let action = 'Get records by UserId'
-            Records.find({ userId: req.params.UserId })
+            Records.find({ userId: req.params.UserId, CLASSIFICATION_INTER: null }).limit(150)
+                .then(records => {
+                    res.send(handleResponse(action, records))
+                }).catch(error => {
+                    return next(handleResponse(action, null, error))
+                })
+        }
+    },
+    getInterByUserId: {
+        path: '/inter/user/:UserId',
+        reqType: 'get',
+        method(req, res, next) {
+            let action = 'Get records by UserId'
+            Records.find({ userId: req.params.UserId, INTRASTATE_NONHAZMAT: null }).limit(150)
                 .then(records => {
                     res.send(handleResponse(action, records))
                 }).catch(error => {

@@ -755,7 +755,7 @@
             },
             mounted() {
                 // this.$store.dispatch('authenticate')
-                // this.$store.dispatch('authenticate2')
+                this.$store.dispatch('authenticateIntra')
     
                 // this.$store.dispatch('getUserRecords', this.user._id)
                 // $(document).ready(function () {
