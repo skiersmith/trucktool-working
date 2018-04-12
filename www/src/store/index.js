@@ -270,7 +270,7 @@ var store = new vuex.Store({
         getSplitRecords({ commit, dispatch }) {
 
             api('records')
-                .then(res => {
+            .then(res => {
                     var records2 = []
                     for (let q = 0; q < res.data.data.length; q++) {
 
@@ -302,6 +302,7 @@ var store = new vuex.Store({
 
             api('records')
                 .then(res => {
+                    debugger
                     var records2 = []
                     for (let q = 0; q < res.data.data.length; q++) {
 
@@ -333,6 +334,7 @@ var store = new vuex.Store({
 
             api('records')
                 .then(res => {
+                    debugger
                     var records2 = []
                     for (let q = 0; q < res.data.data.length; q++) {
 
@@ -979,7 +981,19 @@ var store = new vuex.Store({
 
                     console.log(res)
                     console.log("done")
-                    dispatch('authenticate2')
+                    // dispatch('authenticate2')
+                })
+                .catch(() => {
+                    // router.push({ name: "Register" })
+                })
+        },
+        updateStatus({ commit, dispatch }, payload) {
+            api.put('records/' + payload._id, payload)
+                .then(res => {
+
+                    console.log(res)
+                    console.log("done1")
+                    // dispatch('authenticate2')
                 })
                 .catch(() => {
                     // router.push({ name: "Register" })

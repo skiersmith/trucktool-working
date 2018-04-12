@@ -249,6 +249,7 @@
         this.$store.dispatch('getSplitRecords2')
       },
       getSplit3() {
+        debugger
         this.$store.dispatch('getSplitRecords3')
       },
       updateRecord(record) {
@@ -521,10 +522,77 @@
             }
           }
         });
-        this.setResults(records)
+        this.filter(records)
         // actualResults = records
         return
       },
+    filter(arr) {
+    var total = 0
+    var output = []
+    debugger
+    for (let p = 0; p < arr.length; p++) {
+        var element = arr[p];
+        console.log(element["MCS_150_DATE"])
+        // console.log(p)
+        
+
+            var twoYear = 31536000000 * 2
+            var date = Date.parse(element["MCS_150_DATE"])
+            // console.log("yo")
+     
+            // console.log(date + twoYear - Date.now())
+            // console.log(Date.now())
+
+            if (date + twoYear < Date.now()) {
+                // console.log("here2")
+                console.log(element)
+                // console.log("here")
+                output.push(element)
+            }
+            else {
+                continue
+
+            }
+            
+        
+    }
+
+    for (let p = 0; p < output.length; p++) {
+        total++
+    }
+    console.log(total)
+    // filter2(output)
+    this.setResults(output)
+    // return output
+},
+
+// filter2(arr) {
+//     var object = {
+//         even: [],
+//         odd: []
+//     }
+//     // console.log("yo")
+//     for (let p = 0; p < arr.length; p++) {
+//         const element = arr[p];
+//         // console.log(element["DOT #"])
+//         element3 = element["DOT #"].toString().split("").reverse()
+//         // console.log(element3)
+//         var num = parseInt(element3[1])
+//         // console.log(num)
+//         if (num % 2 == 0) {
+//             object.even.push(element)
+         
+//             continue
+//         }
+//         else if (num % 2 != 0) {
+//             object.odd.push(element)
+          
+//             continue
+//         }
+//     }
+//     this.setResults(records)
+// },
+
       setResults(records) {
         this.actualResults = records
 

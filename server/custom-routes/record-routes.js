@@ -17,13 +17,39 @@ module.exports = {
                 })
         }
     },
+    getRecordsBySplit: {
+        path: '/records/split',
+        reqType: 'get',
+        method(req, res, next) {
+            let action = 'Get records by dot'
+            Records.find({ userId: null }).limit(1000)
+                .then(records => {
+                    res.send(handleResponse(action, records))
+                }).catch(error => {
+                    return next(handleResponse(action, null, error))
+                })
+        }
+    },
+   deleteRecordsBySplit: {
+        path: '/records/split/delete',
+        reqType: 'delete',
+        method(req, res, next) {
+            let action = 'Get records by dot'
+            Records.deleteMany({ userId: null })
+                .then(records => {
+                    res.send(handleResponse(action, records))
+                }).catch(error => {
+                    return next(handleResponse(action, null, error))
+                })
+        }
+    },
     // ,{ qty: { $gt: 25 } }
     getIntraByUserId: {
         path: '/intra/user/:UserId',
         reqType: 'get',
         method(req, res, next) {
             let action = 'Get records by UserId'
-            Records.find({ userId: req.params.UserId, CLASSIFICATION_INTER: null }).limit(150)
+            Records.find({ userId: req.params.UserId, CLASSIFICATION_INTER: null }).limit(250)
                 .then(records => {
                     res.send(handleResponse(action, records))
                 }).catch(error => {
@@ -36,7 +62,7 @@ module.exports = {
         reqType: 'get',
         method(req, res, next) {
             let action = 'Get records by UserId'
-            Records.find({ userId: req.params.UserId, INTRASTATE_NONHAZMAT: null }).limit(150)
+            Records.find({ userId: req.params.UserId, INTRASTATE_NONHAZMAT: null }).limit(250)
                 .then(records => {
                     res.send(handleResponse(action, records))
                 }).catch(error => {

@@ -591,6 +591,7 @@
                         this.hide()
                     }
     
+                    this.updateStatus(this.transaction)
                     this.updateCalled(this.transaction)
                     // else if (this.transaction.Status == "yellow") {
                     // }
@@ -610,6 +611,18 @@
                         }
                     }
                 },
+                updateStatus(transaction) {
+
+var record2 = this.$store.state.activeRecords
+for (let q = 0; q < record2.length; q++) {
+    const element = record2[q];
+    if (element.Dot === transaction.Dot) {
+        element.Status = transaction.Status
+        debugger
+        this.$store.dispatch('updateStatus', element)
+    }
+}
+},
                 // updateColoro(transaction) {
                 //     var record = {
                 //         Dot: transaction.Dot,

@@ -517,8 +517,8 @@
 
         methods: {
             //modal methods
-            getUserRecords4(){
-                
+            getUserRecords4() {
+
                 this.$store.dispatch('getUserRecords', this.user._id)
             },
             routeHome() {
@@ -676,7 +676,7 @@
                     this.hide()
 
                 }
-
+                this.updateStatus(this.transaction)
                 this.updateCalled(this.transaction)
                 // else if (this.transaction.Status == "yellow") {
                 // }
@@ -693,6 +693,18 @@
                     if (element.Dot === transaction.Dot) {
                         element.Called = true
                         this.$store.dispatch('updateCalled', element)
+                    }
+                }
+            },
+            updateStatus(transaction) {
+
+                var record2 = this.$store.state.activeRecords
+                for (let q = 0; q < record2.length; q++) {
+                    const element = record2[q];
+                    if (element.Dot === transaction.Dot) {
+                        element.Status = transaction.Status
+                        
+                        this.$store.dispatch('updateStatus', element)
                     }
                 }
             },
