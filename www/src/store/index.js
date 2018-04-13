@@ -169,7 +169,7 @@ var store = new vuex.Store({
                     console.log("2")
                 }
             }
-
+            debugger
             state.eastern = eastern
             state.central = central
             state.pacific = pacific

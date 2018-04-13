@@ -418,6 +418,10 @@
                                         <label for="statusr">Red</label>
                                         <input type="radio" name="statusr" value="red" v-model="transaction.Status">
                                     </div>
+                                    <!-- <div class="form-group">
+                                        <label class="" for="inputName">Callback Date:</label>
+                                        <input type="date" name="statusr" v-model="transaction.Callback">
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
@@ -703,7 +707,7 @@
                     const element = record2[q];
                     if (element.Dot === transaction.Dot) {
                         element.Status = transaction.Status
-                        
+
                         this.$store.dispatch('updateStatus', element)
                     }
                 }

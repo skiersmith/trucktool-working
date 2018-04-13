@@ -304,6 +304,92 @@
                         </tr>
     
                     </tbody>
+                    <tbody v-if="tableTimeZone == 1">
+                            <tr v-if="record" v-for="(record, key) in cRecordsC">
+                                <th scope="row">{{record.Dot}}</th>
+                                <td>{{record.CENSUS_LEGAL_NAME}}</td>
+                                <td>{{record.CENSUS_OFFICE_TELEPHONE_NUMBER}}</td>
+                                <td>{{record.CENSUS_CELL_PHONE_NUMBER}}</td>
+                                <td>{{record.COMPANY_REP_1}}</td>
+                                <td>{{record.COMPANY_REP_2}}</td>
+                                <td>{{record.CENSUS_MAILING_ADDRESS_STATE}}</td>
+                                <td>{{record.DOCKET}}</td>
+                                <td>
+                                    <p class="inline">{{ifCalled(record.Called)}}</p>
+                                    <button class="btn-xs btn-info" @click="show(record)">Call</button>
+                                    <a target="_blank" :href="'https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=' + record.Dot"
+                                        class="btn btn-primary btn-xs ">Safer</a>
+        
+                                </td>
+        
+                            </tr>
+        
+                        </tbody>
+                        <tbody v-if="tableTimeZone == 3">
+                            <tr v-if="record" v-for="(record, key) in pRecordsC">
+                                <th scope="row">{{record.Dot}}</th>
+                                <td>{{record.CENSUS_LEGAL_NAME}}</td>
+                                <td>{{record.CENSUS_OFFICE_TELEPHONE_NUMBER}}</td>
+                                <td>{{record.CENSUS_CELL_PHONE_NUMBER}}</td>
+                                <td>{{record.COMPANY_REP_1}}</td>
+                                <td>{{record.COMPANY_REP_2}}</td>
+                                <td>{{record.CENSUS_MAILING_ADDRESS_STATE}}</td>
+                                <td>{{record.DOCKET}}</td>
+                                <td>
+                                    <p class="inline">{{ifCalled(record.Called)}}</p>
+                                    <button class="btn-xs btn-info" @click="show(record)">Call</button>
+                                    <a target="_blank" :href="'https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=' + record.Dot"
+                                        class="btn btn-primary btn-xs ">Safer</a>
+        
+                                </td>
+        
+                            </tr>
+        
+                        </tbody>
+                        <tbody v-if="tableTimeZone == 2">
+                            <tr v-if="record" v-for="(record, key) in mRecordsC">
+                                <th scope="row">{{record.Dot}}</th>
+                                <td>{{record.CENSUS_LEGAL_NAME}}</td>
+                                <td>{{record.CENSUS_OFFICE_TELEPHONE_NUMBER}}</td>
+                                <td>{{record.CENSUS_CELL_PHONE_NUMBER}}</td>
+                                <td>{{record.COMPANY_REP_1}}</td>
+                                <td>{{record.COMPANY_REP_2}}</td>
+                                <td>{{record.CENSUS_MAILING_ADDRESS_STATE}}</td>
+                                <td>{{record.DOCKET}}</td>
+                                <td>
+                                    <p class="inline">{{ifCalled(record.Called)}}</p>
+                                    <!-- <p class="inline">{{ifCalled(record.Called)}}</p> -->
+        
+                                    <button class="btn-xs btn-info" @click="show(record)">Call</button>
+                                    <a target="_blank" :href="'https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=' + record.Dot"
+                                        class="btn btn-primary btn-xs ">Safer</a>
+        
+                                </td>
+        
+                            </tr>
+        
+                        </tbody>
+                        <tbody v-if="tableTimeZone == 4">
+                            <tr v-if="record" v-for="(record, key) in eRecordsC">
+                                <th scope="row">{{record.Dot}}</th>
+                                <td>{{record.CENSUS_LEGAL_NAME}}</td>
+                                <td>{{record.CENSUS_OFFICE_TELEPHONE_NUMBER}}</td>
+                                <td>{{record.CENSUS_CELL_PHONE_NUMBER}}</td>
+                                <td>{{record.COMPANY_REP_1}}</td>
+                                <td>{{record.COMPANY_REP_2}}</td>
+                                <td>{{record.CENSUS_MAILING_ADDRESS_STATE}}</td>
+                                <td>{{record.DOCKET}}</td>
+                                <td>
+                                    <p class="inline">{{ifCalled(record.Called)}}</p>
+                                    <button class="btn-xs btn-info" @click="show(record)">Call</button>
+                                    <a target="_blank" :href="'https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=' + record.Dot"
+                                        class="btn btn-primary btn-xs ">Safer</a>
+        
+                                </td>
+        
+                            </tr>
+        
+                        </tbody>
                 </table>
             </div>
             <modal height="auto" :scrollable="true" name="transaction-modal">
@@ -764,6 +850,80 @@ for (let q = 0; q < record2.length; q++) {
                         }
                     }
                 },
+                eRecordsC() {
+                var records = this.$store.state.ieasternC
+                return records
+                var one = true
+                // while (one === true) {
+
+                //     var check = this.checkRecords(records)
+                //     if (check === true) {
+
+                //         return records
+                //     }
+                //     else {
+
+                //         continue
+                //     }
+                // }
+                // for (let q = 0; q < records.length; q++) {
+                //     const record = records[q];
+
+                // }
+            },
+            cRecordsC() {
+                var records = this.$store.state.icentralC
+                return records
+                var one = true
+                // while (one === true) {
+
+                //     var check = this.checkRecords(records)
+                //     if (check === true) {
+
+                //         return records
+                //     }
+                //     else {
+
+                //         continue
+                //     }
+                // }
+            },
+            mRecordsC() {
+                var records = this.$store.state.imountainC
+
+                console.log(records[5])
+                return records
+                var one = true
+                // while (one === true) {
+
+                //     var check = this.checkRecords(records)
+                //     if (check === true) {
+                //         console.log(records)
+                //         return records
+                //     }
+                //     else {
+
+                //         continue
+                //     }
+                // }
+            },
+            pRecordsC() {
+                var records = this.$store.state.ipacificC
+                return records
+                var one = true
+                // while (one === true) {
+
+                //     var check = this.checkRecords(records)
+                //     if (check === true) {
+
+                //         return records
+                //     }
+                //     else {
+
+                //         continue
+                //     }
+                // }
+            },
     
                 yTransactions() {
                     return this.$store.state.activeYTransactions
