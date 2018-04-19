@@ -165,6 +165,7 @@
                             <th scope="col">Company Rep 2</th>
                             <th scope="col">State</th>
                             <th scope="col">Docket</th>
+                            <th scope="col">Status</th>
                             <th scope="col">------</th>
     
                         </tr>
@@ -228,6 +229,7 @@
                             <td>{{record.COMPANY_REP_2}}</td>
                             <td>{{record.CENSUS_MAILING_ADDRESS_STATE}}</td>
                             <td>{{record.DOCKET}}</td>
+                            <td>{{record.Status}}</td>
                             <td>
                                 <p class="inline">{{ifCalled(record.Called)}}</p>
                                 <button class="btn-xs btn-info" @click="show(record)">Call</button>
@@ -314,8 +316,9 @@
                                 <td>{{record.COMPANY_REP_2}}</td>
                                 <td>{{record.CENSUS_MAILING_ADDRESS_STATE}}</td>
                                 <td>{{record.DOCKET}}</td>
+                                <td>{{record.Status}}</td>
                                 <td>
-                                    <p class="inline">{{ifCalled(record.Called)}}</p>
+                                    <p class="inline">{{ifCalled(record)}}</p>
                                     <button class="btn-xs btn-info" @click="show(record)">Call</button>
                                     <a target="_blank" :href="'https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=' + record.Dot"
                                         class="btn btn-primary btn-xs ">Safer</a>
@@ -526,6 +529,15 @@
     
             methods: {
                 //modal methods
+                // recordStatus(status){
+                //     var return1 = status
+                //     if(status === undefined){
+                //         return ""
+                //     }
+                //     else{
+                //         return return1
+                //     }
+                // },
                 routeHome() {
                     router.push('/')
                 },
@@ -576,9 +588,15 @@
                     document.body.scrollTop = document.body.scrollHeight;
                     document.documentElement.scrollTop = document.documentElement.scrollHeight
                 },
-                ifCalled(called) {
-    
-                    if (called === true) {
+                ifCalled(record) {
+                    
+                    if (record.Called === true) {
+                        console.log(record.Status)
+                        if(record.Status != undefined){
+                            
+                            var return1 = "Called " + record.Status
+                            return return1
+                        }
                         return "Called"
                     }
                     else {
@@ -677,7 +695,7 @@
                         this.hide()
                     }
     
-                    this.updateStatus(this.transaction)
+                    // this.updateStatus(this.transaction)
                     this.updateCalled(this.transaction)
                     // else if (this.transaction.Status == "yellow") {
                     // }
@@ -687,12 +705,14 @@
     
                 },
                 updateCalled(transaction) {
-    
+                    
                     var record2 = this.$store.state.activeRecords
                     for (let q = 0; q < record2.length; q++) {
                         const element = record2[q];
                         if (element.Dot === transaction.Dot) {
                             element.Called = true
+                            
+                            // element.Status = transaction.Status
                             this.$store.dispatch('updateCalled', element)
                         }
                     }
@@ -704,7 +724,7 @@ for (let q = 0; q < record2.length; q++) {
     const element = record2[q];
     if (element.Dot === transaction.Dot) {
         element.Status = transaction.Status
-        debugger
+        
         this.$store.dispatch('updateStatus', element)
     }
 }

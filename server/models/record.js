@@ -25,6 +25,8 @@ var schema = new mongoose.Schema({
     noSale: { type : Boolean},
     CLASSIFICATION_INTER: { type : String},
     INTRASTATE_NONHAZMAT: { type : String},
+    Status: { type : String},
+    timezone: { type : String},
     
 });
 schema.plugin(uniqueValidator);

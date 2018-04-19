@@ -714,7 +714,7 @@
                 }
             },
             mRecords() {
-                debugger
+                
                 var records = this.$store.state.imountain
                 var one = true
                 while (one === true) {

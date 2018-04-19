@@ -6,6 +6,13 @@
       <button @click="getSplit">Get Recent Expirations (1 Year)</button>
       <button @click="getSplit2">Get Recent Expirations (4 Months)</button>
     </div>
+    <form @submit.prevent="getCalled" >
+      <input v-model="calledUserId" type="text">
+      <button type="submit">getCalled</button>
+    </form>
+    
+    <button @click="getNullRecords">getnull</button>
+    <button @click="nullToTimezone">nullToTimezon</button>
     <!-- <div class="nav-header">
       <div class="nav-header-container">
         <div>
@@ -224,6 +231,7 @@
 </template>
 
 <script>
+  var zipcode_to_timezone = require('zipcode-to-timezone');
   import { XlsCsvParser } from 'vue-xls-csv-parser';
   export default {
     name: 'App',
@@ -231,11 +239,19 @@
       XlsCsvParser,
     },
     methods: {
+      getCalled(){
+        debugger
+        var uid = this.calledUserId
+        this.$store.dispatch('getCalled', uid)
+      },
+      getNullRecords(){
+        this.$store.dispatch('getNull')
+      },
       userRegister() {
         this.$store.dispatch('userRegister', this.register)
       },
       getRecordsByUserId() {
-        debugger
+        
         var userId = this.delUID
         this.$store.dispatch('getUserRecords3', userId)
       },
@@ -249,7 +265,7 @@
         this.$store.dispatch('getSplitRecords2')
       },
       getSplit3() {
-        debugger
+        
         this.$store.dispatch('getSplitRecords3')
       },
       updateRecord(record) {
@@ -366,7 +382,7 @@
           }
         }
         console.log(userRecords)
-        debugger
+        
         this.records9 = userRecords
 
         this.createUserRecords()
@@ -377,7 +393,7 @@
         var store = this.$store
 
         var urs = []
-        debugger
+        
         for (var key in userRecords) {
           if (userRecords.hasOwnProperty(key)) {
             for (let q = 0; q < userRecords[key].length; q++) {
@@ -437,7 +453,7 @@
       },
       createRecords(results) {
         var store = this.$store
-        debugger
+        
         // var results = this.actualResults
         for (var p = 0; p < results.length; p++) {
           (function (p) {
@@ -456,9 +472,78 @@
           })(p);
         }
       },
+      updateRecords(results) {
+        var store = this.$store
+        
+        // var results = this.actualResults
+        for (var p = 0; p < results.length; p++) {
+          (function (p) {
+            var results1 = results[p]
+            // var record = store.dispatch('getRecordByDot', results1)
+            
+
+              setTimeout(function () {
+                // alert("hello");
+                // JSON.stringify(results1)
+
+                // store.dispatch('addRecords', results1)
+                store.dispatch('updateCalled', results1)
+              }, 100 * p);
+            
+          })(p);
+        }
+      },
 
       onValidate(results) {
         this.results = results;
+      },
+      nullToTimezone() {
+        
+        var records = this.$store.state.activeRecords 
+        var finalRecords = []
+       for (let q = 0; q < records.data.length; q++) {
+         const record = records.data[q];
+         if (!record.timezone) {
+           
+         
+         var zip2 = record.CENSUS_MAILING_ADDRESS_ZIP_CODE
+         var zip = ""
+         //zip validation
+         for (let p = 0; p < zip2.length; p++) {
+           const element = zip2[p];
+           zip += element
+           if (p == 4) {
+             break
+            }
+          }
+          var tz = zipcode_to_timezone.lookup(zip);
+          
+          if (tz != null) {
+            if (tz == "America/Los_Angeles") {
+              tz = "Pacific"
+            }
+            else if (tz == "America/Anchorage" || tz == "America/Juneau" || tz == "America/Nome" || tz == "America/Yakutat") {
+              tz = "Alaska"
+            }
+            else if (tz == "America/Chicago" || tz == "America/Menominee" || tz == "America/North_Dakota/Center") {
+              tz = "Central"
+            }
+            else if (tz == "America/Detroit" || tz == "America/New_York" || tz == "America/Indiana/Indianapolis" || tz == "America/Indiana/Vevay" || tz == "America/Kentucky/Louisville" || tz == "America/Kentucky/Monticello") {
+              tz = "Eastern"
+            }
+            else if (tz == "America/Boise" || tz == "America/Phoenix" || tz == "America/Denver" || tz == "America/Shiprock") {
+              tz = "Mountain"
+            }
+            else {
+              console.log("missed one")
+            }
+            record.timezone = tz
+            finalRecords.push(record)
+          }
+        }
+          // records[i]["timezone"] = tz
+        }
+        this.updateRecords(finalRecords)
       },
       //installed tool only sorts by column. this constructs the records into rows.
       count99() {
@@ -468,7 +553,6 @@
         results.forEach(column => {
           for (let i = 0; i < column["data"].length; i++) {
             var element = column["data"][i]
-
             if (!records[i]) { records[i] = {} }
             records[i]["Called"] = false
             if (column["column"] == "DOT") {
@@ -519,7 +603,42 @@
             }
             else if (column["column"] == "CENSUS_MAILING_ADDRESS_ZIP_CODE") {
               records[i]["CENSUS_MAILING_ADDRESS_ZIP_CODE"] = element
+              var zip2 = element
+                var zip = ""
+                //zip validation
+                for (let p = 0; p < zip2.length; p++) {
+                    const element = zip2[p];
+                    zip += element
+                    if (p == 4) {
+                        break
+                    }
+                }
+              var tz = zipcode_to_timezone.lookup(zip);
+              
+              if (tz != null) {
+                    if (tz == "America/Los_Angeles") {
+                        tz = "Pacific"
+                    }
+                    else if (tz == "America/Anchorage" || tz == "America/Juneau" || tz == "America/Nome" || tz == "America/Yakutat") {
+                        tz = "Alaska"
+                    }
+                    else if (tz == "America/Chicago" || tz == "America/Menominee" || tz == "America/North_Dakota/Center") {
+                        tz = "Central"
+                    }
+                    else if (tz == "America/Detroit" || tz == "America/New_York" || tz == "America/Indiana/Indianapolis" || tz == "America/Indiana/Vevay" || tz == "America/Kentucky/Louisville" || tz == "America/Kentucky/Monticello") {
+                        tz = "Eastern"
+                    }
+                    else if (tz == "America/Boise" || tz == "America/Phoenix" || tz == "America/Denver" || tz == "America/Shiprock") {
+                        tz = "Mountain"
+                    }
+                    else {
+                        console.log("missed one")
+                    }
+                }
+              records[i]["timezone"] = tz
+              
             }
+            
           }
         });
         this.filter(records)
@@ -529,7 +648,7 @@
     filter(arr) {
     var total = 0
     var output = []
-    debugger
+    
     for (let p = 0; p < arr.length; p++) {
         var element = arr[p];
         console.log(element["MCS_150_DATE"])
@@ -601,7 +720,7 @@
     },
     computed: {
       deleteUserRecords() {
-        debugger
+        
         console.log(this.$store.state.activeDeleteRecords)
         return this.$store.state.activeDeleteRecords
       },
@@ -664,6 +783,7 @@
     },
     data() {
       return {
+        calledUserId: "",
         recordUser: "",
         register: {},
         inputF: {},

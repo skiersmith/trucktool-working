@@ -81,111 +81,163 @@ var store = new vuex.Store({
             var imountainC = []
             var ipacific = []
             var ipacificC = []
-            debugger
-            for (let q = 0; q < data.eastern.length; q++) {
-                const record = data.eastern[q];
-                if (record.Called === true) {
-                    if (record.CLASSIFICATION_INTER) {
 
-                        easternC.push(record)
-                    }
-                    else if (record.INTRASTATE_NONHAZMAT) {
-                        ieasternC.push(record)
-                    }
-                }
-                else {
-                    
-                    if (record.CLASSIFICATION_INTER) {
-                        eastern.push(record)
+            if (data.eastern.length > 0) {
+                for (let q = 0; q < data.eastern.length; q++) {
+                    const record = data.eastern[q];
+                    if (record.Called === true) {
+                        if (record.CLASSIFICATION_INTER) {
 
+                            easternC.push(record)
+                        }
+                        else if (record.INTRASTATE_NONHAZMAT) {
+                            ieasternC.push(record)
+                        }
                     }
-                    else if (record.INTRASTATE_NONHAZMAT) {
-                        ieastern.push(record)
-                    }
-                }
-            }
-            for (let q = 0; q < data.central.length; q++) {
-                const record = data.central[q];
-                if (record.Called === true) {
-                    if (record.CLASSIFICATION_INTER) {
-                        centralC.push(record)
+                    else {
 
-                    }
-                    else if (record.INTRASTATE_NONHAZMAT) {
-                        icentralC.push(record)
-                    }
-                }
-                else {
-                    if (record.CLASSIFICATION_INTER) {
-                        central.push(record)
+                        if (record.CLASSIFICATION_INTER) {
+                            eastern.push(record)
 
-                    }
-                    else if (record.INTRASTATE_NONHAZMAT) {
-                        icentral.push(record)
+                        }
+                        else if (record.INTRASTATE_NONHAZMAT) {
+                            ieastern.push(record)
+                        }
                     }
                 }
             }
-            for (let q = 0; q < data.pacific.length; q++) {
-                const record = data.pacific[q];
-                if (record.Called === true) {
-                    if (record.CLASSIFICATION_INTER) {
-                        pacificC.push(record)
+            else if (data.central.length > 0) {
 
+                for (let q = 0; q < data.central.length; q++) {
+                    const record = data.central[q];
+                    if (record.Called === true) {
+                        if (record.CLASSIFICATION_INTER) {
+                            centralC.push(record)
+
+                        }
+                        else if (record.INTRASTATE_NONHAZMAT) {
+                            icentralC.push(record)
+                        }
                     }
-                    else if (record.INTRASTATE_NONHAZMAT) {
-                        ipacificC.push(record)
+                    else {
+                        if (record.CLASSIFICATION_INTER) {
+                            central.push(record)
+
+                        }
+                        else if (record.INTRASTATE_NONHAZMAT) {
+                            icentral.push(record)
+                        }
                     }
                 }
-                else {
-                    if (record.CLASSIFICATION_INTER) {
-                        pacific.push(record)
+            }
+            else if (data.pacific.length > 0) {
 
+                for (let q = 0; q < data.pacific.length; q++) {
+                    const record = data.pacific[q];
+                    if (record.Called === true) {
+                        if (record.CLASSIFICATION_INTER) {
+                            pacificC.push(record)
+
+                        }
+                        else if (record.INTRASTATE_NONHAZMAT) {
+                            ipacificC.push(record)
+                        }
                     }
-                    else if (record.INTRASTATE_NONHAZMAT) {
-                        ipacific.push(record)
+                    else {
+                        if (record.CLASSIFICATION_INTER) {
+                            pacific.push(record)
+
+                        }
+                        else if (record.INTRASTATE_NONHAZMAT) {
+                            ipacific.push(record)
+                        }
                     }
                 }
             }
-            for (let q = 0; q < data.mountain.length; q++) {
-                const record = data.mountain[q];
-                if (record.Called === true) {
-                    if (record.CLASSIFICATION_INTER) {
-                        mountainC.push(record)
+            else if (data.mountain.length > 0) {
 
-                    }
-                    else if (record.INTRASTATE_NONHAZMAT) {
-                        imountainC.push(record)
-                    }
-                    console.log("1")
-                }
-                else {
-                    if (record.CLASSIFICATION_INTER) {
-                        mountain.push(record)
+                for (let q = 0; q < data.mountain.length; q++) {
+                    const record = data.mountain[q];
+                    if (record.Called === true) {
+                        if (record.CLASSIFICATION_INTER) {
+                            mountainC.push(record)
 
+                        }
+                        else if (record.INTRASTATE_NONHAZMAT) {
+                            imountainC.push(record)
+                        }
+                        console.log("1")
                     }
-                    else if (record.INTRASTATE_NONHAZMAT) {
-                        imountain.push(record)
+                    else {
+                        if (record.CLASSIFICATION_INTER) {
+                            mountain.push(record)
+
+                        }
+                        else if (record.INTRASTATE_NONHAZMAT) {
+                            imountain.push(record)
+                        }
+                        console.log("2")
                     }
-                    console.log("2")
                 }
             }
-            debugger
-            state.eastern = eastern
-            state.central = central
-            state.pacific = pacific
-            state.mountain = mountain
-            state.easternC = easternC
-            state.centralC = centralC
-            state.pacificC = pacificC
-            state.mountainC = mountainC
-            state.ieastern = ieastern
-            state.icentral = icentral
-            state.ipacific = ipacific
-            state.imountain = imountain
-            state.ieasternC = ieasternC
-            state.icentralC = icentralC
-            state.ipacificC = ipacificC
-            state.imountainC = imountainC
+
+
+
+            if (eastern.length > 0) {
+                state.eastern = eastern
+                debugger
+            }
+            else if (easternC.length > 0) {
+                state.easternC = easternC
+            }
+            if (central.length > 0) {
+                state.central = central
+                debugger
+            }
+            else if (centralC.length > 0) {
+                state.centralC = centralC
+            }
+            if (pacific.length > 0) {
+                state.pacific = pacific
+                debugger
+            }
+            else if (pacificC.length > 0) {
+                state.pacificC = pacificC
+            }
+            if (mountain.length > 0) {
+                state.mountain = mountain
+                debugger
+            }
+            else if (mountainC.length > 0) {
+                state.mountainC = mountainC
+            }
+            if (ieastern.length > 0) {
+
+                state.ieastern = ieastern
+            }
+            else if (ieasternC.length > 0) {
+
+                state.ieasternC = ieasternC
+            }
+            if (ipacific.length > 0) {
+                state.ipacific = ipacific
+            }
+            else if (ipacificC.length > 0) {
+                state.ipacificC = ipacificC
+            }
+            if (imountain.length > 0) {
+                state.imountain = imountain
+            }
+            else if (imountainC.length > 0) {
+                state.imountainC = imountainC
+            }
+            if (icentral.length > 0) {
+                state.icentral = icentral
+            }
+            else if (icentralC.length > 0) {
+                state.icentralC = icentralC
+            }
+
         },
         // setTimeZoneRecord2(state, data) {
         //     state.yEastern = data.eastern
@@ -215,12 +267,27 @@ var store = new vuex.Store({
             }
         },
         setActiveRecords(state, data) {
-            if (data.data) {
-                state.activeRecords = data.data
+
+            if (data.data) { state.activeRecords = data }
+
+            else if (data[0].timezone = "Pacific") {
+                state.activeRecords.pacific = data
             }
-            else if (!data.data) {
-                state.activeRecords = data
+            else if (data[0].timezone = "Eastern") {
+                state.activeRecords.eastern = data
             }
+            else if (data[0].timezone = "Central") {
+                state.activeRecords.central = data
+            }
+            else if (data[0].timezone = "Mountain") {
+                state.activeRecords.mountain = data
+            }
+        },
+        setActiveRecords2() {
+            state.activeRecords = data
+        },
+        clearActiveRecords(state, data) {
+            state.activeRecords = {}
         },
         setActiveSplitRecords(state, data) {
             state.activeSplitRecords = data
@@ -267,10 +334,58 @@ var store = new vuex.Store({
 
     },
     actions: {
+        getNull({ commit, dispatch }) {
+
+            api('records')
+                .then(res => {
+
+
+                    commit('setActiveRecords2', res.data.data)
+
+                })
+                .catch(err => {
+                    commit('handleError', err)
+
+
+                })
+        },
+        getCalled({ commit, dispatch }, userId) {
+            debugger
+            api('records/called/' + userId)
+                .then(res => {
+                    debugger
+
+                    // var records2 = []
+                    // for (let q = 0; q < res.data.data.length; q++) {
+
+                    //     const record = res.data.data[q];
+                    //     var mcs = Date.parse(record.MCS_150_DATE)
+                    //     var today = Date.now()
+                    //     var twoYears = Date.now() - 63113904000
+                    //     var hbd = mcs + 63113904000
+                    //     var hbd2 = twoYears - 31104000000
+                    //     var hbd3 = twoYears + 2592000000
+
+
+                    //     if (!record.userId) {
+                    //         if (hbd < today && mcs > hbd2 || mcs < hbd3) {
+                    //             records2.push(record)
+                    //         }
+                    //     }
+                    // }
+                    commit('setActiveSplitRecords', res.data.data)
+
+                })
+                .catch(err => {
+                    commit('handleError', err)
+
+
+                })
+        },
         getSplitRecords({ commit, dispatch }) {
 
             api('records')
-            .then(res => {
+                .then(res => {
                     var records2 = []
                     for (let q = 0; q < res.data.data.length; q++) {
 
@@ -302,7 +417,7 @@ var store = new vuex.Store({
 
             api('records')
                 .then(res => {
-                    debugger
+
                     var records2 = []
                     for (let q = 0; q < res.data.data.length; q++) {
 
@@ -334,7 +449,7 @@ var store = new vuex.Store({
 
             api('records')
                 .then(res => {
-                    debugger
+
                     var records2 = []
                     for (let q = 0; q < res.data.data.length; q++) {
 
@@ -752,7 +867,394 @@ var store = new vuex.Store({
                         }
                         // console.log(record.tz)
                     }
-                    
+
+                    commit('setTimeZoneRecord', sendObj)
+                })
+                .catch(err => {
+                    commit('handleError', err)
+
+
+                })
+        },
+        getIntraCentralRecords({ commit, dispatch }, userId) {
+            console.log("getIntraRecords")
+            api('intra/central/user/' + userId)
+                .then(res => {
+                    debugger
+                    console.log("test1")
+                    console.log(res)
+                    console.log(res.data.data)
+                    var records2 = []
+                    for (let n = 0; n < res.data.data.length; n++) {
+
+                        var record = res.data.data[n];
+                        if (record.noSale) {
+                            continue
+                        }
+                        else {
+                            records2.push(record)
+                        }
+                    }
+                    commit('setActiveRecords', records2)
+                    var sendObj = {
+                        central: [],
+
+                    }
+                    var nothing = []
+                    // commit('clearTZRecords', nothing)
+                    console.log(res)
+                    for (let l = 0; l < records2.length; l++) {
+                        var record = records2[l];
+                        var zip2 = record.CENSUS_MAILING_ADDRESS_ZIP_CODE
+
+                        var zip = ""
+                        for (let p = 0; p < zip2.length; p++) {
+                            const element = zip2[p];
+                            zip += element
+                            if (p == 4) {
+                                break
+                            }
+                        }
+                        var tz = zipcode_to_timezone.lookup(zip);
+                        if (tz != null) {
+                            if (tz == "America/Los_Angeles") {
+                                tz = "Pacific"
+                            }
+                            else if (tz == "America/Anchorage" || tz == "America/Juneau" || tz == "America/Nome" || tz == "America/Yakutat") {
+                                tz = "Alaska"
+                            }
+                            else if (tz == "America/Chicago" || tz == "America/Menominee" || tz == "America/North_Dakota/Center") {
+                                tz = "Central"
+                            }
+                            else if (tz == "America/Detroit" || tz == "America/New_York" || tz == "America/Indiana/Indianapolis" || tz == "America/Indiana/Vevay" || tz == "America/Kentucky/Louisville" || tz == "America/Kentucky/Monticello") {
+
+                                tz = "Eastern"
+                            }
+                            else if (tz == "America/Boise" || tz == "America/Phoenix" || tz == "America/Denver" || tz == "America/Shiprock") {
+                                tz = "Mountain"
+                            }
+                            else {
+                                // console.log("hi")
+                                // this.timezone2 = ""
+                                // console.log(tz)
+                            }
+                            record.timezone = tz
+                        }
+                        if (record.timezone == "Eastern") {
+                            sendObj.eastern.push(record)
+                            console.log("eastern")
+                        }
+                        else if (record.timezone == "Central") {
+                            sendObj.central.push(record)
+                            console.log("central")
+                        }
+                        else if (record.timezone == "Mountain") {
+                            sendObj.mountain.push(record)
+                            // console.log("mountain")
+                        }
+                        else if (record.timezone == "Pacific") {
+                            sendObj.pacific.push(record)
+                            console.log("pacific")
+                        }
+                        else if (record.timezone == "Canada") {
+                            // sendObj.pacific.push(record)
+                            // console.log("pacific")
+                        }
+                        // console.log(record.tz)
+                    }
+
+                    commit('setTimeZoneRecord', sendObj)
+                    dispatch('getIntraPacificRecords', userId)
+
+
+                })
+                .catch(err => {
+                    commit('handleError', err)
+
+
+                })
+        },
+        getIntraMountainRecords({ commit, dispatch }, userId) {
+            console.log("getIntraRecords")
+            api('intra/mountain/user/' + userId)
+                .then(res => {
+                    debugger
+                    console.log("test1")
+                    console.log(res)
+                    console.log(res.data.data)
+                    var records2 = []
+                    for (let n = 0; n < res.data.data.length; n++) {
+
+                        var record = res.data.data[n];
+                        if (record.noSale) {
+                            continue
+                        }
+                        else {
+                            records2.push(record)
+                        }
+                    }
+                    commit('setActiveRecords', records2)
+                    var sendObj = {
+
+                        mountain: []
+                    }
+                    var nothing = []
+                    // commit('clearTZRecords', nothing)
+                    console.log(res)
+                    for (let l = 0; l < records2.length; l++) {
+                        var record = records2[l];
+                        var zip2 = record.CENSUS_MAILING_ADDRESS_ZIP_CODE
+
+                        var zip = ""
+                        for (let p = 0; p < zip2.length; p++) {
+                            const element = zip2[p];
+                            zip += element
+                            if (p == 4) {
+                                break
+                            }
+                        }
+                        var tz = zipcode_to_timezone.lookup(zip);
+                        if (tz != null) {
+                            if (tz == "America/Los_Angeles") {
+                                tz = "Pacific"
+                            }
+                            else if (tz == "America/Anchorage" || tz == "America/Juneau" || tz == "America/Nome" || tz == "America/Yakutat") {
+                                tz = "Alaska"
+                            }
+                            else if (tz == "America/Chicago" || tz == "America/Menominee" || tz == "America/North_Dakota/Center") {
+                                tz = "Central"
+                            }
+                            else if (tz == "America/Detroit" || tz == "America/New_York" || tz == "America/Indiana/Indianapolis" || tz == "America/Indiana/Vevay" || tz == "America/Kentucky/Louisville" || tz == "America/Kentucky/Monticello") {
+
+                                tz = "Eastern"
+                            }
+                            else if (tz == "America/Boise" || tz == "America/Phoenix" || tz == "America/Denver" || tz == "America/Shiprock") {
+                                tz = "Mountain"
+                            }
+                            else {
+                                // console.log("hi")
+                                // this.timezone2 = ""
+                                // console.log(tz)
+                            }
+                            record.timezone = tz
+                        }
+                        if (record.timezone == "Eastern") {
+                            sendObj.eastern.push(record)
+                            console.log("eastern")
+                        }
+                        else if (record.timezone == "Central") {
+                            sendObj.central.push(record)
+                            console.log("central")
+                        }
+                        else if (record.timezone == "Mountain") {
+                            sendObj.mountain.push(record)
+                            // console.log("mountain")
+                        }
+                        else if (record.timezone == "Pacific") {
+                            sendObj.pacific.push(record)
+                            console.log("pacific")
+                        }
+                        else if (record.timezone == "Canada") {
+                            // sendObj.pacific.push(record)
+                            // console.log("pacific")
+                        }
+                        // console.log(record.tz)
+                    }
+
+                    commit('setTimeZoneRecord', sendObj)
+                    dispatch('getIntraMountainRecords', userId)
+
+                })
+                .catch(err => {
+                    commit('handleError', err)
+
+
+                })
+        },
+        getIntraPacificRecords({ commit, dispatch }, userId) {
+            console.log("getIntraRecords")
+            api('intra/pacific/user/' + userId)
+                .then(res => {
+                    debugger
+                    console.log("test1")
+                    console.log(res)
+                    console.log(res.data.data)
+                    var records2 = []
+                    for (let n = 0; n < res.data.data.length; n++) {
+
+                        var record = res.data.data[n];
+                        if (record.noSale) {
+                            continue
+                        }
+                        else {
+                            records2.push(record)
+                        }
+                    }
+                    commit('setActiveRecords', records2)
+                    var sendObj = {
+
+                        pacific: [],
+
+                    }
+                    var nothing = []
+                    // commit('clearTZRecords', nothing)
+                    console.log(res)
+                    for (let l = 0; l < records2.length; l++) {
+                        var record = records2[l];
+                        var zip2 = record.CENSUS_MAILING_ADDRESS_ZIP_CODE
+
+                        var zip = ""
+                        for (let p = 0; p < zip2.length; p++) {
+                            const element = zip2[p];
+                            zip += element
+                            if (p == 4) {
+                                break
+                            }
+                        }
+                        var tz = zipcode_to_timezone.lookup(zip);
+                        if (tz != null) {
+                            if (tz == "America/Los_Angeles") {
+                                tz = "Pacific"
+                            }
+                            else if (tz == "America/Anchorage" || tz == "America/Juneau" || tz == "America/Nome" || tz == "America/Yakutat") {
+                                tz = "Alaska"
+                            }
+                            else if (tz == "America/Chicago" || tz == "America/Menominee" || tz == "America/North_Dakota/Center") {
+                                tz = "Central"
+                            }
+                            else if (tz == "America/Detroit" || tz == "America/New_York" || tz == "America/Indiana/Indianapolis" || tz == "America/Indiana/Vevay" || tz == "America/Kentucky/Louisville" || tz == "America/Kentucky/Monticello") {
+
+                                tz = "Eastern"
+                            }
+                            else if (tz == "America/Boise" || tz == "America/Phoenix" || tz == "America/Denver" || tz == "America/Shiprock") {
+                                tz = "Mountain"
+                            }
+                            else {
+                                // console.log("hi")
+                                // this.timezone2 = ""
+                                // console.log(tz)
+                            }
+                            record.timezone = tz
+                        }
+                        if (record.timezone == "Eastern") {
+                            sendObj.eastern.push(record)
+                            console.log("eastern")
+                        }
+                        else if (record.timezone == "Central") {
+                            sendObj.central.push(record)
+                            console.log("central")
+                        }
+                        else if (record.timezone == "Mountain") {
+                            sendObj.mountain.push(record)
+                            // console.log("mountain")
+                        }
+                        else if (record.timezone == "Pacific") {
+                            sendObj.pacific.push(record)
+                            console.log("pacific")
+                        }
+                        else if (record.timezone == "Canada") {
+                            // sendObj.pacific.push(record)
+                            // console.log("pacific")
+                        }
+                        // console.log(record.tz)
+                    }
+
+                    commit('setTimeZoneRecord', sendObj)
+                    dispatch('getIntraEasternRecords', userId)
+                })
+                .catch(err => {
+                    commit('handleError', err)
+
+
+                })
+        },
+        getIntraEasternRecords({ commit, dispatch }, userId) {
+            console.log("getIntraRecords")
+            api('intra/eastern/user/' + userId)
+                .then(res => {
+                    debugger
+                    console.log("test1")
+                    console.log(res)
+                    console.log(res.data.data)
+                    var records2 = []
+                    for (let n = 0; n < res.data.data.length; n++) {
+
+                        var record = res.data.data[n];
+                        if (record.noSale) {
+                            continue
+                        }
+                        else {
+                            records2.push(record)
+                        }
+                    }
+                    commit('setActiveRecords', records2)
+                    var sendObj = {
+                        eastern: [],
+
+                    }
+                    var nothing = []
+                    // commit('clearTZRecords', nothing)
+                    console.log(res)
+                    for (let l = 0; l < records2.length; l++) {
+                        var record = records2[l];
+                        var zip2 = record.CENSUS_MAILING_ADDRESS_ZIP_CODE
+
+                        var zip = ""
+                        for (let p = 0; p < zip2.length; p++) {
+                            const element = zip2[p];
+                            zip += element
+                            if (p == 4) {
+                                break
+                            }
+                        }
+                        var tz = zipcode_to_timezone.lookup(zip);
+                        if (tz != null) {
+                            if (tz == "America/Los_Angeles") {
+                                tz = "Pacific"
+                            }
+                            else if (tz == "America/Anchorage" || tz == "America/Juneau" || tz == "America/Nome" || tz == "America/Yakutat") {
+                                tz = "Alaska"
+                            }
+                            else if (tz == "America/Chicago" || tz == "America/Menominee" || tz == "America/North_Dakota/Center") {
+                                tz = "Central"
+                            }
+                            else if (tz == "America/Detroit" || tz == "America/New_York" || tz == "America/Indiana/Indianapolis" || tz == "America/Indiana/Vevay" || tz == "America/Kentucky/Louisville" || tz == "America/Kentucky/Monticello") {
+
+                                tz = "Eastern"
+                            }
+                            else if (tz == "America/Boise" || tz == "America/Phoenix" || tz == "America/Denver" || tz == "America/Shiprock") {
+                                tz = "Mountain"
+                            }
+                            else {
+                                // console.log("hi")
+                                // this.timezone2 = ""
+                                // console.log(tz)
+                            }
+                            record.timezone = tz
+                        }
+                        if (record.timezone == "Eastern") {
+                            sendObj.eastern.push(record)
+                            console.log("eastern")
+                        }
+                        else if (record.timezone == "Central") {
+                            sendObj.central.push(record)
+                            console.log("central")
+                        }
+                        else if (record.timezone == "Mountain") {
+                            sendObj.mountain.push(record)
+                            // console.log("mountain")
+                        }
+                        else if (record.timezone == "Pacific") {
+                            sendObj.pacific.push(record)
+                            console.log("pacific")
+                        }
+                        else if (record.timezone == "Canada") {
+                            // sendObj.pacific.push(record)
+                            // console.log("pacific")
+                        }
+                        // console.log(record.tz)
+                    }
+
                     commit('setTimeZoneRecord', sendObj)
                 })
                 .catch(err => {
@@ -765,6 +1267,7 @@ var store = new vuex.Store({
             console.log("getInterRecords")
             api('inter/user/' + userId)
                 .then(res => {
+                    debugger
                     console.log("test1")
                     console.log(res)
                     console.log(res.data.data)
@@ -848,7 +1351,7 @@ var store = new vuex.Store({
                         }
                         // console.log(record.tz)
                     }
-                    
+
                     commit('setTimeZoneRecord', sendObj)
                 })
                 .catch(err => {
@@ -857,11 +1360,768 @@ var store = new vuex.Store({
 
                 })
         },
+        // getInterCentralRecords({ commit, dispatch }, userId) {
+        //     console.log("getIntraRecords")
+        //     api('inter/central/user/' + userId)
+        //         .then(res => {
+        //             debugger
+        //             console.log("test1")
+        //             console.log(res)
+        //             console.log(res.data.data)
+        //             var records2 = []
+        //             for (let n = 0; n < res.data.data.length; n++) {
+
+        //                 var record = res.data.data[n];
+        //                 if (record.noSale) {
+        //                     continue
+        //                 }
+        //                 else {
+        //                     records2.push(record)
+        //                 }
+        //             }
+        //             commit('setActiveRecords', records2)
+        //             var sendObj = {
+        //                 central: [],
+        //             }
+        //             var nothing = []
+        //             // commit('clearTZRecords', nothing)
+        //             console.log(res)
+        //             for (let l = 0; l < records2.length; l++) {
+        //                 var record = records2[l];
+        //                 var zip2 = record.CENSUS_MAILING_ADDRESS_ZIP_CODE
+
+        //                 var zip = ""
+        //                 for (let p = 0; p < zip2.length; p++) {
+        //                     const element = zip2[p];
+        //                     zip += element
+        //                     if (p == 4) {
+        //                         break
+        //                     }
+        //                 }
+        //                 var tz = zipcode_to_timezone.lookup(zip);
+        //                 if (tz != null) {
+        //                     if (tz == "America/Los_Angeles") {
+        //                         tz = "Pacific"
+        //                     }
+        //                     else if (tz == "America/Anchorage" || tz == "America/Juneau" || tz == "America/Nome" || tz == "America/Yakutat") {
+        //                         tz = "Alaska"
+        //                     }
+        //                     else if (tz == "America/Chicago" || tz == "America/Menominee" || tz == "America/North_Dakota/Center") {
+        //                         tz = "Central"
+        //                     }
+        //                     else if (tz == "America/Detroit" || tz == "America/New_York" || tz == "America/Indiana/Indianapolis" || tz == "America/Indiana/Vevay" || tz == "America/Kentucky/Louisville" || tz == "America/Kentucky/Monticello") {
+
+        //                         tz = "Eastern"
+        //                     }
+        //                     else if (tz == "America/Boise" || tz == "America/Phoenix" || tz == "America/Denver" || tz == "America/Shiprock") {
+        //                         tz = "Mountain"
+        //                     }
+        //                     else {
+        //                         // console.log("hi")
+        //                         // this.timezone2 = ""
+        //                         // console.log(tz)
+        //                     }
+        //                     record.timezone = tz
+        //                 }
+        //                 if (record.timezone == "Eastern") {
+        //                     sendObj.eastern.push(record)
+        //                     console.log("eastern")
+        //                 }
+        //                 else if (record.timezone == "Central") {
+        //                     sendObj.central.push(record)
+        //                     console.log("central")
+        //                 }
+        //                 else if (record.timezone == "Mountain") {
+        //                     sendObj.mountain.push(record)
+        //                     // console.log("mountain")
+        //                 }
+        //                 else if (record.timezone == "Pacific") {
+        //                     sendObj.pacific.push(record)
+        //                     console.log("pacific")
+        //                 }
+        //                 else if (record.timezone == "Canada") {
+        //                     // sendObj.pacific.push(record)
+        //                     // console.log("pacific")
+        //                 }
+        //                 // console.log(record.tz)
+        //             }
+
+        //             commit('setTimeZoneRecord', sendObj)
+        //             dispatch('getInterPacificRecords', userId)
+
+        //         })
+        //         .catch(err => {
+        //             commit('handleError', err)
+
+
+        //         })
+        // },
+        // getInterMountainRecords({ commit, dispatch }, userId) {
+        //     console.log("getIntraRecords")
+        //     api('inter/mountain/user/' + userId)
+        //         .then(res => {
+        //             debugger
+        //             console.log("test1")
+        //             console.log(res)
+        //             console.log(res.data.data)
+        //             var records2 = []
+        //             for (let n = 0; n < res.data.data.length; n++) {
+
+        //                 var record = res.data.data[n];
+        //                 if (record.noSale) {
+        //                     continue
+        //                 }
+        //                 else {
+        //                     records2.push(record)
+        //                 }
+        //             }
+        //             commit('setActiveRecords', records2)
+        //             var sendObj = {
+        //                 mountain: []
+        //             }
+        //             var nothing = []
+        //             // commit('clearTZRecords', nothing)
+        //             console.log(res)
+        //             for (let l = 0; l < records2.length; l++) {
+        //                 var record = records2[l];
+        //                 var zip2 = record.CENSUS_MAILING_ADDRESS_ZIP_CODE
+
+        //                 var zip = ""
+        //                 for (let p = 0; p < zip2.length; p++) {
+        //                     const element = zip2[p];
+        //                     zip += element
+        //                     if (p == 4) {
+        //                         break
+        //                     }
+        //                 }
+        //                 var tz = zipcode_to_timezone.lookup(zip);
+        //                 if (tz != null) {
+        //                     if (tz == "America/Los_Angeles") {
+        //                         tz = "Pacific"
+        //                     }
+        //                     else if (tz == "America/Anchorage" || tz == "America/Juneau" || tz == "America/Nome" || tz == "America/Yakutat") {
+        //                         tz = "Alaska"
+        //                     }
+        //                     else if (tz == "America/Chicago" || tz == "America/Menominee" || tz == "America/North_Dakota/Center") {
+        //                         tz = "Central"
+        //                     }
+        //                     else if (tz == "America/Detroit" || tz == "America/New_York" || tz == "America/Indiana/Indianapolis" || tz == "America/Indiana/Vevay" || tz == "America/Kentucky/Louisville" || tz == "America/Kentucky/Monticello") {
+
+        //                         tz = "Eastern"
+        //                     }
+        //                     else if (tz == "America/Boise" || tz == "America/Phoenix" || tz == "America/Denver" || tz == "America/Shiprock") {
+        //                         tz = "Mountain"
+        //                     }
+        //                     else {
+        //                         // console.log("hi")
+        //                         // this.timezone2 = ""
+        //                         // console.log(tz)
+        //                     }
+        //                     record.timezone = tz
+        //                 }
+        //                 if (record.timezone == "Eastern") {
+        //                     sendObj.eastern.push(record)
+        //                     console.log("eastern")
+        //                 }
+        //                 else if (record.timezone == "Central") {
+        //                     sendObj.central.push(record)
+        //                     console.log("central")
+        //                 }
+        //                 else if (record.timezone == "Mountain") {
+        //                     sendObj.mountain.push(record)
+        //                     // console.log("mountain")
+        //                 }
+        //                 else if (record.timezone == "Pacific") {
+        //                     sendObj.pacific.push(record)
+        //                     console.log("pacific")
+        //                 }
+        //                 else if (record.timezone == "Canada") {
+        //                     // sendObj.pacific.push(record)
+        //                     // console.log("pacific")
+        //                 }
+        //                 // console.log(record.tz)
+        //             }
+
+        //             commit('setTimeZoneRecord', sendObj)
+        //             dispatch('getInterMountainRecords', userId)
+
+        //         })
+        //         .catch(err => {
+        //             commit('handleError', err)
+
+
+        //         })
+        // },
+        // getInterPacificRecords({ commit, dispatch }, userId) {
+        //     console.log("getIntraRecords")
+        //     api('inter/pacific/user/' + userId)
+        //         .then(res => {
+        //             debugger
+        //             console.log("test1")
+        //             console.log(res)
+        //             console.log(res.data.data)
+        //             var records2 = []
+        //             for (let n = 0; n < res.data.data.length; n++) {
+
+        //                 var record = res.data.data[n];
+        //                 if (record.noSale) {
+        //                     continue
+        //                 }
+        //                 else {
+        //                     records2.push(record)
+        //                 }
+        //             }
+        //             commit('setActiveRecords', records2)
+        //             var sendObj = {
+        //                 pacific: [],
+        //             }
+        //             var nothing = []
+        //             // commit('clearTZRecords', nothing)
+        //             console.log(res)
+        //             for (let l = 0; l < records2.length; l++) {
+        //                 var record = records2[l];
+        //                 var zip2 = record.CENSUS_MAILING_ADDRESS_ZIP_CODE
+
+        //                 var zip = ""
+        //                 for (let p = 0; p < zip2.length; p++) {
+        //                     const element = zip2[p];
+        //                     zip += element
+        //                     if (p == 4) {
+        //                         break
+        //                     }
+        //                 }
+        //                 var tz = zipcode_to_timezone.lookup(zip);
+        //                 if (tz != null) {
+        //                     if (tz == "America/Los_Angeles") {
+        //                         tz = "Pacific"
+        //                     }
+        //                     else if (tz == "America/Anchorage" || tz == "America/Juneau" || tz == "America/Nome" || tz == "America/Yakutat") {
+        //                         tz = "Alaska"
+        //                     }
+        //                     else if (tz == "America/Chicago" || tz == "America/Menominee" || tz == "America/North_Dakota/Center") {
+        //                         tz = "Central"
+        //                     }
+        //                     else if (tz == "America/Detroit" || tz == "America/New_York" || tz == "America/Indiana/Indianapolis" || tz == "America/Indiana/Vevay" || tz == "America/Kentucky/Louisville" || tz == "America/Kentucky/Monticello") {
+
+        //                         tz = "Eastern"
+        //                     }
+        //                     else if (tz == "America/Boise" || tz == "America/Phoenix" || tz == "America/Denver" || tz == "America/Shiprock") {
+        //                         tz = "Mountain"
+        //                     }
+        //                     else {
+        //                         // console.log("hi")
+        //                         // this.timezone2 = ""
+        //                         // console.log(tz)
+        //                     }
+        //                     record.timezone = tz
+        //                 }
+        //                 if (record.timezone == "Eastern") {
+        //                     sendObj.eastern.push(record)
+        //                     console.log("eastern")
+        //                 }
+        //                 else if (record.timezone == "Central") {
+        //                     sendObj.central.push(record)
+        //                     console.log("central")
+        //                 }
+        //                 else if (record.timezone == "Mountain") {
+        //                     sendObj.mountain.push(record)
+        //                     // console.log("mountain")
+        //                 }
+        //                 else if (record.timezone == "Pacific") {
+        //                     sendObj.pacific.push(record)
+        //                     console.log("pacific")
+        //                 }
+        //                 else if (record.timezone == "Canada") {
+        //                     // sendObj.pacific.push(record)
+        //                     // console.log("pacific")
+        //                 }
+        //                 // console.log(record.tz)
+        //             }
+
+        //             commit('setTimeZoneRecord', sendObj)
+        //             dispatch('getInterEasternRecords', userId)
+        //         })
+        //         .catch(err => {
+        //             commit('handleError', err)
+
+
+        //         })
+        // },
+        // getInterEasternRecords({ commit, dispatch }, userId) {
+        //     console.log("getIntraRecords")
+        //     api('inter/eastern/user/' + userId)
+        //         .then(res => {
+        //             debugger
+        //             console.log("test1")
+        //             console.log(res)
+        //             console.log(res.data.data)
+        //             var records2 = []
+        //             for (let n = 0; n < res.data.data.length; n++) {
+
+        //                 var record = res.data.data[n];
+        //                 if (record.noSale) {
+        //                     continue
+        //                 }
+        //                 else {
+        //                     records2.push(record)
+        //                 }
+        //             }
+        //             commit('setActiveRecords', records2)
+        //             var sendObj = {
+        //                 eastern: [],
+
+        //             }
+        //             var nothing = []
+        //             // commit('clearTZRecords', nothing)
+        //             console.log(res)
+        //             for (let l = 0; l < records2.length; l++) {
+        //                 var record = records2[l];
+        //                 var zip2 = record.CENSUS_MAILING_ADDRESS_ZIP_CODE
+
+        //                 var zip = ""
+        //                 for (let p = 0; p < zip2.length; p++) {
+        //                     const element = zip2[p];
+        //                     zip += element
+        //                     if (p == 4) {
+        //                         break
+        //                     }
+        //                 }
+        //                 var tz = zipcode_to_timezone.lookup(zip);
+        //                 if (tz != null) {
+        //                     if (tz == "America/Los_Angeles") {
+        //                         tz = "Pacific"
+        //                     }
+        //                     else if (tz == "America/Anchorage" || tz == "America/Juneau" || tz == "America/Nome" || tz == "America/Yakutat") {
+        //                         tz = "Alaska"
+        //                     }
+        //                     else if (tz == "America/Chicago" || tz == "America/Menominee" || tz == "America/North_Dakota/Center") {
+        //                         tz = "Central"
+        //                     }
+        //                     else if (tz == "America/Detroit" || tz == "America/New_York" || tz == "America/Indiana/Indianapolis" || tz == "America/Indiana/Vevay" || tz == "America/Kentucky/Louisville" || tz == "America/Kentucky/Monticello") {
+
+        //                         tz = "Eastern"
+        //                     }
+        //                     else if (tz == "America/Boise" || tz == "America/Phoenix" || tz == "America/Denver" || tz == "America/Shiprock") {
+        //                         tz = "Mountain"
+        //                     }
+        //                     else {
+        //                         // console.log("hi")
+        //                         // this.timezone2 = ""
+        //                         // console.log(tz)
+        //                     }
+        //                     record.timezone = tz
+        //                 }
+        //                 if (record.timezone == "Eastern") {
+        //                     sendObj.eastern.push(record)
+        //                     console.log("eastern")
+        //                 }
+        //                 else if (record.timezone == "Central") {
+        //                     sendObj.central.push(record)
+        //                     console.log("central")
+        //                 }
+        //                 else if (record.timezone == "Mountain") {
+        //                     sendObj.mountain.push(record)
+        //                     // console.log("mountain")
+        //                 }
+        //                 else if (record.timezone == "Pacific") {
+        //                     sendObj.pacific.push(record)
+        //                     console.log("pacific")
+        //                 }
+        //                 else if (record.timezone == "Canada") {
+        //                     // sendObj.pacific.push(record)
+        //                     // console.log("pacific")
+        //                 }
+        //                 // console.log(record.tz)
+        //             }
+
+        //             commit('setTimeZoneRecord', sendObj)
+        //         })
+        //         .catch(err => {
+        //             commit('handleError', err)
+
+
+        //         })
+        // },
+        getInterAllRecords({ commit, dispatch }, userId) {
+            console.log("getIntraRecords")
+            api('inter/central/user/' + userId)
+                .then(res => {
+                    debugger
+                    console.log("test1")
+                    console.log(res)
+                    console.log(res.data.data)
+                    var records2 = []
+                    for (let n = 0; n < res.data.data.length; n++) {
+
+                        var record = res.data.data[n];
+                        if (record.noSale) {
+                            continue
+                        }
+                        else {
+                            records2.push(record)
+                        }
+                    }
+                    commit('setActiveRecords', records2)
+                    var sendObj1 = {
+                        central: [],
+                    }
+                    var nothing = []
+                    // commit('clearTZRecords', nothing)
+                    console.log(res)
+                    for (let l = 0; l < records2.length; l++) {
+                        var record = records2[l];
+                        var zip2 = record.CENSUS_MAILING_ADDRESS_ZIP_CODE
+
+                        var zip = ""
+                        for (let p = 0; p < zip2.length; p++) {
+                            const element = zip2[p];
+                            zip += element
+                            if (p == 4) {
+                                break
+                            }
+                        }
+                        var tz = zipcode_to_timezone.lookup(zip);
+                        if (tz != null) {
+                            if (tz == "America/Los_Angeles") {
+                                tz = "Pacific"
+                            }
+                            else if (tz == "America/Anchorage" || tz == "America/Juneau" || tz == "America/Nome" || tz == "America/Yakutat") {
+                                tz = "Alaska"
+                            }
+                            else if (tz == "America/Chicago" || tz == "America/Menominee" || tz == "America/North_Dakota/Center") {
+                                tz = "Central"
+                            }
+                            else if (tz == "America/Detroit" || tz == "America/New_York" || tz == "America/Indiana/Indianapolis" || tz == "America/Indiana/Vevay" || tz == "America/Kentucky/Louisville" || tz == "America/Kentucky/Monticello") {
+
+                                tz = "Eastern"
+                            }
+                            else if (tz == "America/Boise" || tz == "America/Phoenix" || tz == "America/Denver" || tz == "America/Shiprock") {
+                                tz = "Mountain"
+                            }
+                            else {
+                                // console.log("hi")
+                                // this.timezone2 = ""
+                                // console.log(tz)
+                            }
+                            record.timezone = tz
+                        }
+                        if (record.timezone == "Eastern") {
+                            sendObj.eastern.push(record)
+                            console.log("eastern")
+                        }
+                        else if (record.timezone == "Central") {
+                            sendObj.central.push(record)
+                            console.log("central")
+                        }
+                        else if (record.timezone == "Mountain") {
+                            sendObj.mountain.push(record)
+                            // console.log("mountain")
+                        }
+                        else if (record.timezone == "Pacific") {
+                            sendObj.pacific.push(record)
+                            console.log("pacific")
+                        }
+                        else if (record.timezone == "Canada") {
+                            // sendObj.pacific.push(record)
+                            // console.log("pacific")
+                        }
+                        // console.log(record.tz)
+                    }
+
+
+                    
+                })
+                .catch(err => {
+                    commit('handleError', err)
+                    
+                    
+                })
+                api('inter/mountain/user/' + userId)
+                .then(res => {
+                    debugger
+                    console.log("test1")
+                    console.log(res)
+                    console.log(res.data.data)
+                    var records2 = []
+                    for (let n = 0; n < res.data.data.length; n++) {
+                        
+                        var record = res.data.data[n];
+                        if (record.noSale) {
+                            continue
+                        }
+                        else {
+                            records2.push(record)
+                        }
+                    }
+                    commit('setActiveRecords', records2)
+                    var sendObj2 = {
+                        mountain: []
+                    }
+                    var nothing = []
+                    // commit('clearTZRecords', nothing)
+                    console.log(res)
+                    for (let l = 0; l < records2.length; l++) {
+                        var record = records2[l];
+                        var zip2 = record.CENSUS_MAILING_ADDRESS_ZIP_CODE
+                        
+                        var zip = ""
+                        for (let p = 0; p < zip2.length; p++) {
+                            const element = zip2[p];
+                            zip += element
+                            if (p == 4) {
+                                break
+                            }
+                        }
+                        var tz = zipcode_to_timezone.lookup(zip);
+                        if (tz != null) {
+                            if (tz == "America/Los_Angeles") {
+                                tz = "Pacific"
+                            }
+                            else if (tz == "America/Anchorage" || tz == "America/Juneau" || tz == "America/Nome" || tz == "America/Yakutat") {
+                                tz = "Alaska"
+                            }
+                            else if (tz == "America/Chicago" || tz == "America/Menominee" || tz == "America/North_Dakota/Center") {
+                                tz = "Central"
+                            }
+                            else if (tz == "America/Detroit" || tz == "America/New_York" || tz == "America/Indiana/Indianapolis" || tz == "America/Indiana/Vevay" || tz == "America/Kentucky/Louisville" || tz == "America/Kentucky/Monticello") {
+                                
+                                tz = "Eastern"
+                            }
+                            else if (tz == "America/Boise" || tz == "America/Phoenix" || tz == "America/Denver" || tz == "America/Shiprock") {
+                                tz = "Mountain"
+                            }
+                            else {
+                                // console.log("hi")
+                                // this.timezone2 = ""
+                                // console.log(tz)
+                            }
+                            record.timezone = tz
+                        }
+                        if (record.timezone == "Eastern") {
+                            sendObj.eastern.push(record)
+                            console.log("eastern")
+                        }
+                        else if (record.timezone == "Central") {
+                            sendObj.central.push(record)
+                            console.log("central")
+                        }
+                        else if (record.timezone == "Mountain") {
+                            sendObj.mountain.push(record)
+                            // console.log("mountain")
+                        }
+                        else if (record.timezone == "Pacific") {
+                            sendObj.pacific.push(record)
+                            console.log("pacific")
+                        }
+                        else if (record.timezone == "Canada") {
+                            // sendObj.pacific.push(record)
+                            // console.log("pacific")
+                        }
+                        // console.log(record.tz)
+                    }
+                    
+                    
+                })
+                .catch(err => {
+                    commit('handleError', err)
+                    
+                    
+                })
+                api('inter/pacific/user/' + userId)
+                .then(res => {
+                    debugger
+                    console.log("test1")
+                    console.log(res)
+                    console.log(res.data.data)
+                    var records2 = []
+                    for (let n = 0; n < res.data.data.length; n++) {
+                        
+                        var record = res.data.data[n];
+                        if (record.noSale) {
+                            continue
+                        }
+                        else {
+                            records2.push(record)
+                        }
+                    }
+                    commit('setActiveRecords', records2)
+                    var sendObj4 = {
+                        pacific: [],
+                    }
+                    var nothing = []
+                    // commit('clearTZRecords', nothing)
+                    console.log(res)
+                    for (let l = 0; l < records2.length; l++) {
+                        var record = records2[l];
+                        var zip2 = record.CENSUS_MAILING_ADDRESS_ZIP_CODE
+                        
+                        var zip = ""
+                        for (let p = 0; p < zip2.length; p++) {
+                            const element = zip2[p];
+                            zip += element
+                            if (p == 4) {
+                                break
+                            }
+                        }
+                        var tz = zipcode_to_timezone.lookup(zip);
+                        if (tz != null) {
+                            if (tz == "America/Los_Angeles") {
+                                tz = "Pacific"
+                            }
+                            else if (tz == "America/Anchorage" || tz == "America/Juneau" || tz == "America/Nome" || tz == "America/Yakutat") {
+                                tz = "Alaska"
+                            }
+                            else if (tz == "America/Chicago" || tz == "America/Menominee" || tz == "America/North_Dakota/Center") {
+                                tz = "Central"
+                            }
+                            else if (tz == "America/Detroit" || tz == "America/New_York" || tz == "America/Indiana/Indianapolis" || tz == "America/Indiana/Vevay" || tz == "America/Kentucky/Louisville" || tz == "America/Kentucky/Monticello") {
+                                
+                                tz = "Eastern"
+                            }
+                            else if (tz == "America/Boise" || tz == "America/Phoenix" || tz == "America/Denver" || tz == "America/Shiprock") {
+                                tz = "Mountain"
+                            }
+                            else {
+                                // console.log("hi")
+                                // this.timezone2 = ""
+                                // console.log(tz)
+                            }
+                            record.timezone = tz
+                        }
+                        if (record.timezone == "Eastern") {
+                            sendObj.eastern.push(record)
+                            console.log("eastern")
+                        }
+                        else if (record.timezone == "Central") {
+                            sendObj.central.push(record)
+                            console.log("central")
+                        }
+                        else if (record.timezone == "Mountain") {
+                            sendObj.mountain.push(record)
+                            // console.log("mountain")
+                        }
+                        else if (record.timezone == "Pacific") {
+                            sendObj.pacific.push(record)
+                            console.log("pacific")
+                        }
+                        else if (record.timezone == "Canada") {
+                            // sendObj.pacific.push(record)
+                            // console.log("pacific")
+                        }
+                        // console.log(record.tz)
+                    }
+                    
+                    commit('setTimeZoneRecord', sendObj4)
+                    commit('setTimeZoneRecord', sendObj3)
+                    commit('setTimeZoneRecord', sendObj2)
+                    commit('setTimeZoneRecord', sendObj1)
+                })
+                .catch(err => {
+                    commit('handleError', err)
+                    
+
+                })
+            api('inter/eastern/user/' + userId)
+                .then(res => {
+                    debugger
+                    console.log("test1")
+                    console.log(res)
+                    console.log(res.data.data)
+                    var records2 = []
+                    for (let n = 0; n < res.data.data.length; n++) {
+
+                        var record = res.data.data[n];
+                        if (record.noSale) {
+                            continue
+                        }
+                        else {
+                            records2.push(record)
+                        }
+                    }
+                    commit('setActiveRecords', records2)
+                    var sendObj3 = {
+                        eastern: [],
+
+                    }
+                    var nothing = []
+                    // commit('clearTZRecords', nothing)
+                    console.log(res)
+                    for (let l = 0; l < records2.length; l++) {
+                        var record = records2[l];
+                        var zip2 = record.CENSUS_MAILING_ADDRESS_ZIP_CODE
+
+                        var zip = ""
+                        for (let p = 0; p < zip2.length; p++) {
+                            const element = zip2[p];
+                            zip += element
+                            if (p == 4) {
+                                break
+                            }
+                        }
+                        var tz = zipcode_to_timezone.lookup(zip);
+                        if (tz != null) {
+                            if (tz == "America/Los_Angeles") {
+                                tz = "Pacific"
+                            }
+                            else if (tz == "America/Anchorage" || tz == "America/Juneau" || tz == "America/Nome" || tz == "America/Yakutat") {
+                                tz = "Alaska"
+                            }
+                            else if (tz == "America/Chicago" || tz == "America/Menominee" || tz == "America/North_Dakota/Center") {
+                                tz = "Central"
+                            }
+                            else if (tz == "America/Detroit" || tz == "America/New_York" || tz == "America/Indiana/Indianapolis" || tz == "America/Indiana/Vevay" || tz == "America/Kentucky/Louisville" || tz == "America/Kentucky/Monticello") {
+
+                                tz = "Eastern"
+                            }
+                            else if (tz == "America/Boise" || tz == "America/Phoenix" || tz == "America/Denver" || tz == "America/Shiprock") {
+                                tz = "Mountain"
+                            }
+                            else {
+                                // console.log("hi")
+                                // this.timezone2 = ""
+                                // console.log(tz)
+                            }
+                            record.timezone = tz
+                        }
+                        if (record.timezone == "Eastern") {
+                            sendObj.eastern.push(record)
+                            console.log("eastern")
+                        }
+                        else if (record.timezone == "Central") {
+                            sendObj.central.push(record)
+                            console.log("central")
+                        }
+                        else if (record.timezone == "Mountain") {
+                            sendObj.mountain.push(record)
+                            // console.log("mountain")
+                        }
+                        else if (record.timezone == "Pacific") {
+                            sendObj.pacific.push(record)
+                            console.log("pacific")
+                        }
+                        else if (record.timezone == "Canada") {
+                            // sendObj.pacific.push(record)
+                            // console.log("pacific")
+                        }
+                        // console.log(record.tz)
+                    }
+
+                    commit('setTimeZoneRecord', sendObj)
+                })
+                .catch(err => {
+                    commit('handleError', err)
+
+
+                })
+        },
+
+
+
         getUserRecords3({ commit, dispatch }, userId) {
 
             api('records/user/' + userId)
                 .then(res => {
-                   debugger
+
                     commit('setActiveSplitRecords', res.data.data)
                 })
                 .catch(err => {
@@ -976,6 +2236,7 @@ var store = new vuex.Store({
                 })
         },
         updateCalled({ commit, dispatch }, payload) {
+
             api.put('records/' + payload._id, payload)
                 .then(res => {
 
@@ -1109,7 +2370,7 @@ var store = new vuex.Store({
             auth('/authenticate')
                 .then(res => {
 
-                    dispatch('getIntraRecords', res.data.data._id)
+                    dispatch('getIntraCentralRecords', res.data.data._id)
 
                 })
                 .catch(() => {
@@ -1119,8 +2380,9 @@ var store = new vuex.Store({
         authenticateInter({ commit, dispatch }) {
             auth('/authenticate')
                 .then(res => {
+                    dispatch('getInterAllRecords', res.data.data._id)
+                    // dispatch('getInterCentralRecords', res.data.data._id)
 
-                    dispatch('getInterRecords', res.data.data._id)
 
                 })
                 .catch(() => {

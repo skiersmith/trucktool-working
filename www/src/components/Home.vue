@@ -690,25 +690,25 @@
 
             },
             updateCalled(transaction) {
-
+                
                 var record2 = this.$store.state.activeRecords
                 for (let q = 0; q < record2.length; q++) {
                     const element = record2[q];
                     if (element.Dot === transaction.Dot) {
                         element.Called = true
+                        element.Status = transaction.Status
                         this.$store.dispatch('updateCalled', element)
                     }
                 }
             },
             updateStatus(transaction) {
-
+                
                 var record2 = this.$store.state.activeRecords
                 for (let q = 0; q < record2.length; q++) {
                     const element = record2[q];
                     if (element.Dot === transaction.Dot) {
-                        element.Status = transaction.Status
 
-                        this.$store.dispatch('updateStatus', element)
+                        this.$store.dispatch('updateCalled', element)
                     }
                 }
             },
