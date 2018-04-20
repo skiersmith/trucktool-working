@@ -10,7 +10,7 @@
       <input v-model="calledUserId" type="text">
       <button type="submit">getCalled</button>
     </form>
-    
+    <button @click="getState">Get State</button>
     <button @click="getNullRecords">getnull</button>
     <button @click="nullToTimezone">nullToTimezon</button>
     <!-- <div class="nav-header">
@@ -246,6 +246,9 @@
       },
       getNullRecords(){
         this.$store.dispatch('getNull')
+      },
+      getState(){
+        this.$store.dispatch('getState')
       },
       userRegister() {
         this.$store.dispatch('userRegister', this.register)
@@ -547,7 +550,7 @@
       },
       //installed tool only sorts by column. this constructs the records into rows.
       count99() {
-
+        debugger
         var records = []
         var results = this.results
         results.forEach(column => {
@@ -603,15 +606,19 @@
             }
             else if (column["column"] == "CENSUS_MAILING_ADDRESS_ZIP_CODE") {
               records[i]["CENSUS_MAILING_ADDRESS_ZIP_CODE"] = element
+              
               var zip2 = element
                 var zip = ""
                 //zip validation
-                for (let p = 0; p < zip2.length; p++) {
-                    const element = zip2[p];
-                    zip += element
-                    if (p == 4) {
-                        break
-                    }
+                if (element != undefined) {
+                 
+                  for (let p = 0; p < zip2.length; p++) {
+                      const element = zip2[p];
+                      zip += element
+                      if (p == 4) {
+                          break
+                      }
+                  }
                 }
               var tz = zipcode_to_timezone.lookup(zip);
               
@@ -632,8 +639,11 @@
                         tz = "Mountain"
                     }
                     else {
-                        console.log("missed one")
+                       
                     }
+                }
+                else{
+                  tz = "Canada"
                 }
               records[i]["timezone"] = tz
               

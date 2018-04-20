@@ -253,7 +253,7 @@
                     </tr>
 
                 </tbody>
-                <!-- <tbody v-if="tableTimeZone == 5">
+                <tbody v-if="tableTimeZone == 5">
                     <tr v-if="record" v-for="(record, key) in caRecords">
                         <th scope="row">{{record.Dot}}</th>
                         <td>{{record.CENSUS_LEGAL_NAME}}</td>
@@ -273,9 +273,9 @@
 
                     </tr>
 
-                </tbody> -->
+                </tbody>
                 <!-- CALLED RECORDS -->
-                <!-- <tbody v-if="tableTimeZone == 5">
+                <tbody v-if="tableTimeZone == 5">
                     <tr v-if="record" v-for="(record, key) in caRecordsC">
                         <th scope="row">{{record.Dot}}</th>
                         <td>{{record.CENSUS_LEGAL_NAME}}</td>
@@ -295,7 +295,7 @@
 
                     </tr>
 
-                </tbody> -->
+                </tbody>
                 <tbody v-if="tableTimeZone == 1">
                     <tr v-if="record" v-for="(record, key) in cRecordsC">
                         <th scope="row">{{record.Dot}}</th>
@@ -793,18 +793,7 @@
                 var records = this.$store.state.eastern
 
                 var one = true
-                // while (one === true) {
-
-                //     var check = this.checkRecords(records)
-                //     if (check === true) {
-
-                //         return records
-                //     }
-                //     else {
-
-                //         continue
-                //     }
-                // }
+                
                 for (let q = 0; q < records.length; q++) {
                     const record = records[q];
 
@@ -814,18 +803,7 @@
             cRecords() {
                 var records = this.$store.state.central
                 var one = true
-                // while (one === true) {
-
-                //     var check = this.checkRecords(records)
-                //     if (check === true) {
-
-                //         return records
-                //     }
-                //     else {
-
-                //         continue
-                //     }
-                // }
+                
                 return records
             },
             mRecords() {
@@ -849,18 +827,7 @@
             pRecords() {
                 var records = this.$store.state.pacific
                 var one = true
-                // while (one === true) {
-
-                //     var check = this.checkRecords(records)
-                //     if (check === true) {
-
-                //         return records
-                //     }
-                //     else {
-
-                //         continue
-                //     }
-                // }
+                
                 return records
             },
 
@@ -868,18 +835,7 @@
                 var records = this.$store.state.easternC
                 return records
                 var one = true
-                // while (one === true) {
-
-                //     var check = this.checkRecords(records)
-                //     if (check === true) {
-
-                //         return records
-                //     }
-                //     else {
-
-                //         continue
-                //     }
-                // }
+                
                 // for (let q = 0; q < records.length; q++) {
                 //     const record = records[q];
 
@@ -889,18 +845,7 @@
                 var records = this.$store.state.centralC
                 return records
                 var one = true
-                // while (one === true) {
-
-                //     var check = this.checkRecords(records)
-                //     if (check === true) {
-
-                //         return records
-                //     }
-                //     else {
-
-                //         continue
-                //     }
-                // }
+                
             },
             mRecordsC() {
                 var records = this.$store.state.mountainC
@@ -925,18 +870,17 @@
                 var records = this.$store.state.pacificC
                 return records
                 var one = true
-                // while (one === true) {
-
-                //     var check = this.checkRecords(records)
-                //     if (check === true) {
-
-                //         return records
-                //     }
-                //     else {
-
-                //         continue
-                //     }
-                // }
+                
+            },
+            caRecords() {
+                var records = this.$store.state.canada
+                return records
+                
+            },
+            caRecordsC() {
+                var records = this.$store.state.canadaC
+                return records
+                
             },
 
             yTransactions() {

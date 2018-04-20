@@ -286,7 +286,7 @@
     
                     </tbody>
                     <tbody v-if="tableTimeZone == 5">
-                        <tr v-if="record" v-for="(record, key) in caRecords">
+                        <tr v-if="record" v-for="(record, key) in caRecordsC">
                             <th scope="row">{{record.Dot}}</th>
                             <td>{{record.CENSUS_LEGAL_NAME}}</td>
                             <td>{{record.CENSUS_OFFICE_TELEPHONE_NUMBER}}</td>
@@ -943,6 +943,16 @@ for (let q = 0; q < record2.length; q++) {
                 //         continue
                 //     }
                 // }
+            },
+            caRecords() {
+                var records = this.$store.state.icanada
+                return records
+                
+            },
+            caRecordsC() {
+                var records = this.$store.state.icanadaC
+                return records
+                
             },
     
                 yTransactions() {

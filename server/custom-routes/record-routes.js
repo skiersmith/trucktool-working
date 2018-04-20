@@ -30,12 +30,25 @@ module.exports = {
                 })
         }
     },
+    getRecordsByStateTime: {
+        path: '/records/sc/1',
+        reqType: 'get',
+        method(req, res, next) {
+            let action = 'Get records by null'
+            Records.find({ CENSUS_MAILING_ADDRESS_STATE: "SC"}).limit(300)
+                .then(records => {
+                    res.send(handleResponse(action, records))
+                }).catch(error => {
+                    return next(handleResponse(action, null, error))
+                })
+        }
+    },
     getRecordsByCalled: {
         path: '/records/called/:UserId',
         reqType: 'get',
         method(req, res, next) {
             let action = 'Get records by null'
-            Records.find({ userId: req.params.UserId, Called: false, timezone: "Pacific" }).limit(300)
+            Records.find({ userId: req.params.UserId, Called: false }).limit(300)
                 .then(records => {
                     res.send(handleResponse(action, records))
                 }).catch(error => {
@@ -75,7 +88,7 @@ module.exports = {
         reqType: 'get',
         method(req, res, next) {
             let action = 'Get records by UserId'
-            Records.find({ userId: req.params.UserId, CLASSIFICATION_INTER: null }).limit(300)
+            Records.find({ userId: req.params.UserId, CLASSIFICATION_INTER: null }).limit(250)
                 .then(records => {
                     res.send(handleResponse(action, records))
                 }).catch(error => {
@@ -135,12 +148,25 @@ module.exports = {
                 })
         }
     },
+    getIntraCanadaByUserId: {
+        path: '/intra/canada/user/:UserId',
+        reqType: 'get',
+        method(req, res, next) {
+            let action = 'Get records by UserId'
+            Records.find({ userId: req.params.UserId, CLASSIFICATION_INTER: null, timezone: "Canada" }).limit(150)
+                .then(records => {
+                    res.send(handleResponse(action, records))
+                }).catch(error => {
+                    return next(handleResponse(action, null, error))
+                })
+        }
+    },
     getInterByUserId: {
         path: '/inter/user/:UserId',
         reqType: 'get',
         method(req, res, next) {
             let action = 'Get records by UserId'
-            Records.find({ userId: req.params.UserId, INTRASTATE_NONHAZMAT: null }).limit(300)
+            Records.find({ userId: req.params.UserId, INTRASTATE_NONHAZMAT: null }).limit(250)
                 .then(records => {
                     res.send(handleResponse(action, records))
                 }).catch(error => {
@@ -193,6 +219,19 @@ module.exports = {
         method(req, res, next) {
             let action = 'Get records by UserId'
             Records.find({ userId: req.params.UserId, INTRASTATE_NONHAZMAT: null, timezone: "Central" }).limit(150)
+                .then(records => {
+                    res.send(handleResponse(action, records))
+                }).catch(error => {
+                    return next(handleResponse(action, null, error))
+                })
+        }
+    },
+    getInterCanadaByUserId: {
+        path: '/inter/canada/user/:UserId',
+        reqType: 'get',
+        method(req, res, next) {
+            let action = 'Get records by UserId'
+            Records.find({ userId: req.params.UserId, INTRASTATE_NONHAZMAT: null, timezone: "Canada" }).limit(150)
                 .then(records => {
                     res.send(handleResponse(action, records))
                 }).catch(error => {
