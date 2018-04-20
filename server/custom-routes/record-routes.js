@@ -88,7 +88,7 @@ module.exports = {
         reqType: 'get',
         method(req, res, next) {
             let action = 'Get records by UserId'
-            Records.find({ userId: req.params.UserId, CLASSIFICATION_INTER: null }).limit(250)
+            Records.find({ userId: req.params.UserId, CLASSIFICATION_INTER: null }).limit(200)
                 .then(records => {
                     res.send(handleResponse(action, records))
                 }).catch(error => {
