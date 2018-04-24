@@ -240,7 +240,7 @@
     },
     methods: {
       getCalled(){
-        debugger
+        
         var uid = this.calledUserId
         this.$store.dispatch('getCalled', uid)
       },
@@ -550,7 +550,7 @@
       },
       //installed tool only sorts by column. this constructs the records into rows.
       count99() {
-        debugger
+        
         var records = []
         var results = this.results
         results.forEach(column => {
@@ -658,7 +658,7 @@
     filter(arr) {
     var total = 0
     var output = []
-    
+    debugger
     for (let p = 0; p < arr.length; p++) {
         var element = arr[p];
         console.log(element["MCS_150_DATE"])

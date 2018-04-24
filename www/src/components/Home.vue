@@ -511,11 +511,52 @@
                 timezone2: "",
                 lZip: false,
                 safUrl: "",
-                worldClock: false
+                worldClock: false,
+                executed1: false,
+                    executed2: false,
+                    executed3: false,
+                    executed4: false,
+                    executed5: false,
                 // rowColor: "danger",
 
 
 
+            }
+        },
+        watch: {
+            tableTimeZone: function (newValue, oldValue) {
+                console.log(this.tableTimeZone)
+                if(this.tableTimeZone === 1){
+                   if(this.executed1 === false){
+                    this.executed1 = true   
+                    this.$store.dispatch('getInterCentralRecords', this.user._id)
+                    }
+                }
+                else if(this.tableTimeZone === 2){
+                    debugger
+                    if(this.executed2 === false){
+                        this.executed2 = true   
+                        this.$store.dispatch('getInterMountainRecords', this.user._id)
+                }
+                }
+                else if(this.tableTimeZone === 3){
+                    if(this.executed3 === false){
+                        this.executed3 = true   
+                        this.$store.dispatch('getInterPacificRecords', this.user._id)
+                }
+                }
+                else if(this.tableTimeZone === 4){
+                    if(this.executed4 === false){
+                        this.executed4 = true   
+                        this.$store.dispatch('getInterEasternRecords', this.user._id)
+                }
+                }
+                else if(this.tableTimeZone === 5){
+                    if(this.executed5 === false){
+                        this.executed5 = true   
+                        this.$store.dispatch('getInterCanadaRecords', this.user._id)
+                }
+                }
             }
         },
 
@@ -690,7 +731,7 @@
 
             },
             updateCalled(transaction) {
-                
+
                 var record2 = this.$store.state.activeRecords
                 for (let q = 0; q < record2.length; q++) {
                     const element = record2[q];
@@ -702,7 +743,7 @@
                 }
             },
             updateStatus(transaction) {
-                
+
                 var record2 = this.$store.state.activeRecords
                 for (let q = 0; q < record2.length; q++) {
                     const element = record2[q];
@@ -793,7 +834,7 @@
                 var records = this.$store.state.eastern
 
                 var one = true
-                
+
                 for (let q = 0; q < records.length; q++) {
                     const record = records[q];
 
@@ -803,7 +844,7 @@
             cRecords() {
                 var records = this.$store.state.central
                 var one = true
-                
+
                 return records
             },
             mRecords() {
@@ -827,7 +868,7 @@
             pRecords() {
                 var records = this.$store.state.pacific
                 var one = true
-                
+
                 return records
             },
 
@@ -835,7 +876,7 @@
                 var records = this.$store.state.easternC
                 return records
                 var one = true
-                
+
                 // for (let q = 0; q < records.length; q++) {
                 //     const record = records[q];
 
@@ -845,7 +886,7 @@
                 var records = this.$store.state.centralC
                 return records
                 var one = true
-                
+
             },
             mRecordsC() {
                 var records = this.$store.state.mountainC
@@ -870,17 +911,17 @@
                 var records = this.$store.state.pacificC
                 return records
                 var one = true
-                
+
             },
             caRecords() {
                 var records = this.$store.state.canada
                 return records
-                
+
             },
             caRecordsC() {
                 var records = this.$store.state.canadaC
                 return records
-                
+
             },
 
             yTransactions() {
@@ -896,7 +937,7 @@
         },
         mounted() {
             // this.$store.dispatch('authenticate')
-            this.$store.dispatch('authenticateInter')
+            this.$store.dispatch('authenticate')
             // console.log("hello")
             // this.$store.dispatch('getUserRecords', this.user._id)
             // $(document).ready(function () {

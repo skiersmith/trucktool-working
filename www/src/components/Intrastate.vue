@@ -519,13 +519,56 @@
                     timezone2: "",
                     lZip: false,
                     safUrl: "",
-                    worldClock: false
+                    worldClock: false,
+                    executed1: false,
+                    executed2: false,
+                    executed3: false,
+                    executed4: false,
+                    executed5: false,
                     // rowColor: "danger",
     
     
     
                 }
             },
+            watch: {
+            tableTimeZone: function (newValue, oldValue) {
+                console.log(this.tableTimeZone)
+                if(this.tableTimeZone === 1){
+                   if(this.executed1 === false){
+                    this.executed1 = true   
+                    this.$store.dispatch('getIntraCentralRecords', this.user._id)
+                    }
+                }
+                else if(this.tableTimeZone === 2){
+                    debugger
+                    if(this.executed2 === false){
+                        this.executed2 = true   
+                        this.$store.dispatch('getIntraMountainRecords', this.user._id)
+                }
+                }
+                else if(this.tableTimeZone === 3){
+                    if(this.executed3 === false){
+                        this.executed3 = true   
+                        this.$store.dispatch('getIntraPacificRecords', this.user._id)
+                }
+                }
+                else if(this.tableTimeZone === 4){
+                    if(this.executed4 === false){
+                        this.executed4 = true   
+                        this.$store.dispatch('getIntraEasternRecords', this.user._id)
+                }
+                }
+                else if(this.tableTimeZone === 5){
+                    
+                    if(this.executed5 === false){
+                        this.executed5 = true 
+                        debugger  
+                        this.$store.dispatch('getIntraCanadaRecords', this.user._id)
+                }
+                }
+            }
+        },
     
             methods: {
                 //modal methods
