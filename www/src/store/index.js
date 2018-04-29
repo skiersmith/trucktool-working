@@ -88,14 +88,14 @@ var store = new vuex.Store({
             var canadaC = []
             var icanada = []
             var icanadaC = []
-
+            debugger
             console.log("1")
             if (data.eastern) {
                 for (let q = 0; q < data.eastern.length; q++) {
                     const record = data.eastern[q];
                     if (record.Called === true) {
-                        if (record.CLASSIFICATION_INTER) {
 
+                        if (record.CLASSIFICATION_INTER) {
                             easternC.push(record)
                         }
                         else if (record.INTRASTATE_NONHAZMAT) {
@@ -124,6 +124,7 @@ var store = new vuex.Store({
 
                         }
                         else if (record.INTRASTATE_NONHAZMAT) {
+                            debugger
                             icentralC.push(record)
                         }
                     }
@@ -216,74 +217,86 @@ var store = new vuex.Store({
             }
 
 
+            if (eastern.length > 0 || easternC.length > 0 || eastern.length > 0 || ieasternC.length > 0) { 
+                if (eastern) {
+                    state.eastern = eastern
+                }
+                if (easternC) {
+                    state.easternC = easternC
+                }
+                if (ieastern) {
 
-            if (eastern.length > 0) {
-                state.eastern = eastern
+                    state.ieastern = ieastern
+                }
+                if (ieasternC) {
+    
+                    state.ieasternC = ieasternC
+                }   
+            }
+            if (central.length > 0 || centralC.length > 0 || icentral.length > 0 || icanada.length > 0) {
+                if (central) {
+                    state.central = central
+    
+                }
+                if (centralC) {
+                    state.centralC = centralC
+                }
+                if (icentral) {
+                    state.icentral = icentral
+                }
+                if (icentralC) {
+                    state.icentralC = icentralC
+                }
+            }
+            if (pacific.length > 0 || pacificC.length > 0 || ipacific.length > 0 || ipacificC.length > 0) {
+                if (pacific) {
+                    state.pacific = pacific
+                }
+                if (pacificC) {
+                    state.pacificC = pacificC
+                }
+                if (ipacific) {
+                    state.ipacific = ipacific
+                }
+                if (ipacificC) {
+                    state.ipacificC = ipacificC
+                }    
+            }
+            if (mountain.length > 0 || mountainC.length > 0 || imountain.length > 0 || imountainC.length > 0) {
+                if (mountain) {
+                    state.mountain = mountain
+                }
+                if (mountainC) {
+                    state.mountainC = mountainC
+                }  
+                if (imountain) {
+                    state.imountain = imountain
+                }
+                if (imountainC) {
+                    state.imountainC = imountainC
+                }
+            }
 
+            if (canada.length > 0 || canadaC.length > 0 || icanada.length > 0 || icanadaC.length > 0) {
+                debugger
+                if (canada) {
+                    state.canada = canada
+                }
+                if (canadaC) {
+                    state.canadaC = canadaC
+                }
+                if (icanada) {
+                    state.icanada = icanada
+                }
+                if (icanadaC) {
+                    state.icanadaC = icanadaC
+                }
             }
-            else if (easternC.length > 0) {
-                state.easternC = easternC
-            }
-            if (central.length > 0) {
-                state.central = central
-
-            }
-            else if (centralC.length > 0) {
-                state.centralC = centralC
-            }
-            if (pacific.length > 0) {
-                state.pacific = pacific
-
-            }
-            else if (pacificC.length > 0) {
-                state.pacificC = pacificC
-            }
-            if (mountain.length > 0) {
-                state.mountain = mountain
-
-            }
-            else if (mountainC.length > 0) {
-                state.mountainC = mountainC
-            }
-            if (canada.length > 0) {
-                state.canada = canada
-
-            }
-            else if (canadaC.length > 0) {
-                state.canadaC = canadaC
-            }
-            if (ieastern.length > 0) {
-
-                state.ieastern = ieastern
-            }
-            else if (ieasternC.length > 0) {
-
-                state.ieasternC = ieasternC
-            }
-            if (ipacific.length > 0) {
-                state.ipacific = ipacific
-            }
-            else if (ipacificC.length > 0) {
-                state.ipacificC = ipacificC
-            }
-            if (imountain.length > 0) {
-                state.imountain = imountain
-            }
-            else if (imountainC.length > 0) {
-                state.imountainC = imountainC
-            }
-            if (icentral.length > 0) {
-                state.icentral = icentral
-            }
-            else if (icentralC.length > 0) {
-                state.icentralC = icentralC
-            }
-            if (icanada.length > 0) {
-                state.icanada = icanada
-            }
-            else if (icanadaC.length > 0) {
-                state.icanadaC = icanadaC
-            }
+            
+           
+            
+           
+            
 
         },
         // setTimeZoneRecord2(state, data) {
@@ -1838,7 +1851,7 @@ var store = new vuex.Store({
                     console.log(res.data.data)
                     var records2 = []
                     for (let n = 0; n < res.data.data.length; n++) {
-                        
+
                         var record = res.data.data[n];
                         if (record.noSale) {
                             continue
@@ -1849,7 +1862,7 @@ var store = new vuex.Store({
                     }
                     // commit('setActiveRecords', records2)
                     var sendObj = {
-                        canada: [], 
+                        canada: [],
                     }
                     for (let q = 0; q < records2.length; q++) {
                         const record = records2[q];
@@ -1860,7 +1873,7 @@ var store = new vuex.Store({
                     var nothing = []
                     // commit('clearTZRecords', nothing)
                     debugger
-                    
+
                     commit('setTimeZoneRecord', sendObj)
                 })
                 .catch(err => {

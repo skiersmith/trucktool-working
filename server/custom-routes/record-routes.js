@@ -35,7 +35,7 @@ module.exports = {
         reqType: 'get',
         method(req, res, next) {
             let action = 'Get records by null'
-            Records.find({ CENSUS_MAILING_ADDRESS_STATE: "SC"}).limit(300)
+            Records.find({ CENSUS_MAILING_ADDRESS_STATE: "CO"}).limit(300)
                 .then(records => {
                     res.send(handleResponse(action, records))
                 }).catch(error => {
@@ -49,6 +49,19 @@ module.exports = {
         method(req, res, next) {
             let action = 'Get records by null'
             Records.find({ timezone: "Canada" }).limit(300)
+                .then(records => {
+                    res.send(handleResponse(action, records))
+                }).catch(error => {
+                    return next(handleResponse(action, null, error))
+                })
+        }
+    },
+    deleteRecordsByTzTime: {
+        path: '/records/co/1',
+        reqType: 'delete',
+        method(req, res, next) {
+            let action = 'Get records by null'
+            Records.deleteMany({ CENSUS_MAILING_ADDRESS_STATE: "CO" })
                 .then(records => {
                     res.send(handleResponse(action, records))
                 }).catch(error => {

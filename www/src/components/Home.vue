@@ -731,14 +731,19 @@
 
             },
             updateCalled(transaction) {
-
-                var record2 = this.$store.state.activeRecords
-                for (let q = 0; q < record2.length; q++) {
-                    const element = record2[q];
-                    if (element.Dot === transaction.Dot) {
-                        element.Called = true
-                        element.Status = transaction.Status
-                        this.$store.dispatch('updateCalled', element)
+                debugger
+                var record3 = this.$store.state.activeRecords
+                for (const key in record3) {
+                    if (record3.hasOwnProperty(key)) {
+                        const record2 = record3[key];
+                        for (let q = 0; q < record2.length; q++) {
+                            const element = record2[q];
+                            if (element.Dot === transaction.Dot) {
+                                element.Called = true
+                                element.Status = transaction.Status
+                                this.$store.dispatch('updateCalled', element)
+                            }
+                        }
                     }
                 }
             },
