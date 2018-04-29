@@ -127,7 +127,7 @@ module.exports = {
         reqType: 'get',
         method(req, res, next) {
             let action = 'Get records by UserId'
-            Records.find({ userId: req.params.UserId, CLASSIFICATION_INTER: null, timezone: "Mountain" }).limit(200)
+            Records.find({ userId: req.params.UserId, CLASSIFICATION_INTER: null, timezone: "Mountain",  Status: { $ne: "red" } }).limit(200)
                 .then(records => {
                     res.send(handleResponse(action, records))
                 }).catch(error => {
@@ -140,7 +140,7 @@ module.exports = {
         reqType: 'get',
         method(req, res, next) {
             let action = 'Get records by UserId'
-            Records.find({ userId: req.params.UserId, CLASSIFICATION_INTER: null, timezone: "Eastern" }).limit(200)
+            Records.find({ userId: req.params.UserId, CLASSIFICATION_INTER: null, timezone: "Eastern",  Status: { $ne: "red" } }).limit(200)
                 .then(records => {
                     res.send(handleResponse(action, records))
                 }).catch(error => {
@@ -153,7 +153,7 @@ module.exports = {
         reqType: 'get',
         method(req, res, next) {
             let action = 'Get records by UserId'
-            Records.find({ userId: req.params.UserId, CLASSIFICATION_INTER: null, timezone: "Pacific" }).limit(200)
+            Records.find({ userId: req.params.UserId, CLASSIFICATION_INTER: null, timezone: "Pacific",  Status: { $ne: "red" } }).limit(200)
                 .then(records => {
                     res.send(handleResponse(action, records))
                 }).catch(error => {
@@ -166,7 +166,7 @@ module.exports = {
         reqType: 'get',
         method(req, res, next) {
             let action = 'Get records by UserId'
-            Records.find({ userId: req.params.UserId, CLASSIFICATION_INTER: null, timezone: "Central" }).limit(200)
+            Records.find({ userId: req.params.UserId, CLASSIFICATION_INTER: null, timezone: "Central",  Status: { $ne: "red" } }).limit(200)
                 .then(records => {
                     res.send(handleResponse(action, records))
                 }).catch(error => {
@@ -179,7 +179,7 @@ module.exports = {
         reqType: 'get',
         method(req, res, next) {
             let action = 'Get records by UserId'
-            Records.find({ userId: req.params.UserId, CLASSIFICATION_INTER: null, timezone: "Canada" }).limit(200)
+            Records.find({ userId: req.params.UserId, CLASSIFICATION_INTER: null, timezone: "Canada",  Status: { $ne: "red" } }).limit(200)
                 .then(records => {
                     res.send(handleResponse(action, records))
                 }).catch(error => {
@@ -205,7 +205,7 @@ module.exports = {
         reqType: 'get',
         method(req, res, next) {
             let action = 'Get records by UserId'
-            Records.find({ userId: req.params.UserId, INTRASTATE_NONHAZMAT: null, timezone: "Mountain" }).limit(200)
+            Records.find({ userId: req.params.UserId, INTRASTATE_NONHAZMAT: null, timezone: "Mountain",  Status: { $ne: "red" } }).limit(200)
                 .then(records => {
                     res.send(handleResponse(action, records))
                 }).catch(error => {
@@ -218,7 +218,7 @@ module.exports = {
         reqType: 'get',
         method(req, res, next) {
             let action = 'Get records by UserId'
-            Records.find({ userId: req.params.UserId, INTRASTATE_NONHAZMAT: null, timezone: "Eastern" }).limit(200)
+            Records.find({ userId: req.params.UserId, INTRASTATE_NONHAZMAT: null, timezone: "Eastern",  Status: { $ne: "red" } }).limit(200)
                 .then(records => {
                     res.send(handleResponse(action, records))
                 }).catch(error => {
@@ -231,7 +231,7 @@ module.exports = {
         reqType: 'get',
         method(req, res, next) {
             let action = 'Get records by UserId'
-            Records.find({ userId: req.params.UserId, INTRASTATE_NONHAZMAT: null, timezone: "Pacific" }).limit(200)
+            Records.find({ userId: req.params.UserId, INTRASTATE_NONHAZMAT: null, timezone: "Pacific",  Status: { $ne: "red" } }).limit(200)
                 .then(records => {
                     res.send(handleResponse(action, records))
                 }).catch(error => {
@@ -244,7 +244,7 @@ module.exports = {
         reqType: 'get',
         method(req, res, next) {
             let action = 'Get records by UserId'
-            Records.find({ userId: req.params.UserId, INTRASTATE_NONHAZMAT: null, timezone: "Central" }).limit(200)
+            Records.find({ userId: req.params.UserId, INTRASTATE_NONHAZMAT: null, timezone: "Central",  Status: { $ne: "red" } }).limit(200)
                 .then(records => {
                     res.send(handleResponse(action, records))
                 }).catch(error => {
@@ -257,7 +257,7 @@ module.exports = {
         reqType: 'get',
         method(req, res, next) {
             let action = 'Get records by UserId'
-            Records.find({ userId: req.params.UserId, INTRASTATE_NONHAZMAT: null, timezone: "Canada" }).limit(200)
+            Records.find({ userId: req.params.UserId, INTRASTATE_NONHAZMAT: null, timezone: "Canada",  Status: { $ne: "red" }  }).limit(200)
                 .then(records => {
                     res.send(handleResponse(action, records))
                 }).catch(error => {
