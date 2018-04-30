@@ -920,23 +920,23 @@ var store = new vuex.Store({
                             }
                             record.timezone = tz
                         }
-                        if (record.timezone == "Eastern") {
+                        if (record.timezone === "Eastern") {
                             sendObj.eastern.push(record)
                             console.log("eastern")
                         }
-                        else if (record.timezone == "Central") {
+                        else if (record.timezone === "Central") {
                             sendObj.central.push(record)
                             console.log("central")
                         }
-                        else if (record.timezone == "Mountain") {
+                        else if (record.timezone === "Mountain") {
                             sendObj.mountain.push(record)
                             // console.log("mountain")
                         }
-                        else if (record.timezone == "Pacific") {
+                        else if (record.timezone === "Pacific") {
                             sendObj.pacific.push(record)
                             console.log("pacific")
                         }
-                        else if (record.timezone == "Canada") {
+                        else if (record.timezone === "Canada") {
                             // sendObj.pacific.push(record)
                             // console.log("pacific")
                         }
@@ -1015,23 +1015,23 @@ var store = new vuex.Store({
                             }
                             record.timezone = tz
                         }
-                        if (record.timezone == "Eastern") {
+                        if (record.timezone === "Eastern") {
                             sendObj.eastern.push(record)
                             console.log("eastern")
                         }
-                        else if (record.timezone == "Central") {
+                        else if (record.timezone === "Central") {
                             sendObj.central.push(record)
                             console.log("central")
                         }
-                        else if (record.timezone == "Mountain") {
+                        else if (record.timezone === "Mountain") {
                             sendObj.mountain.push(record)
                             // console.log("mountain")
                         }
-                        else if (record.timezone == "Pacific") {
+                        else if (record.timezone === "Pacific") {
                             sendObj.pacific.push(record)
                             console.log("pacific")
                         }
-                        else if (record.timezone == "Canada") {
+                        else if (record.timezone === "Canada") {
                             // sendObj.pacific.push(record)
                             // console.log("pacific")
                         }
@@ -1113,23 +1113,23 @@ var store = new vuex.Store({
                             }
                             record.timezone = tz
                         }
-                        if (record.timezone == "Eastern") {
+                        if (record.timezone === "Eastern") {
                             sendObj.eastern.push(record)
                             console.log("eastern")
                         }
-                        else if (record.timezone == "Central") {
+                        else if (record.timezone === "Central") {
                             sendObj.central.push(record)
                             console.log("central")
                         }
-                        else if (record.timezone == "Mountain") {
+                        else if (record.timezone === "Mountain") {
                             sendObj.mountain.push(record)
                             // console.log("mountain")
                         }
-                        else if (record.timezone == "Pacific") {
+                        else if (record.timezone === "Pacific") {
                             sendObj.pacific.push(record)
                             console.log("pacific")
                         }
-                        else if (record.timezone == "Canada") {
+                        else if (record.timezone === "Canada") {
                             // sendObj.pacific.push(record)
                             // console.log("pacific")
                         }
@@ -1211,23 +1211,23 @@ var store = new vuex.Store({
                             }
                             record.timezone = tz
                         }
-                        if (record.timezone == "Eastern") {
+                        if (record.timezone === "Eastern") {
                             sendObj.eastern.push(record)
                             console.log("eastern")
                         }
-                        else if (record.timezone == "Central") {
+                        else if (record.timezone === "Central") {
                             sendObj.central.push(record)
                             console.log("central")
                         }
-                        else if (record.timezone == "Mountain") {
+                        else if (record.timezone === "Mountain") {
                             sendObj.mountain.push(record)
                             // console.log("mountain")
                         }
-                        else if (record.timezone == "Pacific") {
+                        else if (record.timezone === "Pacific") {
                             sendObj.pacific.push(record)
                             console.log("pacific")
                         }
-                        else if (record.timezone == "Canada") {
+                        else if (record.timezone === "Canada") {
                             // sendObj.pacific.push(record)
                             // console.log("pacific")
                         }
@@ -1307,23 +1307,23 @@ var store = new vuex.Store({
                             }
                             record.timezone = tz
                         }
-                        if (record.timezone == "Eastern") {
+                        if (record.timezone === "Eastern") {
                             sendObj.eastern.push(record)
                             console.log("eastern")
                         }
-                        else if (record.timezone == "Central") {
+                        else if (record.timezone === "Central") {
                             sendObj.central.push(record)
                             console.log("central")
                         }
-                        else if (record.timezone == "Mountain") {
+                        else if (record.timezone === "Mountain") {
                             sendObj.mountain.push(record)
                             // console.log("mountain")
                         }
-                        else if (record.timezone == "Pacific") {
+                        else if (record.timezone === "Pacific") {
                             sendObj.pacific.push(record)
                             console.log("pacific")
                         }
-                        else if (record.timezone == "Canada") {
+                        else if (record.timezone === "Canada") {
                             // sendObj.pacific.push(record)
                             // console.log("pacific")
                         }
@@ -1404,23 +1404,23 @@ var store = new vuex.Store({
                             }
                             record.timezone = tz
                         }
-                        if (record.timezone == "Eastern") {
+                        if (record.timezone === "Eastern") {
                             sendObj.eastern.push(record)
                             console.log("eastern")
                         }
-                        else if (record.timezone == "Central") {
+                        else if (record.timezone === "Central") {
                             sendObj.central.push(record)
                             console.log("central")
                         }
-                        else if (record.timezone == "Mountain") {
+                        else if (record.timezone === "Mountain") {
                             sendObj.mountain.push(record)
                             // console.log("mountain")
                         }
-                        else if (record.timezone == "Pacific") {
+                        else if (record.timezone === "Pacific") {
                             sendObj.pacific.push(record)
                             console.log("pacific")
                         }
-                        else if (record.timezone == "Canada") {
+                        else if (record.timezone === "Canada") {
                             // sendObj.pacific.push(record)
                             // console.log("pacific")
                         }
@@ -1476,7 +1476,7 @@ var store = new vuex.Store({
                         // var tz = zipcode_to_timezone.lookup(zip);
 
 
-                        if (record.timezone == "Central") {
+                        if (record.timezone === "Central") {
                             sendObj.central.push(record)
                             console.log("central")
                         }
@@ -1533,7 +1533,7 @@ var store = new vuex.Store({
                             }
                         }
 
-                        if (record.timezone == "Mountain") {
+                        if (record.timezone === "Mountain") {
                             sendObj.mountain.push(record)
                             // console.log("mountain")
                         }
@@ -1614,23 +1614,23 @@ var store = new vuex.Store({
                             }
                             record.timezone = tz
                         }
-                        if (record.timezone == "Eastern") {
+                        if (record.timezone === "Eastern") {
                             sendObj.eastern.push(record)
                             console.log("eastern")
                         }
-                        else if (record.timezone == "Central") {
+                        else if (record.timezone === "Central") {
                             sendObj.central.push(record)
                             console.log("central")
                         }
-                        else if (record.timezone == "Mountain") {
+                        else if (record.timezone === "Mountain") {
                             sendObj.mountain.push(record)
                             // console.log("mountain")
                         }
-                        else if (record.timezone == "Pacific") {
+                        else if (record.timezone === "Pacific") {
                             sendObj.pacific.push(record)
                             console.log("pacific")
                         }
-                        else if (record.timezone == "Canada") {
+                        else if (record.timezone === "Canada") {
                             // sendObj.pacific.push(record)
                             // console.log("pacific")
                         }
@@ -1710,23 +1710,23 @@ var store = new vuex.Store({
                             }
                             record.timezone = tz
                         }
-                        if (record.timezone == "Eastern") {
+                        if (record.timezone === "Eastern") {
                             sendObj.eastern.push(record)
                             console.log("eastern")
                         }
-                        else if (record.timezone == "Central") {
+                        else if (record.timezone ==="Central") {
                             sendObj.central.push(record)
                             console.log("central")
                         }
-                        else if (record.timezone == "Mountain") {
+                        else if (record.timezone === "Mountain") {
                             sendObj.mountain.push(record)
                             // console.log("mountain")
                         }
-                        else if (record.timezone == "Pacific") {
+                        else if (record.timezone === "Pacific") {
                             sendObj.pacific.push(record)
                             console.log("pacific")
                         }
-                        else if (record.timezone == "Canada") {
+                        else if (record.timezone === "Canada") {
                             // sendObj.pacific.push(record)
                             // console.log("pacific")
                         }
