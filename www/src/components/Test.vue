@@ -269,7 +269,7 @@
       },
       getSplit3() {
         
-        this.$store.dispatch('getSplitRecords3')
+        this.$store.dispatch('getSplitRecords4')
       },
       updateRecord(record) {
         record.userId = this.recordUser

@@ -5,7 +5,7 @@ import router from '../router'
 import { loadavg } from 'os';
 var zipcode_to_timezone = require('zipcode-to-timezone');
 var production = !window.location.host.includes('localhost');
-var baseUrl = production ? '//salty-temple-67586.herokuapp.com/' : '//localhost:5000/';
+var baseUrl = production ? '//floating-brushlands-87135.herokuapp.com/' : '//localhost:5000/';
 let api = axios.create({
     baseURL: baseUrl + 'api',
     timeout: 2000,
@@ -22,10 +22,17 @@ var store = new vuex.Store({
     state: {
         activeDeleteRecords: {},
         time: false,
+        Executed: false,
         error: {},
         user: {},
         users: {},
-        activeRecords: {},
+        activeRecords: {
+            pacific: {},
+            eastern: {},
+            central: {},
+            mountain: {},
+            canada: {},
+        },
         activeSplitRecords: [],
         activeRecord: {},
         eastern: [],
@@ -217,7 +224,7 @@ var store = new vuex.Store({
             }
 
 
-            if (eastern.length > 0 || easternC.length > 0 || eastern.length > 0 || ieasternC.length > 0) { 
+            if (eastern.length > 0 || easternC.length > 0 || ieastern.length > 0 || ieasternC.length > 0) { 
                 if (eastern) {
                     state.eastern = eastern
                 }
@@ -327,20 +334,23 @@ var store = new vuex.Store({
             }
         },
         setActiveRecords(state, data) {
-
+            debugger
             if (data.data) { state.activeRecords = data }
 
-            else if (data[0].timezone = "Pacific") {
+            else if (data[0].timezone === "Pacific") {
                 state.activeRecords.pacific = data
             }
-            else if (data[0].timezone = "Eastern") {
+            else if (data[0].timezone === "Eastern") {
                 state.activeRecords.eastern = data
             }
-            else if (data[0].timezone = "Central") {
+            else if (data[0].timezone === "Central") {
                 state.activeRecords.central = data
             }
-            else if (data[0].timezone = "Mountain") {
+            else if (data[0].timezone === "Mountain") {
                 state.activeRecords.mountain = data
+            }
+            else if (data[0].timezone === "Canada") {
+                state.activeRecords.canada = data
             }
         },
         setActiveRecords2() {
@@ -449,6 +459,37 @@ var store = new vuex.Store({
                     //     }
                     // }
                     commit('setActiveSplitRecords', res.data.data)
+
+                })
+                .catch(err => {
+                    commit('handleError', err)
+
+
+                })
+        },
+        getSplitRecords4({ commit, dispatch }) {
+
+            api('records/split/get')
+                .then(res => {
+                    var records2 = []
+                    for (let q = 0; q < res.data.data.length; q++) {
+
+                        const record = res.data.data[q];
+                        var mcs = Date.parse(record.MCS_150_DATE)
+                        var today = Date.now()
+                        var twoYears = Date.now() - 63113904000
+                        var hbd = mcs + 63113904000
+                        var hbd2 = twoYears - 31104000000
+                        var hbd3 = twoYears + 2592000000
+
+
+                        if (!record.userId) {
+                            if (hbd < today && mcs > hbd2 || mcs < hbd3) {
+                                records2.push(record)
+                            }
+                        }
+                    }
+                    commit('setActiveSplitRecords', records2)
 
                 })
                 .catch(err => {
@@ -726,7 +767,7 @@ var store = new vuex.Store({
             // data.CENSUS_MAILING_ADDRESS_ZIP_CODE = "83702"
             api.put('records/' + data._id, data)
                 .then(res => {
-
+                    debugger
                     console.log(res)
                 })
                 .catch(err => {
@@ -952,7 +993,7 @@ var store = new vuex.Store({
                 })
         },
         getIntraCentralRecords({ commit, dispatch }, userId) {
-            console.log("getIntraRecords")
+            console.log("getIntraCEntralRecords")
             api('intra/central/user/' + userId)
                 .then(res => {
 
@@ -1039,7 +1080,7 @@ var store = new vuex.Store({
                     }
 
                     commit('setTimeZoneRecord', sendObj)
-                    dispatch('getIntraPacificRecords', userId)
+                    // dispatch('getIntraPacificRecords', userId)
 
 
                 })
@@ -1050,7 +1091,13 @@ var store = new vuex.Store({
                 })
         },
         getIntraMountainRecords({ commit, dispatch }, userId) {
-            console.log("getIntraRecords")
+            debugger
+            var executed = this.state.Executed
+            if (executed === false){
+                this.state.Executed = true
+            
+            debugger
+            console.log("getIntraMountainRecords")
             api('intra/mountain/user/' + userId)
                 .then(res => {
 
@@ -1137,7 +1184,7 @@ var store = new vuex.Store({
                     }
 
                     commit('setTimeZoneRecord', sendObj)
-                    dispatch('getIntraMountainRecords', userId)
+                    // dispatch('getIntraMountainRecords', userId)
 
                 })
                 .catch(err => {
@@ -1145,6 +1192,10 @@ var store = new vuex.Store({
 
 
                 })
+            }
+            else{
+                return
+            }
         },
         getIntraPacificRecords({ commit, dispatch }, userId) {
             console.log("getIntraRecords")
@@ -1235,7 +1286,7 @@ var store = new vuex.Store({
                     }
 
                     commit('setTimeZoneRecord', sendObj)
-                    dispatch('getIntraEasternRecords', userId)
+                    // dispatch('getIntraEasternRecords', userId)
                 })
                 .catch(err => {
                     commit('handleError', err)
@@ -1860,7 +1911,7 @@ var store = new vuex.Store({
                             records2.push(record)
                         }
                     }
-                    // commit('setActiveRecords', records2)
+                    commit('setActiveRecords', records2)
                     var sendObj = {
                         canada: [],
                     }
@@ -2183,7 +2234,7 @@ var store = new vuex.Store({
 
             api.put('records/' + payload._id, payload)
                 .then(res => {
-
+                    debugger
                     console.log(res)
                     console.log("done")
                     // dispatch('authenticate2')

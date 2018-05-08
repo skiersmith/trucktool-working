@@ -165,7 +165,7 @@
                             <th scope="col">Company Rep 2</th>
                             <th scope="col">State</th>
                             <th scope="col">Docket</th>
-                            <th scope="col">Status</th>
+                            <!-- <th scope="col">Status</th> -->
                             <th scope="col">------</th>
     
                         </tr>
@@ -229,7 +229,7 @@
                             <td>{{record.COMPANY_REP_2}}</td>
                             <td>{{record.CENSUS_MAILING_ADDRESS_STATE}}</td>
                             <td>{{record.DOCKET}}</td>
-                            <td>{{record.Status}}</td>
+                            <!-- <td>{{record.Status}}</td> -->
                             <td>
                                 <p class="inline">{{ifCalled(record)}}</p>
                                 <button class="btn-xs btn-info" @click="show(record)">Call</button>
@@ -316,7 +316,7 @@
                                 <td>{{record.COMPANY_REP_2}}</td>
                                 <td>{{record.CENSUS_MAILING_ADDRESS_STATE}}</td>
                                 <td>{{record.DOCKET}}</td>
-                                <td>{{record.Status}}</td>
+                                <!-- <td>{{record.Status}}</td> -->
                                 <td>
                                     <p class="inline">{{ifCalled(record)}}</p>
                                     <button class="btn-xs btn-info" @click="show(record)">Call</button>
@@ -534,38 +534,44 @@
             watch: {
             tableTimeZone: function (newValue, oldValue) {
                 console.log(this.tableTimeZone)
-                if(this.tableTimeZone === 1){
+                console.log(newValue)
+                if(newValue === 1){
                    if(this.executed1 === false){
+                    console.log("here")
                     this.executed1 = true   
                     this.$store.dispatch('getIntraCentralRecords', this.user._id)
                     }
                 }
-                else if(this.tableTimeZone === 2){
-                    debugger
+                else if(newValue === 2){
                     if(this.executed2 === false){
-                        this.executed2 = true   
+                        debugger
+                        console.log("here")
+                        this.executed2 = true                     
                         this.$store.dispatch('getIntraMountainRecords', this.user._id)
+                    
+                    }
                 }
-                }
-                else if(this.tableTimeZone === 3){
+                else if(newValue === 3){
                     if(this.executed3 === false){
+                        console.log("here")
                         this.executed3 = true   
                         this.$store.dispatch('getIntraPacificRecords', this.user._id)
+                    }
                 }
-                }
-                else if(this.tableTimeZone === 4){
+                else if(newValue === 4){
                     if(this.executed4 === false){
+                        console.log("here")  
                         this.executed4 = true   
                         this.$store.dispatch('getIntraEasternRecords', this.user._id)
+                    }
                 }
-                }
-                else if(this.tableTimeZone === 5){
+                else if(newValue === 5){
                     
                     if(this.executed5 === false){
+                        console.log("here")
                         this.executed5 = true 
-                        debugger  
                         this.$store.dispatch('getIntraCanadaRecords', this.user._id)
-                }
+                    }
                 }
             }
         },
@@ -749,7 +755,7 @@
     
                 },
                 updateCalled(transaction) {
-                    
+                    debugger
                     var record3 = this.$store.state.activeRecords
                     for (const key in record3) {
                     if (record3.hasOwnProperty(key)) {

@@ -35,7 +35,7 @@ module.exports = {
         reqType: 'get',
         method(req, res, next) {
             let action = 'Get records by null'
-            Records.find({ CENSUS_MAILING_ADDRESS_STATE: "CO"}).limit(300)
+            Records.find({ CENSUS_MAILING_ADDRESS_STATE: "WY"}).limit(300)
                 .then(records => {
                     res.send(handleResponse(action, records))
                 }).catch(error => {
@@ -83,11 +83,11 @@ module.exports = {
         }
     },
     getRecordsBySplit: {
-        path: '/records/split',
+        path: '/records/split/get',
         reqType: 'get',
         method(req, res, next) {
             let action = 'Get records by dot'
-            Records.find({ userId: null }).limit(1000)
+            Records.find({ userId: null, CENSUS_MAILING_ADDRESS_STATE: "WY" }).limit(1000)
                 .then(records => {
                     res.send(handleResponse(action, records))
                 }).catch(error => {
