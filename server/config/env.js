@@ -28,7 +28,8 @@ let env = {
 	DBPROTOCOL: 'mongodb',
 	DBUSERNAME: 'trucktoolprimary',
 	DBPASSWORD: 'trucktool',
-	DBHOST: 'ds014298-a0.mlab.com:14298',
+	DBHOST1: 'ds014298-a0.mlab.com:14298',
+	DBHOST2: 'ds014298-a1.mlab.com:14296',
 	DBNAME: 'trucktool',
 	SERVERNAME: 'dev-server'
 }
@@ -40,7 +41,7 @@ Object.keys(env).forEach(v => {
 
 
 // MongoDb Connection String Builder
-env.CONNECTIONSTRING = `${env.DBPROTOCOL}://${env.DBUSERNAME}:${env.DBPASSWORD}@${env.DBHOST}/${env.DBNAME}`
+env.CONNECTIONSTRING = `${env.DBPROTOCOL}://${env.DBUSERNAME}:${env.DBPASSWORD}@${env.DBHOST2}/${env.DBNAME}`
 process.env.CONNECTIONSTRING = env.CONNECTIONSTRING
 
 exports = env
