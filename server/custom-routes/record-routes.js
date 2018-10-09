@@ -87,7 +87,7 @@ module.exports = {
         reqType: 'get',
         method(req, res, next) {
             let action = 'Get records by dot'
-            Records.find({ userId: null, CENSUS_MAILING_ADDRESS_STATE: "WY" }).limit(1000)
+            Records.find({ userId: null, CENSUS_MAILING_ADDRESS_STATE: "NY" }).limit(1000)
                 .then(records => {
                     res.send(handleResponse(action, records))
                 }).catch(error => {
