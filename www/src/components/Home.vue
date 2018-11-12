@@ -118,7 +118,6 @@
             <span class="pointer" style="position:relative;left: 15rem;color: red;" @click="worldClockToggle">X</span>
             <test2></test2>
         </div>
-        <div class="spacer10"></div>
 
         <div>
             <div class="row margin2">
@@ -142,6 +141,43 @@
                 </div>
             </div>
         </div>
+        
+        <div style=" width: 45rem;">
+            <h3>Callbacks</h3>
+            <table id="ifThisWorks" class="table table-bordered table-striped">
+
+                <thead>
+                    <tr>
+                        <th scope="col">Dot #</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Notes</th>
+                        <th scope="col">Callback Date</th>
+                        <th scope="col">------</th>
+
+                    </tr>
+                </thead>
+                <!-- NOT CALLED RECORDS -->
+                <tbody>
+                    <tr v-for="(t, key) in cbTransactions">
+                        <th scope="row">{{t.Dot}}</th>
+                        <td>{{t.Status}}</td>
+                        <td>{{t.Notes}}</td>
+                        <td>{{t.Callback}}</td>
+                        <td>
+                            <!-- <p class="inline">{{ifCalled(record)}}</p> -->
+                            <button class="btn-xs btn-info" @click="show(t)">Call</button>
+                            <a target="_blank" :href="'https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=' + t.Dot"
+                                class="btn btn-primary btn-xs ">Safer</a>
+                        </td>
+
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+
+
         <!-- <h1 class="title">My Records</h1> -->
         <h2 style="display: inline; margin-left: 1rem;">Current Zone </h2>
         <h3 style="display: inline; margin-left: 1rem;" v-if="tableTimeZone == 3">Pacific</h3>
@@ -150,6 +186,11 @@
         <h3 style="display: inline; margin-left: 1rem;" v-if="tableTimeZone == 4">Eastern</h3>
         <h3 style="display: inline; margin-left: 1rem;" v-if="tableTimeZone == 5">Canada</h3>
         <button style="margin-left: 3rem;" class="btn-xs" @click="tableTimeToggle">Toggle</button>
+
+        <button class="btn btn-xs" style="margin-left: 6rem;" @click="sortList">State<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span></i></button>
+        <button class="btn btn-xs" @click="sortListReverse">State <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span> </button>
+        <!-- <button @click="sortListDot">Sort Dot</button>
+        <button @click="sortListDotReverse">Sort Dot Reverse</button> -->
         <!-- col-lg-offset-1 col-lg-6 -->
         <div class="recordCont">
             <!-- table-bordered table-striped -->
@@ -159,6 +200,7 @@
                     <tr>
                         <th scope="col">Dot #</th>
                         <th scope="col">Company Name</th>
+                        <th scope="col">Company DBA</th>
                         <th scope="col">Office Phone Number</th>
                         <th scope="col">Cell Phone Number</th>
                         <th scope="col">Company Rep</th>
@@ -174,6 +216,7 @@
                     <tr v-if="record" v-for="(record, key) in pRecords">
                         <th scope="row">{{record.Dot}}</th>
                         <td>{{record.CENSUS_LEGAL_NAME}}</td>
+                        <td>{{record.CENSUS_DBA}}</td>
                         <td>{{record.CENSUS_OFFICE_TELEPHONE_NUMBER}}</td>
                         <td>{{record.CENSUS_CELL_PHONE_NUMBER}}</td>
                         <td>{{record.COMPANY_REP_1}}</td>
@@ -194,6 +237,7 @@
                     <tr v-if="record" v-for="(record, key) in mRecords">
                         <th scope="row">{{record.Dot}}</th>
                         <td>{{record.CENSUS_LEGAL_NAME}}</td>
+                        <td>{{record.CENSUS_DBA}}</td>
                         <td>{{record.CENSUS_OFFICE_TELEPHONE_NUMBER}}</td>
                         <td>{{record.CENSUS_CELL_PHONE_NUMBER}}</td>
                         <td>{{record.COMPANY_REP_1}}</td>
@@ -215,6 +259,7 @@
                     <tr v-if="record" v-for="(record, key) in cRecords">
                         <th scope="row">{{record.Dot}}</th>
                         <td>{{record.CENSUS_LEGAL_NAME}}</td>
+                        <td>{{record.CENSUS_DBA}}</td>
                         <td>{{record.CENSUS_OFFICE_TELEPHONE_NUMBER}}</td>
                         <td>{{record.CENSUS_CELL_PHONE_NUMBER}}</td>
                         <td>{{record.COMPANY_REP_1}}</td>
@@ -236,6 +281,7 @@
                     <tr v-if="record" v-for="(record, key) in eRecords">
                         <th scope="row">{{record.Dot}}</th>
                         <td>{{record.CENSUS_LEGAL_NAME}}</td>
+                        <td>{{record.CENSUS_DBA}}</td>
                         <td>{{record.CENSUS_OFFICE_TELEPHONE_NUMBER}}</td>
                         <td>{{record.CENSUS_CELL_PHONE_NUMBER}}</td>
                         <td>{{record.COMPANY_REP_1}}</td>
@@ -257,6 +303,7 @@
                     <tr v-if="record" v-for="(record, key) in caRecords">
                         <th scope="row">{{record.Dot}}</th>
                         <td>{{record.CENSUS_LEGAL_NAME}}</td>
+                        <td>{{record.CENSUS_DBA}}</td>
                         <td>{{record.CENSUS_OFFICE_TELEPHONE_NUMBER}}</td>
                         <td>{{record.CENSUS_CELL_PHONE_NUMBER}}</td>
                         <td>{{record.COMPANY_REP_1}}</td>
@@ -279,6 +326,7 @@
                     <tr v-if="record" v-for="(record, key) in caRecordsC">
                         <th scope="row">{{record.Dot}}</th>
                         <td>{{record.CENSUS_LEGAL_NAME}}</td>
+                        <td>{{record.CENSUS_DBA}}</td>
                         <td>{{record.CENSUS_OFFICE_TELEPHONE_NUMBER}}</td>
                         <td>{{record.CENSUS_CELL_PHONE_NUMBER}}</td>
                         <td>{{record.COMPANY_REP_1}}</td>
@@ -300,6 +348,7 @@
                     <tr v-if="record" v-for="(record, key) in cRecordsC">
                         <th scope="row">{{record.Dot}}</th>
                         <td>{{record.CENSUS_LEGAL_NAME}}</td>
+                        <td>{{record.CENSUS_DBA}}</td>
                         <td>{{record.CENSUS_OFFICE_TELEPHONE_NUMBER}}</td>
                         <td>{{record.CENSUS_CELL_PHONE_NUMBER}}</td>
                         <td>{{record.COMPANY_REP_1}}</td>
@@ -321,6 +370,7 @@
                     <tr v-if="record" v-for="(record, key) in pRecordsC">
                         <th scope="row">{{record.Dot}}</th>
                         <td>{{record.CENSUS_LEGAL_NAME}}</td>
+                        <td>{{record.CENSUS_DBA}}</td>
                         <td>{{record.CENSUS_OFFICE_TELEPHONE_NUMBER}}</td>
                         <td>{{record.CENSUS_CELL_PHONE_NUMBER}}</td>
                         <td>{{record.COMPANY_REP_1}}</td>
@@ -342,6 +392,7 @@
                     <tr v-if="record" v-for="(record, key) in mRecordsC">
                         <th scope="row">{{record.Dot}}</th>
                         <td>{{record.CENSUS_LEGAL_NAME}}</td>
+                        <td>{{record.CENSUS_DBA}}</td>
                         <td>{{record.CENSUS_OFFICE_TELEPHONE_NUMBER}}</td>
                         <td>{{record.CENSUS_CELL_PHONE_NUMBER}}</td>
                         <td>{{record.COMPANY_REP_1}}</td>
@@ -365,6 +416,7 @@
                     <tr v-if="record" v-for="(record, key) in eRecordsC">
                         <th scope="row">{{record.Dot}}</th>
                         <td>{{record.CENSUS_LEGAL_NAME}}</td>
+                        <td>{{record.CENSUS_DBA}}</td>
                         <td>{{record.CENSUS_OFFICE_TELEPHONE_NUMBER}}</td>
                         <td>{{record.CENSUS_CELL_PHONE_NUMBER}}</td>
                         <td>{{record.COMPANY_REP_1}}</td>
@@ -389,60 +441,58 @@
         <modal height="auto" :scrollable="true" name="transaction-modal">
             <div class="margin2">
                 <form id="transForm1" @submit.prevent="newTransaction">
-                    <div class="form-group fT-container">
+                    <div class="form-group"></div>
+                    <div class="form-group">
+                        <div class="regInput">
+                            <div class="form-group" style="display: inline-block;">
 
-                        <div class="form-group padding">
-                            <div class="form-group">
-                                <label class="" for="description">Dot #:</label>
-                                <div class="regInput">
-                                    <input type="text" size="15" name="name" placeholder="dot #" v-model="transaction.Dot" />
+                                <div class="form-group">
+                                    <label for="dot">Dot #:</label>
+                                    <div class="regInput">
+                                        <input type="text" size="15" name="dot" placeholder="dot #" v-model="transaction.Dot" />
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group margin5">
-                                <h4>Status</h4>
-                                <div class="regInput">
-                                    <!-- <input type="text" size="40" name="status" placeholder="Status" v-model="transaction.Status" /> -->
-                                    <div class="form-group">
+                                <div class="form-group">
+                                    <h4>Status</h4>
+                                    <div class="form-group" style="padding: 0.5rem; display: inline-block;">
                                         <label for="statusg">Green</label>
                                         <input type="radio" name="statusg" value="green" v-model="transaction.Status" checked>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" style="padding: 0.5rem; display: inline-block;">
                                         <label for="statuso">Orange</label>
                                         <input type="radio" name="statuso" value="orange" v-model="transaction.Status">
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" style="padding: 0.5rem; display: inline-block;">
                                         <label for="statusy">Yellow</label>
                                         <input type="radio" name="statusy" value="yellow" v-model="transaction.Status">
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" style="padding: 0.5rem; display: inline-block;">
                                         <label for="statusr">Red</label>
                                         <input type="radio" name="statusr" value="red" v-model="transaction.Status">
                                     </div>
-                                    <!-- <div class="form-group">
-                                        <label class="" for="inputName">Callback Date:</label>
-                                        <input type="date" name="statusr" v-model="transaction.Callback">
-                                    </div> -->
                                 </div>
                             </div>
-                        </div>
-                        <div class="spacer4"></div>
-                        <div class="form-group padding">
-                            <label class="" for="inputName">Notes:</label>
-                            <div class="regInput">
-                                <textarea maxlength="200" rows="4" cols="50" form="transForm1" v-model="transaction.Notes"></textarea>
+                            <div class="form-group">
+                                <label class="" for="inputName">Callback Date:</label>
+                                <input type="date" name="statusr" v-model="transaction.Callback">
                             </div>
                         </div>
                     </div>
-
-                    <div class="margin3">
-                        <button class="btn-sm btn-success" type="submit">Submit</button>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Notes</label>
+                        <textarea class="form-control" form="transForm1" v-model="transaction.Notes" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <div class="margin3">
+                            <button class="btn-sm btn-success" type="submit">Submit</button>
+                        </div>
                     </div>
                 </form>
             </div>
             <div>
                 <div class="transactions2">
-                    <div class=" mainDiv2 bg2">
-                        <div v-for="z in yTransactions">
+                    <div v-for="z in yTransactions">
+                        <div class=" mainDiv2 bg2">
 
 
                             <div class="flex-container transactions1">
@@ -513,10 +563,10 @@
                 safUrl: "",
                 worldClock: false,
                 executed1: false,
-                    executed2: false,
-                    executed3: false,
-                    executed4: false,
-                    executed5: false,
+                executed2: false,
+                executed3: false,
+                executed4: false,
+                executed5: false,
                 // rowColor: "danger",
 
 
@@ -526,36 +576,36 @@
         watch: {
             tableTimeZone: function (newValue, oldValue) {
                 console.log(this.tableTimeZone)
-                if(this.tableTimeZone === 1){
-                   if(this.executed1 === false){
-                    this.executed1 = true   
-                    this.$store.dispatch('getInterCentralRecords', this.user._id)
+                if (this.tableTimeZone === 1) {
+                    if (this.executed1 === false) {
+                        this.executed1 = true
+                        this.$store.dispatch('getInterCentralRecords', this.user._id)
                     }
                 }
-                else if(this.tableTimeZone === 2){
+                else if (this.tableTimeZone === 2) {
                     debugger
-                    if(this.executed2 === false){
-                        this.executed2 = true   
+                    if (this.executed2 === false) {
+                        this.executed2 = true
                         this.$store.dispatch('getInterMountainRecords', this.user._id)
+                    }
                 }
-                }
-                else if(this.tableTimeZone === 3){
-                    if(this.executed3 === false){
-                        this.executed3 = true   
+                else if (this.tableTimeZone === 3) {
+                    if (this.executed3 === false) {
+                        this.executed3 = true
                         this.$store.dispatch('getInterPacificRecords', this.user._id)
+                    }
                 }
-                }
-                else if(this.tableTimeZone === 4){
-                    if(this.executed4 === false){
-                        this.executed4 = true   
+                else if (this.tableTimeZone === 4) {
+                    if (this.executed4 === false) {
+                        this.executed4 = true
                         this.$store.dispatch('getInterEasternRecords', this.user._id)
+                    }
                 }
-                }
-                else if(this.tableTimeZone === 5){
-                    if(this.executed5 === false){
-                        this.executed5 = true   
+                else if (this.tableTimeZone === 5) {
+                    if (this.executed5 === false) {
+                        this.executed5 = true
                         this.$store.dispatch('getInterCanadaRecords', this.user._id)
-                }
+                    }
                 }
             }
         },
@@ -586,7 +636,112 @@
             },
             sortList() {
                 //have to account for called records probably going to seperate them from the others
-                var records = this.eRecords
+                if (this.tableTimeZone === 1) {
+                    var records = this.cRecords
+                    var records2 = this.cRecordsC
+                }
+                else if (this.tableTimeZone === 2) {
+                    var records = this.mRecords
+                    var records2 = this.mRecordsC
+                }
+                else if (this.tableTimeZone === 3) {
+                    var records = this.pRecords
+                    var records2 = this.pRecordsC
+                }
+                else if (this.tableTimeZone === 4) {
+                    var records = this.eRecords
+                    var records2 = this.eRecordsC
+                }
+                else if (this.tableTimeZone === 5) {
+                    var records = this.caRecords
+                    var records2 = this.caRecordsC
+                }
+    
+                var returnO = records.sort(function (a, b) {
+                    var nameA = a.CENSUS_MAILING_ADDRESS_STATE.toLowerCase(), nameB = b.CENSUS_MAILING_ADDRESS_STATE.toLowerCase();
+
+                    if (nameA < nameB) //sort string ascending
+                        return -1;
+                    if (nameA > nameB)
+                        return 1;
+                    return 0; //default return value (no sorting)
+                });
+                console.log(returnO)
+                var returnO2 = records2.sort(function (a, b) {
+                    var nameA = a.CENSUS_MAILING_ADDRESS_STATE.toLowerCase(), nameB = b.CENSUS_MAILING_ADDRESS_STATE.toLowerCase();
+
+                    if (nameA < nameB) //sort string ascending
+                        return -1;
+                    if (nameA > nameB)
+                        return 1;
+                    return 0; //default return value (no sorting)
+                });
+                console.log(returnO2)
+
+            },
+            sortListReverse() {
+                //have to account for called records probably going to seperate them from the others
+                if (this.tableTimeZone === 1) {
+                    var records = this.cRecords
+                    var records2 = this.cRecordsC
+                }
+                else if (this.tableTimeZone === 2) {
+                    var records = this.mRecords
+                    var records2 = this.mRecordsC
+                }
+                else if (this.tableTimeZone === 3) {
+                    var records = this.pRecords
+                    var records2 = this.pRecordsC
+                }
+                else if (this.tableTimeZone === 4) {
+                    var records = this.eRecords
+                    var records2 = this.eRecordsC
+                }
+                else if (this.tableTimeZone === 5) {
+                    var records = this.caRecords
+                    var records2 = this.caRecordsC
+                }
+                // records.reverse()
+                var returnO = records.sort(function (a, b) {
+                    var nameA = a.CENSUS_MAILING_ADDRESS_STATE.toLowerCase(), nameB = b.CENSUS_MAILING_ADDRESS_STATE.toLowerCase();
+
+                    if (nameA > nameB) //sort string descending
+                        return -1;
+                    if (nameA < nameB)
+                        return 1;
+                    return 0; //default return value (no sorting)
+                });
+                var returnO2 = records2.sort(function (a, b) {
+                    var nameA = a.CENSUS_MAILING_ADDRESS_STATE.toLowerCase(), nameB = b.CENSUS_MAILING_ADDRESS_STATE.toLowerCase();
+
+                    if (nameA > nameB) //sort string ascending
+                        return -1;
+                    if (nameA < nameB)
+                        return 1;
+                    return 0; //default return value (no sorting)
+                });
+                console.log(returnO2)
+
+                console.log(returnO)
+
+            },
+            sortListDot() {
+                //have to account for called records probably going to seperate them from the others
+                if (this.tableTimeZone === 1) {
+                    var records = this.cRecords
+                }
+                else if (this.tableTimeZone === 2) {
+                    var records = this.mRecords
+                }
+                else if (this.tableTimeZone === 3) {
+                    var records = this.pRecords
+                }
+                else if (this.tableTimeZone === 4) {
+                    var records = this.eRecords
+                }
+                else if (this.tableTimeZone === 5) {
+                    var records = this.caRecords
+                }
                 var records2 = []
                 for (let p = 0; p < records.length; p++) {
                     const record = records[p];
@@ -597,11 +752,41 @@
 
 
                 var returnO = records.sort(function (a, b) {
-                    var nameA = a.CENSUS_MAILING_ADDRESS_STATE.toLowerCase(), nameB = b.CENSUS_MAILING_ADDRESS_STATE.toLowerCase();
+                    var nameA = a.Dot.toLowerCase(), nameB = b.Dot.toLowerCase();
 
                     if (nameA < nameB) //sort string ascending
                         return -1;
                     if (nameA > nameB)
+                        return 1;
+                    return 0; //default return value (no sorting)
+                });
+                console.log(returnO)
+
+            },
+            sortListDotReverse() {
+                //have to account for called records probably going to seperate them from the others
+                if (this.tableTimeZone === 1) {
+                    var records = this.cRecords
+                }
+                else if (this.tableTimeZone === 2) {
+                    var records = this.mRecords
+                }
+                else if (this.tableTimeZone === 3) {
+                    var records = this.pRecords
+                }
+                else if (this.tableTimeZone === 4) {
+                    var records = this.eRecords
+                }
+                else if (this.tableTimeZone === 5) {
+                    var records = this.caRecords
+                }
+                // records.reverse()
+                var returnO = records.sort(function (a, b) {
+                    var nameA = a.Dot, nameB = b.Dot;
+
+                    if (nameA > nameB) //sort string descending
+                        return -1;
+                    if (nameA < nameB)
                         return 1;
                     return 0; //default return value (no sorting)
                 });
@@ -621,11 +806,11 @@
             },
             ifCalled(record) {
                 if (record.Called === true) {
-                    if(record.Status != undefined){
-                            
-                            var return1 = "Called " + record.Status
-                            return return1
-                        }
+                    if (record.Status != undefined) {
+
+                        var return1 = "Called " + record.Status
+                        return return1
+                    }
                     return "Called"
                 }
                 else {
@@ -647,6 +832,15 @@
                 this.$store.dispatch('searchTransByDot', record.Dot)
                 this.$modal.show('transaction-modal');
             },
+            // show2(transaction) {
+            //     this.transaction = {}
+            //     this.transaction.Dot = transactionDot
+            //     this.transaction.CENSUS_LEGAL_NAME = record.CENSUS_LEGAL_NAME
+
+            //     this.$store.dispatch('searchTransByDot', record.Dot)
+            //     this.$modal.show('transaction-modal');
+            // },
+            
             hide() {
                 this.$modal.hide('transaction-modal');
             },
@@ -824,6 +1018,9 @@
 
         },
         computed: {
+            cbTransactions(){
+                return this.$store.state.activeCallbackTransactions
+            },
             tableTimeZone1() {
                 return this.tableTimeZone
             },
@@ -946,7 +1143,8 @@
         },
         mounted() {
             // this.$store.dispatch('authenticate')
-            this.$store.dispatch('authenticate')
+            this.$store.dispatch('getUserTransactionsCallback', this.$store.state.user._id)
+
             // console.log("hello")
             // this.$store.dispatch('getUserRecords', this.user._id)
             // $(document).ready(function () {

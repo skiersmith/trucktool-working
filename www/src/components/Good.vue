@@ -101,7 +101,41 @@
             </div>
             <!-- /.container-fluid -->
         </nav>
-        <div class="spacer10"></div>
+        <div style=" margin-top: 15rem; width: 45rem;">
+            <h3>Callbacks</h3>
+            <table id="ifThisWorks" class="table table-bordered table-striped">
+
+                <thead>
+                    <tr>
+                        <th scope="col">Dot #</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Notes</th>
+                        <th scope="col">Callback Date</th>
+
+                        <th scope="col">------</th>
+
+                    </tr>
+                </thead>
+                <!-- NOT CALLED RECORDS -->
+                <tbody>
+                    <tr v-for="(t, key) in cbTransactions">
+                        <th scope="row">{{t.Dot}}</th>
+                        <td>{{t.Status}}</td>
+                        <td>{{t.Notes}}</td>
+                        <td>{{t.Callback}}</td>
+
+                        <td>
+                            <!-- <p class="inline">{{ifCalled(record)}}</p> -->
+                            <button class="btn-xs btn-info" @click="show(t)">Call</button>
+                            <a target="_blank" :href="'https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=' + t.Dot"
+                                class="btn btn-primary btn-xs ">Safer</a>
+                        </td>
+
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
         <div class="margin2">
 
 
@@ -416,8 +450,13 @@
 
                 this.$notify('New Transaction', 'info', { itemClass: 'alert col-6 alert-info', visibility: 1000 })
                 this.$store.dispatch('authenticate')
-                this.$store.dispatch('newTransaction', this.transaction)
-                this.transaction = {}
+                if(this.transaction.Status = "Red"){
+                    this.$store.dispatch('updateTransaction', this.transaction)
+                }
+                else{
+                    this.$store.dispatch('newTransaction', this.transaction)
+                }
+                
             },
             searchTransByDot() {
                 this.$store.dispatch('searchTransByDot', this.transaction.Dot)
@@ -447,6 +486,9 @@
 
         },
         computed: {
+            cbTransactions(){
+                return this.$store.state.activeCallbackTransactions
+            },
             tableTimeZone1() {
                 return this.tableTimeZone
             },

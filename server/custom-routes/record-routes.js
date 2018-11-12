@@ -74,7 +74,7 @@ module.exports = {
         reqType: 'get',
         method(req, res, next) {
             let action = 'Get records by null'
-            Records.find({ userId: req.params.UserId, Called: false }).limit(300)
+            Records.find({ userId: req.params.UserId, Called: false, CENSUS_MAILING_ADDRESS_STATE: "NJ" }).limit(300)
                 .then(records => {
                     res.send(handleResponse(action, records))
                 }).catch(error => {
@@ -87,7 +87,7 @@ module.exports = {
         reqType: 'get',
         method(req, res, next) {
             let action = 'Get records by dot'
-            Records.find({ userId: null, CENSUS_MAILING_ADDRESS_STATE: "WY" }).limit(1000)
+            Records.find({ userId: null, CENSUS_MAILING_ADDRESS_STATE: "TN" }).limit(1000)
                 .then(records => {
                     res.send(handleResponse(action, records))
                 }).catch(error => {

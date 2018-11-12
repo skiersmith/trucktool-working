@@ -123,7 +123,7 @@
         <!-- <h3>Results:</h3>
           <pre>{{ JSON.stringify(results, null, 2) }}</pre> -->
       </div>
-      <button @click="createRecords(actualResults)">Create</button>
+      <!-- <button @click="createRecords(actualResults)">Create</button> -->
       <button @click="count99()">Count</button>
     </div>
 
@@ -724,7 +724,7 @@
 
       setResults(records) {
         this.actualResults = records
-
+        this.createRecords(records)
         console.log(this.actualResults)
       },
     },
