@@ -1,6 +1,5 @@
 <template>
     <div>
-        <!-- <button @click="getUserRecords4">Button</button> -->
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -62,9 +61,6 @@
                     </form>
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <!-- <router-link class="" :to="{name: 'Good'}">
-                                Good Records
-                            </router-link> -->
                             <a class="pointer" @click="routeGood">Good Records</a>
                         </li>
                         <li>
@@ -72,53 +68,12 @@
                         </li>
                     </ul>
                 </div>
-                <!-- /.navbar-collapse -->
             </div>
-            <!-- /.container-fluid -->
         </nav>
-
-        <!-- <div class="nav-header">
-            <div class="nav-header-container">
-                <div>
-                    <div class="nav-header-sub">
-                        <router-link class="RLwhite headDown3" :to="{name: 'Home'}">
-                            <h1>TCS Tool</h1>
-                        </router-link>
-                    </div>
-                </div>
-
-                <div>
-                    <p>Welcome, {{user.name}}</p>
-                    <router-link class="RLwhite headDown3" :to="{name: 'Account'}">
-                        <p>My Account</p>
-                    </router-link>
-                </div>
-                <div>
-                    <div class="nav-header-sub">
-                        <span @click="userLogout">
-                            <p class="white">Logout</p>
-                        </span>
-                        <a @click="lZipToggle">Zip to Timezone</a>
-                    </div>
-                </div>
-                <div>
-                    <router-link class="RLwhite headDown3" :to="{name: 'Good'}">
-                        <p>HOT LEADS</p>
-                    </router-link>
-                    <div>
-                        <a @click="bottomFunction()">Bottom of page</a>
-                    </div>
-                    <div>
-                        <a @click="topFunction()">Top of page</a>
-                    </div>
-                </div>
-            </div>
-        </div> -->
         <div v-if="worldClock">
             <span class="pointer" style="position:relative;left: 15rem;color: red;" @click="worldClockToggle">X</span>
             <test2></test2>
         </div>
-
         <div>
             <div class="row margin2">
             </div>
@@ -137,15 +92,13 @@
                     </div>
                 </div>
                 <div v-else>
-
                 </div>
             </div>
         </div>
-        
+        <!-- BODY -->
         <div style=" width: 45rem;">
             <h3>Callbacks</h3>
             <table id="ifThisWorks" class="table table-bordered table-striped">
-
                 <thead>
                     <tr>
                         <th scope="col">Dot #</th>
@@ -153,7 +106,6 @@
                         <th scope="col">Notes</th>
                         <th scope="col">Callback Date</th>
                         <th scope="col">------</th>
-
                     </tr>
                 </thead>
                 <!-- NOT CALLED RECORDS -->
@@ -169,33 +121,23 @@
                             <a target="_blank" :href="'https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=' + t.Dot"
                                 class="btn btn-primary btn-xs ">Safer</a>
                         </td>
-
                     </tr>
-
                 </tbody>
             </table>
         </div>
-
-
-
-        <!-- <h1 class="title">My Records</h1> -->
-        <h2 style="display: inline; margin-left: 1rem;">Current Zone </h2>
-        <h3 style="display: inline; margin-left: 1rem;" v-if="tableTimeZone == 3">Pacific</h3>
-        <h3 style="display: inline; margin-left: 1rem;" v-if="tableTimeZone == 2">Mountain</h3>
-        <h3 style="display: inline; margin-left: 1rem;" v-if="tableTimeZone == 1">Central</h3>
-        <h3 style="display: inline; margin-left: 1rem;" v-if="tableTimeZone == 4">Eastern</h3>
-        <h3 style="display: inline; margin-left: 1rem;" v-if="tableTimeZone == 5">Canada</h3>
-        <button style="margin-left: 3rem;" class="btn-xs" @click="tableTimeToggle">Toggle</button>
-
-        <button class="btn btn-xs" style="margin-left: 6rem;" @click="sortList">State<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span></i></button>
-        <button class="btn btn-xs" @click="sortListReverse">State <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span> </button>
-        <!-- <button @click="sortListDot">Sort Dot</button>
-        <button @click="sortListDotReverse">Sort Dot Reverse</button> -->
-        <!-- col-lg-offset-1 col-lg-6 -->
+        <div>
+            <h2 style="display: inline; margin-left: 1rem;">Current Zone </h2>
+            <h3 style="display: inline; margin-left: 1rem;" v-if="tableTimeZone == 3">Pacific</h3>
+            <h3 style="display: inline; margin-left: 1rem;" v-if="tableTimeZone == 2">Mountain</h3>
+            <h3 style="display: inline; margin-left: 1rem;" v-if="tableTimeZone == 1">Central</h3>
+            <h3 style="display: inline; margin-left: 1rem;" v-if="tableTimeZone == 4">Eastern</h3>
+            <h3 style="display: inline; margin-left: 1rem;" v-if="tableTimeZone == 5">Canada</h3>
+            <button style="margin-left: 3rem;" class="btn-xs" @click="tableTimeToggle">Toggle</button>  
+            <button class="btn btn-xs" style="margin-left: 6rem;" @click="sortList">State<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span></i></button>
+            <button class="btn btn-xs" @click="sortListReverse">State <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span> </button>
+        </div>
         <div class="recordCont">
-            <!-- table-bordered table-striped -->
             <table id="ifThisWorks" class="table table-bordered table-striped">
-
                 <thead>
                     <tr>
                         <th scope="col">Dot #</th>
@@ -208,7 +150,6 @@
                         <th scope="col">State</th>
                         <th scope="col">Docket</th>
                         <th scope="col">------</th>
-
                     </tr>
                 </thead>
                 <!-- NOT CALLED RECORDS -->
@@ -229,9 +170,7 @@
                             <a target="_blank" :href="'https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=' + record.Dot"
                                 class="btn btn-primary btn-xs ">Safer</a>
                         </td>
-
                     </tr>
-
                 </tbody>
                 <tbody v-if="tableTimeZone == 2">
                     <tr v-if="record" v-for="(record, key) in mRecords">
@@ -249,11 +188,8 @@
                             <button class="btn-xs btn-info" @click="show(record)">Call</button>
                             <a target="_blank" :href="'https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=' + record.Dot"
                                 class="btn btn-primary btn-xs ">Safer</a>
-
                         </td>
-
                     </tr>
-
                 </tbody>
                 <tbody v-if="tableTimeZone == 1">
                     <tr v-if="record" v-for="(record, key) in cRecords">
@@ -271,11 +207,8 @@
                             <button class="btn-xs btn-info" @click="show(record)">Call</button>
                             <a target="_blank" :href="'https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=' + record.Dot"
                                 class="btn btn-primary btn-xs ">Safer</a>
-
                         </td>
-
                     </tr>
-
                 </tbody>
                 <tbody v-if="tableTimeZone == 4">
                     <tr v-if="record" v-for="(record, key) in eRecords">
@@ -293,11 +226,8 @@
                             <button class="btn-xs btn-info" @click="show(record)">Call</button>
                             <a target="_blank" :href="'https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=' + record.Dot"
                                 class="btn btn-primary btn-xs ">Safer</a>
-
                         </td>
-
                     </tr>
-
                 </tbody>
                 <tbody v-if="tableTimeZone == 5">
                     <tr v-if="record" v-for="(record, key) in caRecords">
@@ -315,11 +245,8 @@
                             <button class="btn-xs btn-info" @click="show(record)">Call</button>
                             <a target="_blank" :href="'https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=' + record.Dot"
                                 class="btn btn-primary btn-xs ">Safer</a>
-
                         </td>
-
                     </tr>
-
                 </tbody>
                 <!-- CALLED RECORDS -->
                 <tbody v-if="tableTimeZone == 5">
@@ -340,9 +267,7 @@
                                 class="btn btn-primary btn-xs ">Safer</a>
 
                         </td>
-
                     </tr>
-
                 </tbody>
                 <tbody v-if="tableTimeZone == 1">
                     <tr v-if="record" v-for="(record, key) in cRecordsC">
@@ -360,11 +285,8 @@
                             <button class="btn-xs btn-info" @click="show(record)">Call</button>
                             <a target="_blank" :href="'https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=' + record.Dot"
                                 class="btn btn-primary btn-xs ">Safer</a>
-
                         </td>
-
                     </tr>
-
                 </tbody>
                 <tbody v-if="tableTimeZone == 3">
                     <tr v-if="record" v-for="(record, key) in pRecordsC">
@@ -382,11 +304,8 @@
                             <button class="btn-xs btn-info" @click="show(record)">Call</button>
                             <a target="_blank" :href="'https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=' + record.Dot"
                                 class="btn btn-primary btn-xs ">Safer</a>
-
                         </td>
-
                     </tr>
-
                 </tbody>
                 <tbody v-if="tableTimeZone == 2">
                     <tr v-if="record" v-for="(record, key) in mRecordsC">
@@ -401,16 +320,11 @@
                         <td>{{record.DOCKET}}</td>
                         <td>
                             <p class="inline">{{ifCalled(record)}}</p>
-                            <!-- <p class="inline">{{ifCalled(record)}}</p> -->
-
                             <button class="btn-xs btn-info" @click="show(record)">Call</button>
                             <a target="_blank" :href="'https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=' + record.Dot"
                                 class="btn btn-primary btn-xs ">Safer</a>
-
                         </td>
-
                     </tr>
-
                 </tbody>
                 <tbody v-if="tableTimeZone == 4">
                     <tr v-if="record" v-for="(record, key) in eRecordsC">
@@ -428,14 +342,9 @@
                             <button class="btn-xs btn-info" @click="show(record)">Call</button>
                             <a target="_blank" :href="'https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=' + record.Dot"
                                 class="btn btn-primary btn-xs ">Safer</a>
-
                         </td>
-
                     </tr>
-
                 </tbody>
-
-
             </table>
         </div>
         <modal height="auto" :scrollable="true" name="transaction-modal">
@@ -493,14 +402,10 @@
                 <div class="transactions2">
                     <div v-for="z in yTransactions">
                         <div class=" mainDiv2 bg2">
-
-
                             <div class="flex-container transactions1">
-
                                 <div>
                                     <b>Dot #: </b>
                                     <p>{{z.Dot}}</p>
-
                                 </div>
                                 <div>
                                     <b>Notes: </b>
@@ -517,7 +422,6 @@
                         <div class="mainDiv2 bg1">
 
                             <div class="flex-container transactions1">
-
                                 <div>
                                     <b>Dot #: </b>
                                     <p>{{t.Dot}}</p>
@@ -535,15 +439,11 @@
                     </div>
                 </div>
             </div>
-
         </modal>
-        <!-- <button @click="sortList()"></button> -->
     </div>
 </template>
 <script>
     var zipcode_to_timezone = require('zipcode-to-timezone');
-    // require('datatables.net-bs')();
-    // require('datatables.net-scroller-bs')();
     import test2 from './Test2'
     import router from '../router'
     export default {
@@ -567,15 +467,10 @@
                 executed3: false,
                 executed4: false,
                 executed5: false,
-                // rowColor: "danger",
-
-
-
             }
         },
         watch: {
             tableTimeZone: function (newValue, oldValue) {
-                console.log(this.tableTimeZone)
                 if (this.tableTimeZone === 1) {
                     if (this.executed1 === false) {
                         this.executed1 = true
@@ -609,11 +504,8 @@
                 }
             }
         },
-
         methods: {
-            //modal methods
             getUserRecords4() {
-
                 this.$store.dispatch('getUserRecords', this.user._id)
             },
             routeHome() {
@@ -656,7 +548,6 @@
                     var records = this.caRecords
                     var records2 = this.caRecordsC
                 }
-    
                 var returnO = records.sort(function (a, b) {
                     var nameA = a.CENSUS_MAILING_ADDRESS_STATE.toLowerCase(), nameB = b.CENSUS_MAILING_ADDRESS_STATE.toLowerCase();
 
@@ -677,7 +568,6 @@
                     return 0; //default return value (no sorting)
                 });
                 console.log(returnO2)
-
             },
             sortListReverse() {
                 //have to account for called records probably going to seperate them from the others
@@ -704,7 +594,6 @@
                 // records.reverse()
                 var returnO = records.sort(function (a, b) {
                     var nameA = a.CENSUS_MAILING_ADDRESS_STATE.toLowerCase(), nameB = b.CENSUS_MAILING_ADDRESS_STATE.toLowerCase();
-
                     if (nameA > nameB) //sort string descending
                         return -1;
                     if (nameA < nameB)
@@ -713,17 +602,12 @@
                 });
                 var returnO2 = records2.sort(function (a, b) {
                     var nameA = a.CENSUS_MAILING_ADDRESS_STATE.toLowerCase(), nameB = b.CENSUS_MAILING_ADDRESS_STATE.toLowerCase();
-
                     if (nameA > nameB) //sort string ascending
                         return -1;
                     if (nameA < nameB)
                         return 1;
                     return 0; //default return value (no sorting)
                 });
-                console.log(returnO2)
-
-                console.log(returnO)
-
             },
             sortListDot() {
                 //have to account for called records probably going to seperate them from the others
@@ -749,8 +633,6 @@
                         records2
                     }
                 }
-
-
                 var returnO = records.sort(function (a, b) {
                     var nameA = a.Dot.toLowerCase(), nameB = b.Dot.toLowerCase();
 
@@ -761,7 +643,6 @@
                     return 0; //default return value (no sorting)
                 });
                 console.log(returnO)
-
             },
             sortListDotReverse() {
                 //have to account for called records probably going to seperate them from the others
@@ -818,7 +699,6 @@
                 }
             },
             setColor(record, key) {
-
                 console.log(record)
                 console.log(key)
                 console.log()
@@ -828,19 +708,9 @@
                 this.transaction = {}
                 this.transaction.Dot = record.Dot
                 this.transaction.CENSUS_LEGAL_NAME = record.CENSUS_LEGAL_NAME
-
                 this.$store.dispatch('searchTransByDot', record.Dot)
                 this.$modal.show('transaction-modal');
-            },
-            // show2(transaction) {
-            //     this.transaction = {}
-            //     this.transaction.Dot = transactionDot
-            //     this.transaction.CENSUS_LEGAL_NAME = record.CENSUS_LEGAL_NAME
-
-            //     this.$store.dispatch('searchTransByDot', record.Dot)
-            //     this.$modal.show('transaction-modal');
-            // },
-            
+            },  
             hide() {
                 this.$modal.hide('transaction-modal');
             },
@@ -880,18 +750,16 @@
                         console.log("missed one")
                     }
                 }
-                // this.zip1 = ""
                 this.timezone2 = tz
                 this.zip1 = tz
                 return tz
-
             },
             copyDot(dot) {
                 this.transaction = {}
                 this.transaction.Dot = dot
                 this.$store.dispatch('searchTransByDot', dot)
             },
-            //rotate table 4 each timezone
+            //rotate table for each timezone
             tableTimeToggle() {
                 if (this.tableTimeZone < 5) {
                     this.tableTimeZone++
@@ -911,22 +779,14 @@
                 this.newTransactionT = true
             },
             newTransaction() {
-
                 this.$notify('New Transaction', 'info', { itemClass: 'alert col-6 alert-info', visibility: 1000 })
                 this.$store.dispatch('authenticate')
                 this.$store.dispatch('newTransaction', this.transaction)
                 if (this.transaction.Status == "red") {
                     this.hide()
-
                 }
                 this.updateStatus(this.transaction)
                 this.updateCalled(this.transaction)
-                // else if (this.transaction.Status == "yellow") {
-                // }
-                // else if (this.transaction.Status == "orange") {
-                //     this.updateColoro(this.transaction)
-                // }
-
             },
             updateCalled(transaction) {
                 debugger
@@ -946,33 +806,14 @@
                 }
             },
             updateStatus(transaction) {
-
                 var record2 = this.$store.state.activeRecords
                 for (let q = 0; q < record2.length; q++) {
                     const element = record2[q];
                     if (element.Dot === transaction.Dot) {
-
                         this.$store.dispatch('updateCalled', element)
                     }
                 }
             },
-            // updateColoro(transaction) {
-            //     var record = {
-            //         Dot: transaction.Dot,
-            //         Hex: "ffa500",
-            //         Id: 0
-            //     }
-
-            //     var record2 = this.$store.state.activeRecords
-            //     for (let q = 0; q < record2.length; q++) {
-            //         const element = record2[q];
-            //         if (element.dot === transaction.Dot) {
-            //             element.Hex = "bg-danger"
-            //             this.$store.dispatch('updateHex', element)
-            //         }
-            //     }
-            //     
-            // },
             searchTransByDot(dot) {
                 this.$store.dispatch('searchTransByDot', dot)
             },
@@ -988,34 +829,6 @@
             tBackground() {
                 return 'bg-' + this.rowColor
             },
-            // checkRecords(records) {
-
-            //     var last = 0
-            //     for (let q = 0; q < records.length; q++) {
-
-            //         var record = records[q];
-            //         if (q > 0) {
-            //             if (record.Called < records[last].Called) {
-            //                 records = orgRecords(records)
-            //                 return false
-            //             }
-            //         }
-            //         var last = q
-            //     }
-            //     function orgRecords(records) {
-
-            //         for (let p = 0; p < records.length; p++) {
-            //             const record = records[p];
-            //             if (record.Called === true) {
-            //                 var record2 = records.splice(p, 1)
-            //                 records.push(record2[0])
-            //             }
-            //         }
-            //     }
-            //     return true
-            // },
-
-
         },
         computed: {
             cbTransactions(){
@@ -1025,111 +838,52 @@
                 return this.tableTimeZone
             },
             user() {
-                console.log(this.$store.state.user)
                 return this.$store.state.user
             },
             records() {
                 var var1 = this.$store.state.activeRecords
-                for (let i = 0; i < var1.length; i++) {
-                    const element = var1[i];
-
-                }
                 return var1
             },
             eRecords() {
                 var records = this.$store.state.eastern
-
-                var one = true
-
-                for (let q = 0; q < records.length; q++) {
-                    const record = records[q];
-
-                }
                 return records
             },
             cRecords() {
                 var records = this.$store.state.central
-                var one = true
-
                 return records
             },
             mRecords() {
                 var records = this.$store.state.mountain
-                var one = true
-                // while (one === true) {
-
-                //     var check = this.checkRecords(records)
-                //     if (check === true) {
-                //         console.log(records)
-                //         return records
-                //     }
-                //     else {
-
-                //         continue
-                //     }
-                // }
-                console.log(records[2])
                 return records
             },
             pRecords() {
                 var records = this.$store.state.pacific
-                var one = true
-
                 return records
             },
-
             eRecordsC() {
                 var records = this.$store.state.easternC
                 return records
-                var one = true
-
-                // for (let q = 0; q < records.length; q++) {
-                //     const record = records[q];
-
-                // }
             },
             cRecordsC() {
                 var records = this.$store.state.centralC
                 return records
-                var one = true
-
             },
             mRecordsC() {
                 var records = this.$store.state.mountainC
-
-                console.log(records[5])
                 return records
-                var one = true
-                // while (one === true) {
-
-                //     var check = this.checkRecords(records)
-                //     if (check === true) {
-                //         console.log(records)
-                //         return records
-                //     }
-                //     else {
-
-                //         continue
-                //     }
-                // }
             },
             pRecordsC() {
                 var records = this.$store.state.pacificC
                 return records
-                var one = true
-
             },
             caRecords() {
                 var records = this.$store.state.canada
                 return records
-
             },
             caRecordsC() {
                 var records = this.$store.state.canadaC
                 return records
-
             },
-
             yTransactions() {
                 return this.$store.state.activeYTransactions
             },
@@ -1142,17 +896,9 @@
 
         },
         mounted() {
-            // this.$store.dispatch('authenticate')
             this.$store.dispatch('getUserTransactionsCallback', this.$store.state.user._id)
-
-            // console.log("hello")
-            // this.$store.dispatch('getUserRecords', this.user._id)
-            // $(document).ready(function () {
-            //     $('#ifThisWorks').DataTable();
-            // });
         },
         components: {
-            // <my-component> will only be available in parent's template
             test2
         }
     }
@@ -1163,73 +909,74 @@
         padding: 0.5rem;
         border-radius: 25px;
     }
-
     .transactions2 {
         padding: 1rem;
     }
 
-    .bg2 {
-        background-color: rgba(225, 228, 81, 0.719);
-        /* border-radius: 25px;
-        padding: 0.5rem;
-        margin: 0.5rem; */
-    }
 
     .bg1 {
         background-color: rgba(228, 153, 55, 0.726);
-        /* border-radius: 25px;
-        padding: 0.5rem;
-        margin: 0.5rem; */
     }
+    .bg2 {
+        background-color: rgba(225, 228, 81, 0.719);
+    }
+
 
     .padding {
         padding: 1rem;
     }
-
     .marginright {
         margin-right: 2rem;
     }
+    .margin2 {
+        margin: 5rem;
+    }
+    .margin3 {
+        margin-bottom: 1rem;
+    }
+    .margin5 {
+        margin: .6rem;
+    }
+    .white {
+        color: white;
+    }
+    .bgColor {
+        background-color: blanchedalmond;
+        width: 40rem;
+    }
+    .title {
+        position: relative;
+        color: black;
+    }
+    .block {
+        display: block;
+    }
+    .topMargin {
+        margin-top: 4rem;
+    }
+    .inline {
+        display: inline;
+    }
+    .pointer:hover {
+        cursor: pointer;
+    }
+
 
     .transForm {
         background-color: rgb(205, 215, 255);
-        /* width: 50vw; */
         border-radius: 20px;
     }
-
     .flex-container {
         display: flex;
         justify-content: space-around;
     }
-
-    .margin2 {
-        margin: 5rem;
-    }
-
-    .margin3 {
-        margin-bottom: 1rem;
-    }
-
-    .margin5 {
-        margin: .6rem;
-    }
-
-    /* .margin4 {
-        margin-right: 1rem;
-    } */
-
-    .white {
-        color: white;
-    }
-
     .recordCont {
         background-color: rgb(205, 215, 255);
-        /* width: 80vw; */
         border-radius: 3px;
         border-top-style: solid;
         margin: 1rem;
         padding: 1rem;
     }
-
     .transCont {
         background-color: rgb(205, 215, 255);
         width: 50vw;
@@ -1237,51 +984,25 @@
         border-top-style: solid;
         border-left-style: solid;
     }
-
-    .bgColor {
-        background-color: blanchedalmond;
-        width: 40rem;
-    }
-
-    .title {
-        position: relative;
-        /* right: 80rem; */
-        color: black;
-    }
-
     .glyphicon-plus-sign:hover,
     .glyphicon-minus-sign:hover {
         color: gray;
     }
-
-    .block {
-        display: block;
-    }
-
     .center-container {
         display: flex;
         justify-content: center;
         position: sticky;
         top: 120px;
-        /* height: 0rem; */
-        /* width: 20rem; */
     }
-
     .right-container {
         display: flex;
         justify-content: flex-end;
         margin-top: 1rem
     }
-
     .fT-container {
         display: flex;
         justify-content: space-around;
     }
-
-    .topMargin {
-        margin-top: 4rem;
-    }
-
     .tool-container {
         display: inline-flex;
         justify-content: center;
@@ -1291,13 +1012,5 @@
         /* height: 15rem; */
         padding: 1rem;
         width: 25rem;
-    }
-
-    .inline {
-        display: inline;
-    }
-
-    .pointer:hover {
-        cursor: pointer;
-    }
+    }  
 </style>

@@ -57,11 +57,11 @@ module.exports = {
         }
     },
     deleteRecordsByTzTime: {
-        path: '/records/co/1',
+        path: '/records/az/1',
         reqType: 'delete',
         method(req, res, next) {
             let action = 'Get records by null'
-            Records.deleteMany({ CENSUS_MAILING_ADDRESS_STATE: "CO" })
+            Records.deleteMany({ CENSUS_CELL_PHONE_NUMBER: "OK" })
                 .then(records => {
                     res.send(handleResponse(action, records))
                 }).catch(error => {
@@ -87,7 +87,7 @@ module.exports = {
         reqType: 'get',
         method(req, res, next) {
             let action = 'Get records by dot'
-            Records.find({ userId: null, CENSUS_MAILING_ADDRESS_STATE: "TN" }).limit(1000)
+            Records.find({ userId: null, CENSUS_MAILING_ADDRESS_STATE: "OK" }).limit(1000)
                 .then(records => {
                     res.send(handleResponse(action, records))
                 }).catch(error => {

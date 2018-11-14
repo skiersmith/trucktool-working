@@ -730,6 +730,7 @@
                 console.log(returnO)
 
             },
+            
             sortListReverse() {
                 //have to account for called records probably going to seperate them from the others
                 if (this.tableTimeZone === 1) {

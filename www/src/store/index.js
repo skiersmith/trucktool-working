@@ -2207,6 +2207,7 @@ var store = new vuex.Store({
 
                 })
         },
+       
         getUserTransactions2({ commit, dispatch }, userId) {
             
             api('gtransactions/user/' + userId)

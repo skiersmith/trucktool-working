@@ -11,6 +11,7 @@ var schema = new mongoose.Schema({
     Created: { type: Date, default: Date.now },
     Updated: { type: String },
     CENSUS_LEGAL_NAME: { type: String },
+    Callback: { type: Date },
 });
 
 
