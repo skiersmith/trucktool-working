@@ -74,7 +74,7 @@ module.exports = {
         reqType: 'get',
         method(req, res, next) {
             let action = 'Get records by null'
-            Records.find({ userId: req.params.UserId, Called: false, CENSUS_MAILING_ADDRESS_STATE: "NJ" }).limit(300)
+            Records.find({ userId: req.params.UserId, Called: false, CENSUS_MAILING_ADDRESS_STATE: {$in: ["NM","AZ","CO"] } }).limit(500)
                 .then(records => {
                     res.send(handleResponse(action, records))
                 }).catch(error => {
@@ -87,7 +87,7 @@ module.exports = {
         reqType: 'get',
         method(req, res, next) {
             let action = 'Get records by dot'
-            Records.find({ userId: null, CENSUS_MAILING_ADDRESS_STATE: "OK" }).limit(1000)
+            Records.find({ userId: req.params.UserId, Called: false, CENSUS_MAILING_ADDRESS_STATE: "GA"}).limit(600)
                 .then(records => {
                     res.send(handleResponse(action, records))
                 }).catch(error => {
@@ -100,7 +100,7 @@ module.exports = {
         reqType: 'delete',
         method(req, res, next) {
             let action = 'Get records by dot'
-            Records.deleteMany({ userId: null })
+            Records.deleteMany({Called: false , Created: { $gte: ["2016-11-15T00:00:00-06:00" ] }}).limit(500)
                 .then(records => {
                     res.send(handleResponse(action, records))
                 }).catch(error => {
@@ -266,11 +266,11 @@ module.exports = {
         }
     },
     getRecordsByUserId: {
-        path: '/records/user/:UserId',
+        path: '/records/all/all',
         reqType: 'get',
         method(req, res, next) {
             let action = 'Get records by UserId'
-            Records.find({ userId: req.params.UserId})
+            Records.find({ Called: false, })
                 .then(records => {
                     res.send(handleResponse(action, records))
                 }).catch(error => {
@@ -280,15 +280,18 @@ module.exports = {
     },
 
     updateRecordsByDot: {
-        path: '/records/dot/:Dot',
+        path: '/records/dot3/:dot',
         reqType: 'put',
         method(req, res, next) {
             let action = 'update record'
             // Transactions.updateMany({ Dot: req.params.Dot, status: "green"}, req.params)
             // Records.update
-            Records.findOneAndUpdate(
-                { Dot: req.params.Dot},
-                { $set: { noSale: true } },
+            
+            Records.update(
+                // { Dot: req.params.Dot},
+                // { $set: { noSale: true } },
+                { Dot: req.params.dot},
+                { $set: { userId: "5b92b37effb3c052eee45b98" } }
             ).then(records => {
                 res.send(handleResponse(action, records))
             }).catch(error => {

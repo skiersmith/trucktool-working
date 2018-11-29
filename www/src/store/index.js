@@ -36,6 +36,7 @@ var store = new vuex.Store({
             canada: {},
         },
         activeSplitRecords: [],
+        activeUTDot: [],
         activeRecord: {},
         eastern: [],
         easternC: [],
@@ -386,6 +387,9 @@ var store = new vuex.Store({
         },
         setActiveUGTransactions(state, data) {
             state.activeUGTransactions = data
+        },
+        setActiveUTDot(state, data) {
+            state.activeUTDot = data
         },
         setDeleteRecords(state, data) {
             state.activeDeleteRecords = data
@@ -796,7 +800,20 @@ var store = new vuex.Store({
             // data.CENSUS_MAILING_ADDRESS_ZIP_CODE = "83702"
             api.put('records/' + data._id, data)
                 .then(res => {
-                    debugger
+                    
+                    console.log(res)
+                })
+                .catch(err => {
+                    commit('handleError', err)
+
+
+                })
+        },
+        updateRecord2({ commit, dispatch }, data) {
+            
+            // data.CENSUS_MAILING_ADDRESS_ZIP_CODE = "83702"
+            api.put('records/dot3/' + data.Dot)
+                .then(res => {
                     console.log(res)
                 })
                 .catch(err => {
@@ -2164,6 +2181,25 @@ var store = new vuex.Store({
 
 
                     dispatch('getUserRecords', res.data)
+                })
+                .catch(err => {
+                    commit('handleError', err)
+
+
+                })
+        },
+        getUserTransaction2({ commit, dispatch }, userId) {
+
+            api('transactions/users/' + userId)
+                .then(res => {
+                    console.log(res.data.data)
+                   var dots = []
+                    for (let i = 0; i < res.data.data.length; i++) {
+                        var transaction = res.data.data[i];
+                        dots.push(transaction.Dot)
+                    } 
+                    commit('setActiveUTDot', dots)
+                    debugger
                 })
                 .catch(err => {
                     commit('handleError', err)

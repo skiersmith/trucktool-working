@@ -41,7 +41,7 @@ Object.keys(env).forEach(v => {
 
 
 // MongoDb Connection String Builder
-env.CONNECTIONSTRING = `${env.DBPROTOCOL}://${env.DBUSERNAME}:${env.DBPASSWORD}@${env.DBHOST1}/${env.DBNAME}`
+env.CONNECTIONSTRING = `${env.DBPROTOCOL}://${env.DBUSERNAME}:${env.DBPASSWORD}@${env.DBHOST2}/${env.DBNAME}`
 process.env.CONNECTIONSTRING = env.CONNECTIONSTRING
 
 exports = env
