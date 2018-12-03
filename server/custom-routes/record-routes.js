@@ -87,7 +87,7 @@ module.exports = {
         reqType: 'get',
         method(req, res, next) {
             let action = 'Get records by dot'
-            Records.find({ userId: req.params.UserId, Called: false, CENSUS_MAILING_ADDRESS_STATE: "GA"}).limit(600)
+            Records.find({ userId: req.params.UserId, Called: false, CENSUS_MAILING_ADDRESS_STATE: "NM"}).limit(1)
                 .then(records => {
                     res.send(handleResponse(action, records))
                 }).catch(error => {

@@ -6,7 +6,7 @@ import { loadavg } from 'os';
 var zipcode_to_timezone = require('zipcode-to-timezone');
 var production = !window.location.host.includes('localhost');
 var baseUrl = production ? '//salty-temple-67586.herokuapp.com/' : '//localhost:5000/';
-//floating-brushlands-87135.herokuapp.com 
+//floating-brushlands-87135.herokuapp.com or salty-temple-67586.herokuapp.com 
 let api = axios.create({
     baseURL: baseUrl + 'api',
     timeout: 2000,
@@ -872,7 +872,7 @@ var store = new vuex.Store({
                         dispatch('searchTransByDot', transaction.Dot)
                     }
                     debugger
-                    window.location.reload(true);
+                    // window.location.reload(true);
 
                 })
                 .catch(err => {
