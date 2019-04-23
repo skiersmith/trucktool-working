@@ -6,7 +6,7 @@
       <button @click="getSplit">Get Recent Expirations (1 Year)</button>
       <button @click="getSplit2">Get Recent Expirations (4 Months)</button>
     </div>
-    <form @submit.prevent="getCalled" >
+    <form @submit.prevent="getCalled">
       <input v-model="calledUserId" type="text">
       <button type="submit">getCalled</button>
     </form>
@@ -123,7 +123,7 @@
         <!-- <h3>Results:</h3>
           <pre>{{ JSON.stringify(results, null, 2) }}</pre> -->
       </div>
-      <button @click="createRecords(actualResults)">Create</button>
+      <!-- <button @click="createRecords(actualResults)">Create</button> -->
       <button @click="count99()">Count</button>
     </div>
 
@@ -227,6 +227,17 @@
         </div>
       </form>
     </div>
+
+    <div>
+      <form @submit.prevent="dataaFix">
+        <input v-model="dataFix.userId" type="text"><button type="submit"></button>
+      </form>
+    </div>
+    <div>
+      <form @submit.prevent="dataaFix2">
+        <input v-model="dataFix2.userId" type="text"><button type="submit"></button>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -239,22 +250,49 @@
       XlsCsvParser,
     },
     methods: {
-      getCalled(){
-        
+
+      dataaFix() {
+        var uid = this.dataFix.userId
+        this.$store.dispatch('getUserTransaction2', uid)
+      },
+      dataaFix2() {
+        var store = this.$store
+        var uid = this.dataFix2.userId
+        var dots = this.UTDotTransactions
+        // for (let i = 0; i < dots.length; i++) {
+        //   const element = dots[i];
+
+        //   this.$store.dispatch('updateRecord2', payload)
+        // }
+        for (var p = 0; p < dots.length; p++) {
+          (function (p) {
+            var element = dots[p]
+            var payload = {
+              userId: uid,
+              Dot: element
+            }
+            setTimeout(function () {
+
+              store.dispatch('updateRecord2', payload)
+            }, 100 * p);
+          })(p);
+        }
+      },
+      getCalled() {
         var uid = this.calledUserId
         this.$store.dispatch('getCalled', uid)
       },
-      getNullRecords(){
+      getNullRecords() {
         this.$store.dispatch('getNull')
       },
-      getState(){
+      getState() {
         this.$store.dispatch('getState')
       },
       userRegister() {
         this.$store.dispatch('userRegister', this.register)
       },
       getRecordsByUserId() {
-        
+
         var userId = this.delUID
         this.$store.dispatch('getUserRecords3', userId)
       },
@@ -268,7 +306,7 @@
         this.$store.dispatch('getSplitRecords2')
       },
       getSplit3() {
-        
+
         this.$store.dispatch('getSplitRecords4')
       },
       updateRecord(record) {
@@ -385,7 +423,7 @@
           }
         }
         console.log(userRecords)
-        
+
         this.records9 = userRecords
 
         this.createUserRecords()
@@ -396,27 +434,27 @@
         var store = this.$store
 
         var urs = []
-        
+
         for (var key in userRecords) {
           if (userRecords.hasOwnProperty(key)) {
             for (let q = 0; q < userRecords[key].length; q++) {
               (function (q) {
-              var ur = userRecords[key][q];
-              console.log(ur)
-              var userRecord = {
-                userId: key,
-                _id: ur._id
-              }
+                var ur = userRecords[key][q];
+                console.log(ur)
+                var userRecord = {
+                  userId: key,
+                  _id: ur._id
+                }
 
                 // urs.push(userRecord)
                 // console.log(userRecord)
-                  // var ur = userRecords[key][q];
-                  setTimeout(function () {
-                    // alert("hello");
-                    // JSON.stringify(results1)
-                    store.dispatch('newUserRecord', userRecord)
-                  }, 100 * q);
-                })(q);
+                // var ur = userRecords[key][q];
+                setTimeout(function () {
+                  // alert("hello");
+                  // JSON.stringify(results1)
+                  store.dispatch('newUserRecord', userRecord)
+                }, 100 * q);
+              })(q);
             }
           }
         }
@@ -456,7 +494,7 @@
       },
       createRecords(results) {
         var store = this.$store
-        
+
         // var results = this.actualResults
         for (var p = 0; p < results.length; p++) {
           (function (p) {
@@ -477,22 +515,22 @@
       },
       updateRecords(results) {
         var store = this.$store
-        
+
         // var results = this.actualResults
         for (var p = 0; p < results.length; p++) {
           (function (p) {
             var results1 = results[p]
             // var record = store.dispatch('getRecordByDot', results1)
-            
 
-              setTimeout(function () {
-                // alert("hello");
-                // JSON.stringify(results1)
 
-                // store.dispatch('addRecords', results1)
-                store.dispatch('updateCalled', results1)
-              }, 100 * p);
-            
+            setTimeout(function () {
+              // alert("hello");
+              // JSON.stringify(results1)
+
+              // store.dispatch('addRecords', results1)
+              store.dispatch('updateCalled', results1)
+            }, 100 * p);
+
           })(p);
         }
       },
@@ -501,56 +539,56 @@
         this.results = results;
       },
       nullToTimezone() {
-        
-        var records = this.$store.state.activeRecords 
+
+        var records = this.$store.state.activeRecords
         var finalRecords = []
-       for (let q = 0; q < records.data.length; q++) {
-         const record = records.data[q];
-         if (!record.timezone) {
-           
-         
-         var zip2 = record.CENSUS_MAILING_ADDRESS_ZIP_CODE
-         var zip = ""
-         //zip validation
-         for (let p = 0; p < zip2.length; p++) {
-           const element = zip2[p];
-           zip += element
-           if (p == 4) {
-             break
+        for (let q = 0; q < records.data.length; q++) {
+          const record = records.data[q];
+          if (!record.timezone) {
+
+
+            var zip2 = record.CENSUS_MAILING_ADDRESS_ZIP_CODE
+            var zip = ""
+            //zip validation
+            for (let p = 0; p < zip2.length; p++) {
+              const element = zip2[p];
+              zip += element
+              if (p == 4) {
+                break
+              }
+            }
+            var tz = zipcode_to_timezone.lookup(zip);
+
+            if (tz != null) {
+              if (tz == "America/Los_Angeles") {
+                tz = "Pacific"
+              }
+              else if (tz == "America/Anchorage" || tz == "America/Juneau" || tz == "America/Nome" || tz == "America/Yakutat") {
+                tz = "Alaska"
+              }
+              else if (tz == "America/Chicago" || tz == "America/Menominee" || tz == "America/North_Dakota/Center") {
+                tz = "Central"
+              }
+              else if (tz == "America/Detroit" || tz == "America/New_York" || tz == "America/Indiana/Indianapolis" || tz == "America/Indiana/Vevay" || tz == "America/Kentucky/Louisville" || tz == "America/Kentucky/Monticello") {
+                tz = "Eastern"
+              }
+              else if (tz == "America/Boise" || tz == "America/Phoenix" || tz == "America/Denver" || tz == "America/Shiprock") {
+                tz = "Mountain"
+              }
+              else {
+                console.log("missed one")
+              }
+              record.timezone = tz
+              finalRecords.push(record)
             }
           }
-          var tz = zipcode_to_timezone.lookup(zip);
-          
-          if (tz != null) {
-            if (tz == "America/Los_Angeles") {
-              tz = "Pacific"
-            }
-            else if (tz == "America/Anchorage" || tz == "America/Juneau" || tz == "America/Nome" || tz == "America/Yakutat") {
-              tz = "Alaska"
-            }
-            else if (tz == "America/Chicago" || tz == "America/Menominee" || tz == "America/North_Dakota/Center") {
-              tz = "Central"
-            }
-            else if (tz == "America/Detroit" || tz == "America/New_York" || tz == "America/Indiana/Indianapolis" || tz == "America/Indiana/Vevay" || tz == "America/Kentucky/Louisville" || tz == "America/Kentucky/Monticello") {
-              tz = "Eastern"
-            }
-            else if (tz == "America/Boise" || tz == "America/Phoenix" || tz == "America/Denver" || tz == "America/Shiprock") {
-              tz = "Mountain"
-            }
-            else {
-              console.log("missed one")
-            }
-            record.timezone = tz
-            finalRecords.push(record)
-          }
-        }
           // records[i]["timezone"] = tz
         }
         this.updateRecords(finalRecords)
       },
       //installed tool only sorts by column. this constructs the records into rows.
       count99() {
-        
+
         var records = []
         var results = this.results
         results.forEach(column => {
@@ -606,131 +644,131 @@
             }
             else if (column["column"] == "CENSUS_MAILING_ADDRESS_ZIP_CODE") {
               records[i]["CENSUS_MAILING_ADDRESS_ZIP_CODE"] = element
-              
+
               var zip2 = element
-                var zip = ""
-                //zip validation
-                if (element != undefined) {
-                 
-                  for (let p = 0; p < zip2.length; p++) {
-                      const element = zip2[p];
-                      zip += element
-                      if (p == 4) {
-                          break
-                      }
+              var zip = ""
+              //zip validation
+              if (element != undefined) {
+
+                for (let p = 0; p < zip2.length; p++) {
+                  const element = zip2[p];
+                  zip += element
+                  if (p == 4) {
+                    break
                   }
                 }
+              }
               var tz = zipcode_to_timezone.lookup(zip);
-              
+
               if (tz != null) {
-                    if (tz == "America/Los_Angeles") {
-                        tz = "Pacific"
-                    }
-                    else if (tz == "America/Anchorage" || tz == "America/Juneau" || tz == "America/Nome" || tz == "America/Yakutat") {
-                        tz = "Alaska"
-                    }
-                    else if (tz == "America/Chicago" || tz == "America/Menominee" || tz == "America/North_Dakota/Center") {
-                        tz = "Central"
-                    }
-                    else if (tz == "America/Detroit" || tz == "America/New_York" || tz == "America/Indiana/Indianapolis" || tz == "America/Indiana/Vevay" || tz == "America/Kentucky/Louisville" || tz == "America/Kentucky/Monticello") {
-                        tz = "Eastern"
-                    }
-                    else if (tz == "America/Boise" || tz == "America/Phoenix" || tz == "America/Denver" || tz == "America/Shiprock") {
-                        tz = "Mountain"
-                    }
-                    else {
-                       
-                    }
+                if (tz == "America/Los_Angeles") {
+                  tz = "Pacific"
                 }
-                else{
-                  tz = "Canada"
+                else if (tz == "America/Anchorage" || tz == "America/Juneau" || tz == "America/Nome" || tz == "America/Yakutat") {
+                  tz = "Alaska"
                 }
+                else if (tz == "America/Chicago" || tz == "America/Menominee" || tz == "America/North_Dakota/Center") {
+                  tz = "Central"
+                }
+                else if (tz == "America/Detroit" || tz == "America/New_York" || tz == "America/Indiana/Indianapolis" || tz == "America/Indiana/Vevay" || tz == "America/Kentucky/Louisville" || tz == "America/Kentucky/Monticello") {
+                  tz = "Eastern"
+                }
+                else if (tz == "America/Boise" || tz == "America/Phoenix" || tz == "America/Denver" || tz == "America/Shiprock") {
+                  tz = "Mountain"
+                }
+                else {
+
+                }
+              }
+              else {
+                tz = "Canada"
+              }
               records[i]["timezone"] = tz
-              
+
             }
-            
+
           }
         });
         this.filter(records)
         // actualResults = records
         return
       },
-    filter(arr) {
-    var total = 0
-    var output = []
-    debugger
-    for (let p = 0; p < arr.length; p++) {
-        var element = arr[p];
-        console.log(element["MCS_150_DATE"])
-        // console.log(p)
-        
+      filter(arr) {
+        var total = 0
+        var output = []
+        debugger
+        for (let p = 0; p < arr.length; p++) {
+          var element = arr[p];
+          console.log(element["MCS_150_DATE"])
+          // console.log(p)
 
-            var twoYear = 31536000000 * 2
-            var date = Date.parse(element["MCS_150_DATE"])
-            // console.log("yo")
-     
-            // console.log(date + twoYear - Date.now())
-            // console.log(Date.now())
 
-            if (date + twoYear < Date.now()) {
-                // console.log("here2")
-                console.log(element)
-                // console.log("here")
-                output.push(element)
-            }
-            else {
-                continue
+          var twoYear = 31536000000 * 2
+          var date = Date.parse(element["MCS_150_DATE"])
+          // console.log("yo")
 
-            }
-            
-        
-    }
+          // console.log(date + twoYear - Date.now())
+          // console.log(Date.now())
 
-    for (let p = 0; p < output.length; p++) {
-        total++
-    }
-    console.log(total)
-    // filter2(output)
-    this.setResults(output)
-    // return output
-},
+          if (date + twoYear < Date.now()) {
+            // console.log("here2")
+            console.log(element)
+            // console.log("here")
+            output.push(element)
+          }
+          else {
+            continue
 
-// filter2(arr) {
-//     var object = {
-//         even: [],
-//         odd: []
-//     }
-//     // console.log("yo")
-//     for (let p = 0; p < arr.length; p++) {
-//         const element = arr[p];
-//         // console.log(element["DOT #"])
-//         element3 = element["DOT #"].toString().split("").reverse()
-//         // console.log(element3)
-//         var num = parseInt(element3[1])
-//         // console.log(num)
-//         if (num % 2 == 0) {
-//             object.even.push(element)
-         
-//             continue
-//         }
-//         else if (num % 2 != 0) {
-//             object.odd.push(element)
-          
-//             continue
-//         }
-//     }
-//     this.setResults(records)
-// },
+          }
+
+
+        }
+
+        for (let p = 0; p < output.length; p++) {
+          total++
+        }
+        console.log(total)
+        // filter2(output)
+        this.setResults(output)
+        // return output
+      },
+
+      // filter2(arr) {
+      //     var object = {
+      //         even: [],
+      //         odd: []
+      //     }
+      //     // console.log("yo")
+      //     for (let p = 0; p < arr.length; p++) {
+      //         const element = arr[p];
+      //         // console.log(element["DOT #"])
+      //         element3 = element["DOT #"].toString().split("").reverse()
+      //         // console.log(element3)
+      //         var num = parseInt(element3[1])
+      //         // console.log(num)
+      //         if (num % 2 == 0) {
+      //             object.even.push(element)
+
+      //             continue
+      //         }
+      //         else if (num % 2 != 0) {
+      //             object.odd.push(element)
+
+      //             continue
+      //         }
+      //     }
+      //     this.setResults(records)
+      // },
 
       setResults(records) {
         this.actualResults = records
-
+        this.createRecords(records)
         console.log(this.actualResults)
       },
     },
     computed: {
       deleteUserRecords() {
-        
+
         console.log(this.$store.state.activeDeleteRecords)
         return this.$store.state.activeDeleteRecords
       },
@@ -759,6 +797,9 @@
       },
       gTransactions() {
         return this.$store.state.activeGTransactions
+      },
+      UTDotTransactions() {
+        return this.$store.state.activeUTDot
       },
       oTransactions() {
         return this.$store.state.activeGTransactions
@@ -793,6 +834,8 @@
     },
     data() {
       return {
+        dataFix: {},
+        dataFix2: {},
         calledUserId: "",
         recordUser: "",
         register: {},
